@@ -1,0 +1,7 @@
+.favoriteButton {
+  :global(.anticon) {
+    display: flex;
+    align-items: center;
+    --ant-button-only-icon-size: 24px;
+  }
+}

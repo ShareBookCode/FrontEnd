@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 620px;
+}
+
+.annotation {
+  :global(h3.ant-typography) {
+    margin-bottom: 15px;
+    font-family: "Onest", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 31px;
+    color: var(--ant-color-text);
+  }
+
+  .annotationText {
+    font-family: "Literata", serif; // Нужно добавить этот шрифт
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 135%;
+    color: var(--ant-color-text);
+  }
+
+  .expandButton {
+    font-family: "Literata", serif;
+    color: var(--ant-color-primary);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    margin-left: 8px;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detailItem {
+  display: flex;
+  gap: 40px;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "Onest", sans-serif;
+
+  .label {
+    width: 107px;
+    color: var(--color-text-author);
+  }
+
+  .value {
+    width: 142px;
+    color: var(--ant-color-text);
+  }
+}

@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  background: transparent;
+}
+
+.header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 18px;
+  background: transparent;
+  padding: 0;
+  height: auto;
+}
+
+.titleWrapper {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  :global(h1.ant-typography) {
+    margin-bottom: 0;
+    line-height: 36px;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: "Onest", sans-serif;
+  }
+
+  :global(span.ant-typography) {
+    margin-bottom: 0;
+    line-height: 24px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    color: var(--color-text-author);
+  }
+
+  > * {
+    line-height: 24px;
+  }
+}
+
+.buttonsWrapper {
+  justify-content: space-between;
+  flex: 1;
+
+  > * {
+    display: flex;
+    align-items: center;
+    height: 37px;
+  }
+}
+
+.contentLayout {
+  display: flex;
+  gap: 24px;
+}
+
+.contentContainer {
+  display: flex;
+  gap: 24px;
+}
