@@ -1,3 +1,8 @@
+.maskModal {
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(10px);
+}
+
 .modal {
   height: 498px;
   padding: 20px 20px !important;
@@ -7,41 +12,20 @@
   height: 100%;
 }
 
-.wrapper {
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttonModal {
-  width: 36px;
-  height: 36px;
-  border-radius: 20px;
-
+.containerContent {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: rgba(241, 244, 246, 1);
-  border: none;
-  cursor: pointer;
-}
-
-.buttonHide {
-  visibility: hidden;
-}
-
-.signUp {
-  display: grid;
-  grid-template-rows: 40px auto 40px;
+  flex-direction: column;
 }
 
 .title {
-  font-family: 'Onest-Medium', sans-serif;
-  margin-bottom: 25px;
+  font-family: 'Onest-SemiBold', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.container {
+.containerForm {
   width: 284px;
   display: flex;
   flex-direction: column;
@@ -50,7 +34,7 @@
 
 .buttonAuth {
   width: 100%;
-  margin-top: 16px;
+  margin-top: 20px;
   background: rgba(90, 156, 255, 1);
 
   &:hover {
@@ -60,32 +44,14 @@
 
 .link {
   font-family: 'Onest-Medium', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   margin-top: 24px;
 
-  a {
+  button {
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    background: none;
     color: var(--ant-color-primary)
   }
-}
-
-.containerContent {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.legalText {
-  display: flex;
-  justify-content: center;
-
-  max-width: 527px;
-  height: 100%;
-  margin-bottom: 10px;
-
-  font-family: 'Onest-Regular', sans-serif;
-  line-height: 20.4px;
-  font-size: 16px;
-  color: var(--ant-color-text-placeholder);
-  text-align: center;
 }

@@ -50,5 +50,10 @@ export const antdThemeConfig: ThemeConfig = {
       boxShadowTertiary: "0px 2px 7px rgba(42, 127, 255, 80)",
       colorBgContainer: "#FFFFFF",
     },
+    Checkbox: {
+      fontFamily: "Onest-Regular",
+      fontSize: 12,
+      paddingXS: 6,
+    },
   },
 };

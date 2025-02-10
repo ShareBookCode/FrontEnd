@@ -1,127 +1,37 @@
-import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import styles from "../auth.module.scss";
-import { useNavigate, useSearchParams } from "react-router";
-import { useRegisterUserMutation } from "../../../services/api/sharebookApi.ts";
-import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
-import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
+import extraStyles from "./signUpName.module.scss";
+import { useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
 
-export function SignUpPassword() {
+export function SignUpName() {
+  const { t } = useTranslation("auth");
   const [, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
-
-  const [register, { isLoading }] = useRegisterUserMutation();
-
-  const onFinish: FormProps["onFinish"] = async (values) => {
-    console.log("Success:", values);
-    try {
-      await register(values).unwrap();
-      navigate("/");
-    } catch (err) {
-      console.log("err:", err);
-    }
-  };
-
-  const onFinishFailed: FormProps["onFinishFailed"] = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
 
   return (
     <div className={styles.containerContent}>
-      <h1 className={styles.title}>Регистрация через почту</h1>
+      <h1 className={styles.title}>{t("titleOneScreen")}</h1>
       <div>
-        <Form
-          name="basic"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-          className={styles.container}
-        >
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input placeholder="Почта" autoComplete="email" />
+        <Form autoComplete="off" className={styles.containerForm}>
+          <Form.Item name="name">
+            <Input placeholder={t("name")} />
           </Form.Item>
-
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input.Password
-              placeholder="Введите пароль"
-              autoComplete="new-password"
-              iconRender={(visible) =>
-                visible ? (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordShow />
-                  </div>
-                ) : (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordHide />
-                  </div>
-                )
-              }
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="passwordConfirm"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error(
-                      "The new password that you entered do not match!",
-                    ),
-                  );
-                },
-              }),
-            ]}
-          >
-            <Input.Password
-              placeholder="Повторите пароль"
-              autoComplete="new-password"
-              iconRender={(visible) =>
-                visible ? (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordShow />
-                  </div>
-                ) : (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordHide />
-                  </div>
-                )
-              }
-            />
+          <Form.Item name="city">
+            <Input placeholder={t("city")} />
           </Form.Item>
         </Form>
-
+        {/*<Checkbox>Не хочу указывать город</Checkbox>*/}
+        <div className={extraStyles.containerCheckbox}>
+          <input type="checkbox" className={extraStyles.checkbox} />
+          {t("textCheckbox")}
+        </div>
         <Button
+          onClick={() => setSearchParams({ auth: "signUpPassword" })}
           className={styles.buttonAuth}
           type="primary"
           htmlType="submit"
-          loading={isLoading}
         >
-          Далее
+          {t("buttonNext")}
         </Button>
       </div>
     </div>

@@ -1,18 +1,20 @@
 import { Button, Form, Input } from "antd";
 import styles from "../auth.module.scss";
 import { useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export function SignUp() {
+  const { t } = useTranslation("auth");
   const [, setSearchParams] = useSearchParams();
   return (
     <div className={styles.containerContent}>
-      <h1 className={styles.title}>Присоединяйтесь к ShareBook</h1>
+      <h1 className={styles.title}>{t("titleSignUp")}</h1>
       <div>
         <Form
           name="basic"
           initialValues={{ remember: true }}
           autoComplete="off"
-          className={styles.container}
+          className={styles.containerForm}
         >
           <Form.Item
             name="email"
@@ -23,22 +25,24 @@ export function SignUp() {
               },
             ]}
           >
-            <Input placeholder="Почта" autoComplete="email" />
+            <Input placeholder={t("email")} autoComplete="email" />
           </Form.Item>
         </Form>
 
         <Button
-          onClick={() => setSearchParams({ auth: "SignUpPassword" })}
+          onClick={() => setSearchParams({ auth: "signUpName" })}
           className={styles.buttonAuth}
           type="primary"
           htmlType="submit"
         >
-          Далее
+          {t("buttonNext")}
         </Button>
       </div>
       <p className={styles.link}>
-        Уже есть аккаунт?
-        <a onClick={() => setSearchParams({ auth: "signIn" })}> Войти</a>
+        {t("textSignUp")}
+        <button onClick={() => setSearchParams({ auth: "signIn" })}>
+          {t("linkSignUp")}
+        </button>
       </p>
     </div>
   );

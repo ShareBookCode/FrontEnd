@@ -4,9 +4,12 @@ import { useNavigate, useSearchParams } from "react-router";
 import { useAuthMutation } from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
+import { useTranslation } from "react-i18next";
 import styles from "../auth.module.scss";
+import extraStyles from "./signIn.module.scss";
 
 export function SignIn() {
+  const { t } = useTranslation("auth");
   const [, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -28,7 +31,7 @@ export function SignIn() {
 
   return (
     <div className={styles.containerContent}>
-      <h1 className={styles.title}>Вход через почту</h1>
+      <h1 className={styles.title}>{t("titleSignIn")}</h1>
       <div>
         <Form
           name="basic"
@@ -36,7 +39,7 @@ export function SignIn() {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
-          className={styles.container}
+          className={styles.containerForm}
         >
           <Form.Item
             name="login"
@@ -47,7 +50,7 @@ export function SignIn() {
               },
             ]}
           >
-            <Input placeholder="Почта" />
+            <Input placeholder={t("email")} />
           </Form.Item>
 
           <Form.Item
@@ -60,34 +63,36 @@ export function SignIn() {
             ]}
           >
             <Input.Password
-              placeholder="Пароль"
-              iconRender={(visible) =>
-                visible ? (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordShow />
-                  </div>
-                ) : (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordHide />
-                  </div>
-                )
-              }
+              placeholder={t("password")}
+              iconRender={(visible) => (
+                <div className={styles.svgPassword}>
+                  {visible ? <SvgPasswordShow /> : <SvgPasswordHide />}
+                </div>
+              )}
             />
           </Form.Item>
+          <Button
+            className={styles.buttonAuth}
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+          >
+            {t("buttonSignIn")}
+          </Button>
         </Form>
 
-        <Button
-          className={styles.buttonAuth}
-          type="primary"
-          htmlType="submit"
-          loading={isLoading}
+        <button
+          onClick={() => setSearchParams({ auth: "forgotPassword" })}
+          className={extraStyles.linkForgotPassword}
         >
-          Войти
-        </Button>
+          {t("textForgotPassword")}
+        </button>
       </div>
       <p className={styles.link}>
-        Ещё нет аккаунта?
-        <a onClick={() => setSearchParams({ auth: "signUp" })}> Регистрация</a>
+        {t("textSingIn")}
+        <button onClick={() => setSearchParams({ auth: "signUp" })}>
+          {t("linkSingIn")}
+        </button>
       </p>
     </div>
   );

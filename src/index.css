@@ -16,3 +16,9 @@ body {
   font-family: "Onest-Regular";
   src: url("./fonts/Onest-Regular.woff") format("woff");
 }
+
+@font-face {
+  font-family: "Onest-SemiBold";
+  src: url("./fonts/Onest-SemiBold.woff") format("woff");
+}
+

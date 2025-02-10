@@ -1,0 +1,42 @@
+.wrapper {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.signUp {
+	display: grid;
+	grid-template-rows: 50px auto 50px;
+	justify-items: center;
+}
+
+.buttonModal {
+	width: 36px;
+	height: 36px;
+	border-radius: 20px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background: rgba(241, 244, 246, 1);
+	border: none;
+	cursor: pointer;
+}
+
+.buttonHide {
+	visibility: hidden;
+}
+
+.legalText {
+	display: flex;
+	justify-content: center;
+	max-width: 527px;
+	height: 100%;
+
+	font-family: 'Onest-Regular', sans-serif;
+	line-height: 20.4px;
+	font-size: 16px;
+	color: var(--ant-color-text-placeholder);
+	text-align: center;
+}
