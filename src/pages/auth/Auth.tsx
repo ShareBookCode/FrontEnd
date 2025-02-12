@@ -1,34 +1,26 @@
+import { Outlet, useSearchParams } from "react-router";
 import styles from "./auth.module.scss";
-import { Modal } from "antd";
-import { useSearchParams } from "react-router";
-import { ScreenAuth } from "./ScreenAuth";
+import { useEffect } from "react";
+import * as events from "node:events";
 
 export function Auth() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const isModalOpen = searchParams.get("auth") != null;
 
-  const closeAuth = () => {
-    searchParams.delete("auth");
-    setSearchParams(searchParams);
-  };
+  useEffect(() => {
+    const handlePopState = (e) => {
+      console.log(e.state);
+      console.log(document.location.search);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   return (
-    <Modal
-      width={826}
-      centered={true}
-      footer={null}
-      closable={false}
-      maskClosable={true}
-      getContainer={false}
-      open={isModalOpen}
-      onCancel={closeAuth}
-      classNames={{
-        mask: styles.maskModal,
-        content: styles.modal,
-        body: styles.containerModal,
-      }}
-    >
-      <ScreenAuth />
-    </Modal>
+    <div className={styles.wrapper}>
+      <Outlet />
+    </div>
   );
 }

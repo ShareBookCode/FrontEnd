@@ -24,6 +24,7 @@ export const antdThemeConfig: ThemeConfig = {
     Input: {
       colorText: "#000000",
       activeBorderColor: "rgba(42, 127, 255, 80)",
+      colorError: "rgba(255, 42, 42, 0.8)",
       fontFamily: "Onest-Regular",
       fontSize: 16,
       hoverBorderColor: "transparent",
@@ -35,6 +36,9 @@ export const antdThemeConfig: ThemeConfig = {
     },
     Form: {
       itemMarginBottom: 0,
+      colorError: "rgba(255, 42, 42, 0.8)",
+      fontFamily: "Onest-Regular",
+      fontSize: 12,
     },
     Dropdown: {
       paddingBlock: 6,

@@ -1,6 +1,6 @@
 import { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
-import { useNavigate, useSearchParams } from "react-router";
+import { useNavigate } from "react-router";
 import { useAuthMutation } from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
@@ -10,7 +10,6 @@ import extraStyles from "./signIn.module.scss";
 
 export function SignIn() {
   const { t } = useTranslation("auth");
-  const [, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const [login, { isLoading }] = useAuthMutation();
@@ -39,38 +38,47 @@ export function SignIn() {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
-          className={styles.containerForm}
         >
-          <Form.Item
-            name="login"
-            rules={[
-              {
-                required: true,
-                message: "Please input your login!",
-              },
-            ]}
-          >
-            <Input placeholder={t("email")} />
-          </Form.Item>
+          <div className={styles.containerForm}>
+            <Form.Item
+              name="login"
+              rules={[
+                {
+                  required: true,
+                  message: t("messageLoginEmpty"),
+                },
+              ]}
+            >
+              <Input placeholder={t("email")} />
+            </Form.Item>
 
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: t("messagePasswordEmpty"),
+                },
+              ]}
+            >
+              <Input.Password
+                placeholder={t("password")}
+                iconRender={(visible) => (
+                  <div className={styles.svgPassword}>
+                    {visible ? <SvgPasswordShow /> : <SvgPasswordHide />}
+                  </div>
+                )}
+              />
+            </Form.Item>
+          </div>
+
+          <button
+            onClick={() => navigate("/auth/forgotPassword")}
+            className={extraStyles.linkForgotPassword}
           >
-            <Input.Password
-              placeholder={t("password")}
-              iconRender={(visible) => (
-                <div className={styles.svgPassword}>
-                  {visible ? <SvgPasswordShow /> : <SvgPasswordHide />}
-                </div>
-              )}
-            />
-          </Form.Item>
+            {t("textForgotPassword")}
+          </button>
+
           <Button
             className={styles.buttonAuth}
             type="primary"
@@ -80,17 +88,10 @@ export function SignIn() {
             {t("buttonSignIn")}
           </Button>
         </Form>
-
-        <button
-          onClick={() => setSearchParams({ auth: "forgotPassword" })}
-          className={extraStyles.linkForgotPassword}
-        >
-          {t("textForgotPassword")}
-        </button>
       </div>
       <p className={styles.link}>
         {t("textSingIn")}
-        <button onClick={() => setSearchParams({ auth: "signUp" })}>
+        <button onClick={() => navigate("/auth/signUp")}>
           {t("linkSingIn")}
         </button>
       </p>
