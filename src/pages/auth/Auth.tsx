@@ -1,22 +1,21 @@
-import { Outlet, useSearchParams } from "react-router";
+import { Outlet, useNavigate, useSearchParams } from "react-router";
 import styles from "./auth.module.scss";
 import { useEffect } from "react";
-import * as events from "node:events";
 
 export function Auth() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handlePopState = (e) => {
-      console.log(e.state);
-      console.log(document.location.search);
+    const handlePopState = () => {
+      navigate(`${location.pathname}?${searchParams}`, { replace: true });
     };
 
     window.addEventListener("popstate", handlePopState);
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
-  }, []);
+  }, [navigate, searchParams]);
 
   return (
     <div className={styles.wrapper}>

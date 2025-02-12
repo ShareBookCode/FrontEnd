@@ -3,20 +3,20 @@ import styles from "../auth.module.scss";
 import extraStyles from "./signUp.module.scss";
 import { useNavigate, useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 let emailValue = "";
 
 export function SignUp() {
   const { t } = useTranslation("auth");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const [form] = Form.useForm<{ email: string }>();
 
   const navigate = useNavigate();
-  // console.log(emailValue);
 
-  // useEffect(() => {
-  //   console.log(34);
-  //   window.history.replaceState({}, "", "/auth/signUp");
-  // }, []);
+  useEffect(() => {
+    form.setFieldsValue({ email: searchParams.get("email") ?? "" });
+  }, [form, searchParams]);
 
   const onFinish: FormProps["onFinish"] = (values) => {
     searchParams.set("email", values.email);
@@ -32,12 +32,7 @@ export function SignUp() {
         <span>{t("titleFour")}</span>
       </h1>
       <div>
-        <Form
-          name="basic"
-          initialValues={{ email: searchParams.get("email") }}
-          autoComplete="off"
-          onFinish={onFinish}
-        >
+        <Form name="basic" autoComplete="off" onFinish={onFinish} form={form}>
           <div className={styles.containerForm}>
             <Form.Item
               name="email"
