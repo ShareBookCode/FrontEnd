@@ -1,8 +1,9 @@
 .wrapper {
-  margin-top: 154px;
+  padding-top: 154px;
+  height: calc(100vh - 66px);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   flex-direction: column;
 }
 
@@ -30,11 +31,6 @@
 .buttonAuth {
   width: 100%;
   margin-top: 20px;
-  background: rgba(90, 156, 255, 1);
-
-  &:hover {
-    background: rgba(90, 156, 255, 1) !important;
-  }
 }
 
 .link {
@@ -48,5 +44,20 @@
     padding: 0;
     background: none;
     color: var(--ant-color-primary)
+  }
+}
+
+.legalText {
+  font-family: 'Onest-Regular', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  color: var(--ant-color-text-placeholder);
+
+  width: 527px;
+  margin-bottom: 50px;
+
+  .legalTextLink {
+    color: var(--ant-color-text-placeholder);
+    text-decoration: underline;
   }
 }

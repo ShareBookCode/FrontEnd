@@ -28,3 +28,4 @@ export function createI18nInstance() {
 
   return instance;
 }
+1;

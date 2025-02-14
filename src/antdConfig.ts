@@ -15,6 +15,8 @@ export const antdThemeConfig: ThemeConfig = {
       fontFamily: "Onest-Medium",
       fontSize: 16,
       colorPrimaryHover: "#2A7FFF",
+      colorBgContainerDisabled: "rgba(90, 156, 255, 1)",
+      colorTextDisabled: "#FFFFFF",
       controlHeight: 42,
       borderRadius: 9,
     },

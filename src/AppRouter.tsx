@@ -10,6 +10,8 @@ import { SignIn } from "./pages/auth/SignIn";
 import { SignUp } from "./pages/auth/SignUp";
 import { SignUpName } from "./pages/auth/SignUpName";
 import { SignUpPassword } from "./pages/auth/SignUpPassword";
+import { GoToEmail } from "./pages/auth/GoToEmail";
+import { ForgotPassword } from "./pages/auth/ForgotPassword";
 
 const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
 
@@ -28,11 +30,12 @@ export function AppRouter({ location }: { location: string }) {
           <Route path="signUp" element={<SignUp />} />
           <Route path="signUpName" element={<SignUpName />} />
           <Route path="signUpPassword" element={<SignUpPassword />} />
+          <Route path="goToEmail" element={<GoToEmail />} />
+          <Route path="forgotPassword" element={<ForgotPassword />} />
         </Route>
         <Route path="/profile/:userId?" element={<Profile />} />
         <Route path={"*"} element={<div>404 page not found</div>} />
       </Routes>
-      <Auth />
     </Router>
   );
 }
