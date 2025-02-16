@@ -2,7 +2,10 @@ import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import styles from "../auth.module.scss";
 import { useNavigate, useSearchParams } from "react-router";
-import { useRegisterUserMutation } from "../../../services/api/sharebookApi.ts";
+import {
+  useLazyGenerateLoginQuery,
+  useRegisterUserMutation,
+} from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
 import { useTranslation } from "react-i18next";
@@ -11,16 +14,18 @@ export function SignUpPassword() {
   const { t } = useTranslation("auth");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [triggerGenerateLogin] = useLazyGenerateLoginQuery();
 
   const [register, { isLoading }] = useRegisterUserMutation();
 
   const onFinish: FormProps["onFinish"] = async (values) => {
     console.log("Success:", values);
     try {
+      const login = await triggerGenerateLogin().unwrap();
       const registerValues = {
         userRegistrationDto: {
           name: searchParams.get("name") || "",
-          login: "test",
+          login: login.originalLogin ?? "",
           password: values.password || "",
           passwordConfirm: values.passwordConfirm || "",
           email: searchParams.get("email") || "",

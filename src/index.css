@@ -35,7 +35,6 @@ body {
   src: url("./fonts/Onest-SemiBold.woff") format("woff");
 }
 
-
 @font-face {
   font-family: "Inter-Medium";
   src: url("./fonts/Inter-Medium.ttf") format("ttf");

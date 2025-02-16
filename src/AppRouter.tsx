@@ -61,7 +61,6 @@ export function AppRouter({ location }: { location: string }) {
         <Route path="/profile/:userId?" element={<Profile />} />
         <Route path={"*"} element={<div>404 page not found</div>} />
       </Routes>
-      <Auth />
     </Router>
   );
 }
