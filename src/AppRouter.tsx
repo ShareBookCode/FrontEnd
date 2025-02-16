@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes, StaticRouter } from "react-router";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  StaticRouter,
+} from "react-router";
 import { Home } from "./pages/home/Home.tsx";
 import { HeaderComponent } from "./components/Header";
 import { Favourites } from "./pages/favourites/Favourites.tsx";
@@ -26,6 +32,7 @@ export function AppRouter({ location }: { location: string }) {
         <Route path="/createBook" element={<CreateBook />} />
         <Route path="/chats" element={<Chat />} />
         <Route path="/auth" element={<Auth />}>
+          <Route index element={<Navigate to="signUp" replace />} />
           <Route path="signIn" element={<SignIn />} />
           <Route path="signUp" element={<SignUp />} />
           <Route path="signUpName" element={<SignUpName />} />

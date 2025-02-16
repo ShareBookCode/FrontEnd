@@ -7,13 +7,10 @@ import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
 import { useTranslation } from "react-i18next";
 import styles from "../auth.module.scss";
 import extraStyles from "./signIn.module.scss";
-import { useDisabledForm } from "../hooks/useDisabledForm.tsx";
 
 export function SignIn() {
   const { t } = useTranslation("auth");
   const navigate = useNavigate();
-  const { form, disabledButton, handleFormChange } = useDisabledForm();
-
   const [login, { isLoading }] = useAuthMutation();
 
   const onFinish: FormProps["onFinish"] = async (values) => {
@@ -31,19 +28,17 @@ export function SignIn() {
       <h1 className={styles.title}>{t("titleSignIn")}</h1>
       <div>
         <Form
-          form={form}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
-          onChange={handleFormChange}
         >
           <div className={styles.containerForm}>
             <Form.Item
-              name="login"
+              name="email"
               rules={[
                 {
                   required: true,
-                  message: t("messageLoginEmpty"),
+                  message: t("messageEmailEmpty"),
                 },
               ]}
             >
@@ -82,7 +77,6 @@ export function SignIn() {
             type="primary"
             htmlType="submit"
             loading={isLoading}
-            disabled={disabledButton}
           >
             {t("buttonSignIn")}
           </Button>

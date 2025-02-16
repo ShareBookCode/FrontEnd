@@ -6,11 +6,9 @@ import { useRegisterUserMutation } from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
 import { useTranslation } from "react-i18next";
-import { useDisabledForm } from "../hooks/useDisabledForm.tsx";
 
 export function SignUpPassword() {
   const { t } = useTranslation("auth");
-  const { form, disabledButton, handleFormChange } = useDisabledForm();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -22,15 +20,15 @@ export function SignUpPassword() {
       const registerValues = {
         userRegistrationDto: {
           name: searchParams.get("name") || "",
-          login: searchParams.get("login") || "",
+          login: "test",
           password: values.password || "",
           passwordConfirm: values.passwordConfirm || "",
           email: searchParams.get("email") || "",
           city: searchParams.get("city") || "",
         },
       };
-      navigate(`/auth/goToEmail?${searchParams.toString()}`);
       await register(registerValues).unwrap();
+      navigate(`/auth/goToEmail?${searchParams.toString()}`);
     } catch (err) {
       console.log("err:", err);
     }
@@ -41,11 +39,9 @@ export function SignUpPassword() {
       <h1 className={styles.title}>{t("titleSignUp")}</h1>
       <div>
         <Form
-          form={form}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
-          onChange={handleFormChange}
         >
           <div className={styles.containerForm}>
             <Form.Item
@@ -116,7 +112,6 @@ export function SignUpPassword() {
             type="primary"
             htmlType="submit"
             loading={isLoading}
-            disabled={disabledButton}
           >
             {t("buttonNext")}
           </Button>

@@ -3,14 +3,12 @@ import styles from "../auth.module.scss";
 import extraStyles from "./signUp.module.scss";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useDisabledForm } from "../hooks/useDisabledForm.tsx";
 
 const regex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 export function SignUp() {
   const { t } = useTranslation("auth");
-  const { form, disabledButton, handleFormChange } = useDisabledForm();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -29,12 +27,10 @@ export function SignUp() {
       </h1>
       <div>
         <Form
-          form={form}
           preserve={false}
           initialValues={{ email: searchParams.get("email") }}
           autoComplete="off"
           onFinish={onFinish}
-          onChange={handleFormChange}
         >
           <div className={styles.containerForm}>
             <Form.Item
@@ -64,7 +60,6 @@ export function SignUp() {
             className={styles.buttonAuth}
             type="primary"
             htmlType="submit"
-            disabled={disabledButton}
           >
             {t("buttonNext")}
           </Button>

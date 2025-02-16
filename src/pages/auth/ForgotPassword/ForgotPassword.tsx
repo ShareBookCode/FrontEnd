@@ -1,19 +1,29 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, FormProps, Input } from "antd";
 import styles from "../auth.module.scss";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
 import { useTranslation } from "react-i18next";
-import { useDisabledForm } from "../hooks/useDisabledForm.tsx";
+import { useSendResetPasswordEmailMutation } from "../../../services/api/sharebookApi.ts";
 
 export function ForgotPassword() {
   const { t } = useTranslation("auth");
-  const { form, disabledButton, handleFormChange } = useDisabledForm();
+  const [resetPassword] = useSendResetPasswordEmailMutation();
+
+  const onFinish: FormProps["onFinish"] = async (values) => {
+    console.log("Success:", values);
+    try {
+      await resetPassword({ e }).unwrap();
+      navigate("/");
+    } catch (err) {
+      console.log("err:", err);
+    }
+  };
 
   return (
     <div className={styles.containerContent}>
       <h1 className={styles.title}>{t("titleForgotPassword")}</h1>
       <div>
-        <Form autoComplete="off" form={form} onChange={handleFormChange}>
+        <Form onFinish={onFinish} autoComplete="off">
           <div className={styles.containerForm}>
             <Form.Item
               name="email"
@@ -92,7 +102,6 @@ export function ForgotPassword() {
             className={styles.buttonAuth}
             type="primary"
             htmlType="submit"
-            disabled={disabledButton}
           >
             {t("buttonResetPassword")}
           </Button>

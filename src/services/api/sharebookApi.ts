@@ -1,5 +1,4 @@
 import { emptySplitApi as api } from "./emptyApi";
-
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     getProfile: build.query<GetProfileApiResponse, GetProfileApiArg>({
@@ -62,6 +61,18 @@ const injectedRtkApi = api.injectEndpoints({
         method: "DELETE",
         params: {
           bookId: queryArg.bookId,
+        },
+      }),
+    }),
+    findAttachment: build.query<
+      FindAttachmentApiResponse,
+      FindAttachmentApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/user/myBook/attachment`,
+        params: {
+          id: queryArg.id,
+          format: queryArg.format,
         },
       }),
     }),
@@ -196,6 +207,16 @@ const injectedRtkApi = api.injectEndpoints({
         },
       }),
     }),
+    searchWithFilters: build.mutation<
+      SearchWithFiltersApiResponse,
+      SearchWithFiltersApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/books/searchWithFilters`,
+        method: "POST",
+        body: queryArg.bookFiltersRequest,
+      }),
+    }),
     auth: build.mutation<AuthApiResponse, AuthApiArg>({
       query: (queryArg) => ({
         url: `/auth`,
@@ -239,21 +260,15 @@ const injectedRtkApi = api.injectEndpoints({
       }),
     }),
     findAllGenre: build.query<FindAllGenreApiResponse, FindAllGenreApiArg>({
-      query: () => ({ url: `/genre` }),
+      query: (queryArg) => ({
+        url: `/genre`,
+        params: {
+          locale: queryArg.locale,
+        },
+      }),
     }),
     generateLogin: build.query<GenerateLoginApiResponse, GenerateLoginApiArg>({
       query: () => ({ url: `/generate-login` }),
-    }),
-    searchWithFilters: build.query<
-      SearchWithFiltersApiResponse,
-      SearchWithFiltersApiArg
-    >({
-      query: (queryArg) => ({
-        url: `/books/searchWithFilters`,
-        params: {
-          filters: queryArg.filters,
-        },
-      }),
     }),
     searchByTitle: build.query<SearchByTitleApiResponse, SearchByTitleApiArg>({
       query: (queryArg) => ({
@@ -345,6 +360,12 @@ export type DeleteBookApiResponse = unknown;
 export type DeleteBookApiArg = {
   bookId: number;
 };
+export type FindAttachmentApiResponse =
+  /** status 200 Вложение отправлено */ Blob;
+export type FindAttachmentApiArg = {
+  id: number;
+  format: string;
+};
 export type SaveAttachmentApiResponse = unknown;
 export type SaveAttachmentApiArg = {
   attachmentMultipartDto: AttachmentMultipartDto;
@@ -406,6 +427,11 @@ export type RefreshApiResponse =
 export type RefreshApiArg = {
   "refresh-token": string;
 };
+export type SearchWithFiltersApiResponse =
+  /** status 200 Возвращает найденные книги */ BookModelDto[];
+export type SearchWithFiltersApiArg = {
+  bookFiltersRequest: BookFiltersRequest;
+};
 export type AuthApiResponse = /** status 200 Возвращает токены */ AuthResponse;
 export type AuthApiArg = {
   loginRequest: LoginRequest;
@@ -430,15 +456,12 @@ export type MailConfirmApiArg = {
 };
 export type FindAllGenreApiResponse =
   /** status 200 Список жанров */ GenreDto[];
-export type FindAllGenreApiArg = void;
+export type FindAllGenreApiArg = {
+  locale: string;
+};
 export type GenerateLoginApiResponse =
   /** status 200 Уникальный на данный момент логин */ OriginalLoginResponse;
 export type GenerateLoginApiArg = void;
-export type SearchWithFiltersApiResponse =
-  /** status 200 Возвращает найденные книги */ BookModelDto[];
-export type SearchWithFiltersApiArg = {
-  filters: BookFiltersRequest;
-};
 export type SearchByTitleApiResponse =
   /** status 200 Возвращает найденные книги */ BookModelDto[];
 export type SearchByTitleApiArg = {
@@ -518,11 +541,6 @@ export type MessageRequest = {
   /** Текст сообщения */
   text: string;
 };
-export type AttachmentDto = {
-  attachId?: number;
-  data?: string[];
-  expansion?: string;
-};
 export type BookModelDto = {
   /** Название */
   title: string;
@@ -536,7 +554,8 @@ export type BookModelDto = {
   year?: number;
   /** Идентификатор */
   bookId?: number;
-  attachment?: AttachmentDto;
+  /** Идентификатор вложения */
+  attachmentId?: number;
 };
 export type BookDto = {
   /** Название */
@@ -597,6 +616,20 @@ export type AuthResponse = {
   /** Токен доступа */
   accessToken?: string;
 };
+export type BookFiltersRequest = {
+  /** Город */
+  city?: string;
+  /** Название */
+  title?: string;
+  /** Автор */
+  author?: string;
+  /** Идентификатор жанра */
+  genre?: number;
+  /** Издательство */
+  publishingHouse?: string;
+  /** Год издания */
+  year?: number;
+};
 export type LoginRequest = {
   /** Логин */
   login: string;
@@ -623,26 +656,11 @@ export type UserPublicProfileDto = {
 };
 export type GenreDto = {
   id?: number;
-  ruName?: string;
-  engName?: string;
+  name?: string;
 };
 export type OriginalLoginResponse = {
   /** Уникальный логин */
   originalLogin?: string;
-};
-export type BookFiltersRequest = {
-  /** Город */
-  city?: string;
-  /** Название */
-  title?: string;
-  /** Автор */
-  author?: string;
-  /** Идентификатор жанра */
-  genre?: number;
-  /** Издательство */
-  publishingHouse?: string;
-  /** Год издания */
-  year?: number;
 };
 export type InfoUsersDto = {
   /** Идентификатор */
@@ -664,37 +682,52 @@ export type InfoUsersDto = {
 };
 export const {
   useGetProfileQuery,
+  useLazyGetProfileQuery,
   usePutProfileMutation,
   usePutMessageMutation,
   useSendMessageMutation,
   useDeleteForEveryoneMessageMutation,
   useBookListQuery,
+  useLazyBookListQuery,
   useSaveBookMutation,
   useDeleteBookMutation,
+  useFindAttachmentQuery,
+  useLazyFindAttachmentQuery,
   useSaveAttachmentMutation,
   useDeleteAttachmentMutation,
   useGetCorrespondenceQuery,
+  useLazyGetCorrespondenceQuery,
   useCreateCorrespondenceMutation,
   useDeleteCorrespondenceMutation,
   useGetAllQuery,
+  useLazyGetAllQuery,
   useSaveBookmarksMutation,
   useDeleteBookmarksMutation,
   useUpdatePasswordMutation,
   useSendResetPasswordEmailMutation,
   useRegisterUserMutation,
   useRefreshMutation,
+  useSearchWithFiltersMutation,
   useAuthMutation,
   useNonLockedUserMutation,
   useLockedUserMutation,
   useGetAllProfileQuery,
+  useLazyGetAllProfileQuery,
   useMailConfirmQuery,
+  useLazyMailConfirmQuery,
   useFindAllGenreQuery,
+  useLazyFindAllGenreQuery,
   useGenerateLoginQuery,
-  useSearchWithFiltersQuery,
+  useLazyGenerateLoginQuery,
   useSearchByTitleQuery,
+  useLazySearchByTitleQuery,
   useBookInfoQuery,
+  useLazyBookInfoQuery,
   useBooksByUserQuery,
+  useLazyBooksByUserQuery,
   useBooksQuery,
+  useLazyBooksQuery,
   useUserListQuery,
+  useLazyUserListQuery,
   useDeleteForMeMessageMutation,
 } = injectedRtkApi;
