@@ -1,5 +1,6 @@
 import { NavLink, useSearchParams } from "react-router";
 import styles from "../filter.module.scss";
+import cn from "classnames";
 
 interface Genre {
   title: string;
@@ -26,9 +27,10 @@ export function FilterGenre() {
           key={genre.id}
           to={{ pathname: genre.url, search: searchParams.toString() }}
           className={(isActive) =>
-            isActive.isActive
-              ? `${styles.buttonGenre} ${styles.buttonActive}`
-              : `${styles.buttonGenre} ${styles.buttonDefault}`
+            cn(styles.buttonGenre, {
+              [styles.buttonActive]: isActive.isActive,
+              [styles.buttonDefault]: !isActive.isActive,
+            })
           }
         >
           {genre.title}

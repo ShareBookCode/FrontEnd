@@ -1,15 +1,16 @@
 import { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
-import { useNavigate, useSearchParams } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuthMutation } from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
+import { useTranslation } from "react-i18next";
 import styles from "../auth.module.scss";
+import extraStyles from "./signIn.module.scss";
 
 export function SignIn() {
-  const [, setSearchParams] = useSearchParams();
+  const { t } = useTranslation("auth");
   const navigate = useNavigate();
-
   const [login, { isLoading }] = useAuthMutation();
 
   const onFinish: FormProps["onFinish"] = async (values) => {
@@ -22,72 +23,68 @@ export function SignIn() {
     }
   };
 
-  const onFinishFailed: FormProps["onFinishFailed"] = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     <div className={styles.containerContent}>
-      <h1 className={styles.title}>Вход через почту</h1>
+      <h1 className={styles.title}>{t("titleSignIn")}</h1>
       <div>
         <Form
-          name="basic"
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
-          className={styles.container}
         >
-          <Form.Item
-            name="login"
-            rules={[
-              {
-                required: true,
-                message: "Please input your login!",
-              },
-            ]}
-          >
-            <Input placeholder="Почта" />
-          </Form.Item>
+          <div className={styles.containerForm}>
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: t("messageEmailEmpty"),
+                },
+              ]}
+            >
+              <Input placeholder={t("email")} />
+            </Form.Item>
 
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: t("messagePasswordEmpty"),
+                },
+              ]}
+            >
+              <Input.Password
+                placeholder={t("password")}
+                iconRender={(visible) => (
+                  <div className={styles.svgPassword}>
+                    {visible ? <SvgPasswordShow /> : <SvgPasswordHide />}
+                  </div>
+                )}
+              />
+            </Form.Item>
+          </div>
+
+          <button
+            onClick={() => navigate("/auth/forgotPassword")}
+            className={extraStyles.linkForgotPassword}
           >
-            <Input.Password
-              placeholder="Пароль"
-              iconRender={(visible) =>
-                visible ? (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordShow />
-                  </div>
-                ) : (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordHide />
-                  </div>
-                )
-              }
-            />
-          </Form.Item>
+            {t("textForgotPassword")}
+          </button>
+
+          <Button
+            className={styles.buttonAuth}
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+          >
+            {t("buttonSignIn")}
+          </Button>
         </Form>
-
-        <Button
-          className={styles.buttonAuth}
-          type="primary"
-          htmlType="submit"
-          loading={isLoading}
-        >
-          Войти
-        </Button>
       </div>
       <p className={styles.link}>
-        Ещё нет аккаунта?
-        <a onClick={() => setSearchParams({ auth: "signUp" })}> Регистрация</a>
+        {t("textSingIn")}
+        <Link to="/auth/signUp">{t("linkSingIn")}</Link>
       </p>
     </div>
   );

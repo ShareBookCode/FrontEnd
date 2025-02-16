@@ -1,44 +1,73 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, FormProps, Input } from "antd";
 import styles from "../auth.module.scss";
-import { useSearchParams } from "react-router";
+import extraStyles from "./signUp.module.scss";
+import { Link, useNavigate, useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
+
+const regex =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 export function SignUp() {
-  const [, setSearchParams] = useSearchParams();
+  const { t } = useTranslation("auth");
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const onFinish: FormProps["onFinish"] = (values) => {
+    searchParams.set("email", values.email);
+    navigate(`/auth/signUpName?${searchParams.toString()}`);
+  };
+
   return (
     <div className={styles.containerContent}>
-      <h1 className={styles.title}>Присоединяйтесь к ShareBook</h1>
+      <h1 className={extraStyles.titleOneScreen}>
+        {t("titleOne")}
+        <span>{t("titleTwo")}</span>
+        {t("titleThree")}
+        <span>{t("titleFour")}</span>
+      </h1>
       <div>
         <Form
-          name="basic"
-          initialValues={{ remember: true }}
+          preserve={false}
+          initialValues={{ email: searchParams.get("email") }}
           autoComplete="off"
-          className={styles.container}
+          onFinish={onFinish}
         >
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
+          <div className={styles.containerForm}>
+            <Form.Item
+              name="email"
+              validateDebounce={1000}
+              rules={[
+                {
+                  required: true,
+                  message: t("messageEmailEmpty"),
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || regex.test(getFieldValue("email"))) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(t("messageEmailIncorrect")),
+                    );
+                  },
+                }),
+              ]}
+            >
+              <Input placeholder={t("email")} autoComplete="email" />
+            </Form.Item>
+          </div>
+          <Button
+            className={styles.buttonAuth}
+            type="primary"
+            htmlType="submit"
           >
-            <Input placeholder="Почта" autoComplete="email" />
-          </Form.Item>
+            {t("buttonNext")}
+          </Button>
         </Form>
-
-        <Button
-          onClick={() => setSearchParams({ auth: "SignUpPassword" })}
-          className={styles.buttonAuth}
-          type="primary"
-          htmlType="submit"
-        >
-          Далее
-        </Button>
       </div>
       <p className={styles.link}>
-        Уже есть аккаунт?
-        <a onClick={() => setSearchParams({ auth: "signIn" })}> Войти</a>
+        {t("textSignUp")}
+        <Link to="/auth/signIn">{t("linkSignUp")}</Link>
       </p>
     </div>
   );

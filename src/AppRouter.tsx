@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes, StaticRouter } from "react-router";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  StaticRouter,
+} from "react-router";
 import { Home } from "./pages/home/Home.tsx";
 import { HeaderComponent } from "./components/Header";
 import { Favourites } from "./pages/favourites/Favourites.tsx";
@@ -13,6 +19,12 @@ import {
 import { useTranslation } from "react-i18next";
 import { Genre } from "./pages/genre";
 import { Auth } from "./pages/auth";
+import { SignIn } from "./pages/auth/SignIn";
+import { SignUp } from "./pages/auth/SignUp";
+import { SignUpName } from "./pages/auth/SignUpName";
+import { SignUpPassword } from "./pages/auth/SignUpPassword";
+import { GoToEmail } from "./pages/auth/GoToEmail";
+import { ForgotPassword } from "./pages/auth/ForgotPassword";
 import { Search } from "./pages/search";
 
 const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
@@ -37,10 +49,18 @@ export function AppRouter({ location }: { location: string }) {
         <Route path="/createBook" element={<CreateBook />} />
         <Route path="/book" element={<BookPage />} />
         <Route path="/chats" element={<Chat />} />
+        <Route path="/auth" element={<Auth />}>
+          <Route index element={<Navigate to="signUp" replace />} />
+          <Route path="signIn" element={<SignIn />} />
+          <Route path="signUp" element={<SignUp />} />
+          <Route path="signUpName" element={<SignUpName />} />
+          <Route path="signUpPassword" element={<SignUpPassword />} />
+          <Route path="goToEmail" element={<GoToEmail />} />
+          <Route path="forgotPassword" element={<ForgotPassword />} />
+        </Route>
         <Route path="/profile/:userId?" element={<Profile />} />
         <Route path={"*"} element={<div>404 page not found</div>} />
       </Routes>
-      <Auth />
     </Router>
   );
 }
