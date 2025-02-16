@@ -5,8 +5,8 @@ import { useParams } from "react-router";
 import { ProfileOwnButtons } from "./ownButtons";
 import { ProfileOtherButtons } from "./otherButtons";
 import { useState } from "react";
-import { AboutMySelf } from "./AboutMySelf";
-import styles from "./Proflie.module.scss";
+import { AboutMySelf } from "./aboutMySelf";
+import styles from "./proflie.module.scss";
 import { Account } from "./Account";
 import {useTranslation} from "react-i18next";
 

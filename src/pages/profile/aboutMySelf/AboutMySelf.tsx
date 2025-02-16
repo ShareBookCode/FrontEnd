@@ -1,4 +1,4 @@
-import styles from "./AboutMySelf.module.scss";
+import styles from "./aboutMySelf.module.scss";
 import {Button, Input} from "antd";
 import avatar from "../info/nikolay.png"
 import {useTranslation} from "react-i18next";

@@ -1,4 +1,4 @@
-import styles from "./Account.module.scss";
+import styles from "./account.module.scss";
 import {Select} from "antd";
 import {useTranslation} from "react-i18next";
 
@@ -8,16 +8,16 @@ export function Account() {
   return (
     <div className={styles.settingsBlock}>
       <div className={styles.settingsItem}>
-        <div className={styles.settingsItemBlockOfTitle}>
-          <span className={styles.settingsTitle}>{t("language")}</span>
-          <span className={styles.settingsCaption}>{t("chooseLanguagePlatform")}</span>
+        <div>
+          <div className={styles.settingsTitle}>{t("language")}</div>
+          <div className={styles.settingsCaption}>{t("chooseLanguagePlatform")}</div>
         </div>
         <Select value={['Русский', "Английский"]}/>
       </div>
       <div className={styles.settingsItem}>
-        <div className={styles.settingsItemBlockOfTitle}>
-          <span className={styles.settingsTitle}>{t("country")}</span>
-          <span className={styles.settingsCaption}>{t("writeYourCounty")}</span>
+        <div>
+          <div className={styles.settingsTitle}>{t("country")}</div>
+          <div className={styles.settingsCaption}>{t("writeYourCounty")}</div>
         </div>
         <Select value={["Санкт-Петербург"]}/>
       </div>
