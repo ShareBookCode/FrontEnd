@@ -1,0 +1,39 @@
+
+.blockAvatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 120px;
+  object-fit: cover;
+}
+
+.form {
+  margin-top: 25px;
+}
+
+.formBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.titleOfInput {
+  font-weight: 500;
+}
+
+.blockOfNameAndLoginInput {
+  display: flex;
+  gap: 10px
+}
+
+.blockOfButton {
+  display: flex;
+  justify-content: end;
+}
