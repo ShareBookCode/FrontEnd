@@ -12,6 +12,7 @@ import {
   startRefresh,
 } from "./authSlice";
 import type { RootState } from "../../store";
+import qs from "qs";
 
 // const baseUrl =  import.meta.env.PROD ? "https://194.67.125.199:8443/" : "https://frontend-wmyr.onrender.com/"
 // Исходный fetchBaseQuery
@@ -36,6 +37,9 @@ const rawBaseQuery = fetchBaseQuery({
     }
 
     return headers;
+  },
+  paramsSerializer: (params) => {
+    return qs.stringify(params);
   },
 });
 

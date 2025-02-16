@@ -3,11 +3,13 @@ import { authReducer } from "./services/auth/authSlice";
 import { sharebookApi } from "./services/api/sharebookApi";
 import { chatReducer } from "./pages/chat/chatSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
+import { mainReducer } from "./mainSlice.ts";
 
 const rootReducer = combineReducers({
   [sharebookApi.reducerPath]: sharebookApi.reducer,
   auth: authReducer,
   chat: chatReducer,
+  main: mainReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

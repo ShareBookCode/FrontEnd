@@ -10,12 +10,11 @@ interface Genre {
 
 const genres: Genre[] = [
   { title: "Все", url: "/", id: "1" },
-  { title: "От ShareBook", url: "/filter/FromShareBook", id: "2" },
-  { title: "Детективы", url: "/filter/Detectives", id: "3" },
-  { title: "Романы", url: "/filter/Novels", id: "4" },
-  { title: "Научные", url: "/filter/Scientific", id: "5" },
-  { title: "Исскуство", url: "/filter/Art", id: "6" },
-  { title: "Учебные", url: "/filter/Tutorials", id: "7" },
+  { title: "Детективы", url: "/genre/11", id: "3" },
+  { title: "Романы", url: "/genre/1", id: "4" },
+  { title: "Научные", url: "/genre/29", id: "5" },
+  { title: "Ужасы", url: "/genre/15", id: "6" },
+  { title: "Учебник", url: "/genre/28", id: "7" },
 ];
 
 export function FilterGenre() {

@@ -16,6 +16,11 @@ body {
 }
 
 @font-face {
+  font-family: "Literata-Regular";
+  src: url("./fonts/Literata-Regular.ttf") format("ttf");
+}
+
+@font-face {
   font-family: "Onest-Medium";
   src: url("./fonts/Onest-Medium.woff") format("woff");
 }
@@ -30,3 +35,13 @@ body {
   src: url("./fonts/Onest-SemiBold.woff") format("woff");
 }
 
+
+@font-face {
+  font-family: "Inter-Medium";
+  src: url("./fonts/Inter-Medium.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Inter-Regular";
+  src: url("./fonts/Inter-Regular.ttf") format("ttf");
+}

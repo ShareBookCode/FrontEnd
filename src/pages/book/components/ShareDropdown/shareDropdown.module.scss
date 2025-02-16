@@ -1,0 +1,72 @@
+.shareButton {
+  &:global(.ant-btn-text.ant-btn-color-default) {
+    padding: 0;
+    width: auto;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      background: transparent;
+
+      .anticon svg {
+        fill: var(--ant-color-primary-hover);
+      }
+
+      span:last-child {
+        color: var(--ant-color-primary-hover);
+      }
+    }
+
+    .anticon svg {
+      width: 19px;
+      height: 19px;
+      fill: var(--ant-color-text);
+    }
+
+    span:last-child {
+      font-family: "Onest-Regular", sans-serif;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      color: var(--ant-color-text);
+    }
+  }
+}
+
+.shareDropdown {
+  :global(.ant-dropdown-menu) {
+    padding: 0;
+    width: 170px;
+    background: var(--ant-color-white);
+    box-shadow: 0px 7px 22px rgba(0, 0, 0, 0.25);
+    border-radius: 9px;
+  }
+
+  :global(.ant-dropdown-menu-item) {
+    height: 35px;
+    gap: 10px;
+    border-radius: 6px;
+
+    &:hover {
+      background: var(--ant-button-default-bg);
+      margin-right: 0;
+      padding-right: 14px;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    span {
+      font-family: "Onest-Regula", sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 400;
+      color: var(--ant-color-text);
+      width: 114px;
+    }
+  }
+}

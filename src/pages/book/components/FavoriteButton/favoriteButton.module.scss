@@ -1,0 +1,32 @@
+.favoriteButton {
+  &:global(.ant-btn-text.ant-btn-color-default) {
+    margin: 0;
+    width: auto;
+    height: auto;
+    background: transparent;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: transparent;
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+
+  :global(.anticon) svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--ant-color-text-placeholder);
+  }
+
+  &.isFavorite :global(.anticon) svg {
+    fill: var(--ant-color-primary);
+  }
+}

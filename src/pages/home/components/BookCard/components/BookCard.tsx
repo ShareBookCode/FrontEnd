@@ -2,10 +2,12 @@ import styles from "../bookCard.module.scss";
 import { Card } from "antd";
 import img1 from "../img/Image1.png";
 import { BookDto } from "../../../../../services/api/sharebookApi.ts";
+import { useAppSelector } from "../../../../../store.ts";
 
 export function BookCard({ book }: { book: BookDto }) {
   // @ts-expect-error WIP
   const attachment = book.attachment;
+  const genreMap = useAppSelector((state) => state.main.genreMap);
 
   return (
     <Card
@@ -31,7 +33,9 @@ export function BookCard({ book }: { book: BookDto }) {
           <div className={styles.title}>{book.title}</div>
           <a className={styles.author}>{book.author}</a>
         </div>
-        <p className={styles.location}>{book.genre}</p>
+        {book.genre !== undefined && !!genreMap[book.genre] && (
+          <p className={styles.location}>{genreMap[book.genre].name}</p>
+        )}
       </div>
     </Card>
   );

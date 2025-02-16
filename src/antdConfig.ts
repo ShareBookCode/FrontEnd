@@ -61,5 +61,15 @@ export const antdThemeConfig: ThemeConfig = {
       fontSize: 12,
       paddingXS: 6,
     },
+    Drawer: {
+      footerPaddingInline: 0,
+      footerPaddingBlock: 0,
+    },
+    Collapse: {
+      headerBg: "transparent",
+      contentBg: "transparent",
+      headerPadding: "16px 0",
+      contentPadding: "0",
+    },
   },
 };

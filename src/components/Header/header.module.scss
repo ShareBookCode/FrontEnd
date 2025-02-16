@@ -78,3 +78,18 @@
   min-width: 38px !important;
   height: 38px;
 }
+
+.emptyButton {
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  border: none;
+  outline: none;
+  margin: 0;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

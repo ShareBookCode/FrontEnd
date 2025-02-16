@@ -1,0 +1,122 @@
+.wrapper {
+  :global(.ant-drawer-header-title) {
+    flex-direction: row-reverse;
+  }
+
+  :global(.ant-drawer-close) {
+    background-color: #f1f4f6;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+  }
+
+  :global(.ant-collapse-expand-icon) {
+    height: 28px !important;
+
+    :global(.ant-collapse-arrow) {
+      font-size: 16px !important;
+    }
+
+    svg {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.drawerHeader {
+  padding-bottom: 0 !important;
+}
+
+.drawerBody {
+  scrollbar-gutter: stable;
+}
+
+.buttonFullFilterOpener {
+  height: 38px;
+}
+
+.filterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.priority.filterTitle {
+  margin: 0;
+  font-family: "Onest", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.searchInput {
+  border-radius: 9px;
+  background-color: #f1f4f6;
+  font-family: "Onest", sans-serif;
+  font-size: 16px;
+}
+
+.priority.sectionTitle {
+  margin: 0;
+  font-family: "Onest", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.checkboxOverflow {
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  margin-top: 18px;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 15px;
+}
+
+.checkbox {
+  font-family: "Onest", sans-serif;
+  font-size: 16px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 35px;
+  background-color: #fff;
+  box-shadow: 0 -10px 25px 0 rgba(144, 144, 144, 0.15);
+}
+
+.resetButton {
+  color: #909090;
+  border: none;
+  background: none;
+  font-family: "Onest", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.applyButton {
+  background-color: #2a7fff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 17px;
+  font-family: "Onest", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.collapseHeader {
+  flex-direction: row-reverse;
+}
