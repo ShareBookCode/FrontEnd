@@ -1,0 +1,15 @@
+{
+  "deletePhoto": "Удалить фото",
+  "changePhoto": "Изменить фото",
+  "name": "Имя",
+  "username": "@Юзернейм",
+  "nameAndUsername": "Имя и имя пользователя",
+  "tellAboutYou": "Расскажите о себе",
+  "save": "Сохранить",
+  "language": "Язык",
+  "chooseLanguagePlatform": "Выберете язык платформы",
+  "country": "Город",
+  "writeYourCounty": "Укажите город для персонализации объявлений",
+  "aboutMyself":  "О себе",
+  "account": "Аккаунт"
+}

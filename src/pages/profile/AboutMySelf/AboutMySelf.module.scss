@@ -15,14 +15,12 @@
 }
 
 .form {
-  margin-top: 25px;
-}
-
-.formBlock {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  margin-top: 25px;
 }
+
 
 .titleOfInput {
   font-weight: 500;
