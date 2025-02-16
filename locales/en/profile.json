@@ -1,0 +1,15 @@
+{
+  "deletePhoto": "Delete photo",
+  "changePhoto": "Change photo",
+  "name": "Name",
+  "username": "@userName",
+  "nameAndUsername": "Name and Username",
+  "tellAboutYou": "Tell about you",
+  "save": "Save",
+  "language": "Language",
+  "chooseLanguagePlatform": "Choose a platform language",
+  "country": "Country",
+  "writeYourCounty": "Indicate the city for personalization of ads",
+  "aboutMyself":  "About myself",
+  "account": "Account"
+}
