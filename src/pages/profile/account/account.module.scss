@@ -2,6 +2,8 @@
 .settingsBlock {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 93.69%;
   gap: 20px;
 }
 
@@ -24,4 +26,9 @@
 .settingsCaption {
   font-size: 14px;
   color: #909090;
+}
+
+.blockButton {
+  display: flex;
+  justify-content: end;
 }

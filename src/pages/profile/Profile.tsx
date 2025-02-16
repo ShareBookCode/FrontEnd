@@ -7,7 +7,7 @@ import { ProfileOtherButtons } from "./otherButtons";
 import { useState } from "react";
 import { AboutMySelf } from "./aboutMySelf";
 import styles from "./proflie.module.scss";
-import { Account } from "./Account";
+import { Account } from "./account";
 import {useTranslation} from "react-i18next";
 
 type Section = 'about' | 'account';
