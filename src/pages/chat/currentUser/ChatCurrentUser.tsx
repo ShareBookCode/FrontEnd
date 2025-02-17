@@ -5,25 +5,39 @@ import styles from "./chatCurrentUser.module.scss";
 import { SvgMenu } from "./SvgMenu.tsx";
 import { Dropdown } from "antd";
 import { SvgTrash } from "./SvgTrash.tsx";
+import { useTranslation } from "react-i18next";
+import * as React from "react";
 
-const actions = [
-  {
-    danger: true,
-    label: (
-      <div className={styles.delete}>
-        <SvgTrash />
-        Удалить чат
-      </div>
-    ),
-    key: "delete",
-  },
-];
+// const actions = [
+//   {
+//     danger: true,
+//     label: (
+//       <div className={styles.delete}>
+//         <SvgTrash />
+//         Удалить чат
+//       </div>
+//     ),
+//     key: "delete",
+//   },
+// ];
 
 export function ChatCurrentUser() {
   // const users = useAppSelector(sharebookApi.endpoints.getUsers.select);
   const activeChatId = useAppSelector((state) => state.chat.activeId);
   const activeUser = users.find((user) => user.author.id === activeChatId);
-
+  const { t } = useTranslation("chat");
+  const actions = [
+    {
+      danger: true,
+      label: React.createElement(
+        "div",
+        { className: styles.delete },
+        React.createElement(SvgTrash),
+        t("chat.delete")
+      ),
+      key: "delete",
+    },
+  ];
   if (!activeUser) {
     return null;
   }
@@ -38,7 +52,7 @@ export function ChatCurrentUser() {
       <div className={styles.textContent}>
         <div className={styles.authorName}>{activeUser.author.name}</div>
         <div className={styles.bookTitle}>
-          Книга{" "}
+          {t("chat.book")}
           <a
             href={`/profile/${activeUser.author.id}/book/${activeUser.book.id}`}
           >

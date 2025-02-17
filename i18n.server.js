@@ -16,7 +16,7 @@ export function createI18nInstance() {
     .init({
       fallbackLng: "en",
       preload: ["en", "ru"],
-      ns: ["common", "auth", "chat"],
+      ns: ["common", "auth", "chat", "home", "header", "search", "profile", "createBook"],
       defaultNS: "common",
       backend: {
         loadPath: __dirname + "/locales/{{lng}}/{{ns}}.json",

@@ -1,19 +1,20 @@
 import styles from "../header.module.scss";
 import { NavLink } from "react-router";
+import { useTranslation } from "react-i18next";
 
 interface MainMenuItem {
   title: string;
   url: string;
 }
 
-const mainMenuItems: MainMenuItem[] = [
-  { title: "Главная", url: "/" },
-  { title: "Избранное", url: "/favourites" },
-  { title: "Чаты", url: "/chats" },
-  { title: "Новое объявление", url: "/createBook" },
-];
-
 export function Nav() {
+  const { t } = useTranslation("header");
+  const mainMenuItems: MainMenuItem[] = [
+    { title: `${t("nav.titles.main")}`, url: "/" },
+    { title: `${t("nav.titles.favourites")}`, url: "/favourites" },
+    { title: `${t("nav.titles.chats")}`, url: "/chats" },
+    { title: `${t("nav.titles.createBook")}`, url: "/createBook" },
+  ];
   return (
     <nav>
       <ul className={styles.navBar}>

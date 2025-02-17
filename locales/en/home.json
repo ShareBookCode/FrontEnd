@@ -1,0 +1,17 @@
+{
+    "filters": {
+        "type": {
+            "exchange": "Exchanges",
+            "giveAway": "Gives Away",
+            "allOptions": "All options"
+        },
+        "genre": {
+            "all": "All",
+            "detectives": "Detectives",
+            "novels": "Novels",
+            "scientific": "Scientific",
+            "horrors": "Horrors",
+            "textbook": "Textbook"
+        }
+    }
+}

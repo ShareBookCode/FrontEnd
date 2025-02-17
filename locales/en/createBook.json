@@ -1,0 +1,25 @@
+{
+    "title": {
+        "label": "Title",
+        "message": "Please enter the title of the book",
+        "placeholder": "Enter the book title"
+    },
+    "author": {
+        "label": "Author",
+        "message": "Please enter the author's name",
+        "placeholder": "Enter the author's name"
+    },
+    "genre": {
+        "label": "Genre",
+        "placeholder": "Enter the book genre (optional)"
+    },
+    "publishingHouse": {
+        "label": "Publishing house",
+        "placeholder": "Enter the publisher (optional)"
+    },
+    "year": {
+        "label": "Year of publication",
+        "placeholder": "Enter the year of publication (optional)"
+    },
+    "save": "Save"
+}

@@ -1,0 +1,20 @@
+{
+    "fullFilter": {
+        "languages": {
+            "ru": "Русский",
+            "en": "English",
+            "fr": "Français"
+        },
+        "titles": {
+            "author": "Автор",
+            "genres": "Жанры",
+            "year": "Год издания",
+            "publishingHouse": "Издательство",
+            "language": "Язык",
+            "filter": "Фильтр",
+            "reset": "Сбросить",
+            "apply": "Применить"
+        },
+        "placeholder": "Поиск"
+    }
+}

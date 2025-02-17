@@ -3,6 +3,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import styles from "./full.module.scss";
 import { CheckboxGroup } from "./CheckboxGroup.tsx";
 import { useDeferredValue, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Item {
   name?: string;
@@ -17,6 +18,7 @@ interface Props {
 export function CheckboxFilter({ items, name }: Props) {
   const [itemQuery, setItemQuery] = useState("");
   const deferredItemQuery = useDeferredValue(itemQuery);
+  const { t } = useTranslation("search");
 
   const filteredItems = useMemo(() => {
     return items.filter((item) =>
@@ -27,7 +29,7 @@ export function CheckboxFilter({ items, name }: Props) {
   return (
     <>
       <Input
-        placeholder="Поиск"
+        placeholder={t("fullFilter.placeholder")}
         prefix={<SearchOutlined />}
         className={styles.searchInput}
         onChange={(e) => setItemQuery(e.target.value)}

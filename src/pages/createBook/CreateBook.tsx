@@ -4,10 +4,12 @@ import {
   useSaveBookMutation,
 } from "../../services/api/sharebookApi.ts";
 import styles from "./createBook.module.scss";
+import { useTranslation } from "react-i18next";
 
 export function CreateBook() {
   const [form] = Form.useForm<BookDto>();
   const [save] = useSaveBookMutation();
+  const { t } = useTranslation("createBook");
 
   async function handleFinish(values: BookDto) {
     try {
@@ -26,41 +28,41 @@ export function CreateBook() {
       className={styles.wrapper}
     >
       <Form.Item
-        label="Название"
+        label={t("title.label")}
         name="title"
         rules={[
-          { required: true, message: "Пожалуйста, введите название книги" },
+          { required: true, message: `${t("title.message")}` },
         ]}
       >
-        <Input placeholder="Введите название книги" />
+        <Input placeholder= {t("title.placeholder")} />
       </Form.Item>
 
       <Form.Item
-        label="Автор"
+        label={t("author.label")}
         name="author"
-        rules={[{ required: true, message: "Пожалуйста, введите имя автора" }]}
+        rules={[{ required: true, message: `${t("author.message")}` }]}
       >
-        <Input placeholder="Введите имя автора" />
+        <Input placeholder={t("author.placeholder")} />
       </Form.Item>
 
-      <Form.Item label="Жанр" name="genre">
-        <Input placeholder="Введите жанр книги (необязательно)" />
+      <Form.Item label={t("genre.label")} name="genre">
+        <Input placeholder={t("genre.placeholder")} />
       </Form.Item>
 
-      <Form.Item label="Издательство" name="publishingHouse">
-        <Input placeholder="Введите издательство (необязательно)" />
+      <Form.Item label={t("publishingHouse.label")} name="publishingHouse">
+        <Input placeholder={t("publishingHouse.placeholder")} />
       </Form.Item>
 
-      <Form.Item label="Год издания" name="year">
+      <Form.Item label={t("year.label")} name="year">
         <Input
           type="number"
-          placeholder="Введите год издания (необязательно)"
+          placeholder={t("year.placeholder")}
         />
       </Form.Item>
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Сохранить
+          {t("save")}
         </Button>
       </Form.Item>
     </Form>

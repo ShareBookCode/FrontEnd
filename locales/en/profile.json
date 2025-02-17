@@ -1,0 +1,11 @@
+{
+    "otherButtons": {
+        "write": "Send a message"
+    },
+    "ownButtons": {
+        "newAd": "Create a book"
+    },
+    "info": {
+        "score": "{giveCount, plural, one {Given} other {Given}} {giveCount, plural, one {book} other {books}} • Exchanged {exchangedCount}"
+    }    
+}

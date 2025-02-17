@@ -7,6 +7,7 @@ import {
   UserPublicProfileDto,
 } from "../../../services/api/sharebookApi.ts";
 import { PropsWithChildren } from "../../../types.ts";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   profile?: UserPublicProfileDto | UserProfileDto;
@@ -18,6 +19,7 @@ export function ProfileInfo({
   isOwnProfile,
   children,
 }: PropsWithChildren<Props>) {
+  const { t } = useTranslation("profile");
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -30,8 +32,7 @@ export function ProfileInfo({
               {profile?.name}
             </Typography.Title>
             <Typography.Text className={styles.score}>
-              <span className={styles.emoji}>🎯</span> Отдано 17 книг • Обменяно
-              21
+              <span className={styles.emoji}>🎯</span> {t("info.score", { giveCount: 1, exchangedCount: 3 })}
             </Typography.Text>
             <Typography.Paragraph className={styles.description}>
               Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
