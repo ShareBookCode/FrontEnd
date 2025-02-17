@@ -1,15 +1,15 @@
-import { FilterComponent } from "./components/Filter";
-import { BookCardComponent } from "./components/BookCard";
 import styles from "./home.module.scss";
 import { useBooksQuery } from "../../services/api/sharebookApi.ts";
+import { HomeMenu } from "./HomeMenu";
+import { BookList } from "../../components/BookList";
 
 export function Home() {
-  const { data } = useBooksQuery();
+	const { data } = useBooksQuery();
 
-  return (
-    <div className={styles.container}>
-      <FilterComponent />
-      <BookCardComponent books={data} />
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<HomeMenu />
+			<BookList books={data} />
+		</div>
+	);
 }

@@ -5,124 +5,106 @@ import { useNavigate, useSearchParams } from "react-router";
 import { useRegisterUserMutation } from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
+import { useTranslation } from "react-i18next";
 
 export function SignUpPassword() {
-  const [, setSearchParams] = useSearchParams();
+  const { t } = useTranslation("auth");
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [register, { isLoading }] = useRegisterUserMutation();
 
   const onFinish: FormProps["onFinish"] = async (values) => {
-    console.log("Success:", values);
     try {
-      await register(values).unwrap();
-      navigate("/");
+      const registerValues = {
+        userRegistrationDto: {
+          name: searchParams.get("name") ?? "",
+          login: "",
+          password: values.password ?? "",
+          passwordConfirm: values.passwordConfirm ?? "",
+          email: searchParams.get("email") ?? "",
+          city: searchParams.get("city") ?? "",
+        },
+      };
+      await register(registerValues).unwrap();
+      navigate(`/auth/goToEmail?${searchParams.toString()}`);
     } catch (err) {
       console.log("err:", err);
     }
   };
 
-  const onFinishFailed: FormProps["onFinishFailed"] = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     <div className={styles.containerContent}>
-      <h1 className={styles.title}>Регистрация через почту</h1>
+      <h1 className={styles.title}>{t("titleSignUp")}</h1>
       <div>
-        <Form
-          name="basic"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-          className={styles.container}
-        >
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input placeholder="Почта" autoComplete="email" />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input.Password
-              placeholder="Введите пароль"
-              autoComplete="new-password"
-              iconRender={(visible) =>
-                visible ? (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordShow />
-                  </div>
-                ) : (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordHide />
-                  </div>
-                )
-              }
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="passwordConfirm"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error(
-                      "The new password that you entered do not match!",
-                    ),
-                  );
+        <Form onFinish={onFinish} autoComplete="off">
+          <div className={styles.containerForm}>
+            <Form.Item
+              name="password"
+              validateDebounce={1000}
+              rules={[
+                {
+                  required: true,
+                  message: t("messagePasswordEmpty"),
                 },
-              }),
-            ]}
-          >
-            <Input.Password
-              placeholder="Повторите пароль"
-              autoComplete="new-password"
-              iconRender={(visible) =>
-                visible ? (
+                {
+                  min: 8,
+                  message: t("messagePasswordLength"),
+                },
+              ]}
+            >
+              <Input.Password
+                placeholder={t("password")}
+                autoComplete="new-password"
+                iconRender={(visible) => (
                   <div className={styles.svgPassword}>
-                    <SvgPasswordShow />
+                    {visible ? <SvgPasswordShow /> : <SvgPasswordHide />}
                   </div>
-                ) : (
-                  <div className={styles.svgPassword}>
-                    <SvgPasswordHide />
-                  </div>
-                )
-              }
-            />
-          </Form.Item>
-        </Form>
+                )}
+              />
+            </Form.Item>
 
-        <Button
-          className={styles.buttonAuth}
-          type="primary"
-          htmlType="submit"
-          loading={isLoading}
-        >
-          Далее
-        </Button>
+            <Form.Item
+              name="passwordConfirm"
+              validateDebounce={1000}
+              rules={[
+                {
+                  required: true,
+                  message: t("messagePasswordEmpty"),
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(t("messagePasswordDontMatch")),
+                    );
+                  },
+                }),
+              ]}
+            >
+              <Input.Password
+                placeholder={t("confirmPassword")}
+                autoComplete="new-password"
+                iconRender={(visible) => (
+                  <div className={styles.svgPassword}>
+                    {visible ? <SvgPasswordShow /> : <SvgPasswordHide />}
+                  </div>
+                )}
+              />
+            </Form.Item>
+          </div>
+
+          <Button
+            className={styles.buttonAuth}
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+          >
+            {t("buttonNext")}
+          </Button>
+        </Form>
       </div>
     </div>
   );

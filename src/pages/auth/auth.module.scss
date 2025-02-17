@@ -1,71 +1,10 @@
-.modal {
-  height: 498px;
-  padding: 20px 20px !important;
-}
-
-.containerModal {
-  height: 100%;
-}
-
 .wrapper {
-  height: 100%;
+  padding-top: 154px;
+  height: calc(100vh - 66px);
   display: flex;
-  justify-content: space-between;
-}
-
-.buttonModal {
-  width: 36px;
-  height: 36px;
-  border-radius: 20px;
-
-  display: flex;
-  justify-content: center;
   align-items: center;
-
-  background: rgba(241, 244, 246, 1);
-  border: none;
-  cursor: pointer;
-}
-
-.buttonHide {
-  visibility: hidden;
-}
-
-.signUp {
-  display: grid;
-  grid-template-rows: 40px auto 40px;
-}
-
-.title {
-  font-family: 'Onest-Medium', sans-serif;
-  margin-bottom: 25px;
-}
-
-.container {
-  width: 284px;
-  display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  gap: 12px;
-}
-
-.buttonAuth {
-  width: 100%;
-  margin-top: 16px;
-  background: rgba(90, 156, 255, 1);
-
-  &:hover {
-    background: rgba(90, 156, 255, 1) !important;
-  }
-}
-
-.link {
-  font-family: 'Onest-Medium', sans-serif;
-  font-size: 15px;
-  margin-top: 24px;
-
-  a {
-    color: var(--ant-color-primary)
-  }
 }
 
 .containerContent {
@@ -75,17 +14,50 @@
   flex-direction: column;
 }
 
-.legalText {
+.title {
+  width: 100%;
+  margin-bottom: 38px;
+  font-family: 'Onest-SemiBold', sans-serif;
+  font-size: 24px;
+}
+
+.containerForm {
+  width: 300px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
 
-  max-width: 527px;
-  height: 100%;
-  margin-bottom: 10px;
+.buttonAuth {
+  width: 100%;
+  margin-top: 20px;
+}
 
-  font-family: 'Onest-Regular', sans-serif;
-  line-height: 20.4px;
+.link {
+  font-family: 'Onest-Medium', sans-serif;
   font-size: 16px;
-  color: var(--ant-color-text-placeholder);
+  margin-top: 20px;
+
+  button {
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    background: none;
+    color: var(--ant-color-primary)
+  }
+}
+
+.legalText {
+  font-family: 'Onest-Regular', sans-serif;
+  font-size: 16px;
   text-align: center;
+  color: var(--ant-color-text-placeholder);
+
+  width: 527px;
+  margin-bottom: 50px;
+
+  .legalTextLink {
+    color: var(--ant-color-text-placeholder);
+    text-decoration: underline;
+  }
 }
