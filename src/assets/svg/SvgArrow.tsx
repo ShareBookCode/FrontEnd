@@ -1,4 +1,4 @@
-import styles from "../../components/Header/headerAuth.module.scss";
+import styles from "../../components/Header/headerLite.module.scss";
 import cn from "classnames";
 
 export function SvgArrow({ showListState }: { showListState: boolean }) {

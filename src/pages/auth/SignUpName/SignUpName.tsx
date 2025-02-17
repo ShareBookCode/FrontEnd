@@ -10,8 +10,7 @@ export function SignUpName() {
 
   const onFinish: FormProps["onFinish"] = (values) => {
     searchParams.set("name", values.name);
-    if (values.city == null) searchParams.set("city", "");
-    else searchParams.set("city", values.city);
+    searchParams.set("city", values.city ?? "");
     navigate(`/auth/signUpPassword?${searchParams.toString()}`);
   };
 

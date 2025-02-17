@@ -26,11 +26,11 @@ export function FilterGenre() {
         <NavLink
           key={genre.id}
           to={{ pathname: genre.url, search: searchParams.toString() }}
-          className={(isActive) =>
-            cn(styles.buttonGenre, {
-              [styles.buttonActive]: isActive.isActive,
-              [styles.buttonDefault]: !isActive.isActive,
-            })
+          className={({ isActive }) =>
+            cn(
+              styles.buttonGenre,
+              isActive ? styles.buttonActive : styles.buttonDefault,
+            )
           }
         >
           {genre.title}

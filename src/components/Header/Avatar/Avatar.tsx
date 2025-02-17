@@ -7,15 +7,13 @@ export function Avatar() {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Button
-        className={styles.avatar}
-        type="primary"
-        shape="circle"
-        onClick={() => navigate("/auth/signIn")}
-      >
-        <SvgAvatar />
-      </Button>
-    </>
+    <Button
+      className={styles.avatar}
+      type="primary"
+      shape="circle"
+      onClick={() => navigate("/auth/signIn")}
+    >
+      <SvgAvatar />
+    </Button>
   );
 }

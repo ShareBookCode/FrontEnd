@@ -1,13 +1,13 @@
 import { Dropdown } from "antd";
-import styles from "../headerAuth.module.scss";
+import styles from "../headerLite.module.scss";
 import { useState } from "react";
 import cn from "classnames";
 import { SvgArrow } from "../../../assets/svg/SvgArrow";
 import { useTranslation } from "react-i18next";
 
 const languages = [
-  { label: "Русский", lng: "ru", key: "ru" },
-  { label: "English", lng: "en", key: "en" },
+  { label: "Русский", key: "ru" },
+  { label: "English", key: "en" },
 ];
 
 const defaultLanguage = languages[0];
@@ -20,7 +20,6 @@ export function SwitchLanguages() {
 
   const handleMenuClick = ({ key }: { key: string }) => {
     i18n.changeLanguage(key);
-    document.cookie = "";
   };
 
   return (
