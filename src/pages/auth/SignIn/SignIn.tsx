@@ -14,7 +14,6 @@ export function SignIn() {
   const [login, { isLoading }] = useAuthMutation();
 
   const onFinish: FormProps["onFinish"] = async (values) => {
-    console.log("Success:", values);
     try {
       await login({ loginRequest: values }).unwrap();
       navigate("/");

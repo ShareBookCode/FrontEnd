@@ -2,10 +2,7 @@ import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import styles from "../auth.module.scss";
 import { useNavigate, useSearchParams } from "react-router";
-import {
-  useLazyGenerateLoginQuery,
-  useRegisterUserMutation,
-} from "../../../services/api/sharebookApi.ts";
+import { useRegisterUserMutation } from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
 import { useTranslation } from "react-i18next";
@@ -14,22 +11,19 @@ export function SignUpPassword() {
   const { t } = useTranslation("auth");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [triggerGenerateLogin] = useLazyGenerateLoginQuery();
 
   const [register, { isLoading }] = useRegisterUserMutation();
 
   const onFinish: FormProps["onFinish"] = async (values) => {
-    console.log("Success:", values);
     try {
-      const login = await triggerGenerateLogin().unwrap();
       const registerValues = {
         userRegistrationDto: {
-          name: searchParams.get("name") || "",
-          login: login.originalLogin ?? "",
-          password: values.password || "",
-          passwordConfirm: values.passwordConfirm || "",
-          email: searchParams.get("email") || "",
-          city: searchParams.get("city") || "",
+          name: searchParams.get("name") ?? "",
+          login: "",
+          password: values.password ?? "",
+          passwordConfirm: values.passwordConfirm ?? "",
+          email: searchParams.get("email") ?? "",
+          city: searchParams.get("city") ?? "",
         },
       };
       await register(registerValues).unwrap();
@@ -43,11 +37,7 @@ export function SignUpPassword() {
     <div className={styles.containerContent}>
       <h1 className={styles.title}>{t("titleSignUp")}</h1>
       <div>
-        <Form
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          autoComplete="off"
-        >
+        <Form onFinish={onFinish} autoComplete="off">
           <div className={styles.containerForm}>
             <Form.Item
               name="password"
@@ -57,16 +47,10 @@ export function SignUpPassword() {
                   required: true,
                   message: t("messagePasswordEmpty"),
                 },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password").length >= 8) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      new Error(t("messagePasswordLength")),
-                    );
-                  },
-                }),
+                {
+                  min: 8,
+                  message: t("messagePasswordLength"),
+                },
               ]}
             >
               <Input.Password

@@ -2,6 +2,7 @@ import { Link, Outlet, useNavigate, useSearchParams } from "react-router";
 import styles from "./auth.module.scss";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { HeaderLite } from "../../components/Header";
 
 export function Auth() {
   const { t } = useTranslation("auth");
@@ -20,14 +21,17 @@ export function Auth() {
   }, [navigate, searchParams]);
 
   return (
-    <div className={styles.wrapper}>
-      <Outlet />
-      <p className={styles.legalText}>
-        {t("legalText")}
-        <Link to="/" className={styles.legalTextLink}>
-          {t("legalTextLink")}
-        </Link>
-      </p>
-    </div>
+    <>
+      <HeaderLite />
+      <div className={styles.wrapper}>
+        <Outlet />
+        <p className={styles.legalText}>
+          {t("legalText")}
+          <Link to="/" className={styles.legalTextLink}>
+            {t("legalTextLink")}
+          </Link>
+        </p>
+      </div>
+    </>
   );
 }

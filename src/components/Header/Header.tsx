@@ -1,10 +1,10 @@
 import styles from "./header.module.scss";
-import { Logo } from "./components/Logo.tsx";
-import { Nav } from "./components/Nav.tsx";
-import { SearchInput } from "./components/SearchInput.tsx";
-import { Avatar } from "./components/Avatar.tsx";
+import { Logo } from "./Logo";
+import { Nav } from "./Nav";
+import { SearchInput } from "./SearchInput";
+import { Avatar } from "./Avatar";
 
-export function HeaderComponent() {
+export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>

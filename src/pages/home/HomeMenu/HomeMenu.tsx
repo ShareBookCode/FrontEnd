@@ -1,8 +1,8 @@
 import styles from "./filter.module.scss";
-import { FilterGenre } from "./components/FilterGenre.tsx";
-import { FilterType } from "./components/FilterType.tsx";
+import { FilterGenre } from "./FilterGenre";
+import { FilterType } from "./FilterType";
 
-export function FilterComponent() {
+export function HomeMenu() {
   return (
     <div className={styles.container}>
       <FilterGenre />

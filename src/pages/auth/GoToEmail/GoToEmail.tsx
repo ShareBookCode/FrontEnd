@@ -1,4 +1,4 @@
-import extraStyles from "./goToEmail.module.scss";
+import extraStyles from "../goToEmail.module.scss"
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 

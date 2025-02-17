@@ -1,8 +1,8 @@
 import styles from "../bookCard.module.scss";
 import { Card } from "antd";
 import img1 from "../img/Image1.png";
-import { BookDto } from "../../../../../services/api/sharebookApi.ts";
-import { useAppSelector } from "../../../../../store.ts";
+import { BookDto } from "../../../services/api/sharebookApi.ts";
+import { useAppSelector } from "../../../store.ts";
 
 export function BookCard({ book }: { book: BookDto }) {
   // @ts-expect-error WIP

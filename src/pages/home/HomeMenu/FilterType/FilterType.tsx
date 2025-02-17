@@ -1,8 +1,8 @@
 import { Dropdown } from "antd";
 import styles from "../filter.module.scss";
 import { useState } from "react";
-import { SvgArrow } from "../svg/SvgArrow.tsx";
 import { useSearchParams } from "react-router";
+import { SvgArrow } from "../../../../assets/svg/SvgArrow.tsx";
 
 interface Type {
   label: string;
@@ -32,7 +32,7 @@ export function FilterType() {
     <Dropdown
       overlayClassName={styles.typeFilter}
       menu={{
-        items: types.filter((item) => item.key !== filterType),
+        items: types,
         onClick: handleMenuClick,
       }}
       trigger={["click"]}

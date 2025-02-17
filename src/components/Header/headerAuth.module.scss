@@ -1,0 +1,53 @@
+.container {
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 0 150px 0;
+
+  font-family: "Onest-Medium", sans-serif;
+  font-size: 16px;
+}
+
+.language {
+  width: 159px;
+  ul {
+    margin-bottom: 3px !important;
+  }
+}
+
+.buttonLanguage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 6px;
+  padding: 0;
+  height: 38px;
+
+  cursor: pointer;
+  border: none;
+  font-family: "Onest-Medium", sans-serif;
+  color: var(--ant-color-text-placeholder);
+  background: none;
+
+  transition: 0.2s;
+}
+
+.buttonLanguageActive {
+  color: var(--ant-color-primary);
+}
+
+.svgDefault {
+  transition: 0.2s;
+  path {
+    stroke: var(--ant-color-text-placeholder);
+  }
+}
+
+.svgActive {
+  rotate: 180deg;
+  path {
+    stroke: var(--ant-color-primary);
+  }
+}

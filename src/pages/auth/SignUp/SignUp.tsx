@@ -3,9 +3,7 @@ import styles from "../auth.module.scss";
 import extraStyles from "./signUp.module.scss";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
-
-const regex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+import { regex } from "../../../utils/regex";
 
 export function SignUp() {
   const { t } = useTranslation("auth");
@@ -41,16 +39,10 @@ export function SignUp() {
                   required: true,
                   message: t("messageEmailEmpty"),
                 },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || regex.test(getFieldValue("email"))) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      new Error(t("messageEmailIncorrect")),
-                    );
-                  },
-                }),
+                {
+                  pattern: regex,
+                  message: t("messageEmailIncorrect"),
+                },
               ]}
             >
               <Input placeholder={t("email")} autoComplete="email" />
