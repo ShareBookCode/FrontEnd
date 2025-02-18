@@ -5,7 +5,9 @@
     "ownButtons": {
         "newAd": "Create a book"
     },
-    "info": {
-        "score": "{giveCount, plural, one {Given} other {Given}} {giveCount, plural, one {book} other {books}} • Exchanged {exchangedCount}"
-    }    
+    "score": {
+        "scoreGiven_one": "Given {{count}} book",
+        "scoreGiven_other": "Given {{count}} books",
+        "scoreExchange": "Exchanged {{exchangedCount}}"
+    }  
 }

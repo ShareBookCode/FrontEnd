@@ -16,5 +16,10 @@
             "apply": "Применить"
         },
         "placeholder": "Поиск"
+    },
+    "booksFound": {
+        "book_one": "{{count}} книга найдена",
+        "book_few": "{{count}} книги найдено",
+        "book_many": "{{count}} книг найдено"
     }
 }

@@ -16,5 +16,9 @@
             "apply": "Apply"
         },
         "placeholder": "Search"
+    },
+    "booksFound": {
+        "book_one": "{{count}} book finded",
+        "book_other": "{{count}} books finded"
     }
 }

@@ -8,19 +8,6 @@ import { SvgTrash } from "./SvgTrash.tsx";
 import { useTranslation } from "react-i18next";
 import * as React from "react";
 
-// const actions = [
-//   {
-//     danger: true,
-//     label: (
-//       <div className={styles.delete}>
-//         <SvgTrash />
-//         Удалить чат
-//       </div>
-//     ),
-//     key: "delete",
-//   },
-// ];
-
 export function ChatCurrentUser() {
   // const users = useAppSelector(sharebookApi.endpoints.getUsers.select);
   const activeChatId = useAppSelector((state) => state.chat.activeId);

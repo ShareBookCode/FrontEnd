@@ -5,7 +5,10 @@
     "ownButtons": {
         "newAd": "Новое объявление"
     },
-    "info": {
-        "score": "{giveCount, plural, one {Отдана} few {Отдано} many {Отдано}} {giveCount, plural, one {книга} few {книги} many {книг}} • Обменяно {exchangedCount}"
+    "score": {
+        "scoreGiven_one": "Отдана {{count}} книга",
+        "scoreGiven_few": "Отдано {{count}} книги",
+        "scoreGiven_many": "Отдано {{count}} книг",
+        "scoreExchange": "Обменяно {{exchangedCount}}"
     }
 }
