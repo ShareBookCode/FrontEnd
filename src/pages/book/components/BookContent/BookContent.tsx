@@ -1,11 +1,11 @@
 import { Typography } from "antd";
 import { ShareDropdown } from "../ShareDropdown";
 import styles from "./bookContent.module.scss";
-import { BookGallery } from "../BookGallery";
 import { BookDescription } from "../BookDescription";
 import { BookData } from "../../../../types/book";
 import { OwnerCard } from "../OwnerCard";
 import { FavoriteButton } from "../FavoriteButton";
+import { BookGallerySwiper } from "../BookGallerySwiper";
 
 const { Title, Text } = Typography;
 
@@ -42,10 +42,7 @@ export const BookContent = () => {
 
       <div className={styles.contentLayout}>
         <div className={styles.contentContainer}>
-          <div className={styles.favoriteButtonWrapper}>
-            <FavoriteButton />
-          </div>
-          <BookGallery images={images} />
+          <BookGallerySwiper images={images} />
           <BookDescription bookDetails={bookDetails} />
         </div>
         <aside>

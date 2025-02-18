@@ -1,1 +1,0 @@
-export { BookGallery } from "./BookGallery";
