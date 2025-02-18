@@ -1,10 +1,10 @@
 import styles from "./search.module.scss";
-import { BookCardComponent } from "../home/components/BookCard";
 import { useSearchByTitleQuery } from "../../services/api/sharebookApi.ts";
 import { useParams } from "react-router";
 import { FilterFull } from "./FullFilter";
 import { Form } from "antd";
 import { useEffect } from "react";
+import { BookList } from "../../components/BookList";
 
 export function Search() {
   const { title = "" } = useParams();
@@ -24,7 +24,7 @@ export function Search() {
         </div>
         <FilterFull form={form} />
       </h1>
-      <BookCardComponent books={data} />
+      <BookList books={data} />
     </div>
   );
 }

@@ -1,0 +1,130 @@
+.card {
+  width: 315px;
+  border: 1px solid rgba(158, 158, 158, 0.2);
+  box-shadow: 0px 0px 12px 5px rgba(66, 66, 66, 0.05);
+  border-radius: 15px;
+  padding: 15px;
+
+  :global(.ant-card-body) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  gap: 14px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.name {
+  font-family: "Onest-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--ant-color-text);
+}
+
+.membershipTime {
+  font-family: "Onest-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--ant-color-text-placeholder);
+}
+
+.detailsRow {
+  display: flex;
+  gap: 8px;
+
+  .iconWrapper {
+    display: flex;
+    width: 24px;
+    flex-shrink: 0;
+  }
+}
+
+.statsRow {
+  padding-bottom: 3px;
+  align-items: flex-end;
+}
+
+.statsIcon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.statsText {
+  font-family: "Onest-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--ant-color-text);
+}
+
+.exchangeInfoText {
+  font-family: "Onest-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--ant-color-text-placeholder);
+}
+
+.locationIcon {
+  font-size: 18px;
+  color: var(--ant-color-text-quaternary);
+}
+
+.location {
+  font-family: "Onest-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--ant-color-text-placeholder);
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--ant-color-border-bg);
+  width: 100%;
+
+  &:global(.ant-divider-horizontal) {
+    margin: 2px 0;
+  }
+}
+
+.messageButton {
+  width: 100%;
+  height: 42px;
+  border-radius: 9px;
+  font-family: "Onest-Medium", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  &:global(.ant-btn-variant-solid:hover) {
+    &:hover {
+      background-color: var(--ant-geekblue-6); //В фигме #355FFF
+    }
+  }
+
+  &:global(.ant-btn-variant-solid:disabled) {
+    color: var(--ant-color-bg-base);
+    background-color: var(--ant-color-primary-text-hover); //В фигме #5A9CFF
+
+    &:hover {
+      color: var(--ant-color-bg-base);
+      background-color: var(--ant-color-primary-text-hover);
+    }
+  }
+}
