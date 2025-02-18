@@ -2,7 +2,7 @@ import i18next from "i18next";
 import Backend from "i18next-fs-backend";
 import { LanguageDetector } from "i18next-http-middleware";
 import { fileURLToPath } from "url";
-import { dirname } from "path";;
+import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
