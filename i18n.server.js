@@ -15,7 +15,6 @@ export function createI18nInstance() {
     .use(LanguageDetector)
     .init({
       fallbackLng: "en",
-      preload: ["en", "ru"],
       ns: ["common", "auth", "chat"],
       defaultNS: "common",
       backend: {
@@ -23,6 +22,9 @@ export function createI18nInstance() {
       },
       react: {
         useSuspense: false,
+      },
+      detection: {
+        caches: ["cookie"],
       },
     });
 
