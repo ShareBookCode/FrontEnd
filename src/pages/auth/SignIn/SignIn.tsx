@@ -1,5 +1,4 @@
-import { FormProps } from "antd";
-import { Button, Form, Input } from "antd";
+import { Button, Form, FormProps, Input } from "antd";
 import { Link, useNavigate } from "react-router";
 import { useAuthMutation } from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
@@ -33,7 +32,7 @@ export function SignIn() {
         >
           <div className={styles.containerForm}>
             <Form.Item
-              name="email"
+              name="login"
               rules={[
                 {
                   required: true,

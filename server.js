@@ -66,11 +66,6 @@ app.use("*", async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, "/");
 
-    const initialI18nStore = {};
-    req.i18n.languages.forEach((lng) => {
-      initialI18nStore[lng] = req.i18n.store.data[lng] || {};
-    });
-
     /** @type {string} */
     let template;
     /** @type {import('./src/entry-server.ts').render} */
@@ -96,7 +91,6 @@ app.use("*", async (req, res) => {
         `<!--i18n-head-->`,
         `
         <script>
-            window.initialI18nStore = ${JSON.stringify(initialI18nStore)};
             window.initialLanguage = '${req.i18n.language}';
         </script>
       `,
