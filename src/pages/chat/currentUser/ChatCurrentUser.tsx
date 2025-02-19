@@ -6,7 +6,6 @@ import { SvgMenu } from "./SvgMenu.tsx";
 import { Dropdown } from "antd";
 import { SvgTrash } from "./SvgTrash.tsx";
 import { useTranslation } from "react-i18next";
-import * as React from "react";
 
 export function ChatCurrentUser() {
   // const users = useAppSelector(sharebookApi.endpoints.getUsers.select);
@@ -16,11 +15,11 @@ export function ChatCurrentUser() {
   const actions = [
     {
       danger: true,
-      label: React.createElement(
-        "div",
-        { className: styles.delete },
-        React.createElement(SvgTrash),
-        t("chat.delete")
+      label: (
+        <div className={styles.delete}>
+          <SvgTrash />
+          {t("chat.delete")}
+        </div>
       ),
       key: "delete",
     },
