@@ -564,15 +564,10 @@ export type BookDto = {
   author: string;
   /** Идентификатор жанра */
   genre?: number;
-  /** Язык книги */
-  language?: string;
   /** Издательство */
   publishingHouse?: string;
   /** Год издания */
   year?: number;
-  /** Год издания */
-  condition?: 'good' | 'bad' | 'normal';
-  description?: string;
 };
 export type AttachmentMultipartDto = {
   /** Идентификатор книги */

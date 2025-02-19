@@ -1,7 +1,7 @@
-import { Button, Form, Input, Radio, Select, Typography } from "antd";
+import { Button, Form, Input, Radio, Typography } from "antd";
 import {
   BookDto,
-  useFindAllGenreQuery,
+  sharebookApi,
   useSaveBookMutation,
 } from "../../services/api/sharebookApi.ts";
 import { BackIcon } from "../../components/Header/svg/BackIcon.tsx";
@@ -9,6 +9,9 @@ import styles from "./createBook.module.scss";
 import { CheckboxGroupProps } from "antd/es/checkbox/Group";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store.ts";
+import { CheckboxGroup } from "../search/FullFilter/CheckboxGroup.tsx";
+import { useDeferredValue, useMemo, useState } from "react";
 
 const options: CheckboxGroupProps<string>["options"] = [
   { label: "Хорошее", value: "good" },
@@ -20,9 +23,25 @@ export function CreateBook() {
   const [form] = Form.useForm<BookDto>();
   const [save] = useSaveBookMutation();
   const { i18n } = useTranslation();
-  const { data: genres, isLoading: genresLoading } = useFindAllGenreQuery({
-    locale: i18n.language.split("-")[0],
-  });
+
+  const [itemQuery, setItemQuery] = useState("");
+  const deferredItemQuery = useDeferredValue(itemQuery);
+
+  const { data: genres = [] } = useAppSelector(
+    sharebookApi.endpoints.findAllGenre.select({
+      locale: i18n.language.split("-")[0],
+    })
+  );
+
+  const filteredItems = useMemo(() => {
+    return genres.filter((genre) =>
+      genre.name?.toLowerCase().includes(deferredItemQuery.toLowerCase())
+    );
+  }, [genres, deferredItemQuery]);
+
+  // const { data: genres, isLoading: genresLoading } = useFindAllGenreQuery({
+  //   locale: i18n.language.split("-")[0],
+  // });
 
   async function handleFinish(values: BookDto) {
     try {
@@ -72,15 +91,25 @@ export function CreateBook() {
 
           <Form.Item label="Жанр" name="genre">
             {/* <Input placeholder="Роман" /> */}
-            <Select
+            {/* <Select
               loading={genresLoading}
-              options={genres?.map((genre) => ({
+              options={genre?.map((genre) => ({
                 value: genre.id,
                 label: genre.name,
               }))}
               placeholder="Роман"
               className={styles.select}
-            />
+            /> */}
+            {/* <CheckboxFilter items={genre} name="genre" /> */}
+            <>
+              <Input
+                placeholder="Роман"
+                className={styles.searchInput}
+                onChange={(e) => setItemQuery(e.target.value)}
+                value={itemQuery}
+              />
+              <CheckboxGroup items={filteredItems} />
+            </>
           </Form.Item>
 
           <Form.Item label="Язык книги" name="language">
