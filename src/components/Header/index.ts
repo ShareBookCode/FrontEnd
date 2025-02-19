@@ -1,1 +1,2 @@
-export { HeaderComponent } from "./HeaderComponent.tsx";
+export { Header } from './Header.tsx';
+export { HeaderLite } from './HeaderLite.tsx';

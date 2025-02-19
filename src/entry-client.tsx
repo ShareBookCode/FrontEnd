@@ -10,12 +10,17 @@ i18next
   .use(LanguageDetector)
   .init(
     {
-      lng: window.initialLanguage,
-      fallbackLng: "en",
-      debug: false,
-      resources: window.initialI18nStore,
+      ns: ["common", "auth", "chat"],
+      defaultNS: "common",
+      fallbackLng: window.initialLanguage,
       react: {
         useSuspense: false,
+      },
+      backend: {
+        loadPath: "/locales/{{lng}}/{{ns}}.json",
+      },
+      detection: {
+        caches: ["cookie"],
       },
     },
     () => {

@@ -2,6 +2,14 @@ body {
 	margin: 0;
 }
 
+.ant-form-item-explain-error {
+   margin-top: 3px;
+}
+
+.ant-input-password-icon {
+  display: flex;
+}
+
 @font-face {
   font-family: "Literata-Medium";
   src: url("./fonts/Literata-Medium.woff") format("woff");
@@ -9,7 +17,7 @@ body {
 
 @font-face {
   font-family: "Literata-Regular";
-  src: url("./fonts/Literata-Regular.ttf") format("ttf");
+  src: url("./fonts/Literata-Regular.woff") format("woff");
 }
 
 @font-face {
@@ -23,11 +31,6 @@ body {
 }
 
 @font-face {
-  font-family: "Inter-Medium";
-  src: url("./fonts/Inter-Medium.ttf") format("ttf");
-}
-
-@font-face {
-  font-family: "Inter-Regular";
-  src: url("./fonts/Inter-Regular.ttf") format("ttf");
+  font-family: "Onest-SemiBold";
+  src: url("./fonts/Onest-SemiBold.woff") format("woff");
 }

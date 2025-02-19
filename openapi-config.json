@@ -4,5 +4,9 @@
   "apiImport": "emptySplitApi",
   "outputFile": "./src/services/api/sharebookApi.ts",
   "exportName": "sharebookApi",
-  "hooks": true
+  "hooks": {
+    "queries": true,
+    "lazyQueries": true,
+    "mutations": true
+  }
 }
