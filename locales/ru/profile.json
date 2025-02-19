@@ -1,0 +1,14 @@
+{
+    "otherButtons": {
+        "write": "Написать"
+    },
+    "ownButtons": {
+        "newAd": "Новое объявление"
+    },
+    "score": {
+        "scoreGiven_one": "Отдана {{count}} книга",
+        "scoreGiven_few": "Отдано {{count}} книги",
+        "scoreGiven_many": "Отдано {{count}} книг",
+        "scoreExchange": "Обменяно {{exchangedCount}}"
+    }
+}

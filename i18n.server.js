@@ -15,8 +15,9 @@ export function createI18nInstance() {
     .use(LanguageDetector)
     .init({
       fallbackLng: "en",
-      ns: ["common", "auth", "chat"],
+      ns: ["common", "auth", "chat", "home", "header", "search", "profile", "createBook"],
       defaultNS: "common",
+      pluralSeparator: '_',
       backend: {
         loadPath: __dirname + "/locales/{{lng}}/{{ns}}.json",
       },
@@ -27,6 +28,5 @@ export function createI18nInstance() {
         caches: ["cookie"],
       },
     });
-
   return instance;
 }

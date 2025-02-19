@@ -1,0 +1,25 @@
+{
+    "fullFilter": {
+        "languages": {
+            "ru": "Русский",
+            "en": "English",
+            "fr": "Français"
+        },
+        "titles": {
+            "author": "Автор",
+            "genres": "Жанры",
+            "year": "Год издания",
+            "publishingHouse": "Издательство",
+            "language": "Язык",
+            "filter": "Фильтр",
+            "reset": "Сбросить",
+            "apply": "Применить"
+        },
+        "placeholder": "Поиск"
+    },
+    "booksFound": {
+        "book_one": "{{count}} книга найдена",
+        "book_few": "{{count}} книги найдено",
+        "book_many": "{{count}} книг найдено"
+    }
+}
