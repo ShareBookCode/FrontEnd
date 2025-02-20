@@ -38,6 +38,12 @@ export function SignUpPassword() {
       <h1 className={styles.title}>{t("titleSignUp")}</h1>
       <div>
         <Form onFinish={onFinish} autoComplete="off">
+          <input
+            hidden={true}
+            type="text"
+            name="username"
+            value={searchParams.get("email") ?? ""}
+          />
           <div className={styles.containerForm}>
             <Form.Item
               name="password"

@@ -13,7 +13,7 @@ export function Profile() {
 
   const isOwnProfile = userId === "-1";
 
-  const { data } = useGetProfileQuery({ userId, zone: 1 });
+  const { data } = useGetProfileQuery({ userId, zone: 4 });
 
   return (
     <ProfileInfo profile={data} isOwnProfile={isOwnProfile}>
