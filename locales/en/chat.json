@@ -1,3 +1,8 @@
 {
-  "title": "Chats"
+    "title": "Chats",
+    "chat": {
+        "body": "Who do you want to contact?",
+        "delete": "Delete chat",
+        "book": "Book "
+    }
 }

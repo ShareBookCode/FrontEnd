@@ -1,0 +1,17 @@
+{
+    "filters": {
+        "type": {
+            "exchange": "Обменивают",
+            "giveAway": "Отдают",
+            "allOptions": "Все варианты"
+        },
+        "genre": {
+            "all": "Все",
+            "detectives": "Детективы",
+            "novels": "Романы",
+            "scientific": "Научные",
+            "horrors": "Ужасы",
+            "textbook": "Учебник"
+        }
+    }
+}

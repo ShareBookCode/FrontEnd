@@ -14,15 +14,10 @@ import { CheckboxGroup } from "../search/FullFilter/CheckboxGroup.tsx";
 import { useDeferredValue, useMemo, useState } from "react";
 import { AddFile } from "./uploadFile/addFile.tsx";
 
-const options: CheckboxGroupProps<string>["options"] = [
-  { label: "Хорошее", value: "good" },
-  { label: "Нормальное", value: "normal" },
-  { label: "Плохое", value: "bad" },
-];
-
 export function CreateBook() {
   const [form] = Form.useForm<BookDto>();
   const [save] = useSaveBookMutation();
+  const { t } = useTranslation("createBook");
   const { i18n } = useTranslation();
   const [itemQuery, setItemQuery] = useState("");
   const deferredItemQuery = useDeferredValue(itemQuery);
@@ -38,6 +33,12 @@ export function CreateBook() {
       genre.name?.toLowerCase().includes(deferredItemQuery.toLowerCase())
     );
   }, [genres, deferredItemQuery]);
+
+  const options: CheckboxGroupProps<string>["options"] = [
+    { label: t("condition.good"), value: "good" },
+    { label: t("condition.normal"), value: "normal" },
+    { label: t("condition.bad"), value: "bad" },
+  ];
 
   async function handleFinish(values: BookDto) {
     try {
@@ -56,7 +57,7 @@ export function CreateBook() {
       />
 
       <div className={styles.container}>
-        <h1 className={styles.title}>Новое объявление</h1>
+        <h1 className={styles.title}>{t("bookPage.title")}</h1>
         <Form
           form={form}
           layout="vertical"
@@ -66,29 +67,25 @@ export function CreateBook() {
           requiredMark={false}
         >
           <Form.Item
-            label="Название книги"
+            label={t("title.label")}
             name="title"
-            rules={[
-              { required: true, message: "Пожалуйста, введите название книги" },
-            ]}
+            rules={[{ required: true, message: `${t("title.message")}` }]}
           >
-            <Input placeholder="Евгений Онегин" />
+            <Input placeholder={t("title.placeholder")} />
           </Form.Item>
 
           <Form.Item
-            label="Автор"
+            label={t("author.label")}
             name="author"
-            rules={[
-              { required: true, message: "Пожалуйста, введите имя автора" },
-            ]}
+            rules={[{ required: true, message: `${t("author.message")}` }]}
           >
-            <Input placeholder="Александр Пушкин" />
+            <Input placeholder={t("author.placeholder")} />
           </Form.Item>
 
-          <Form.Item label="Жанр" name="genre">
+          <Form.Item label={t("genre.label")} name="genre">
             <div>
               <Input
-                placeholder="Роман"
+                placeholder={t("genre.placeholder")}
                 className={styles.searchInput}
                 onChange={(e) => setItemQuery(e.target.value)}
                 value={itemQuery}
@@ -97,19 +94,19 @@ export function CreateBook() {
             </div>
           </Form.Item>
 
-          <Form.Item label="Язык книги" name="language">
-            <Input placeholder="Русский" />
+          <Form.Item label={t("language.label")} name="language">
+            <Input placeholder={t("genre.placeholder")} />
           </Form.Item>
 
-          <Form.Item label="Издательство" name="publishingHouse">
-            <Input placeholder="АСТ" />
+          <Form.Item label={t("publishingHouse.label")} name="publishingHouse">
+            <Input placeholder={t("publishingHouse.placeholder")} />
           </Form.Item>
 
-          <Form.Item label="Год издания" name="year">
-            <Input type="number" placeholder="1994" />
+          <Form.Item label={t("year.label")} name="year">
+            <Input type="number" placeholder={t("year.placeholder")} />
           </Form.Item>
 
-          <Form.Item label="Состояние" name="condition">
+          <Form.Item label={t("condition.label")} name="condition">
             <Radio.Group
               block
               options={options}
@@ -119,41 +116,42 @@ export function CreateBook() {
             />
           </Form.Item>
 
-          <Form.Item label="Обложка" name="cover">
+          <Form.Item label={t("cover.label")} name="cover">
             <div className={styles.coverUploadContainer}>
               <AddFile single />
               <Typography.Text type="secondary" className={styles.uploadInfo}>
-                Загрузите обложку из интернета, так мы сможем поддерживать
-                удобство поиска книг на платформе. Если в интернете не нашлось
-                вашей книги, пострайтесь сделать аккуратное фото обложки.{" "}
+                {t("cover.info")}
               </Typography.Text>
             </div>
           </Form.Item>
 
-          <Form.Item label="Дополнительные фотографии" name="additionalPhotos">
+          <Form.Item
+            label={t("additionalPhotos.label")}
+            name="additionalPhotos"
+          >
             <div className={styles.additionalPhotos}>
               <AddFile />
             </div>
           </Form.Item>
 
-          <Form.Item label="Описание" name="description">
+          <Form.Item label={t("description.label")} name="description">
             <Input.TextArea
               className={styles.description}
               rows={3}
-              placeholder="Книга 1997 года издания..."
+              placeholder={t("description.placeholder")}
             />
           </Form.Item>
 
           <Form.Item>
             <Button type="primary" htmlType="submit" className={styles.submit}>
-              Разместить объявление
+              {t("save")}
             </Button>
           </Form.Item>
         </Form>
 
         <Typography.Text className={styles.rules}>
-          <span>Выкладывая объявление вы соглашаетесь с </span>
-          <Link to="#">правилами ShareBook</Link>
+          <span>{t("rules.text")}</span>
+          <Link to="#">{t("rules.link")}</Link>
         </Typography.Text>
       </div>
     </div>

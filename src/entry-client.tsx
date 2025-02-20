@@ -10,7 +10,16 @@ i18next
   .use(LanguageDetector)
   .init(
     {
-      ns: ["common", "auth", "chat"],
+      ns: [
+        "common",
+        "auth",
+        "chat",
+        "home",
+        "header",
+        "search",
+        "profile",
+        "createBook",
+      ],
       defaultNS: "common",
       fallbackLng: window.initialLanguage,
       react: {
@@ -22,6 +31,7 @@ i18next
       detection: {
         caches: ["cookie"],
       },
+      pluralSeparator: "_",
     },
     () => {
       const preloadedState = window.__PRELOADED_STATE__ || {};

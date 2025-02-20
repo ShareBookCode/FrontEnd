@@ -1,0 +1,53 @@
+{
+  "bookPage": {
+    "title": "New book"
+  },
+  "title": {
+    "label": "Title",
+    "message": "Please enter the title of the book",
+    "placeholder": "Enter the book title"
+  },
+  "author": {
+    "label": "Author",
+    "message": "Please enter the author's name",
+    "placeholder": "Enter the author's name"
+  },
+  "genre": {
+    "label": "Genre",
+    "placeholder": "Enter the book genre (optional)"
+  },
+  "language": {
+    "label": "Language",
+    "placeholder": "Enter the book language (optional)"
+  },
+  "condition": {
+    "label": "Condition",
+    "good": "Good",
+    "normal": "Normal",
+    "bad": "Bad"
+  },
+  "cover": {
+    "label": "Cover",
+    "info": "Upload the cover from the Internet, so we can maintain the convenience of searching books on the platform. If your book is not found on the Internet, try to take a neat photo of the cover."
+  },
+  "additionalPhotos": {
+    "label": "Additional photos"
+  },
+  "description": {
+    "label": "Description",
+    "placeholder": "Enter book description (optional)"
+  },
+  "publishingHouse": {
+    "label": "Publishing house",
+    "placeholder": "Enter the publisher (optional)"
+  },
+  "year": {
+    "label": "Year of publication",
+    "placeholder": "Enter the year of publication (optional)"
+  },
+  "save": "Save",
+  "rules": {
+    "text": "By posting a book you agree to the ",
+    "link": "ShareBook rules"
+  }
+}

@@ -4,11 +4,13 @@ import { useParams } from "react-router";
 import { FilterFull } from "./FullFilter";
 import { Form } from "antd";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { BookList } from "../../components/BookList";
 
 export function Search() {
   const { title = "" } = useParams();
   const { data } = useSearchByTitleQuery({ title });
+  const { t } = useTranslation("search");
 
   const [form] = Form.useForm();
 
@@ -20,7 +22,7 @@ export function Search() {
     <div className={styles.container}>
       <h1 className={styles.h1}>
         <div>
-          {title} <span className={styles.small}>234 книги найдено</span>
+          {title} <span className={styles.small}>{t("booksFound.book", {count: 234})}</span>
         </div>
         <FilterFull form={form} />
       </h1>

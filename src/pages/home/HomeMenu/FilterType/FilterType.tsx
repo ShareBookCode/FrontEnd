@@ -2,6 +2,7 @@ import { Dropdown } from "antd";
 import styles from "../filter.module.scss";
 import { useState } from "react";
 import { useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { SvgArrow } from "../../../../assets/svg/SvgArrow.tsx";
 
 interface Type {
@@ -9,15 +10,16 @@ interface Type {
   key: string;
 }
 
-const types: Type[] = [
-  { label: "Обменивают", key: "0" },
-  { label: "Отдают", key: "1" },
-  { label: "Все варианты", key: "2" },
-];
-
-const defaultType = types[2];
-
 export function FilterType() {
+  const { t } = useTranslation("home");
+
+  const types: Type[] = [
+    { label: t("filters.type.exchange"), key: "0" },
+    { label: t("filters.type.giveAway"), key: "1" },
+    { label: t("filters.type.allOptions"), key: "2" },
+  ];
+
+  const defaultType = types[2];
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterType = searchParams.get("filterType") ?? defaultType.key;

@@ -1,0 +1,13 @@
+{
+    "nav": {
+        "titles": {
+            "main": "Home",
+            "favourites": "Favourites",
+            "chats": "Chats",
+            "createBook": "Create a book"
+        }
+    },
+    "search": {
+        "placeholder": "Search for fantasy, detective, novels"
+    }
+}

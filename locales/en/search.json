@@ -1,0 +1,24 @@
+{
+    "fullFilter": {
+        "languages": {
+            "ru": "Русский",
+            "en": "English",
+            "fr": "Français"
+        },
+        "titles": {
+            "author": "Author",
+            "genres": "Genres",
+            "year": "Year of publication",
+            "publishingHouse": "Publishing house",
+            "language": "Language",
+            "filter": "Filter",
+            "reset": "Reset",
+            "apply": "Apply"
+        },
+        "placeholder": "Search"
+    },
+    "booksFound": {
+        "book_one": "{{count}} book finded",
+        "book_other": "{{count}} books finded"
+    }
+}

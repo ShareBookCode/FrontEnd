@@ -22,27 +22,12 @@ import { CheckboxGroup } from "./CheckboxGroup.tsx";
 
 const { Title } = Typography;
 
-const languages = [
-  {
-    id: 1,
-    name: "Русский",
-  },
-  {
-    id: 2,
-    name: "English",
-  },
-  {
-    id: 3,
-    name: "Français",
-  },
-];
-
 interface Props {
   form: FormInstance;
 }
 
 export function FilterFull({ form }: Props) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("search");
 
   const { data: genre = [] } = useAppSelector(
     sharebookApi.endpoints.findAllGenre.select({
@@ -68,18 +53,33 @@ export function FilterFull({ form }: Props) {
     console.log("Failed:", errorInfo);
   };
 
+  const languages = [
+    {
+      id: 1,
+      name: t("fullFilter.languages.ru"),
+    },
+    {
+      id: 2,
+      name: t("fullFilter.languages.en"),
+    },
+    {
+      id: 3,
+      name: t("fullFilter.languages.fr"),
+    },
+  ];
+
   const items = [
     {
       key: 1,
       label: (
         <Title level={4} className={cn(styles.sectionTitle, styles.priority)}>
-          Автор
+          {t("fullFilter.titles.author")}
         </Title>
       ),
       children: (
         <Form.Item name="author">
           <Input
-            placeholder="Поиск"
+            placeholder={t("fullFilter.placeholder")}
             suffix={<SearchOutlined />}
             className={styles.searchInput}
           />
@@ -91,7 +91,7 @@ export function FilterFull({ form }: Props) {
       key: 2,
       label: (
         <Title level={4} className={cn(styles.sectionTitle, styles.priority)}>
-          Жанры
+          {t("fullFilter.titles.genres")}
         </Title>
       ),
       children: <CheckboxFilter items={genre} name="genre" />,
@@ -101,12 +101,12 @@ export function FilterFull({ form }: Props) {
       key: 3,
       label: (
         <Title level={4} className={cn(styles.sectionTitle, styles.priority)}>
-          Год издания
+          {t("fullFilter.titles.year")}
         </Title>
       ),
       children: (
         <Form.Item name="year">
-          <InputNumber placeholder="Поиск" className={styles.searchInput} />
+          <InputNumber placeholder={t("fullFilter.placeholder")} className={styles.searchInput} />
         </Form.Item>
       ),
       classNames: { header: styles.collapseHeader },
@@ -115,13 +115,13 @@ export function FilterFull({ form }: Props) {
       key: 4,
       label: (
         <Title level={4} className={cn(styles.sectionTitle, styles.priority)}>
-          Издательство
+          {t("fullFilter.titles.publishingHouse")}
         </Title>
       ),
       children: (
         <Form.Item name="publishingHouse">
           <Input
-            placeholder="Поиск"
+            placeholder={t("fullFilter.placeholder")}
             suffix={<SearchOutlined />}
             className={styles.searchInput}
           />
@@ -133,7 +133,7 @@ export function FilterFull({ form }: Props) {
       key: 5,
       label: (
         <Title level={4} className={cn(styles.sectionTitle, styles.priority)}>
-          Язык
+          {t("fullFilter.titles.language")}
         </Title>
       ),
       children: <CheckboxGroup items={languages} name="language" />,
@@ -148,7 +148,7 @@ export function FilterFull({ form }: Props) {
         type="primary"
         className={styles.buttonFullFilterOpener}
       >
-        <SvgFilter /> Фильтр
+        <SvgFilter /> {t("fullFilter.titles.filter")}
       </Button>
       <Form
         form={form}
@@ -172,20 +172,20 @@ export function FilterFull({ form }: Props) {
               level={3}
               className={cn(styles.filterTitle, styles.priority)}
             >
-              Фильтр
+              {t("fullFilter.titles.filter")}
             </Title>
           }
           footer={
             <div className={styles.buttonContainer}>
               <Button className={styles.resetButton} htmlType="reset">
-                Сбросить
+                {t("fullFilter.titles.reset")}
               </Button>
               <Button
                 type="primary"
                 htmlType="submit"
                 className={styles.applyButton}
               >
-                Применить
+                {t("fullFilter.titles.apply")}
               </Button>
             </div>
           }
