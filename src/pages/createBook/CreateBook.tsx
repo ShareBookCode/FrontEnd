@@ -1,4 +1,4 @@
-import { Button, Form, Input, Radio, Typography } from "antd";
+import { AutoComplete, Button, Form, Input, Radio, Typography } from "antd";
 import {
   BookDto,
   sharebookApi,
@@ -7,10 +7,9 @@ import {
 import { BackIcon } from "../../components/Header/svg/BackIcon.tsx";
 import styles from "./createBook.module.scss";
 import { CheckboxGroupProps } from "antd/es/checkbox/Group";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store.ts";
-import { CheckboxGroup } from "../search/FullFilter/CheckboxGroup.tsx";
 import { useDeferredValue, useMemo, useState } from "react";
 import { AddFile } from "./uploadFile/addFile.tsx";
 
@@ -21,17 +20,22 @@ export function CreateBook() {
   const { i18n } = useTranslation();
   const [itemQuery, setItemQuery] = useState("");
   const deferredItemQuery = useDeferredValue(itemQuery);
+  const navigate = useNavigate();
 
   const { data: genres = [] } = useAppSelector(
     sharebookApi.endpoints.findAllGenre.select({
       locale: i18n.language.split("-")[0],
-    })
+    }),
   );
 
   const filteredItems = useMemo(() => {
-    return genres.filter((genre) =>
-      genre.name?.toLowerCase().includes(deferredItemQuery.toLowerCase())
-    );
+    return genres
+      .filter((genre) =>
+        genre.name?.toLowerCase().includes(deferredItemQuery.toLowerCase()),
+      )
+      .map((genre) => ({
+        value: genre.name,
+      }));
   }, [genres, deferredItemQuery]);
 
   const options: CheckboxGroupProps<string>["options"] = [
@@ -41,8 +45,13 @@ export function CreateBook() {
   ];
 
   async function handleFinish(values: BookDto) {
+    const bookDto = { ...values };
+
+    bookDto.genre = genres.find((genre) => genre.name === values.genre)?.id;
+
     try {
-      save({ bookDto: values }).unwrap();
+      save({ bookDto }).unwrap();
+      navigate("/profile");
     } catch (error) {
       console.error(error);
     }
@@ -50,11 +59,14 @@ export function CreateBook() {
 
   return (
     <div>
-      <Button
-        shape="circle"
-        icon={<BackIcon />}
-        className={styles.backButton}
-      />
+      <div className={styles.backContainer}>
+        <Button
+          shape="circle"
+          icon={<BackIcon />}
+          className={styles.backButton}
+          onClick={() => navigate(-1)}
+        />
+      </div>
 
       <div className={styles.container}>
         <h1 className={styles.title}>{t("bookPage.title")}</h1>
@@ -83,15 +95,11 @@ export function CreateBook() {
           </Form.Item>
 
           <Form.Item label={t("genre.label")} name="genre">
-            <div>
-              <Input
-                placeholder={t("genre.placeholder")}
-                className={styles.searchInput}
-                onChange={(e) => setItemQuery(e.target.value)}
-                value={itemQuery}
-              />
-              <CheckboxGroup items={filteredItems} />
-            </div>
+            <AutoComplete
+              options={filteredItems}
+              onSearch={(text: string) => setItemQuery(text)}
+              placeholder={t("genre.placeholder")}
+            />
           </Form.Item>
 
           <Form.Item label={t("language.label")} name="language">
