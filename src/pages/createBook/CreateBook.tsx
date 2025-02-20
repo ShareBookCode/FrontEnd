@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store.ts";
 import { CheckboxGroup } from "../search/FullFilter/CheckboxGroup.tsx";
 import { useDeferredValue, useMemo, useState } from "react";
+import { AddFile } from "./uploadFile/addFile.tsx";
 
 const options: CheckboxGroupProps<string>["options"] = [
   { label: "Хорошее", value: "good" },
@@ -23,7 +24,6 @@ export function CreateBook() {
   const [form] = Form.useForm<BookDto>();
   const [save] = useSaveBookMutation();
   const { i18n } = useTranslation();
-
   const [itemQuery, setItemQuery] = useState("");
   const deferredItemQuery = useDeferredValue(itemQuery);
 
@@ -38,10 +38,6 @@ export function CreateBook() {
       genre.name?.toLowerCase().includes(deferredItemQuery.toLowerCase())
     );
   }, [genres, deferredItemQuery]);
-
-  // const { data: genres, isLoading: genresLoading } = useFindAllGenreQuery({
-  //   locale: i18n.language.split("-")[0],
-  // });
 
   async function handleFinish(values: BookDto) {
     try {
@@ -90,18 +86,7 @@ export function CreateBook() {
           </Form.Item>
 
           <Form.Item label="Жанр" name="genre">
-            {/* <Input placeholder="Роман" /> */}
-            {/* <Select
-              loading={genresLoading}
-              options={genre?.map((genre) => ({
-                value: genre.id,
-                label: genre.name,
-              }))}
-              placeholder="Роман"
-              className={styles.select}
-            /> */}
-            {/* <CheckboxFilter items={genre} name="genre" /> */}
-            <>
+            <div>
               <Input
                 placeholder="Роман"
                 className={styles.searchInput}
@@ -109,7 +94,7 @@ export function CreateBook() {
                 value={itemQuery}
               />
               <CheckboxGroup items={filteredItems} />
-            </>
+            </div>
           </Form.Item>
 
           <Form.Item label="Язык книги" name="language">
@@ -132,6 +117,23 @@ export function CreateBook() {
               buttonStyle="solid"
               className={styles.condition}
             />
+          </Form.Item>
+
+          <Form.Item label="Обложка" name="cover">
+            <div className={styles.coverUploadContainer}>
+              <AddFile single />
+              <Typography.Text type="secondary" className={styles.uploadInfo}>
+                Загрузите обложку из интернета, так мы сможем поддерживать
+                удобство поиска книг на платформе. Если в интернете не нашлось
+                вашей книги, пострайтесь сделать аккуратное фото обложки.{" "}
+              </Typography.Text>
+            </div>
+          </Form.Item>
+
+          <Form.Item label="Дополнительные фотографии" name="additionalPhotos">
+            <div className={styles.additionalPhotos}>
+              <AddFile />
+            </div>
           </Form.Item>
 
           <Form.Item label="Описание" name="description">
