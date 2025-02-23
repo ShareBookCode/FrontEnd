@@ -25,7 +25,9 @@ export function Avatar() {
       shape="circle"
       onClick={() =>
         navigate(
-          (profile.data as UserProfileDto).userId ? "/profile" : "/auth/signIn",
+          (profile.data as UserProfileDto)?.userId
+            ? "/profile"
+            : "/auth/signIn",
         )
       }
     >
