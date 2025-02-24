@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 9px;
   width: 315px;
 }
 
@@ -10,6 +9,7 @@
   height: 475px;
   border-radius: 10px;
   border: 1px solid var(--ant-color-border);
+  margin-bottom: 16px;
   overflow: hidden;
   cursor: pointer;
 
@@ -20,11 +20,15 @@
   }
 }
 
+.mainImageNoBorderRadius {
+  border-radius: 0;
+}
+
 .thumbnails {
   position: relative;
   width: 100%;
   display: flex;
-  gap: 9px;
+  gap: 8px;
 
   &Center {
     justify-content: center;
@@ -41,6 +45,8 @@
     }
 
     .swiper-slide {
+      width: 72px !important;
+      height: 72px;
       border-radius: 7px;
       overflow: hidden;
       cursor: pointer;
@@ -124,5 +130,36 @@
 
   &:hover {
     background: transparent;
+  }
+}
+
+// Стили для модального режима
+.modalContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .mainImage {
+    width: auto;
+    max-width: 600px;
+    height: auto;
+    max-height: 600px;
+    margin: 0 auto 50px; // Добавлен отступ 50px снизу
+    cursor: default; // Убираем pointer с изображения в модалке
+  }
+
+  .thumbnails {
+    width: calc(
+      72px * 7 + 48px + 80px
+    ); // Ширина для 7 тумбнейлов + отступы + место для стрелок
+    position: relative;
+    justify-content: center;
+
+    :global {
+      .swiper {
+        width: calc(72px * 7 + 48px);
+      }
+    }
   }
 }

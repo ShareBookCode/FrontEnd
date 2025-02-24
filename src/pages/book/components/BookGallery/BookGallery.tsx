@@ -1,4 +1,5 @@
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
+import { CloseOutlined } from "@ant-design/icons";
 import { GallerySwiper } from "./components/GallerySwiper";
 import { FavoriteButton } from "../FavoriteButton";
 import { BookImage } from "../../../../types/book";
@@ -22,6 +23,25 @@ export const BookGallery: FC<BookGalleryProps> = ({ images }) => {
     console.log("Image changed to index:", index);
   };
 
+  const handleCloseModal = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsModalOpen(false);
+    console.log("Modal closed");
+  };
+
+  // Блокируем прокрутку страницы при открытой модалке
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isModalOpen]);
+
   return (
     <div className={styles.container}>
       <div className={styles.favoriteButtonWrapper}>
@@ -30,12 +50,25 @@ export const BookGallery: FC<BookGalleryProps> = ({ images }) => {
       <GallerySwiper
         images={images}
         initialIndex={mainImageIndex}
-        maxThumbnails={4}
-        thumbnailsAlignment="left"
-        arrowsPosition="overlay"
+        isModal={false}
         onImageChange={handleImageChange}
         onMainImageClick={handleMainImageClick}
       />
+
+      {isModalOpen && (
+        <div className={styles.modalOverlay}>
+          <button className={styles.closeButton} onClick={handleCloseModal}>
+            <CloseOutlined />
+          </button>
+          <div className={styles.modalContent}>
+            <GallerySwiper
+              images={images}
+              initialIndex={mainImageIndex}
+              isModal={true}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -6,22 +6,18 @@ import { BookImage } from "../../../../../../types/book";
 import styles from "./gallerySwiper.module.scss";
 import "swiper/css";
 
-type GallerySwiperProps = {
+interface GallerySwiperProps {
   images: BookImage[];
   initialIndex?: number;
-  maxThumbnails: number;
-  thumbnailsAlignment: "left" | "center";
-  arrowsPosition: "overlay" | "sides";
+  isModal?: boolean;
   onImageChange?: (index: number) => void;
   onMainImageClick?: () => void;
-};
+}
 
 export const GallerySwiper: FC<GallerySwiperProps> = ({
   images,
   initialIndex = 0,
-  maxThumbnails,
-  thumbnailsAlignment,
-  arrowsPosition,
+  isModal = false,
   onImageChange,
   onMainImageClick,
 }) => {
@@ -29,7 +25,13 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const swiperRef = useRef<SwiperType>();
-  console.log(activeIndex);
+
+  const maxThumbnails = isModal ? 7 : 4;
+  const thumbnailsAlignment = isModal ? "center" : "left";
+  const arrowsPosition = isModal ? "sides" : "overlay";
+  const mainImageSrc =
+    images[activeIndex][isModal ? "largeImageUrl" : "mediumImageUrl"];
+  const hasBorderRadius = !isModal;
 
   const showArrows = images.length > maxThumbnails;
 
@@ -51,6 +53,8 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
     if (!isBeginning) {
       swiperRef.current?.slidePrev();
       console.log("Prev clicked");
+    } else {
+      console.log("Prev button is disabled");
     }
   };
 
@@ -60,6 +64,8 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
     if (!isEnd) {
       swiperRef.current?.slideNext();
       console.log("Next clicked");
+    } else {
+      console.log("Next button is disabled");
     }
   };
 
@@ -78,9 +84,14 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
   }, [initialIndex]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.mainImage} onClick={handleMainImageClick}>
-        <img src={images[activeIndex].mediumImageUrl} alt="" />
+    <div
+      className={`${styles.container} ${isModal ? styles.modalContainer : ""}`}
+    >
+      <div
+        className={`${styles.mainImage} ${!hasBorderRadius ? styles.mainImageNoBorderRadius : ""}`}
+        onClick={handleMainImageClick}
+      >
+        <img src={mainImageSrc} alt="" />
       </div>
 
       <div
@@ -107,7 +118,7 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
 
         <Swiper
           slidesPerView={maxThumbnails}
-          spaceBetween={9}
+          spaceBetween={8}
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
             handleSlideChange();
