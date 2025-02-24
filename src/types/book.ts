@@ -12,7 +12,9 @@ export type BookDetails = {
 
 export type BookImage = {
   id: number;
-  imageUrl: string;
+  smallImageUrl: string;
+  mediumImageUrl: string;
+  largeImageUrl: string;
 };
 
 export type BookData = {

@@ -1,0 +1,128 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 315px;
+}
+
+.mainImage {
+  width: 315px;
+  height: 475px;
+  border-radius: 10px;
+  border: 1px solid var(--ant-color-border);
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.thumbnails {
+  position: relative;
+  width: 100%;
+  display: flex;
+  gap: 9px;
+
+  &Center {
+    justify-content: center;
+  }
+
+  &Left {
+    justify-content: flex-start;
+  }
+
+  :global {
+    .swiper {
+      width: calc(72px * 4 + 24px);
+      height: 72px;
+    }
+
+    .swiper-slide {
+      border-radius: 7px;
+      overflow: hidden;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &-active {
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.04);
+        }
+      }
+    }
+  }
+}
+
+.arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 0;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+    .arrowIcon {
+      color: var(--ant-color-white);
+    }
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.arrowIcon {
+  width: 12px;
+  height: 12px;
+  color: var(--ant-color-text-secondary);
+}
+
+.arrowOverlayPrev {
+  left: 0;
+}
+
+.arrowOverlayNext {
+  right: 0;
+}
+
+.arrowSidesPrev {
+  left: -40px;
+}
+
+.arrowSidesNext {
+  right: -40px;
+}
+
+.arrowDisabled {
+  cursor: not-allowed;
+  opacity: 0.25;
+
+  &:hover {
+    background: transparent;
+  }
+}

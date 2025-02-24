@@ -1,1 +1,0 @@
-export { BookGallerySwiper } from "./BookGallerySwiper";
