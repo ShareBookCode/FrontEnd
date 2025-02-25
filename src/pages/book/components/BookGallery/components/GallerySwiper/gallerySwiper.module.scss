@@ -1,15 +1,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 315px;
+  gap: 9px;
 }
 
 .mainImage {
   width: 315px;
-  height: 475px;
   border-radius: 10px;
   border: 1px solid var(--ant-color-border);
-  margin-bottom: 16px;
   overflow: hidden;
   cursor: pointer;
 
@@ -27,27 +25,22 @@
 .thumbnails {
   position: relative;
   width: 100%;
-  display: flex;
-  gap: 8px;
-
-  &Center {
-    justify-content: center;
-  }
-
-  &Left {
-    justify-content: flex-start;
-  }
 
   :global {
     .swiper {
-      width: calc(72px * 4 + 24px);
+      width: 100%;
+      margin: unset;
       height: 72px;
     }
 
+    .swiper-wrapper {
+      display: flex;
+      justify-content: flex-start;
+    }
+
     .swiper-slide {
-      width: 72px !important;
-      height: 72px;
       border-radius: 7px;
+      width: 72px !important;
       overflow: hidden;
       cursor: pointer;
 
@@ -56,20 +49,21 @@
         height: 100%;
         object-fit: cover;
       }
-
-      &-active {
-        position: relative;
-        &::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.04);
-        }
-      }
     }
+  }
+}
+
+.activeSlide {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -133,33 +127,28 @@
   }
 }
 
-// Стили для модального режима
 .modalContainer {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 50px;
 
   .mainImage {
-    width: auto;
-    max-width: 600px;
-    height: auto;
-    max-height: 600px;
-    margin: 0 auto 50px; // Добавлен отступ 50px снизу
-    cursor: default; // Убираем pointer с изображения в модалке
+    width: 437px;
+    cursor: default;
   }
 
   .thumbnails {
-    width: calc(
-      72px * 7 + 48px + 80px
-    ); // Ширина для 7 тумбнейлов + отступы + место для стрелок
     position: relative;
-    justify-content: center;
+    max-width: 558px;
+  }
+}
 
-    :global {
-      .swiper {
-        width: calc(72px * 7 + 48px);
-      }
+.center {
+  :global {
+    .swiper-wrapper {
+      justify-content: center;
     }
   }
 }

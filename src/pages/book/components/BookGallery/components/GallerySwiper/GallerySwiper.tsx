@@ -27,13 +27,9 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
   const swiperRef = useRef<SwiperType>();
 
   const maxThumbnails = isModal ? 7 : 4;
-  const thumbnailsAlignment = isModal ? "center" : "left";
-  const arrowsPosition = isModal ? "sides" : "overlay";
   const mainImageSrc =
     images[activeIndex][isModal ? "largeImageUrl" : "mediumImageUrl"];
-  const hasBorderRadius = !isModal;
-
-  const showArrows = images.length > maxThumbnails;
+  const isLessThanMaxThumbnails = images.length <= maxThumbnails;
 
   const handleThumbnailClick = useCallback(
     (e: React.MouseEvent, index: number) => {
@@ -88,7 +84,7 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
       className={`${styles.container} ${isModal ? styles.modalContainer : ""}`}
     >
       <div
-        className={`${styles.mainImage} ${!hasBorderRadius ? styles.mainImageNoBorderRadius : ""}`}
+        className={`${styles.mainImage} ${isModal ? styles.mainImageNoBorderRadius : ""}`}
         onClick={handleMainImageClick}
       >
         <img src={mainImageSrc} alt="" />
@@ -96,19 +92,15 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
 
       <div
         className={`${styles.thumbnails} ${
-          thumbnailsAlignment === "center"
-            ? styles.thumbnailsCenter
-            : styles.thumbnailsLeft
+          styles[isModal ? "thumbnailsCenter" : "thumbnailsLeft"]
         }`}
       >
-        {showArrows && (
+        {!isLessThanMaxThumbnails && (
           <button
             type="button"
             disabled={isBeginning}
             className={`${styles.arrow} ${
-              arrowsPosition === "overlay"
-                ? styles.arrowOverlayPrev
-                : styles.arrowSidesPrev
+              styles[isModal ? "arrowSidesPrev" : "arrowOverlayPrev"]
             } ${isBeginning ? styles.arrowDisabled : ""}`}
             onClick={handlePrevClick}
           >
@@ -118,17 +110,19 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
 
         <Swiper
           slidesPerView={maxThumbnails}
-          spaceBetween={8}
+          spaceBetween={9}
+          watchSlidesProgress={true}
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
             handleSlideChange();
           }}
           onSlideChange={handleSlideChange}
+          className={isModal && isLessThanMaxThumbnails ? styles.center : ""}
         >
           {images.map((image, index) => (
             <SwiperSlide
               key={image.id}
-              className={index === activeIndex ? "swiper-slide-active" : ""}
+              className={index === activeIndex ? styles.activeSlide : ""}
               onClick={(e) => handleThumbnailClick(e, index)}
             >
               <img src={image.smallImageUrl} alt="" />
@@ -136,14 +130,12 @@ export const GallerySwiper: FC<GallerySwiperProps> = ({
           ))}
         </Swiper>
 
-        {showArrows && (
+        {!isLessThanMaxThumbnails && (
           <button
             type="button"
             disabled={isEnd}
             className={`${styles.arrow} ${
-              arrowsPosition === "overlay"
-                ? styles.arrowOverlayNext
-                : styles.arrowSidesNext
+              styles[isModal ? "arrowSidesNext" : "arrowOverlayNext"]
             } ${isEnd ? styles.arrowDisabled : ""}`}
             onClick={handleNextClick}
           >

@@ -29,7 +29,6 @@ export const BookGallery: FC<BookGalleryProps> = ({ images }) => {
     console.log("Modal closed");
   };
 
-  // Блокируем прокрутку страницы при открытой модалке
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
