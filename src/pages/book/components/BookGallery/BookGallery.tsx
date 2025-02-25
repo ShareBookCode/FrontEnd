@@ -1,37 +1,73 @@
+import { useState, FC, useEffect } from "react";
+import { CloseOutlined } from "@ant-design/icons";
+import { GallerySwiper } from "./components/GallerySwiper";
+import { FavoriteButton } from "../FavoriteButton";
 import { BookImage } from "../../../../types/book";
 import styles from "./bookGallery.module.scss";
 
-type Props = {
+type BookGalleryProps = {
   images: BookImage[];
 };
-export const BookGallery = ({images}: Props) => {
-  const visibleThumbnails = images.slice(0, 4);
-  const additionalCount = images.length > 4 ? images.length - 3 : 0;
+
+export const BookGallery: FC<BookGalleryProps> = ({ images }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mainImageIndex, setMainImageIndex] = useState(0);
+
+  const handleMainImageClick = () => {
+    setIsModalOpen(true);
+    console.log("Main image clicked, modal should open");
+  };
+
+  const handleImageChange = (index: number) => {
+    setMainImageIndex(index);
+    console.log("Image changed to index:", index);
+  };
+
+  const handleCloseModal = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsModalOpen(false);
+    console.log("Modal closed");
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isModalOpen]);
 
   return (
-    <div className={styles.galleryContainer}>
-      <img
-        className={styles.mainImage}
-        src={images[0].imageUrl}
-        alt="Обложка книги"
+    <div className={styles.container}>
+      <div className={styles.favoriteButtonWrapper}>
+        <FavoriteButton />
+      </div>
+      <GallerySwiper
+        images={images}
+        initialIndex={mainImageIndex}
+        isModal={false}
+        onImageChange={handleImageChange}
+        onMainImageClick={handleMainImageClick}
       />
 
-      <div className={styles.thumbnailsContainer}>
-        {visibleThumbnails.map(({ id, imageUrl }, index) => (
-          <div key={id} className={styles.relative}>
-            <img
-              className={styles.thumbnailImage}
-              src={imageUrl}
-              alt={"Изображение книги"}
+      {isModalOpen && (
+        <div className={styles.modalOverlay}>
+          <button className={styles.closeButton} onClick={handleCloseModal}>
+            <CloseOutlined />
+          </button>
+          <div className={styles.modalContent}>
+            <GallerySwiper
+              images={images}
+              initialIndex={mainImageIndex}
+              isModal={true}
             />
-            {index === 3 && additionalCount > 0 && (
-              <div className={styles.overlay}>
-                <span>+{additionalCount}</span>
-              </div>
-            )}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

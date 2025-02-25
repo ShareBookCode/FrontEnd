@@ -1,0 +1,154 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.mainImage {
+  width: 315px;
+  border-radius: 10px;
+  border: 1px solid var(--ant-color-border);
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.mainImageNoBorderRadius {
+  border-radius: 0;
+}
+
+.thumbnails {
+  position: relative;
+  width: 100%;
+
+  :global {
+    .swiper {
+      width: 100%;
+      margin: unset;
+      height: 72px;
+    }
+
+    .swiper-wrapper {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .swiper-slide {
+      border-radius: 7px;
+      width: 72px !important;
+      overflow: hidden;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.activeSlide {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 0;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+    .arrowIcon {
+      color: var(--ant-color-white);
+    }
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.arrowIcon {
+  width: 12px;
+  height: 12px;
+  color: var(--ant-color-text-secondary);
+}
+
+.arrowOverlayPrev {
+  left: 0;
+}
+
+.arrowOverlayNext {
+  right: 0;
+}
+
+.arrowSidesPrev {
+  left: -40px;
+}
+
+.arrowSidesNext {
+  right: -40px;
+}
+
+.arrowDisabled {
+  cursor: not-allowed;
+  opacity: 0.25;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.modalContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+
+  .mainImage {
+    width: 437px;
+    cursor: default;
+  }
+
+  .thumbnails {
+    position: relative;
+    max-width: 558px;
+  }
+}
+
+.center {
+  :global {
+    .swiper-wrapper {
+      justify-content: center;
+    }
+  }
+}

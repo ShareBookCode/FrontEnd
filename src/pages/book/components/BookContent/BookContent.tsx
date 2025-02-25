@@ -1,18 +1,20 @@
 import { Typography } from "antd";
 import { ShareDropdown } from "../ShareDropdown";
 import styles from "./bookContent.module.scss";
-import { BookGallery } from "../BookGallery";
 import { BookDescription } from "../BookDescription";
 import { BookData } from "../../../../types/book";
 import { OwnerCard } from "../OwnerCard";
-import { FavoriteButton } from "../FavoriteButton";
+import { BookGallery } from "../BookGallery";
 
 const { Title, Text } = Typography;
 
 const mockBookData: BookData = {
-  images: new Array(6)
-    .fill("")
-    .map((_, id) => ({ id, imageUrl: "/mocks/mockBookImage.jpg" })),
+  images: new Array(9).fill("/mocks/mockBookImage.jpg").map((url, id) => ({
+    id,
+    smallImageUrl: url,
+    mediumImageUrl: url,
+    largeImageUrl: url,
+  })),
   bookDetails: {
     title: "Краткие ответы на большие вопросы",
     annotation:
@@ -42,9 +44,6 @@ export const BookContent = () => {
 
       <div className={styles.contentLayout}>
         <div className={styles.contentContainer}>
-          <div className={styles.favoriteButtonWrapper}>
-            <FavoriteButton />
-          </div>
           <BookGallery images={images} />
           <BookDescription bookDetails={bookDetails} />
         </div>
