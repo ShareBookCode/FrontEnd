@@ -1,11 +1,6 @@
 .shareButton {
   &:global(.ant-btn-text.ant-btn-color-default) {
     padding: 0;
-    width: auto;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 
     &:hover {
       background: transparent;
