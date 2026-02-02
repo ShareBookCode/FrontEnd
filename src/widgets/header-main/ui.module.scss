@@ -1,0 +1,97 @@
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 14px;
+  background: $dirty-grey;
+}
+
+.header__nav {
+  font-size: 16px;
+  width: 1330px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.header__logo {
+  height: 24px;
+}
+
+.header__menu {
+  display: flex;
+  gap: 30px;
+
+  list-style-type: none;
+}
+
+.header__link {
+  text-decoration: none;
+  color: $grey;
+  transition: 0.2s;
+
+  &:hover {
+    color: $black;
+  }
+}
+
+.header__linkActive {
+  color: $black;
+}
+
+.header__spacer {
+  width: 217px;
+  height: 100%;
+}
+
+.header__searchContainer {
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: 14px;
+    top: 4%;
+  }
+
+	&:focus-within svg path {
+		stroke: $blue-primary;
+	}
+}
+
+.header__search {
+	font-weight: 400;
+	font-size: 16px;
+
+  width: 400px;
+  height: 38px;
+  padding: 0 41px 0 15.25px;
+  border-radius: 300px;
+
+	border: 2px solid rgb(42, 127, 255, 0);
+  outline: none;
+
+	background: $lite-gray;
+	color: $black;
+
+	&:focus {
+		border: 2px solid rgb(42, 127, 255, 0.8);
+	}
+
+	&::placeholder {
+		color: $grey;
+	}
+
+	&::-webkit-search-cancel-button {
+  	-webkit-appearance: none;
+	}
+}
+
+.header__profile {
+  width: 38px;
+  height: 38px;
+  border-radius: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $blue-primary;
+}
