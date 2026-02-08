@@ -5,7 +5,7 @@ import styles from './ui.module.scss'
 import ProfileIcon from '@/src/shared/icons/profile.svg'
 import Logo from '@/src/shared/icons/logo.svg'
 import SearchIcon from '@/src/shared/icons/search.svg'
-import { onest } from '@/src/shared/fonts/fonts'
+import { onest } from '@/src/shared/fonts'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
 

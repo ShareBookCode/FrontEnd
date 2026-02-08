@@ -1,18 +1,12 @@
-import { NextIntlClientProvider } from 'next-intl'
 import './index.scss'
 import ReduxProvider from './providers/redux-provider'
+import { LayoutProps } from '@/src/shared/lib/types'
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default async function RootLayout({ children }: Readonly<LayoutProps>) {
   return (
-    <html lang='en'>
+    <html>
       <body>
-        <NextIntlClientProvider>
-          <ReduxProvider>{children}</ReduxProvider>
-        </NextIntlClientProvider>
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   )
