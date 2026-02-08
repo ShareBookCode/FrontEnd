@@ -1,4 +1,6 @@
+import { NextIntlClientProvider } from 'next-intl'
 import './index.scss'
+import ReduxProvider from './providers/redux-provider'
 
 export default function RootLayout({
   children,
@@ -7,7 +9,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <NextIntlClientProvider>
+          <ReduxProvider>{children}</ReduxProvider>
+        </NextIntlClientProvider>
+      </body>
     </html>
   )
 }

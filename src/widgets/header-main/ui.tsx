@@ -13,7 +13,7 @@ const links = [
   { name: 'Главная', href: '/' },
   { name: 'Избранное', href: '/favorites' },
   { name: 'Чаты', href: '/chats' },
-  { name: 'Новое объявление', href: '/new-list' },
+  { name: 'Новое объявление', href: '/new-book' },
 ]
 
 export function HeaderMain() {
