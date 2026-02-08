@@ -1,13 +1,13 @@
 import './index.scss'
+import ReduxProvider from './providers/redux-provider'
+import { LayoutProps } from '@/src/shared/lib/types'
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default async function RootLayout({ children }: Readonly<LayoutProps>) {
   return (
-    <html lang='en'>
-      <body>{children}</body>
+    <html>
+      <body>
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   )
 }
