@@ -20,9 +20,12 @@ importers:
       next:
         specifier: 16.1.3
         version: 16.1.3(@babel/core@7.28.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3)
-      next-intl:
+        next-intl:
         specifier: ^4.8.2
         version: 4.8.2(next@16.1.3(@babel/core@7.28.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3))(react@19.2.3)(typescript@5.9.3)
+        normalize.css:
+        specifier: ^8.0.1
+        version: 8.0.1
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -2563,6 +2566,9 @@ packages:
   node-source-walk@7.0.1:
     resolution: {integrity: sha512-3VW/8JpPqPvnJvseXowjZcirPisssnBuDikk6JIZ8jQzF7KJQX52iPFX4RYYxLycYH7IbMRSPUOga/esVjy5Yg==}
     engines: {node: '>=18'}
+
+  normalize.css@8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
@@ -5967,6 +5973,8 @@ snapshots:
   node-source-walk@7.0.1:
     dependencies:
       '@babel/parser': 7.29.0
+
+  normalize.css@8.0.1: {}
 
   nth-check@2.1.1:
     dependencies:

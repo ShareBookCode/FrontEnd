@@ -1,8 +1,10 @@
+@import '../../shared/styles/variables.scss';
+
 .header {
   display: flex;
   justify-content: center;
   padding: 14px;
-  background: $dirty-grey;
+  background: $background-secondary;
 }
 
 .header__nav {
@@ -27,16 +29,16 @@
 
 .header__link {
   text-decoration: none;
-  color: $grey;
+  color: $text-primary;
   transition: 0.2s;
 
   &:hover {
-    color: $black;
+    color: $text-heading;
   }
 }
 
 .header__linkActive {
-  color: $black;
+  color: $text-heading;
 }
 
 .header__spacer {
@@ -54,7 +56,7 @@
   }
 
 	&:focus-within svg path {
-		stroke: $blue-primary;
+		stroke: $color-primary;
 	}
 }
 
@@ -70,15 +72,15 @@
 	border: 2px solid rgb(42, 127, 255, 0);
   outline: none;
 
-	background: $lite-gray;
-	color: $black;
+	background: $background-dark;
+	color: $text-heading;
 
 	&:focus {
 		border: 2px solid rgb(42, 127, 255, 0.8);
 	}
 
 	&::placeholder {
-		color: $grey;
+		color: $text-secondary;
 	}
 
 	&::-webkit-search-cancel-button {
@@ -93,5 +95,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $blue-primary;
+  background-color: $color-primary;
 }

@@ -1,4 +1,6 @@
 import './index.scss'
+import 'normalize.css/normalize.css'
+import '../shared/styles/global.scss'
 import ReduxProvider from './providers/redux-provider'
 import { LayoutProps } from '@/src/shared/lib/types'
 
