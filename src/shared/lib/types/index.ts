@@ -1,1 +1,1 @@
-export type { LayoutProps } from './layout'
+export type { LayoutProps } from './provider'
