@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
 
 const sassOptions = {
   additionalData: `
@@ -22,4 +23,7 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+const withNextIntl = createNextIntlPlugin(
+  './src/shared/config/request-i18n-config.ts',
+)
+export default withNextIntl(nextConfig)

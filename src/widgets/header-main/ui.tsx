@@ -5,7 +5,7 @@ import styles from './ui.module.scss'
 import ProfileIcon from '@/src/shared/icons/profile.svg'
 import Logo from '@/src/shared/icons/logo.svg'
 import SearchIcon from '@/src/shared/icons/search.svg'
-import { onest } from '@/src/shared/fonts/fonts'
+import { onest } from '@/src/shared/fonts'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
 
@@ -13,7 +13,7 @@ const links = [
   { name: 'Главная', href: '/' },
   { name: 'Избранное', href: '/favorites' },
   { name: 'Чаты', href: '/chats' },
-  { name: 'Новое объявление', href: '/new-list' },
+  { name: 'Новое объявление', href: '/new-book' },
 ]
 
 export function HeaderMain() {
