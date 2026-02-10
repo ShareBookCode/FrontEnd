@@ -8,6 +8,7 @@ import SearchIcon from '@icons/search.svg'
 import { onest } from '@shared/fonts'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
+import { LangSwitcher } from '@/features/language-switcher'
 
 const links = [
   { name: 'Главная', href: '/' },
@@ -43,6 +44,9 @@ export function HeaderMain() {
         </ul>
 
         <div className={styles.header__spacer}></div>
+
+        {/* Захаркоженный переключатель языка, добавил для проверки переключения языка */}
+        <LangSwitcher />
 
         <form action='/search' method='get'>
           <label className={styles.header__searchContainer}>
