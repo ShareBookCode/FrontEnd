@@ -1,6 +1,6 @@
 import { getRequestConfig } from 'next-intl/server'
 import { headers } from 'next/headers'
-import { getLocaleFromAcceptLanguage } from '../lib/i18n/locale'
+import { getLocaleFromAcceptLanguage } from '@shared/lib/i18n/locale'
 
 export default getRequestConfig(async () => {
   const headersList = await headers()
@@ -9,6 +9,6 @@ export default getRequestConfig(async () => {
 
   return {
     locale,
-    messages: (await import(`@/messages/${locale}.json`)).default,
+    messages: (await import(`../../../messages/${locale}.json`)).default,
   }
 })

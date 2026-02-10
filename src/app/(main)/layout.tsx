@@ -1,5 +1,5 @@
-import { HeaderMain } from '@/src/widgets/header-main'
-import { LayoutProps } from '@/src/shared/lib/types'
+import { HeaderMain } from '@widgets/header-main'
+import { LayoutProps } from '@shared/lib/types'
 
 export default function Layout({ children }: LayoutProps) {
   return (
