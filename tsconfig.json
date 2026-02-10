@@ -20,8 +20,14 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["src/*"],
+      "@app/*": ["src/app/*"],
+      "@shared/*": ["src/shared/*"],
+      "@widgets/*": ["src/widgets/*"],
+      "@providers/*": ["src/app/providers/*"],
+      "@styles/*": ["src/shared/styles/*"],
+      "@icons/*": ["src/shared/icons/*"],
+    },
   },
   "include": [
     "next-env.d.ts",
@@ -29,7 +35,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    "src"
   ],
   "exclude": ["node_modules"]
 }
