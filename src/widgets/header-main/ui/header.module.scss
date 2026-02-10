@@ -72,8 +72,8 @@
   border: 2px solid rgb(42, 127, 255, 0);
   outline: none;
 
-  background: $background-dirty-gray;
-  color: $text-heading;
+	background: $background-dirty-gray;
+	color: $text-heading;
 
   &:focus {
     border: 2px solid rgb(42, 127, 255, 0.8);
