@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   padding: 14px;
-  background: $background-secondary;
+  background: $background-light-gray;
 }
 
 .header__nav {
@@ -55,37 +55,37 @@
     top: 4%;
   }
 
-	&:focus-within svg path {
-		stroke: $color-primary;
-	}
+  &:focus-within svg path {
+    stroke: $color-primary;
+  }
 }
 
 .header__search {
-	font-weight: 400;
-	font-size: 16px;
+  font-weight: 400;
+  font-size: 16px;
 
   width: 400px;
   height: 38px;
   padding: 0 41px 0 15.25px;
   border-radius: 300px;
 
-	border: 2px solid rgb(42, 127, 255, 0);
+  border: 2px solid rgb(42, 127, 255, 0);
   outline: none;
 
-	background: $background-dark;
-	color: $text-heading;
+  background: $background-dirty-gray;
+  color: $text-heading;
 
-	&:focus {
-		border: 2px solid rgb(42, 127, 255, 0.8);
-	}
+  &:focus {
+    border: 2px solid rgb(42, 127, 255, 0.8);
+  }
 
-	&::placeholder {
-		color: $text-secondary;
-	}
+  &::placeholder {
+    color: $text-secondary;
+  }
 
-	&::-webkit-search-cancel-button {
-  	-webkit-appearance: none;
-	}
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
 }
 
 .header__profile {
