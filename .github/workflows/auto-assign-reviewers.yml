@@ -1,5 +1,10 @@
 name: Auto assign reviewers
 
+on:
+  push:
+    branches:
+      - main 
+
 jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
