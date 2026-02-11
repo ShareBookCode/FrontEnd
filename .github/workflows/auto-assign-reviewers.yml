@@ -1,18 +1,12 @@
-name: Auto Assign Reviewers
-
+name: 'Auto Assign'
 on:
   pull_request:
     types: [opened, ready_for_review]
 
 jobs:
-  assign-reviewers:
+  add-reviews:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign random reviewers from teams
-        uses: peter-evans/random-reviewer@v1
+      - uses: kentaro-m/auto-assign-action@v2.0.1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number-of-reviewers: 2
-          teams: |
-            frontend-middle
-            frontend-junior
+          configuration-path: '.github/auto-assign.yml'
