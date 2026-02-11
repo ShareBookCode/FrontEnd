@@ -23,9 +23,9 @@ jobs:
       - name: Pick random reviewers from teams
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ORG: your-org-name
-          TEAM_1: backend-team
-          TEAM_2: frontend-team
+          ORG: ShareBookCode
+          TEAM_1: frontend-middle
+          TEAM_2: frontend-junior
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
         run: |
