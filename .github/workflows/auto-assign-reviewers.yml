@@ -1,4 +1,4 @@
-name: Auto assign reviewers on push
+name: "Assign Random Reviewers"
 
 on:
   push:
@@ -12,56 +12,16 @@ jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign reviewers from teams
-        uses: actions/github-script@v6
+      - name: Assign random reviewer from Team A
+        uses: ihs7/action-reviewer-roulette@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const teams = ['frontend-middle', 'frontend-junior'];
-            const reviewers = [];
-            console.log('Hello')
-
-            // ищем открытые PR для ветки
-            const prs = await github.rest.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head: `${context.repo.owner}:${context.ref.replace('refs/heads/', '')}`,
-              state: 'open'
-            });
-
-            if (prs.data.length === 0) {
-              console.log('No open PR for this branch. Skipping reviewer assignment.');
-              return;
-            }
-
-            const prNumber = prs.data[0].number;
-
-            for (const team of teams) {
-              // правильный вызов API
-              const members = await github.paginate(
-                github.rest.teams.listMembersInOrg,
-                {
-                  org: context.repo.owner,
-                  team_slug: team
-                }
-              );
-
-              if (members.length === 0) continue;
-
-              const randomMember = members[Math.floor(Math.random() * members.length)].login;
-              reviewers.push(randomMember);
-            }
-
-            console.log(reviewers)
-
-            if (reviewers.length > 0) {
-              await github.rest.pulls.requestReviewers({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: prNumber,
-                reviewers: reviewers
-              });
-              console.log(`Assigned reviewers: ${reviewers.join(', ')}`);
-            } else {
-              console.log('No reviewers assigned.');
-            }
+          token: ${{ secrets.GITHUB_TOKEN }}
+          number-of-reviewers: 1
+          teams: 'ShareBookCode/frontend-middle' 
+          
+      - name: Assign random reviewer from Team B
+        uses: ihs7/action-reviewer-roulette@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          number-of-reviewers: 1
+          teams: 'ShareBookCode/frontend-junior'  
