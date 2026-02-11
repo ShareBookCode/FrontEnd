@@ -2,8 +2,12 @@ name: Auto assign reviewers on push
 
 on:
   push:
-    branches:
-      - main   
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+
 jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
