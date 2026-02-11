@@ -12,7 +12,7 @@ jobs:
         uses: peter-evans/random-reviewer@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          number-of-reviewers: 1
+          number-of-reviewers: 2
           teams: |
             frontend-middle
             frontend-junior
