@@ -1,7 +1,8 @@
 name: 'Auto Assign'
 on:
-  pull_request:
-    types: [opened, ready_for_review]
+  push:
+    branches: 
+      - main
 
 jobs:
   add-reviews:
