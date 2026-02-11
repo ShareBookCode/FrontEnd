@@ -1,5 +1,5 @@
-@import '@styles/variables.scss';
-@import '@styles/adaptive-px.scss';
+@import '../../shared/styles/variables.scss';
+@import '../../shared/styles/adaptive-px.scss';
 
 .header {
   display: flex;
@@ -66,9 +66,9 @@
     height: $apx-18;
   }
 
-  &:focus-within svg path {
-    stroke: $color-primary;
-  }
+	&:focus-within svg path {
+		stroke: $color-primary;
+	}
 }
 
 .header__search {
@@ -86,17 +86,17 @@
 	background: $background-dirty-gray;
 	color: $text-heading;
 
-  &:focus {
-    border: 2px solid rgb(42, 127, 255, 0.8);
-  }
+	&:focus {
+		border: 2px solid rgb(42, 127, 255, 0.8);
+	}
 
-  &::placeholder {
-    color: $text-secondary;
-  }
+	&::placeholder {
+		color: $text-secondary;
+	}
 
-  &::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-  }
+	&::-webkit-search-cancel-button {
+  	-webkit-appearance: none;
+	}
 }
 
 .header__profile {
