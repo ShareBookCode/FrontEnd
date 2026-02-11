@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: 
       - main
-    # types: [opened, ready_for_review]
+    types: [opened, ready_for_review]
 
 jobs:
   lint:
@@ -39,10 +39,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run fsd-check
 
-  # assign-reviewers:
-  #   if: github.event_name == 'pull_request'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: step-security/auto-assign-action@v2
-  #       with:
-  #         configurationPath: ".github/auto-assign.yml"
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: step-security/auto-assign-action@v2
+        with:
+          configurationPath: ".github/auto-assign.yml"
