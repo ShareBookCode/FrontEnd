@@ -1,12 +1,8 @@
 name: Assign random reviewers from teams
 
 on:
-  push:
-    branches: 
-      - main
   pull_request:
-    branches: 
-      - main
+    types: [opened, reopened, ready_for_review]
 
 permissions:
   pull-requests: write
