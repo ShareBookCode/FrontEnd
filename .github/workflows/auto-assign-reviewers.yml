@@ -1,18 +1,42 @@
-name: Auto Assign Reviewers
-
-on:
-  pull_request:
-    types: [opened, ready_for_review]
+name: Auto assign reviewers
 
 jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign random reviewers from teams
-        uses: peter-evans/random-reviewer@v1
+      - name: Assign reviewers from teams
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          number-of-reviewers: 2
-          teams: |
-            frontend-middle
-            frontend-junior
+          script: |
+            const teams = ['frontend-middle', 'frontend-junior'];
+            const reviewers = [];
+
+            for (const team of teams) {
+              // Получаем участников команды
+              const members = await github.paginate(
+                github.teams.listMembersInOrg,
+                {
+                  org: context.repo.owner,
+                  team_slug: team
+                }
+              );
+
+              if (members.length === 0) continue;
+
+              // Случайный выбор одного участника
+              const randomMember = members[Math.floor(Math.random() * members.length)].login;
+              reviewers.push(randomMember);
+            }
+
+            if (reviewers.length > 0) {
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                reviewers: reviewers
+              });
+              console.log(`Assigned reviewers: ${reviewers.join(', ')}`);
+            } else {
+              console.log('No reviewers assigned.');
+            }
