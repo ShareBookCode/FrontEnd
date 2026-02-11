@@ -1,17 +1,50 @@
-name: 'Auto Assign'
-
-permissions:               
-  pull-requests: write       
-  contents: read
+name: Auto assign reviewers
 
 on:
+  push:
+    branches: 
+      - main
   pull_request:
-    types: [opened, ready_for_review]
+    branches: 
+      - main
 
 jobs:
-  add-reviews:
+  assign-reviewers:
     runs-on: ubuntu-latest
     steps:
-      - uses: kentaro-m/auto-assign-action@v2.0.1
+      - name: Assign reviewers from teams
+        uses: actions/github-script@v6
         with:
-          configuration-path: '.github/auto-assign.yml'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const teams = ['frontend-middle', 'frontend-junior'];
+            const reviewers = [];
+
+            for (const team of teams) {
+              // Получаем участников команды
+              const members = await github.paginate(
+                github.teams.listMembersInOrg,
+                {
+                  org: context.repo.owner,
+                  team_slug: team
+                }
+              );
+
+              if (members.length === 0) continue;
+
+              // Случайный выбор одного участника
+              const randomMember = members[Math.floor(Math.random() * members.length)].login;
+              reviewers.push(randomMember);
+            }
+
+            if (reviewers.length > 0) {
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                reviewers: reviewers
+              });
+              console.log(`Assigned reviewers: ${reviewers.join(', ')}`);
+            } else {
+              console.log('No reviewers assigned.');
+            }
