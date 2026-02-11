@@ -43,6 +43,6 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: step-security/auto-assign-action@v1.0.0
+      - uses: step-security/auto-assign-action@v2
         with:
           configurationPath: ".github/auto-assign.yml"
