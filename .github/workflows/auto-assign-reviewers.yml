@@ -1,8 +1,12 @@
 name: Auto assign reviewers on push
 
 on:
+  push:
+    branches: 
+      - main
   pull_request:
-    types: [opened, ready_for_review]
+    branches: 
+      - main
 
 jobs:
   assign-reviewers:
@@ -15,6 +19,7 @@ jobs:
           script: |
             const teams = ['frontend-middle', 'frontend-junior'];
             const reviewers = [];
+            console.log('Hello')
 
             // ищем открытые PR для ветки
             const prs = await github.rest.pulls.list({
@@ -46,6 +51,8 @@ jobs:
               const randomMember = members[Math.floor(Math.random() * members.length)].login;
               reviewers.push(randomMember);
             }
+
+            console.log(reviewers)
 
             if (reviewers.length > 0) {
               await github.rest.pulls.requestReviewers({
