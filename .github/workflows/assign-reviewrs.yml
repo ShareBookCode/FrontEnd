@@ -23,5 +23,5 @@ jobs:
           org: "ShareBookCode" #only needed for  pick-one-from-persons-or-team=true
           teams: "frontend-middle" # only works for GitHub Organisation/Teams
           include-draft: false # Draft PRs will be skipped (default: false)
-          skip-with-manual-reviewers: 2 # Skip this action, if the number of reviwers was already assigned (default: 0)
+          skip-with-manual-reviewers: 2 
           pick-one-from-persons-or-team: false # Will pick out one reviewer from persons and/or the first GitHub team and "org" set (default: false)
