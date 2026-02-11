@@ -9,52 +9,7 @@ on:
     branches: 
       - main
 
-  permissions:
-    contents: read
-    pull-requests: write
-
 jobs:
-  assign-reviewers:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Assign reviewers from teams
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            const pull_number = context.payload.pull_request.number;
-
-            async function getRandomUserFromTeam(teamSlug) {
-              const members = await github.paginate(
-                github.rest.teams.listMembersInOrg,
-                {
-                  org: owner,
-                  team_slug: teamSlug,
-                }
-              );
-
-              if (!members.length) {
-                throw new Error(`Team ${teamSlug} has no members`);
-              }
-
-              const randomIndex = Math.floor(Math.random() * members.length);
-              return members[randomIndex].login;
-            }
-
-            const middleReviewer = await getRandomUserFromTeam('frontend-middle');
-            const juniorReviewer = await getRandomUserFromTeam('frontend-junior');
-
-            await github.rest.pulls.requestReviewers({
-              owner,
-              repo,
-              pull_number,
-              reviewers: [middleReviewer, juniorReviewer],
-            });
-
-            core.info(`Assigned reviewers: ${middleReviewer}, ${juniorReviewer}`);
-
   lint:
     runs-on: ubuntu-latest
     steps:
