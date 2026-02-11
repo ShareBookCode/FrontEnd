@@ -1,14 +1,16 @@
-import './index.scss'
 import 'normalize.css/normalize.css'
-import '../shared/styles/global.scss'
-import ReduxProvider from './providers/redux-provider'
-import { LayoutProps } from '@/src/shared/lib/types'
+import '@styles/global.scss'
+import ReduxProvider from '@providers/redux/redux.provider'
+import { LayoutProps } from '@shared/lib/types'
+import { I18nProvider } from '@providers/i18n/i18n.provider'
 
 export default async function RootLayout({ children }: Readonly<LayoutProps>) {
   return (
     <html>
       <body>
-        <ReduxProvider>{children}</ReduxProvider>
+        <I18nProvider>
+          <ReduxProvider>{children}</ReduxProvider>
+        </I18nProvider>
       </body>
     </html>
   )

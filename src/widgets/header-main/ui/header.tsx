@@ -1,13 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import styles from './ui.module.scss'
-import ProfileIcon from '@/src/shared/icons/profile.svg'
-import Logo from '@/src/shared/icons/logo.svg'
-import SearchIcon from '@/src/shared/icons/search.svg'
-import { onest } from '@/src/shared/fonts'
+import styles from './header.module.scss'
+import ProfileIcon from '@icons/profile.svg'
+import Logo from '@icons/logo.svg'
+import SearchIcon from '@icons/search.svg'
+import { onest } from '@shared/fonts'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
+import { LangSwitcher } from '@/features/language-switcher'
 
 const links = [
   { name: 'Главная', href: '/' },
@@ -43,6 +44,9 @@ export function HeaderMain() {
         </ul>
 
         <div className={styles.header__spacer}></div>
+
+        {/* Захаркоженный переключатель языка, добавил для проверки переключения языка */}
+        <LangSwitcher />
 
         <form action='/search' method='get'>
           <label className={styles.header__searchContainer}>
