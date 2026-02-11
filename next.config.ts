@@ -10,6 +10,16 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // Временная ссылка на фотостоки, в будущем нужно удалить
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        pathname: '/**',
+      },
+    ],
+  },
 }
 
 const withNextIntl = createNextIntlPlugin('./src/shared/lib/i18n/request.ts')
