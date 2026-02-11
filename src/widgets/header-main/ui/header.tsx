@@ -5,10 +5,10 @@ import styles from './header.module.scss'
 import ProfileIcon from '@icons/profile.svg'
 import Logo from '@icons/logo.svg'
 import SearchIcon from '@icons/search.svg'
-import { onest } from '@shared/fonts'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
 import { LangSwitcher } from '@/features/language-switcher'
+import { onest } from '@shared/fonts'
 
 const links = [
   { name: 'Главная', href: '/' },

@@ -25,6 +25,7 @@ const eslintConfig = defineConfig([
       'fsd-lint/no-cross-slice-dependency': 'error',
       'fsd-lint/no-global-store-imports': 'error',
       'fsd-lint/no-ui-in-business-logic': 'error',
+      'fsd-lint/ordered-imports': 'warn',
     },
   },
 
