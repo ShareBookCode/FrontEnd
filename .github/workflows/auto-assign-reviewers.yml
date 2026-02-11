@@ -1,13 +1,9 @@
-name: Auto assign reviewers
+name: Auto assign reviewers on push
 
 on:
   push:
-    branches: 
-      - main
-  pull_request:
-    branches: 
-      - main
-
+    branches:
+      - main   
 jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
@@ -20,10 +16,25 @@ jobs:
             const teams = ['frontend-middle', 'frontend-junior'];
             const reviewers = [];
 
+            // ищем открытые PR для ветки
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${context.ref.replace('refs/heads/', '')}`,
+              state: 'open'
+            });
+
+            if (prs.data.length === 0) {
+              console.log('No open PR for this branch. Skipping reviewer assignment.');
+              return;
+            }
+
+            const prNumber = prs.data[0].number;
+
             for (const team of teams) {
-              // Получаем участников команды
+              // правильный вызов API
               const members = await github.paginate(
-                github.teams.listMembersInOrg,
+                github.rest.teams.listMembersInOrg,
                 {
                   org: context.repo.owner,
                   team_slug: team
@@ -32,7 +43,6 @@ jobs:
 
               if (members.length === 0) continue;
 
-              // Случайный выбор одного участника
               const randomMember = members[Math.floor(Math.random() * members.length)].login;
               reviewers.push(randomMember);
             }
@@ -41,7 +51,7 @@ jobs:
               await github.rest.pulls.requestReviewers({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
+                pull_number: prNumber,
                 reviewers: reviewers
               });
               console.log(`Assigned reviewers: ${reviewers.join(', ')}`);
