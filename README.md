@@ -1,36 +1,215 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ShareBookCode Frontend
 
-## Getting Started
+Frontend-часть проекта ShareBookCode на `Next.js` с `App Router`.
 
-First, run the development server:
+
+## Важно про текущее состояние
+
+- Архитектура проекта **не финальная** и будет дополняться по мере разработки.
+- Некоторые разделы внизу пока оставлены только заголовками, чтобы структура документа была полной и могла постепенно заполняться.
+
+## Стек технологий
+
+![Next.js](https://img.shields.io/badge/Next.js-16.1.3-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)
+
+
+### Основные библиотеки
+
+- `next` — фреймворк, роутинг и серверная часть App Router
+- `react`, `react-dom` — UI-слой приложения
+- `typescript` — типобезопасность
+- `@reduxjs/toolkit`, `react-redux` — глобальное состояние
+- `next-intl` — локализация интерфейса
+- `@svgr/webpack` — импорт `.svg` как React-компонентов
+- `axios` — клиент для HTTP-запросов
+- `sass` — стили и переменные
+- `clsx` — условное объединение CSS-классов
+
+### Инструменты разработки
+
+- `eslint`, `eslint-config-next` — линтинг кода
+- `prettier`, `eslint-plugin-prettier`, `eslint-config-prettier` — форматирование кода
+- `eslint-plugin-fsd-lint` — архитектурные правила FSD
+
+## Требования
+
+- `Node.js` 20+
+- `pnpm` 9+
+
+Проект принудительно использует `pnpm` (`preinstall: npx only-allow pnpm`).
+
+## Быстрый старт
+
+Минимальный набор команд, чтобы развернуть проект локально.
+
+### 1) Установка зависимостей
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2) Запуск в development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+После запуска приложение доступно по адресу `http://localhost:3000`.
 
-## Learn More
+### 3) Проверка линтинга
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4) Production-сборка (локально)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm build
+pnpm start
+```
 
-## Deploy on Vercel
+## Архитектура и структура проекта
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Базовый подход — `Feature-Sliced Design`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+src/
+  app/        # маршруты, layout'ы, провайдеры
+  features/   # пользовательские фичи
+  widgets/    # крупные UI-блоки
+  shared/     # переиспользуемый код, конфиги, стили, иконки
+```
+
+### Что где находится сейчас
+
+- `src/app/(auth)` — страницы авторизации
+- `src/app/(main)` — основные страницы приложения
+- `src/app/providers` — `ReduxProvider`, `I18nProvider`
+- `src/features/language-switcher` — переключение языка
+- `src/widgets/header-main` — шапка приложения
+- `src/shared/config/i18n` — локали и настройки i18n
+
+### Маршруты (текущее состояние)
+
+- `/sign-in` — страница авторизации
+- `/sign-up` — страница регистрации
+- `/forgot-password` — страница восстановления пароля
+- `/` — главная страница
+- `/favorites` — страница избранного
+- `/chats` — страница чатов
+- `/new-book` — страница создания нового объявления
+- `/books/[bookId]` — страница книги
+- `/profile` — страница профиля
+- `/users/[userId]` — страница пользователя
+- `/settings/account` — страница настроек аккаунта
+- `/settings/about-myself` — страница настроек профиля
+
+### Path aliases
+
+Псевдонимы путей нужны для удобства импорта и избежания длинных относительных путей.
+
+- `@/*` -> `src/*`
+- `@app/*` -> `src/app/*`
+- `@shared/*` -> `src/shared/*`
+- `@widgets/*` -> `src/widgets/*`
+- `@features/*` -> `src/features/*`
+- `@providers/*` -> `src/app/providers/*`
+- `@styles/*` -> `src/shared/styles/*`
+- `@icons/*` -> `src/shared/icons/*`
+
+## Локализация
+
+Раздел описывает базовую i18n-конфигурацию.
+
+- Поддерживаемые языки: `ru`, `en`
+- Язык по умолчанию: `ru`
+- Ключ cookie: `NEXT_LOCALE`
+
+## Текущее состояние реализации
+
+- `Redux` подключен, но store пока со stub reducer (`_stub`)
+- Большинство страниц сейчас в виде базовых заготовок
+
+## Стандарты разработки
+
+Раздел фиксирует обязательные правила команды перед созданием Pull Request.
+
+### Линтинг и форматирование
+
+- ESLint: `eslint.config.mjs`
+- Prettier: `.prettierrc`
+  - Без точек с запятой (`semi: false`)
+  - Одинарные кавычки (`singleQuote: true`)
+  - Одинарные кавычки в JSX (`jsxSingleQuote: true`)
+  - Пробелы в объектах (`bracketSpacing: true`)
+  - Запятые везде (`trailingComma: "all"`)
+  - Длина строки: 80 символов (`printWidth: 80`)
+  - Отступы: 2 пробела (`tabWidth: 2`)
+  - Стрелочные функции без скобок для одного параметра (`arrowParens: "avoid"`)
+  - Unix-стиль переносов строк (`endOfLine: "lf"`)
+- FSD-правила: `eslint-plugin-fsd-lint`
+
+### FSD-правила, включенные в проекте
+
+- `fsd-lint/no-public-api-sidestep` — нельзя обходить публичный API слайса и импортировать его внутренние файлы напрямую.
+- `fsd-lint/forbidden-imports` — проверяет и запрещает импорты, которые нарушают правила слоев и связей в FSD.
+- `fsd-lint/no-relative-imports` — нельзя использовать относительные импорты там, где по правилам проекта нужно использовать алиасы.
+- `fsd-lint/no-cross-slice-dependency` — запрещает прямые зависимости между слайсами, если они не предусмотрены архитектурой.
+- `fsd-lint/no-global-store-imports` — запрещает прямой импорт глобального store в местах, где это ломает изоляцию слоев.
+- `fsd-lint/no-ui-in-business-logic` — запрещает смешивать UI-логику с бизнес-логикой.
+
+### Именование веток
+
+Используйте формат:
+
+```text
+FRONTEND-<номер_issue>
+```
+
+Пример: `FRONTEND-10`.
+
+### Code review
+
+- Перед слиянием изменений в `main` обязателен code review.
+- Pull Request должен быть проверен и одобрен согласно правилам репозитория (сейчас это code review двумя разработчиками).
+- Если в Pull Request есть замечания, их нужно исправить и повторно запросить review.
+
+## CI
+
+Раздел описывает автоматические проверки в репозитории.
+
+GitHub Actions workflow `.github/workflows/main.yml` запускается на `push` и `pull_request` в `main` и выполняет:
+
+- `pnpm install --frozen-lockfile`
+- `pnpm run lint --max-warnings 0`
+
+## CODEOWNERS
+
+В этом разделе должны быть указаны актуальные владельцы кода (команды или пользователи), которые отвечают за ревью и сопровождение изменений в репозитории.
+Раздел актуализируется после согласования команд и зон ответственности.
+
+## Переменные окружения
+
+В этом разделе должны быть перечислены все переменные окружения проекта: название, обязательность, пример значения и где эта переменная используется.
+
+## Тестирование
+
+В этом разделе должны быть описаны виды тестов в проекте, команды запуска и минимальные требования перед созданием Pull Request.
+
+## API и интеграции
+
+- Данные по книгам будут приходить по REST API.
+- Финальный способ интеграции (контракты/клиентский слой/схема взаимодействия) пока не утвержден, команда тестирует варианты.
+- Для авторизации пользователей будет использоваться отдельный сервис `Keycloak`.
+
+### Документация
+
+- Keycloak (официальная документация): `https://www.keycloak.org/documentation`
+- Документация API сервиса книг: добавить ссылку после финализации backend-контракта (Swagger/OpenAPI или Confluence).
+
+## Деплой
+
+В этом разделе должны быть описаны окружения (dev/stage/prod), процесс деплоя, необходимые проверки перед релизом и ответственные за выпуск.
