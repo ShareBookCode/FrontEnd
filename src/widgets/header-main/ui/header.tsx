@@ -22,7 +22,7 @@ export function HeaderMain() {
 
   return (
     <header className={styles.header}>
-      <nav className={`${styles.header__nav} ${onest.className}`}>
+      <nav className={clsx(styles.header__nav, onest.className)}>
         <Link className={styles.header__logo} href='/'>
           <Logo />
         </Link>
@@ -48,10 +48,14 @@ export function HeaderMain() {
         {/* Захаркоженный переключатель языка, добавил для проверки переключения языка */}
         <LangSwitcher />
 
-        <form action='/search' method='get'>
+        <form
+          className={styles.header__searchForm}
+          action='/search'
+          method='get'
+        >
           <label className={styles.header__searchContainer}>
             <input
-              className={`${styles.header__search} ${onest.className}`}
+              className={clsx(styles.header__search, onest.className)}
               type='search'
               name='q'
               placeholder='Ищите фэнтези, детективы, романы'

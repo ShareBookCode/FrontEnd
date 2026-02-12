@@ -1,30 +1,42 @@
 @import '@styles/variables.scss';
+@import '@styles/adaptive-px.scss';
 
 .header {
   display: flex;
   justify-content: center;
-  padding: 14px;
+  align-items: center;
+
+  height: $apx-66;
+  padding: $apx-14;
   background: $background-light-gray;
 }
 
 .header__nav {
-  font-size: 16px;
-  width: 1330px;
-  height: 38px;
+  font-size: $apx-16;
+  width: $apx-1330;
+  height: $apx-38;
+  
   display: flex;
   align-items: center;
-  gap: 35px;
+  gap: $apx-35;
 }
 
 .header__logo {
-  height: 24px;
+  width: $apx-116;
+  height: $apx-24;
+
+  svg{
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .header__menu {
   display: flex;
-  gap: 30px;
+  gap: $apx-30;
 
   list-style-type: none;
+  margin-right: auto;
 }
 
 .header__link {
@@ -41,18 +53,17 @@
   color: $text-heading;
 }
 
-.header__spacer {
-  width: 217px;
-  height: 100%;
-}
-
 .header__searchContainer {
   position: relative;
 
   svg {
     position: absolute;
-    right: 14px;
-    top: 4%;
+    right: $apx-14;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: $apx-18;
+    height: $apx-18;
   }
 
   &:focus-within svg path {
@@ -61,15 +72,15 @@
 }
 
 .header__search {
-  font-weight: 400;
-  font-size: 16px;
+	font-weight: 400;
+	font-size: $apx-16;
 
-  width: 400px;
-  height: 38px;
-  padding: 0 41px 0 15.25px;
-  border-radius: 300px;
+  width: $apx-400;
+  height: $apx-38;
+  padding: 0 $apx-41 0 $apx-15;
+  border-radius: $apx-300;
 
-  border: 2px solid rgb(42, 127, 255, 0);
+	border: $apx-2 solid rgb(42, 127, 255, 0);
   outline: none;
 
 	background: $background-dirty-gray;
@@ -89,11 +100,16 @@
 }
 
 .header__profile {
-  width: 38px;
-  height: 38px;
-  border-radius: 36px;
+  width: $apx-38; 
+  height: $apx-38;
+  border-radius: $apx-36;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: $color-primary;
+
+  svg{
+    width: $apx-18; 
+    height: $apx-18;
+  }
 }
