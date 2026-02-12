@@ -13,7 +13,6 @@ Frontend-часть проекта ShareBookCode на `Next.js` с `App Router`.
 ![Next.js](https://img.shields.io/badge/Next.js-16.1.3-black?style=flat-square&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)
-![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.11.2-764ABC?style=flat-square&logo=redux)
 
 
 ### Основные библиотеки
@@ -23,16 +22,16 @@ Frontend-часть проекта ShareBookCode на `Next.js` с `App Router`.
 - `typescript` — типобезопасность
 - `@reduxjs/toolkit`, `react-redux` — глобальное состояние
 - `next-intl` — локализация интерфейса
+- `@svgr/webpack` — импорт `.svg` как React-компонентов
 - `axios` — клиент для HTTP-запросов
 - `sass` — стили и переменные
 - `clsx` — условное объединение CSS-классов
 
 ### Инструменты разработки
 
-- `eslint`, `eslint-config-next` — линтинг и форматирование кода
+- `eslint`, `eslint-config-next` — линтинг кода
 - `prettier`, `eslint-plugin-prettier`, `eslint-config-prettier` — форматирование кода
 - `eslint-plugin-fsd-lint` — архитектурные правила FSD
-- `@svgr/webpack` — импорт `.svg` как React-компонентов
 
 ## Требования
 
@@ -74,8 +73,6 @@ pnpm start
 
 ## Архитектура и структура проекта
 
-Раздел описывает, как организован код и где что лежит.
-
 Базовый подход — `Feature-Sliced Design`:
 
 ```text
@@ -85,13 +82,6 @@ src/
   widgets/    # крупные UI-блоки
   shared/     # переиспользуемый код, конфиги, стили, иконки
 ```
-
-### Кратко по блокам
-
-- `app` — точки входа приложения, layout-дерево, route groups, провайдеры.
-- `features` — изолированные пользовательские сценарии (например, переключение языка).
-- `widgets` — составные UI-блоки, которые собирают несколько элементов интерфейса.
-- `shared` — общий слой: конфиги, утилиты, типы, стили, иконки.
 
 ### Что где находится сейчас
 
@@ -137,7 +127,6 @@ src/
 - Поддерживаемые языки: `ru`, `en`
 - Язык по умолчанию: `ru`
 - Ключ cookie: `NEXT_LOCALE`
-- Переключение языка реализовано в `src/features/language-switcher`
 
 ## Текущее состояние реализации
 
@@ -152,6 +141,15 @@ src/
 
 - ESLint: `eslint.config.mjs`
 - Prettier: `.prettierrc`
+  - Без точек с запятой (`semi: false`)
+  - Одинарные кавычки (`singleQuote: true`)
+  - Одинарные кавычки в JSX (`jsxSingleQuote: true`)
+  - Пробелы в объектах (`bracketSpacing: true`)
+  - Запятые везде (`trailingComma: "all"`)
+  - Длина строки: 80 символов (`printWidth: 80`)
+  - Отступы: 2 пробела (`tabWidth: 2`)
+  - Стрелочные функции без скобок для одного параметра (`arrowParens: "avoid"`)
+  - Unix-стиль переносов строк (`endOfLine: "lf"`)
 - FSD-правила: `eslint-plugin-fsd-lint`
 
 ### FSD-правила, включенные в проекте
