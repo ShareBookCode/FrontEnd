@@ -47,7 +47,6 @@ export function HeaderMain() {
         <LangSwitcher />
 
         <form
-          className={styles.searchForm}
           action='/search'
           method='get'
         >
