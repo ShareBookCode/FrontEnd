@@ -46,8 +46,7 @@ export function HeaderMain() {
         {/* Захаркоженный переключатель языка, добавил для проверки переключения языка */}
         <LangSwitcher />
 
-        <form action='/search' method='get'
-        >
+        <form action='/search' method='get'>
           <label className={styles.searchContainer}>
             <input
               className={clsx(styles.search, onest.className)}
