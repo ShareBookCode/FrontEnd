@@ -1,4 +1,4 @@
-@import '@styles/adaptive-px.scss';
+@use '@styles/adaptive-px' as *;
 
 .container {
   width: 100%;
