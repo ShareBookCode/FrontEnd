@@ -1,5 +1,5 @@
-@import '@styles/variables.scss';
-@import '@styles/adaptive-px.scss';
+@use '@styles/variables' as *;
+@use '@styles/adaptive-px' as *;
 
 .header {
   display: flex;
@@ -11,7 +11,7 @@
   background: $background-light-gray;
 }
 
-.header__nav {
+.nav {
   font-size: $apx-16;
   width: $apx-1330;
   height: $apx-38;
@@ -21,7 +21,7 @@
   gap: $apx-35;
 }
 
-.header__logo {
+.logo {
   width: $apx-116;
   height: $apx-24;
 
@@ -31,7 +31,7 @@
   }
 }
 
-.header__menu {
+.menu {
   display: flex;
   gap: $apx-30;
 
@@ -39,7 +39,7 @@
   margin-right: auto;
 }
 
-.header__link {
+.link {
   text-decoration: none;
   color: $text-primary;
   transition: 0.2s;
@@ -49,11 +49,11 @@
   }
 }
 
-.header__linkActive {
+.linkActive {
   color: $text-heading;
 }
 
-.header__searchContainer {
+.searchContainer {
   position: relative;
 
   svg {
@@ -71,7 +71,7 @@
   }
 }
 
-.header__search {
+.search {
 	font-weight: 400;
 	font-size: $apx-16;
 
@@ -99,7 +99,7 @@
   }
 }
 
-.header__profile {
+.profile {
   width: $apx-38; 
   height: $apx-38;
   border-radius: $apx-36;

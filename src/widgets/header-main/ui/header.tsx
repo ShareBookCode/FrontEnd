@@ -22,18 +22,18 @@ export function HeaderMain() {
 
   return (
     <header className={styles.header}>
-      <nav className={clsx(styles.header__nav, onest.className)}>
-        <Link className={styles.header__logo} href='/'>
+      <nav className={clsx(styles.nav, onest.className)}>
+        <Link className={styles.logo} href='/'>
           <Logo />
         </Link>
 
-        <ul className={styles.header__menu}>
+        <ul className={styles.menu}>
           {links.map(link => (
             <li key={link.name}>
               <Link
                 className={clsx(
-                  styles.header__link,
-                  pathname === link.href && styles.header__linkActive,
+                  styles.link,
+                  pathname === link.href && styles.linkActive,
                 )}
                 href={link.href}
               >
@@ -43,19 +43,13 @@ export function HeaderMain() {
           ))}
         </ul>
 
-        <div className={styles.header__spacer}></div>
-
         {/* Захаркоженный переключатель языка, добавил для проверки переключения языка */}
         <LangSwitcher />
 
-        <form
-          className={styles.header__searchForm}
-          action='/search'
-          method='get'
-        >
-          <label className={styles.header__searchContainer}>
+        <form action='/search' method='get'>
+          <label className={styles.searchContainer}>
             <input
-              className={clsx(styles.header__search, onest.className)}
+              className={clsx(styles.search, onest.className)}
               type='search'
               name='q'
               placeholder='Ищите фэнтези, детективы, романы'
@@ -64,7 +58,7 @@ export function HeaderMain() {
           </label>
         </form>
 
-        <Link href='/profile' className={styles.header__profile}>
+        <Link href='/profile' className={styles.profile}>
           <ProfileIcon />
         </Link>
       </nav>
