@@ -1,19 +1,80 @@
-export type ExchangeType = 'free' | 'temporary' | 'exchange'
+export type ExchangeType = 'free' | 'exchange'
+export type BookCondition = 'New' | 'Good' | 'Fair' | 'Poor'
+export type BindingType = 'Hardcover' | 'Softcover'
+export type Category =
+  | 'All'
+  | 'ShareBook'
+  | 'Detectives'
+  | 'Romance'
+  | 'Science'
+  | 'Art'
+  | 'Textbooks'
+export type FilterType = ExchangeType | 'all'
+
+// Пока не используется, думаю он уйдет в сущность пользователя, но так как пользователя еще не существует, останется тут
+export interface User {
+  id: string
+  name: string
+  avatar: string | null
+  stats: {
+    given: number
+    exchanged: number
+  }
+  location: {
+    city: string
+    district: string
+  }
+}
+
+export interface CatalogFilters {
+  category: Category
+  filterType: FilterType
+}
 
 export interface BookPreview {
   id: string
   title: string
   author: string
-  thumbnail: string | null
-  ownerId: string
-  location: string
+  thumbnail: string
+  location: {
+    city: string
+    district: string
+  }
+  isFavorite?: boolean
+}
+
+export interface Book {
+  id: string
+  title: string
+  author: string
+  description: string
+  thumbnails: string[]
+  publisher: string
+  year: number
+  binding: BindingType
+  pages: number
+  genre: Category
+  language: string
+  condition: BookCondition
+  owner: User
   exchangeType: ExchangeType
-  status: 'available' | 'reserved'
+  status: 'available' | 'reserved' | 'closed'
   createdAt: string
+  updatedAt: string
 }
 
 export interface BookSchema {
-  data: BookPreview[]
-  isLoading: boolean
-  error: string | null
+  // Ветка для превью книг в каталоге
+  catalog: {
+    entities: BookPreview[]
+    isLoading: boolean
+    error: string | null
+    filters: CatalogFilters
+  }
+  // Ветка детальной информации о конкретной книге
+  details: {
+    data: Book | null
+    isLoading: boolean
+    error: string | null
+  }
 }

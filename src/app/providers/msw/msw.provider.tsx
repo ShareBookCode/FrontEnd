@@ -10,7 +10,7 @@ export const MSWProvider = ({ children }: { children: React.ReactNode }) => {
     enableMocking().then(() => setIsReady(true))
   }, [])
 
-  if (!isReady && process.env.NODE_ENV === 'development') return null
+  if (!isReady) return null
 
   return <>{children}</>
 }
