@@ -1,0 +1,24 @@
+@import "@styles/variables.scss";
+@import "@styles/adaptive-px.scss";
+
+.button {
+    font-family:
+        Onest,
+        Onest Fallback;
+    text-align: center;
+    padding: $apx-11 $apx-5;
+    border-radius: $apx-9;
+    font-size: $apx-16;
+    border: none;
+    cursor: pointer;
+    background-color: $color-primary;
+    color: $background-primary;
+    &__primary {
+        background-color: $color-primary;
+     
+    }
+    &__secondary {
+        background-color: $background-primary;
+        color: $text-heading;
+    }
+}
