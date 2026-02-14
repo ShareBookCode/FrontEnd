@@ -1,0 +1,22 @@
+@import "@styles/variables.scss";
+@import "@styles/adaptive-px.scss";
+
+.profile {
+    background-image: $background-gradient;
+    font-family:
+        Onest,
+        Onest Fallback;
+
+    padding-top: $apx-50;
+    padding-bottom: $apx-76;
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__info {
+        display: flex;
+        gap: $apx-20;
+    }
+   
+ 
+}
