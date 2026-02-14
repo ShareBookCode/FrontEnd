@@ -26,6 +26,7 @@ export interface User {
   }
 }
 
+// Сделал ограниченную сортировку, потому она в будущем будет проходить через БД, а не на клиенте
 export interface CatalogFilters {
   category: Category
   filterType: FilterType
@@ -49,6 +50,8 @@ export interface Book {
   author: string
   description: string
   thumbnails: string[]
+  isFavorite?: boolean
+
   publisher: string
   year: number
   binding: BindingType
@@ -56,9 +59,11 @@ export interface Book {
   genre: Category
   language: string
   condition: BookCondition
+
   owner: User
   exchangeType: ExchangeType
   status: 'available' | 'reserved' | 'closed'
+
   createdAt: string
   updatedAt: string
 }

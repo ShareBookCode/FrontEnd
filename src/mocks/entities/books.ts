@@ -72,6 +72,7 @@ const generateMockBooks = (count: number): Book[] => {
       genre: categories[i % categories.length],
       language: 'Русский',
       condition: 'Good' as BookCondition,
+      isFavorite: Math.random() > 0.8,
       owner: {
         id: `user-${i}`,
         name: i % 2 === 0 ? 'Евгения' : 'Александр',
@@ -99,7 +100,7 @@ export const bookHandlers = [
       author: book.author,
       thumbnail: book.thumbnails[0],
       location: book.owner.location,
-      isFavorite: Math.random() > 0.8,
+      isFavorite: book.isFavorite,
     }))
 
     return HttpResponse.json(previews)

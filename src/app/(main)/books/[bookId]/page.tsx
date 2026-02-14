@@ -114,6 +114,11 @@ export default function BookPage() {
               <strong>Страниц:</strong> {book.pages}
             </div>
           </div>
+          {book.isFavorite && (
+            <div style={{ color: 'red', fontSize: '18px', marginTop: '5px' }}>
+              ❤️
+            </div>
+          )}
 
           {/* Блок владельца */}
           {/* Здесь будет информация о пользователе, но для него нужно создавать отдельные моковые данные + прописывать интерфейс, так что оставляем пустым */}
