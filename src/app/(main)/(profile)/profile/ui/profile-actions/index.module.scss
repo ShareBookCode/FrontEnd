@@ -1,0 +1,13 @@
+@import "@styles/variables.scss";
+@import "@styles/adaptive-px.scss";
+
+.actions {
+    display: flex;
+    gap: $apx-12;
+     align-items: flex-start;
+
+     &__primary {
+        padding-right:  30px;
+        padding-left: 30px;
+     }
+}
