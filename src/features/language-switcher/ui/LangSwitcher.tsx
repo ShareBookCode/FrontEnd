@@ -3,8 +3,8 @@
 import { useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
-import { Locale, locales } from '@shared/config'
 import { changeLanguageAction } from '../api/change-language'
+import { Locale, locales } from '@shared/config'
 
 export const LangSwitcher = () => {
   const [isPending, startTransition] = useTransition()

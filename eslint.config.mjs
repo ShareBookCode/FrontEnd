@@ -25,6 +25,7 @@ const eslintConfig = defineConfig([
       'fsd-lint/no-cross-slice-dependency': 'error',
       'fsd-lint/no-global-store-imports': 'error',
       'fsd-lint/no-ui-in-business-logic': 'error',
+      'fsd-lint/ordered-imports': 'warn',
     },
   },
 
@@ -44,7 +45,7 @@ const eslintConfig = defineConfig([
 
   prettierConfig,
 
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'public/mockServiceWorker.js']),
 ])
 
 export default eslintConfig

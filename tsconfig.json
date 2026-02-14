@@ -25,9 +25,12 @@
       "@shared/*": ["src/shared/*"],
       "@widgets/*": ["src/widgets/*"],
       "@features/*": ["src/features/*"],
+      "@entities/*": ["src/entities/*"],
+      "@mocks/*": ["src/mocks/*"],
       "@providers/*": ["src/app/providers/*"],
       "@styles/*": ["src/shared/styles/*"],
       "@icons/*": ["src/shared/icons/*"],
+      "@assets/*": ["src/shared/assets/*"]
     },
   },
   "include": [
