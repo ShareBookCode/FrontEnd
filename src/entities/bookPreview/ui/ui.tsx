@@ -1,10 +1,10 @@
+import styles from './ui.module.scss'
+import clsx from 'clsx'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import { literata } from '@/shared/assets/fonts'
 import FavoriteIcon from '@/shared/assets/icons/favorite.svg'
-import styles from './ui.module.scss'
-import clsx from 'clsx'
 
 export interface BookPreview {
   id: string
