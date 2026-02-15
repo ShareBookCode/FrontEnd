@@ -1,0 +1,14 @@
+@use '@/shared/styles/variables' as *;
+
+.container {
+  max-width: 1365px;
+  padding: 30px 35px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+}
