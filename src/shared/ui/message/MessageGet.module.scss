@@ -1,0 +1,41 @@
+.container {
+  width: 529px;
+  background-color: #F1F4F6;
+}
+
+.messageCard {
+  max-width: 476px;
+  display: flex;
+  background-color: #F1F4F6;
+  box-shadow: none;
+  border-radius: 12px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 9px 10px;
+
+  &:last-child {
+    padding-bottom: 8px;
+  }
+}
+
+.text {
+  margin-right: 5px;
+  color: black;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 0; 
+}
+
+.time {
+  color: #909090;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.2;
+  align-self: flex-end;
+  white-space: nowrap; 
+}
