@@ -1,12 +1,6 @@
-import { useTranslations } from 'next-intl'
-import { BooksFeed } from '@/widgets/bookList'
+import HomePage from './home/page'
 
 export default function Page() {
-  const t = useTranslations('HomePage')
-  return (
-    <>
-      <div>{t('title')}</div>
-      <BooksFeed />
-    </>
-  )
+
+  return <HomePage/>
 }
