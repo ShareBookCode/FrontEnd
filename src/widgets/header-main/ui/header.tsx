@@ -2,12 +2,19 @@
 
 import Link from 'next/link'
 import styles from './header.module.scss'
+<<<<<<< HEAD
 import ProfileIcon from '@/shared/assets/icons/profile.svg'
 import Logo from '@/shared/assets/icons/logo.svg'
 import SearchIcon from '@/shared/assets/icons/search.svg'
+=======
+import ProfileIcon from '@icons/profile.svg'
+import Logo from '@icons/logo.svg'
+import SearchIcon from '@icons/search.svg'
+>>>>>>> origin/main
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
 import { LangSwitcher } from '@/features/language-switcher'
+import { onest } from '@shared/fonts'
 
 const links = [
   { name: 'Главная', href: '/' },

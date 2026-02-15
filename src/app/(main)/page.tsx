@@ -1,5 +1,6 @@
 import { BookPreview } from '@/entities/bookPreview'
 import { useTranslations } from 'next-intl'
+import { BooksFeed } from '@/widgets/bookList'
 
 const bookPreview = {
   id: '2',
@@ -16,9 +17,16 @@ const bookPreview = {
 export default function Page() {
   const t = useTranslations('HomePage')
   return (
+<<<<<<< HEAD
     <div>
       {t('title')}
       <BookPreview bookPreview={bookPreview} />
     </div>
+=======
+    <>
+      <div>{t('title')}</div>
+      <BooksFeed />
+    </>
+>>>>>>> origin/main
   )
 }
