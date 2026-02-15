@@ -1,5 +1,4 @@
 @use '@styles/variables' as *;
-@use '@styles/adaptive-px' as *;
 
 .header {
   display: flex;
@@ -7,7 +6,6 @@
   margin-left: auto;
   margin-right: auto;
   align-items: center;
-
   height: 66px;
   padding: 14px;
   background: $background-light-gray;
@@ -17,19 +15,33 @@
   font-size: 16px;
   width: 1330px;
   height: 38px;
-  
   display: flex;
+  justify-content: space-between; 
   align-items: center;
-   margin-left: auto;
+  margin-left: auto;
   margin-right: auto;
   gap: 35px;
+}
+
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .logo {
   width: 116px;
   height: 24px;
 
-  svg{
+  svg {
     width: 100%;
     height: 100%;
   }
@@ -38,9 +50,9 @@
 .menu {
   display: flex;
   gap: 30px;
-
   list-style-type: none;
-  margin-right: auto;
+  margin: 0; 
+  padding: 0;
 }
 
 .link {
@@ -65,7 +77,6 @@
     right: 14px;
     top: 50%;
     transform: translateY(-50%);
-
     width: 18px;
     height: 18px;
   }
@@ -76,22 +87,19 @@
 }
 
 .search {
-	font-weight: 400;
-	font-size: 16px;
-
+  font-weight: 400;
+  font-size: 16px;
   width: 400px;
-  height:38px;
-  padding: 0 41 0 15;
+  height: 38px;
+  padding: 0 41px 0 15px;
   border-radius: 300px;
-
-	border: 2px solid rgb(42, 127, 255, 0);
+  border: 2px solid rgba(42, 127, 255, 0);
   outline: none;
-
-	background: $background-dirty-gray;
-	color: $text-heading;
+  background: $background-dirty-gray;
+  color: $text-heading;
 
   &:focus {
-    border: 2px solid rgb(42, 127, 255, 0.8);
+    border: 2px solid rgba(42, 127, 255, 0.8);
   }
 
   &::placeholder {
@@ -104,7 +112,7 @@
 }
 
 .profile {
-  width: 38px; 
+  width: 38px;
   height: 38px;
   border-radius: 36px;
   display: flex;
@@ -112,8 +120,8 @@
   align-items: center;
   background-color: $color-primary;
 
-  svg{
-    width: 18px; 
+  svg {
+    width: 18px;
     height: 18px;
   }
 }

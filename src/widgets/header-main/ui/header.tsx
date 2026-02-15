@@ -23,44 +23,47 @@ export function HeaderMain() {
   return (
     <header className={styles.header}>
       <nav className={clsx(styles.nav, onest.className)}>
-        <Link className={styles.logo} href='/'>
-          <Logo />
-        </Link>
+        <div className={styles.leftSection}>
+          <Link className={styles.logo} href='/'>
+            <Logo />
+          </Link>
 
-        <ul className={styles.menu}>
-          {links.map(link => (
-            <li key={link.name}>
-              <Link
-                className={clsx(
-                  styles.link,
-                  pathname === link.href && styles.linkActive,
-                )}
-                href={link.href}
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+          <ul className={styles.menu}>
+            {links.map(link => (
+              <li key={link.name}>
+                <Link
+                  className={clsx(
+                    styles.link,
+                    pathname === link.href && styles.linkActive,
+                  )}
+                  href={link.href}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        {/* Захаркоженный переключатель языка, добавил для проверки переключения языка */}
-        <LangSwitcher />
+        <div className={styles.rightSection}>
+          <form action='/search' method='get'>
+            <label className={styles.searchContainer}>
+              <input
+                className={clsx(styles.search, onest.className)}
+                type='search'
+                name='q'
+                placeholder='Ищите фэнтези, детективы, романы'
+              />
+              <SearchIcon />
+            </label>
+          </form>
 
-        <form action='/search' method='get'>
-          <label className={styles.searchContainer}>
-            <input
-              className={clsx(styles.search, onest.className)}
-              type='search'
-              name='q'
-              placeholder='Ищите фэнтези, детективы, романы'
-            />
-            <SearchIcon />
-          </label>
-        </form>
+          <LangSwitcher />
 
-        <Link href='/profile' className={styles.profile}>
-          <ProfileIcon />
-        </Link>
+          <Link href='/profile' className={styles.profile}>
+            <ProfileIcon />
+          </Link>
+        </div>
       </nav>
     </header>
   )
