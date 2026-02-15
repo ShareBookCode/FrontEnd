@@ -1,5 +1,10 @@
 {
   "HomePage": {
     "title": "Привет мир"
+  },
+  "BookPreview": {
+    "linkAriaLabel": "Перейти к книге",
+    "buttonFavoriteAriaLabel": "Добавить в избранное",
+    "imageAlt": "Обложка книги"
   }
 }

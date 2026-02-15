@@ -41,7 +41,7 @@
 
 .link {
   text-decoration: none;
-  color: $text-primary;
+  color: $text-secondary;
   transition: 0.2s;
 
   &:hover {
@@ -84,7 +84,7 @@
   outline: none;
 
 	background: $background-dirty-gray;
-	color: $text-heading;
+	color: $text-secondary;
 
   &:focus {
     border: 2px solid rgb(42, 127, 255, 0.8);
