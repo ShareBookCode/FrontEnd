@@ -139,8 +139,8 @@ src/
 
 ### Линтинг и форматирование
 
-- ESLint: `eslint.config.mjs`
-- Prettier: `.prettierrc`
+- **ESLint**: `eslint.config.mjs`
+- **Prettier**: `.prettierrc`
   - Без точек с запятой (`semi: false`)
   - Одинарные кавычки (`singleQuote: true`)
   - Одинарные кавычки в JSX (`jsxSingleQuote: true`)
@@ -150,7 +150,7 @@ src/
   - Отступы: 2 пробела (`tabWidth: 2`)
   - Стрелочные функции без скобок для одного параметра (`arrowParens: "avoid"`)
   - Unix-стиль переносов строк (`endOfLine: "lf"`)
-- FSD-правила: `eslint-plugin-fsd-lint`
+- **FSD-правила**: `eslint-plugin-fsd-lint`
 
 ### FSD-правила, включенные в проекте
 
@@ -161,22 +161,23 @@ src/
 - `fsd-lint/no-global-store-imports` — запрещает прямой импорт глобального store в местах, где это ломает изоляцию слоев.
 - `fsd-lint/no-ui-in-business-logic` — запрещает смешивать UI-логику с бизнес-логикой.
 
-### Именование веток
+### Подход к написанию компонентов
 
-Используйте формат:
+В проекте используется два основных подхода к созданию компонентов: **функциональные компоненты** (function declaration) и **стрелочные функции** (arrow functions). Выбор подхода зависит от контекста и назначения компонента.
 
-```text
-FRONTEND-<номер_issue>
-```
+#### 1. Компоненты-страницы (Pages)
 
-Пример: `FRONTEND-10`.
+Для компонентов страниц используется **function declaration**. Это улучшает читаемость в React DevTools и явно обозначает, что компонент является страницей.
 
-### Code review
-
-- Перед слиянием изменений в `main` обязателен code review.
-- Pull Request должен быть проверен и одобрен согласно правилам репозитория (сейчас это code review двумя разработчиками).
-- Если в Pull Request есть замечания, их нужно исправить и повторно запросить review.
-
+```tsx
+// Пример: src/pages/home/ui/HomePage.tsx
+export default function HomePage() {
+  return (
+    <div>
+      {/* контент страницы */}
+    </div>
+  )
+}
 ## CI
 
 Раздел описывает автоматические проверки в репозитории.
