@@ -1,0 +1,22 @@
+@use '@styles/adaptive-px' as *;
+
+.container {
+  width: 100%;
+  max-width: $apx-1400;
+  margin: 0 auto;
+  padding: 0 $apx-35;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: $apx-l-988;
+    padding: 0 $apx-l-20;
+  }
+}
+
+@media (max-width: 450px) {
+  .container {
+    max-width: $apx-m-400;
+    padding: 0 $apx-m-16;
+  }
+}

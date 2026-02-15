@@ -1,0 +1,21 @@
+
+$color-primary: #2A7FFF; 
+$color-primary-dark:#355FFF;
+$color-primary-light:#2a7fffcc;  
+$color-danger:#FF2A2A;
+$color-danger-light:#ff2a2acc;
+
+$text-heading:#000000;
+$text-primary: #303030;      
+$text-secondary: #909090;    
+$text-accent: $color-primary;
+
+$background-primary: #ffffff; 
+$background-light-gray:#F1F4F6;
+$background-dirty-gray: #fafafacc; 
+$background-gradient: linear-gradient(
+  180deg,
+  #DFECFF 0%,
+  #DFECFF 70%,
+  #FFFFFF 100%
+);
