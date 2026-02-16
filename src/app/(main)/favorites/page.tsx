@@ -18,7 +18,6 @@ function Layout({ children }: { children: ReactNode }) {
 }
 
 export default function FavoritesPage() {
-  // TODO: заменить на реальные данные с бэка
   const favorites: BookPreview[] = []
   const isLoading = false
   const error = null
