@@ -17,7 +17,7 @@ function Layout({ children }: { children: ReactNode }) {
   )
 }
 
-export default function FavoritesPage() {
+export default function Page() {
   const favorites: BookPreview[] = []
   const isLoading = false
   const error = null
