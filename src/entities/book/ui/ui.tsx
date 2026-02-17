@@ -3,22 +3,11 @@ import clsx from 'clsx'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
+import { BookPreview as IBookPreview } from '../model/types'
 import { literata } from '@/shared/assets/fonts'
 import FavoriteIcon from '@/shared/assets/icons/favorite.svg'
 
-export interface BookPreview {
-  id: string
-  title: string
-  author: string
-  thumbnail: string
-  location: {
-    city: string
-    district: string
-  }
-  isFavorite?: boolean
-}
-
-export function BookPreview({ bookPreview }: { bookPreview: BookPreview }) {
+export function BookPreview({ bookPreview }: { bookPreview: IBookPreview }) {
   const t = useTranslations('BookPreview')
 
   return (

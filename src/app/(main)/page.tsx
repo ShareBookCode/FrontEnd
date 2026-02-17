@@ -1,5 +1,4 @@
-import { useTranslations } from 'next-intl'
-import { BookPreview } from '@/entities/bookPreview'
+import { BookPreview } from '@/entities/book'
 
 const bookPreview = {
   id: '2',
@@ -14,10 +13,8 @@ const bookPreview = {
 }
 
 export default function Page() {
-  const t = useTranslations('HomePage')
   return (
-    <div>
-      {t('title')}
+    <div style={{ padding: '20px' }}>
       <BookPreview bookPreview={bookPreview} />
     </div>
   )
