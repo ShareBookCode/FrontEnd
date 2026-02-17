@@ -2,7 +2,7 @@
   "HomePage": {
     "title": "Hello world!"
   },
-  "BookPreview": {
+  "Book": {
     "linkAriaLabel": "Go to the book",
     "buttonFavoriteAriaLabel": "Add to favorites",
     "imageAlt": "Book cover"

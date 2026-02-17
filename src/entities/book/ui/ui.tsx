@@ -5,10 +5,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { BookPreview as IBookPreview } from '../model/types'
 import { literata } from '@/shared/assets/fonts'
-import FavoriteIcon from '@/shared/assets/icons/favorite.svg'
+import { FavoriteButton } from '@/shared/ui/favorite-button'
 
 export function BookPreview({ bookPreview }: { bookPreview: IBookPreview }) {
-  const t = useTranslations('BookPreview')
+  const t = useTranslations('Book')
 
   return (
     <article className={styles.card}>
@@ -25,13 +25,7 @@ export function BookPreview({ bookPreview }: { bookPreview: IBookPreview }) {
           fill
         />
 
-        <button
-          type='button'
-          className={styles.favorite}
-          aria-label={t('buttonFavoriteAriaLabel')}
-        >
-          <FavoriteIcon />
-        </button>
+        <FavoriteButton className={styles.favorite} />
       </div>
 
       <h3 className={clsx(styles.title, literata.className)}>
