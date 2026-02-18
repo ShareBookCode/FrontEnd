@@ -2,8 +2,7 @@
 
 .page {
   width: 100%;
-  min-height: 834px;
-  padding-top: 35px;
+  min-height: calc(100dvh - $header-height);
 
   display: flex;
   flex-direction: column;
@@ -11,6 +10,8 @@
 
 .title {
   margin: 0;
+  padding-top: 35px;
+
   font-size: 24px;
   font-weight: 600;
   color: $text-heading;
@@ -21,7 +22,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(-66px);
 }
 
 .emptyInner {
@@ -46,6 +46,7 @@
   width: 24px;
   height: 24px;
   display: block;
+  color: $color-primary; 
 }
 
 .emptyTitle {
@@ -73,7 +74,6 @@
 }
 
 .inlineIcon path {
-  stroke: currentColor;
   fill: currentColor;
 }
 
