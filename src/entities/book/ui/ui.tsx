@@ -22,6 +22,7 @@ export function BookPreview({ bookPreview }: { bookPreview: IBookPreview }) {
         <Image
           src={bookPreview.thumbnail}
           alt={`${t('imageAlt')} ${bookPreview.title}`}
+          sizes='202px'
           fill
         />
 
