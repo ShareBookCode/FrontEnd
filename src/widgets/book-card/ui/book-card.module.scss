@@ -1,0 +1,661 @@
+.wrapper {
+  display: flex;
+  padding: 10px;
+  gap: 40px;
+  justify-content: center;
+
+  .bookImages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 559px;
+    max-width: 315px;
+
+    .bookImagesMain {
+      min-height: 475px;
+      max-width: 315px;
+      position: relative;
+      touch-action: pan-x;
+      overflow: hidden;
+
+      .bookImagesMainImage {
+        display: block;
+        min-height: 475px;
+        max-width: 315px;
+        border-radius: 10px;
+        border: 1px solid #9e9e9e26;
+        transition:
+          transform 0.3s ease,
+          opacity 0.2s ease;
+        object-fit: cover;
+      }
+    }
+
+    .likedBtnContainer {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      top: 10px;
+      left: 10px;
+    }
+  }
+
+  .bookImagesMini {
+    display: flex;
+    max-width: 315px;
+    min-height: 72px;
+    gap: 9px;
+    overflow: hidden;
+
+    .bookImagesMiniItem {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      border-radius: 7px;
+      overflow: hidden;
+      cursor: pointer;
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+
+        svg {
+          width: 26px;
+          height: 26px;
+        }
+      }
+
+      &.active .overlay {
+        opacity: 1;
+      }
+    }
+
+    .bookImagesMiniImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 559px;
+  max-width: 315px;
+
+  .bookImagesEmptyImage {
+    min-height: 559px;
+    max-width: 315px;
+    border-radius: 7px;
+  }
+}
+
+.morePlaceholder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+
+  .morePlaceholderImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(2px);
+  }
+
+  .morePlaceholderOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+  }
+}
+
+.popupOverlay {
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.popupInterface {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 100%;
+  position: relative;
+  z-index: 1001;
+}
+
+.popupCloseBtn {
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  z-index: 1003;
+  background: #e2e5e7;
+  color: #000000;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: normal;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #e9ecee;
+    color: #000000;
+  }
+
+  &:active {
+    background: #f1f4f6;
+    color: #909090;
+  }
+}
+
+.popupImageMain {
+  padding-top: 70px;
+  display: flex;
+  justify-content: center;
+  touch-action: pan-x;
+
+  img {
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
+    cursor: grab;
+    user-select: none;
+  }
+}
+
+%mainNavBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e2e5e7;
+  color: #000000;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: normal;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #e9ecee;
+    color: #000000;
+  }
+
+  &:active {
+    background: #f1f4f6;
+    color: #909090;
+  }
+}
+
+.popupMainNextBtn {
+  @extend %mainNavBtn;
+  right: 35px;
+}
+
+.popupMainPrevBtn {
+  @extend %mainNavBtn;
+  left: 35px;
+}
+
+.popupImageMini {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  max-width: 500px;
+  min-height: 72px;
+  gap: 9px;
+  position: relative;
+  overflow: visible;
+  z-index: 1002;
+  touch-action: pan-x;
+
+  .miniContainer {
+    display: flex;
+    gap: 9px;
+  }
+}
+
+.popupMiniImageItem {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  &.activeMini .overlay {
+    opacity: 1;
+  }
+}
+
+%miniNavBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  background: white;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  width: 48px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: normal;
+  transition: background 0.2s ease;
+
+  &:hover {
+    color: #000000;
+  }
+
+  &:active {
+    color: #909090;
+  }
+}
+
+.popupMiniNextBtn {
+  @extend %miniNavBtn;
+  right: -50px;
+}
+
+.popupMiniPrevBtn {
+  @extend %miniNavBtn;
+  left: -50px;
+}
+
+@media (max-width: 1024px) {
+  .popupInterface {
+    padding: 20px;
+  }
+
+  .popupImageMini {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .popupOverlay {
+    padding: 0;
+  }
+
+  .popupInterface {
+    gap: 30px;
+    padding: 16px;
+  }
+
+  .popupImageMain {
+    padding-top: 60px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .popupImageMini {
+    max-width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0 20px;
+
+    .miniContainer {
+      min-width: max-content;
+      gap: 6px;
+    }
+  }
+
+  .popupMiniImageItem {
+    width: 60px;
+    height: 60px;
+  }
+
+  .popupMainNextBtn,
+  .popupMainPrevBtn {
+    display: none;
+  }
+
+  .popupMiniNextBtn,
+  .popupMiniPrevBtn {
+    display: none !important;
+  }
+
+  .popupCloseBtn {
+    top: 20px;
+    right: 20px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .popupImageMain {
+    padding: 10px;
+    padding-top: 50px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .popupMainNextBtn {
+    right: 15px;
+  }
+
+  .popupMainPrevBtn {
+    left: 15px;
+  }
+
+  .popupMiniNextBtn,
+  .popupMiniPrevBtn {
+    display: none !important;
+  }
+
+  .popupCloseBtn {
+    top: 15px;
+    right: 15px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .popupMiniImageItem {
+    width: 50px;
+    height: 50px;
+  }
+
+  .popupImageMini {
+    .miniContainer {
+      gap: 4px;
+    }
+  }
+}
+
+.bookDetails {
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  .bookDetailsDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .bookDetailsTitle {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .bookDetailsContent {
+      .bookDetailsText {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.35;
+        color: black;
+
+        .readMoreBtn {
+          background: none;
+          border: none;
+          color: #007bff;
+          cursor: pointer;
+          font-size: 14px;
+          padding: 0;
+          margin-left: 4px;
+
+          &:hover {
+            color: #0056b3;
+          }
+        }
+      }
+    }
+  }
+
+  .bookInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    .bookInfoItem {
+      max-width: 289px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .bookInfoLabel {
+        font-size: 16px;
+        color: #909090;
+        font-weight: 500;
+        min-width: 100px;
+        flex-shrink: 0;
+      }
+
+      .bookInfoValue {
+        font-size: 16px;
+        color: #000000;
+        text-align: right;
+        word-break: break-word;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    flex-direction: column;
+    padding: 16px;
+    gap: 24px;
+    align-items: center;
+
+    .bookImages {
+      max-width: 600px;
+      min-height: auto;
+
+      .bookImagesMain {
+        max-width: 600px;
+        min-height: 600px;
+
+        .bookImagesMainImage {
+          max-width: 400px;
+          min-height: 600px;
+        }
+      }
+
+      .bookImagesMini {
+        max-width: 400px;
+        justify-content: center;
+      }
+    }
+
+    .bookDetails {
+      max-width: 100%;
+      margin-top: 0;
+      .bookInfoItem {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .wrapper {
+      flex-direction: column;
+      padding: 12px;
+      gap: 20px;
+
+      .bookImages {
+        max-width: 100%;
+        min-height: auto;
+
+        .bookImagesMain {
+          max-width: 100%;
+          min-height: 400px;
+
+          .bookImagesMainImage {
+            max-width: 100%;
+            min-height: 400px;
+          }
+        }
+
+        .bookImagesMini {
+          max-width: 100%;
+          overflow-x: auto;
+          padding-bottom: 8px;
+
+          .bookImagesMiniItem {
+            flex-shrink: 0;
+          }
+        }
+      }
+
+      .bookDetails {
+        max-width: 100%;
+        margin-top: 0;
+
+        .bookDetailsDescription {
+          margin-bottom: 20px;
+
+          .bookDetailsTitle {
+            font-size: 18px;
+          }
+        }
+
+        .bookInfo {
+          .bookInfoItem {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+
+            .bookInfoLabel {
+              min-width: auto;
+              font-size: 14px;
+            }
+
+            .bookInfoValue {
+              text-align: left;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .wrapper {
+      padding: 8px;
+      gap: 16px;
+
+      .bookImages {
+        .bookImagesMain {
+          min-height: 300px;
+
+          .bookImagesMainImage {
+            min-height: 300px;
+          }
+        }
+
+        .bookImagesMini {
+          .bookImagesMiniItem {
+            width: 60px;
+            height: 60px;
+          }
+        }
+      }
+
+      .bookDetails {
+        .bookDetailsDescription {
+          .bookDetailsTitle {
+            font-size: 16px;
+          }
+
+          .bookDetailsContent {
+            .bookDetailsText {
+              font-size: 13px;
+            }
+          }
+        }
+
+        .bookInfo {
+          .bookInfoItem {
+            .bookInfoLabel {
+              font-size: 13px;
+            }
+
+            .bookInfoValue {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
