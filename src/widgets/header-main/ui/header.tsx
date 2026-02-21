@@ -2,13 +2,12 @@
 
 import Link from 'next/link'
 import styles from './header.module.scss'
-import ProfileIcon from '@icons/profile.svg'
-import Logo from '@icons/logo.svg'
-import SearchIcon from '@icons/search.svg'
-import { onest } from '@shared/fonts'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
 import { LangSwitcher } from '@/features/language-switcher'
+import ProfileIcon from '@/shared/assets/icons/profile.svg'
+import Logo from '@/shared/assets/icons/logo.svg'
+import SearchIcon from '@/shared/assets/icons/search.svg'
 
 const links = [
   { name: 'Главная', href: '/' },
@@ -22,7 +21,7 @@ export function HeaderMain() {
 
   return (
     <header className={styles.header}>
-      <nav className={clsx(styles.nav, onest.className)}>
+      <nav className={styles.nav}>
         <Link className={styles.logo} href='/'>
           <Logo />
         </Link>
@@ -49,7 +48,7 @@ export function HeaderMain() {
         <form action='/search' method='get'>
           <label className={styles.searchContainer}>
             <input
-              className={clsx(styles.search, onest.className)}
+              className={styles.search}
               type='search'
               name='q'
               placeholder='Ищите фэнтези, детективы, романы'
