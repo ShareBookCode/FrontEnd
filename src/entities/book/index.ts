@@ -5,6 +5,7 @@ export type {
   Category,
   FilterType,
   User,
+  BookPreview,
   CatalogFilters,
   BookPreview,
   Book,

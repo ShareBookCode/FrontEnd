@@ -3,29 +3,31 @@
 
 .header {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  height: $header-height;
-  padding: $apx-14;
-  background: $background-light-gray;
+  padding: 14px 0;
+  background: rgb(250, 250, 250, 0.8);
 }
 
 .nav {
-  font-size: $apx-16;
-  width: $apx-1330;
-  height: $apx-38;
-  
+  font-size: 16px;
+
   display: flex;
-  align-items: center;
-  gap: $apx-35;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+  }
 }
 
 .logo {
-  width: $apx-116;
-  height: $apx-24;
+  width: 116px;
+  height: 24px;
 
-  svg{
+  svg {
     width: 100%;
     height: 100%;
   }
@@ -33,7 +35,7 @@
 
 .menu {
   display: flex;
-  gap: $apx-30;
+  gap: 30px;
 
   list-style-type: none;
   margin-right: auto;
@@ -58,12 +60,12 @@
 
   svg {
     position: absolute;
-    right: $apx-14;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
 
-    width: $apx-18;
-    height: $apx-18;
+    width: 18px;
+    height: 18px;
   }
 
   &:focus-within svg path {
@@ -72,19 +74,19 @@
 }
 
 .search {
-	font-weight: 400;
-	font-size: $apx-16;
+  font-weight: 400;
+  font-size: 16px;
 
-  width: $apx-400;
-  height: $apx-38;
-  padding: 0 $apx-41 0 $apx-15;
-  border-radius: $apx-300;
+  width: 400px;
+  height: 38px;
+  padding: 0 41px 0 15px;
+  border-radius: 300px;
 
-	border: $apx-2 solid rgb(42, 127, 255, 0);
+  border: 2px solid rgb(42, 127, 255, 0);
   outline: none;
 
-	background: $background-dirty-gray;
-	color: $text-secondary;
+  background: $background-light-gray;
+  color: $text-secondary;
 
   &:focus {
     border: 2px solid rgb(42, 127, 255, 0.8);
@@ -100,16 +102,16 @@
 }
 
 .profile {
-  width: $apx-38; 
-  height: $apx-38;
-  border-radius: $apx-36;
+  width: 38px;
+  height: 38px;
+  border-radius: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: $color-primary;
 
-  svg{
-    width: $apx-18; 
-    height: $apx-18;
+  svg {
+    width: 18px;
+    height: 18px;
   }
 }
