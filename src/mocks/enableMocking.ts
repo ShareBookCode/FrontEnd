@@ -1,4 +1,4 @@
-export async function enableMocking() {
+export const enableMocking = async () => {
   console.log('Check env', {
     ENV: process.env.NODE_ENV,
     MSW: process.env.NEXT_PUBLIC_MSW,
