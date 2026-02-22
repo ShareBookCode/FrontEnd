@@ -9,6 +9,7 @@ import {
   fetchBooksCatalog,
   selectBookCatalogItems,
   selectBookCatalogIsLoading,
+  BookPreviewCard,
 } from '@/entities/book'
 
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
@@ -24,26 +25,8 @@ export const BooksFeed = () => {
   if (isLoading)
     return (
       <div className={styles.grid}>
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div className={styles.cardSkeleton} key={i}>
-            <div className={styles.imageSkeleton} />
-            <div
-              style={{
-                height: 20,
-                width: '80%',
-                background: '#e0e0e0',
-                borderRadius: 4,
-              }}
-            />
-            <div
-              style={{
-                height: 16,
-                width: '60%',
-                background: '#e0e0e0',
-                borderRadius: 4,
-              }}
-            />
-          </div>
+        {books.map(book => (
+          <BookPreviewCard key={book.id} bookPreview={book} />
         ))}
       </div>
     )
