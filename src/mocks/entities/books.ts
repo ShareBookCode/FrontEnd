@@ -1,5 +1,5 @@
 import { http, HttpResponse, delay } from 'msw'
-import {
+import type {
   Book,
   BookPreview,
   Category,
