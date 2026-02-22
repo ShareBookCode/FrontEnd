@@ -27,8 +27,22 @@ export const BooksFeed = () => {
         {Array.from({ length: 6 }).map((_, i) => (
           <div className={styles.cardSkeleton} key={i}>
             <div className={styles.imageSkeleton} />
-            <div style={{ height: 20, width: '80%', background: '#e0e0e0', borderRadius: 4 }} />
-            <div style={{ height: 16, width: '60%', background: '#e0e0e0', borderRadius: 4 }} />
+            <div
+              style={{
+                height: 20,
+                width: '80%',
+                background: '#e0e0e0',
+                borderRadius: 4,
+              }}
+            />
+            <div
+              style={{
+                height: 16,
+                width: '60%',
+                background: '#e0e0e0',
+                borderRadius: 4,
+              }}
+            />
           </div>
         ))}
       </div>
@@ -37,7 +51,7 @@ export const BooksFeed = () => {
   return (
     <div className={styles.grid}>
       {books.map(book => (
-        <Link  href={`/books/${book.id}`} key={book.id}>
+        <Link href={`/books/${book.id}`} key={book.id}>
           <div className={styles.card}>
             <div>ID: {book.id}</div>
             <b>{book.title}</b>
@@ -48,14 +62,14 @@ export const BooksFeed = () => {
             </div>
 
             {book.thumbnail && (
-              <div  className={styles.imageWrapper}>
+              <div className={styles.imageWrapper}>
                 <Image
                   src={book.thumbnail}
                   alt={book.title}
                   fill
                   style={{ objectFit: 'cover' }}
-                  loading="lazy"
-                  placeholder="blur"
+                  loading='lazy'
+                  placeholder='blur'
                   blurDataURL={book.thumbnail}
                 />
               </div>

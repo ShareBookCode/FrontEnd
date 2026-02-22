@@ -25,5 +25,4 @@ export {
   selectBookDetailsError,
 } from './model/selectors'
 export { BookPreviewCard } from './ui/ui'
-export type {BookPreview} from "./model/types"
-
+export type { BookPreview } from './model/types'

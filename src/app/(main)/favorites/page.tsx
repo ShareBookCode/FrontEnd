@@ -2,7 +2,7 @@ import styles from './page.module.scss'
 import HeartIcon from '@icons/heart.svg'
 import clsx from 'clsx'
 import type { ReactNode } from 'react'
-import type { BookPreview } from '@/entities/book/model'
+import { BookPreview } from '@/entities/book'
 import { Container } from '@/shared/ui/container'
 import { onest } from '@shared/fonts'
 
