@@ -3,11 +3,11 @@ import clsx from 'clsx'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
-import { BookPreview as IBookPreview } from '../model/types'
+import { BookPreview } from '../model/types'
 import { literata } from '@/shared/assets/fonts'
 import { FavoriteButton } from '@/shared/ui/favorite-button'
 
-export function BookPreview({ bookPreview }: { bookPreview: IBookPreview }) {
+export function BookPreviewCard({ bookPreview }: { bookPreview: BookPreview }) {
   const t = useTranslations('Book')
 
   return (

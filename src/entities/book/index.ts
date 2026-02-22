@@ -5,6 +5,7 @@ export type {
   Category,
   FilterType,
   User,
+  BookPreview,
   CatalogFilters,
   Book,
   BookSchema,
@@ -24,4 +25,4 @@ export {
   selectBookDetailsIsLoading,
   selectBookDetailsError,
 } from './model/selectors'
-export { BookPreview } from './ui/ui'
+export { BookPreviewCard } from './ui/ui'

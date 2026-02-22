@@ -18,6 +18,15 @@ const eslintConfig = defineConfig([
     rules: {
       'prettier/prettier': 'warn',
 
+      // для react компонентов использовать только function-declaration
+      'react/function-component-definition': [
+        'warn',
+        {
+          namedComponents: 'function-declaration',
+          unnamedComponents: 'function-expression',
+        },
+      ],
+
       // Архитектурные правила FSD
       'fsd-lint/no-public-api-sidestep': 'error',
       'fsd-lint/forbidden-imports': 'error',
@@ -29,10 +38,18 @@ const eslintConfig = defineConfig([
     },
   },
 
+  // во всех ts файлах разрешены только стрелочные функции
+  {
+    files: ['**/*.ts'],
+    rules: {
+      'func-style': ['warn', 'expression', { allowArrowFunctions: true }],
+    },
+  },
+
   // Исключения для корректной работы Next.js App Router и Shared слоя
   {
     files: [
-      'src/app/**/*.{ts,tsx}', 
+      'src/app/**/*.{ts,tsx}',
       'src/shared/**/*.{ts,tsx}',
       '**/*.test.{ts,tsx}',
     ],
@@ -40,12 +57,18 @@ const eslintConfig = defineConfig([
       'fsd-lint/forbidden-imports': 'off',
       'fsd-lint/no-cross-slice-dependency': 'off',
       'fsd-lint/no-global-store-imports': 'off',
-    }
+    },
   },
 
   prettierConfig,
 
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'public/mockServiceWorker.js']),
+  globalIgnores([
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    'public/mockServiceWorker.js',
+  ]),
 ])
 
 export default eslintConfig
