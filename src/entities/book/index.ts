@@ -24,4 +24,5 @@ export {
   selectBookDetailsIsLoading,
   selectBookDetailsError,
 } from './model/selectors'
-export { BookPreview } from './ui/ui'
+export { BookPreviewCard } from './ui/ui'
+export type { BookPreview } from './model/types'
