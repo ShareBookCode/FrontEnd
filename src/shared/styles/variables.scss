@@ -1,4 +1,3 @@
-
 // Colors
 $color-primary: #2A7FFF; 
 $color-primary-dark:#355FFF;
@@ -15,13 +14,9 @@ $text-accent: $color-primary;
 // Backgrounds
 $background-primary: #ffffff; 
 $background-light-gray:#F1F4F6;
-$background-dirty-gray: #fafafacc; 
 $background-gradient: linear-gradient(
   180deg,
   #DFECFF 0%,
   #DFECFF 70%,
   #FFFFFF 100%
 );
-
-// Sizes
-$header-height: 66px;
