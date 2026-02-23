@@ -1,3 +1,5 @@
-export default function Page() {
-  return <div>Welcome profile</div>
+import { redirect } from 'next/navigation'
+
+export default function ProfilePage() {
+  redirect('/profile/about')
 }

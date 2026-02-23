@@ -1,0 +1,50 @@
+@use '@styles/variables' as *;
+
+$radius: 12px;
+$field-bg: $background-light-gray;
+
+.button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: $radius;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  cursor: pointer;
+  transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+.buttonSecondary {
+  background: $field-bg;
+  color: $text-secondary;
+
+  &:hover {
+    opacity: 0.9;
+    color: $text-primary;
+  }
+}
+
+.buttonPrimary {
+  background: $color-primary;
+  color: $background-primary;
+
+  &:hover {
+    background: $color-primary-dark;
+  }
+}
+
+.buttonDanger {
+  background: $field-bg;
+  color: $color-danger;
+
+  &:hover {
+    background: $color-danger;
+    color: $background-primary;
+  }
+}

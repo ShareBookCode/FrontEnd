@@ -1,0 +1,24 @@
+@use '@styles/variables' as *;
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.label {
+  margin: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: $text-heading;
+}
+
+.description {
+  margin: 4px 0 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: $text-secondary;
+}

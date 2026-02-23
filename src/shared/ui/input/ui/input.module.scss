@@ -1,0 +1,35 @@
+@use '@styles/variables' as *;
+
+$radius: 12px;
+$field-bg: $background-light-gray;
+
+.input {
+  width: 300px;
+  height: 38px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border: 1px solid $field-bg;
+  border-radius: $radius;
+  background: $field-bg;
+  font-size: 14px;
+  line-height: 100%;
+  color: $text-primary;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+
+  &:read-only {
+    cursor: default;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: $color-primary;
+  }
+}
+
+.inputMedium {
+  font-weight: 500;
+}
