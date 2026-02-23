@@ -1,0 +1,42 @@
+@use '@styles/variables' as *;
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+
+  font-family: Onest, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: $text-secondary;
+
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $text-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: inherit;
+
+  :global(path) {
+    stroke: currentColor;
+  }
+}
