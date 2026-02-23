@@ -7,20 +7,20 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ variant = 'default', className, ...props }, ref) => {
-    return (
-      <input
-        ref={ref}
-        className={clsx(
-          styles.input,
-          variant === 'medium' && styles.inputMedium,
-          className,
-        )}
-        {...props}
-      />
-    ),
-  },
-)
-
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  { variant = 'default', className, ...props },
+  ref,
+) {
+  return (
+    <input
+      ref={ref}
+      className={clsx(
+        styles.input,
+        variant === 'medium' && styles.inputMedium,
+        className,
+      )}
+      {...props}
+    />
+  )
+})
 Input.displayName = 'Input'
