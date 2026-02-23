@@ -1,17 +1,17 @@
 @use '@styles/variables' as *;
+@use '@styles/adaptive-px' as *;
 
-$radius: 12px;
 $field-bg: $background-light-gray;
 
 .input {
-  width: 300px;
-  height: 38px;
-  padding: 0 16px;
+  width: $apx-300;
+  height: $apx-38;
+  padding: 0 $apx-16;
   box-sizing: border-box;
-  border: 1px solid $field-bg;
-  border-radius: $radius;
+  border: $apx-1 solid $field-bg;
+  border-radius: $apx-12;
   background: $field-bg;
-  font-size: 14px;
+  font-size: $apx-14;
   line-height: 100%;
   color: $text-primary;
 

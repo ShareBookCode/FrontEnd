@@ -1,0 +1,21 @@
+@use '@styles/variables' as *;
+@use '@styles/adaptive-px' as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $apx-24;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur($apx-4);
+}
+
+.modal {
+  width: 100%;
+  background: $background-primary;
+  border-radius: $apx-16;
+  box-shadow: 0 $apx-8 $apx-32 rgba(0, 0, 0, 0.12);
+}

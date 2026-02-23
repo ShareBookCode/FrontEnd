@@ -1,9 +1,10 @@
 @use '@styles/variables' as *;
+@use '@styles/adaptive-px' as *;
 
 .link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: $apx-8;
   margin: 0;
   padding: 0;
   border: none;
@@ -13,7 +14,7 @@
 
   font-family: Onest, sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: $apx-16;
   line-height: 100%;
   letter-spacing: 0%;
   color: $text-secondary;
@@ -25,14 +26,14 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $color-primary;
-    outline-offset: 2px;
+    outline: $apx-2 solid $color-primary;
+    outline-offset: $apx-2;
   }
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
+  width: $apx-20;
+  height: $apx-20;
   flex-shrink: 0;
   color: inherit;
 

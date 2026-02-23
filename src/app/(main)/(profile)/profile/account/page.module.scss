@@ -1,17 +1,14 @@
-@use '@styles/variables' as *;
-
-$radius: 12px;
-$field-bg: $background-light-gray;
+@use '@styles/adaptive-px' as *;
 
 .pageContent {
-  width: 550px;
+  width: $apx-550;
 }
 
 .sectionList {
-  margin-top: 35px;
+  margin-top: $apx-35;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: $apx-32;
 }
 
 .sectionRow {
@@ -19,48 +16,13 @@ $field-bg: $background-light-gray;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 24px;
+  gap: $apx-24;
 }
 
 .sectionControl {
   flex-shrink: 0;
 }
 
-.select {
-  box-sizing: border-box;
-  border: 1px solid $field-bg;
-  border-radius: $radius;
-  background: $field-bg;
-  font-size: 14px;
-  line-height: 100%;
-  color: $text-primary;
-  width: 100%;
-  padding: 12px 40px 12px 16px;
-  cursor: pointer;
-  appearance: none;
-
-  &:focus-visible {
-    outline: 2px solid $color-primary;
-    outline-offset: 2px;
-  }
-}
-
-.selectWrap {
-  position: relative;
-  width: 100%;
-}
-
-.selectIcon {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-  color: $text-secondary;
-}
-
 .saveWrap {
-  margin-top: 40px;
+  margin-top: $apx-40;
 }
