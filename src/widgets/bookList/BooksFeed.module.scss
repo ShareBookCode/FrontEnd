@@ -2,34 +2,18 @@
   display: grid;
   gap: 20px;
   margin: 35px;
-
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-   // Все карточки в сетке будут одинаковой высоты
   grid-auto-rows: 1fr;
 }
+
 .card {
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 4px;
-
   display: flex;
   flex-direction: column;
-}
-
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  margin-top: 10px;
-}
-.card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 4px;
-
-  display: flex;
-  flex-direction: column;
-   > *:last-child {
+  
+  > *:last-child {
     margin-bottom: 0;
   }
 }
@@ -40,10 +24,11 @@
   height: 300px;
   margin-top: 10px;
 }
+
 .cardSkeleton {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   padding: 12px;
   border-radius: 8px;
   background: #f0f0f0;
@@ -55,6 +40,12 @@
   aspect-ratio: 2/3;
   background: #e0e0e0;
   border-radius: 6px;
+}
+
+.skeletonLine {
+  height: 16px;
+  background: #e0e0e0;
+  border-radius: 4px;
 }
 
 @keyframes shimmer {

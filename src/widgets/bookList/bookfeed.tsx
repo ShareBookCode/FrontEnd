@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import Link from 'next/link'
 import styles from './BooksFeed.module.scss'
 
 import {
@@ -25,8 +24,13 @@ export const BooksFeed = () => {
   if (isLoading) {
     return (
       <div className={styles.grid}>
-        {books.map(book => (
-          <BookPreviewCard key={book.id} bookPreview={book} />
+        {[...Array(6)].map((_, index) => (
+          <div key={index} className={styles.cardSkeleton}>
+            <div className={styles.imageSkeleton} />
+            <div className={styles.skeletonLine} style={{ width: '60%' }} />
+            <div className={styles.skeletonLine} style={{ width: '40%' }} />
+            <div className={styles.skeletonLine} style={{ width: '80%' }} />
+          </div>
         ))}
       </div>
     )
@@ -35,9 +39,7 @@ export const BooksFeed = () => {
   return (
     <div className={styles.grid}>
       {books.map(book => (
-        <Link href={`/books/${book.id}`} key={book.id}>
-          <BookPreviewCard bookPreview={book} />
-        </Link>
+        <BookPreviewCard key={book.id} bookPreview={book} />
       ))}
     </div>
   )
