@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+
 import clsx from 'clsx'
-import ChevronDownIcon from '@/shared/assets/icons/chevron-down.svg'
 import styles from './language-select.module.scss'
+import ChevronDownIcon from '@/shared/assets/icons/chevron-down.svg'
 
 const OPTIONS = [
   { value: 'ru', label: 'Русский' },
@@ -38,7 +39,7 @@ export function LanguageSelect() {
   return (
     <div className={styles.wrap} ref={rootRef}>
       <button
-        type="button"
+        type='button'
         className={clsx(styles.trigger, isOpen && styles.triggerOpen)}
         onClick={() => setIsOpen(prev => !prev)}
       >
@@ -48,15 +49,13 @@ export function LanguageSelect() {
         />
       </button>
       {isOpen && (
-        <ul
-          className={styles.dropdown}
-        >
+        <ul className={styles.dropdown}>
           {OPTIONS.map(option => (
             <li
               key={option.value}
               className={clsx(
                 styles.option,
-                value === option.value && styles.optionSelected
+                value === option.value && styles.optionSelected,
               )}
               onMouseDown={e => e.preventDefault()}
               onClick={() => handleSelect(option)}

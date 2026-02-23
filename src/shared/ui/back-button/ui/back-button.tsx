@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import clsx from 'clsx'
+import styles from './back-button.module.scss'
+
 import { onest } from '@shared/fonts'
 import BackIcon from '@/shared/assets/icons/back.svg'
-import styles from './back-button.module.scss'
 
 interface BackButtonProps {
   href: string
@@ -11,7 +12,12 @@ interface BackButtonProps {
   className?: string
 }
 
-export function BackButton({ href, children, ariaLabel, className }: BackButtonProps) {
+export function BackButton({
+  href,
+  children,
+  ariaLabel,
+  className,
+}: BackButtonProps) {
   return (
     <Link
       href={href}

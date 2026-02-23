@@ -12,11 +12,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <input
         ref={ref}
-        className={clsx(styles.input, variant === 'medium' && styles.inputMedium, className)}
+        className={clsx(
+          styles.input,
+          variant === 'medium' && styles.inputMedium,
+          className,
+        )}
         {...props}
       />
-    )
-  }
+    ),
+  },
 )
 
 Input.displayName = 'Input'

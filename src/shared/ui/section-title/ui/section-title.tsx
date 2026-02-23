@@ -7,9 +7,5 @@ interface SectionTitleProps {
 }
 
 export function SectionTitle({ children, className }: SectionTitleProps) {
-  return (
-    <h2 className={clsx(styles.title, className)}>
-      {children}
-    </h2>
-  )
+  return <h2 className={clsx(styles.title, className)}>{children}</h2>
 }

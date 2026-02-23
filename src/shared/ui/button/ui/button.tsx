@@ -20,12 +20,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           variant === 'primary' && styles.buttonPrimary,
           variant === 'secondary' && styles.buttonSecondary,
           variant === 'danger' && styles.buttonDanger,
-          className
+          className,
         )}
         {...props}
       />
-    )
-  }
+    ),
+  },
 )
 
 Button.displayName = 'Button'
