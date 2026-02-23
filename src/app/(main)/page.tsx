@@ -1,12 +1,21 @@
-import { useTranslations } from 'next-intl'
-import { BooksFeed } from '@/widgets/bookList'
+import { BookPreview } from '@/entities/book'
+
+const bookPreview = {
+  id: '2',
+  title: 'Старик и море, Зеленые холмы Африки',
+  author: 'Эрнест Хэмингуэй',
+  thumbnail: '/auntBook.png',
+  location: {
+    city: 'Санкт-Петербург',
+    district: 'Московский район',
+  },
+  isFavorite: false,
+}
 
 export default function Page() {
-  const t = useTranslations('HomePage')
   return (
-    <>
-      <div>{t('title')}</div>
-      <BooksFeed />
-    </>
+    <div style={{ padding: '20px' }}>
+      <BookPreview bookPreview={bookPreview} />
+    </div>
   )
 }

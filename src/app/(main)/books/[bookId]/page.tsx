@@ -8,7 +8,7 @@ import {
   clearDetails,
   selectBookDetailsData,
   selectBookDetailsIsLoading,
-} from '@entities/book/model'
+} from '@/entities/book'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
 
 export default function BookPage() {

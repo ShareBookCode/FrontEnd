@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { bookReducer } from '@entities/book/model'
+import { bookReducer } from '@/entities/book'
 
 export const store = configureStore({
   reducer: {

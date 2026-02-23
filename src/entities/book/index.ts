@@ -6,16 +6,15 @@ export type {
   FilterType,
   User,
   CatalogFilters,
-  BookPreview,
   Book,
   BookSchema,
-} from './types'
+} from './model/types'
 export {
   bookReducer,
   fetchBooksCatalog,
   fetchBookById,
   clearDetails,
-} from './slice'
+} from './model/slice'
 export {
   selectBookCatalogItems,
   selectBookCatalogIsLoading,
@@ -24,4 +23,5 @@ export {
   selectBookDetailsData,
   selectBookDetailsIsLoading,
   selectBookDetailsError,
-} from './selectors'
+} from './model/selectors'
+export { BookPreview } from './ui/ui'

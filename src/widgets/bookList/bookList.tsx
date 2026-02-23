@@ -7,7 +7,7 @@ import {
   fetchBooksCatalog,
   selectBookCatalogItems,
   selectBookCatalogIsLoading,
-} from '@entities/book/model'
+} from '@/entities/book'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
 
 export const BooksFeed = () => {

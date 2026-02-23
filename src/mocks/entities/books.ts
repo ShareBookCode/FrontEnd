@@ -5,7 +5,7 @@ import {
   Category,
   BindingType,
   BookCondition,
-} from '@entities/book/model'
+} from '@/entities/book'
 
 const categories: Category[] = [
   'Science',
