@@ -7,6 +7,7 @@ import {
   fetchBooksCatalog,
   selectBookCatalogItems,
   selectBookCatalogIsLoading,
+  selectBookCatalogError,
   BookPreviewCard,
 } from '@/entities/book'
 
@@ -16,6 +17,7 @@ export const BooksFeed = () => {
   const dispatch = useAppDispatch()
   const books = useAppSelector(selectBookCatalogItems)
   const isLoading = useAppSelector(selectBookCatalogIsLoading)
+  const error = useAppSelector(selectBookCatalogError)
 
   useEffect(() => {
     dispatch(fetchBooksCatalog())
@@ -24,14 +26,42 @@ export const BooksFeed = () => {
   if (isLoading) {
     return (
       <div className={styles.grid}>
-        {[...Array(6)].map((_, index) => (
+        {[...Array(15)].map((_, index) => (
           <div key={index} className={styles.cardSkeleton}>
             <div className={styles.imageSkeleton} />
+            <div className={styles.skeletonLine} style={{ width: '80%' }} />
             <div className={styles.skeletonLine} style={{ width: '60%' }} />
             <div className={styles.skeletonLine} style={{ width: '40%' }} />
-            <div className={styles.skeletonLine} style={{ width: '80%' }} />
           </div>
         ))}
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className={styles.errorContainer}>
+        <h2 className={styles.errorTitle}>😕 Что-то пошло не так</h2>
+        <p className={styles.errorMessage}>
+          Не удалось загрузить книги. Пожалуйста, попробуйте позже.
+        </p>
+        <button
+          className={styles.retryButton}
+          onClick={() => dispatch(fetchBooksCatalog())}
+        >
+          Попробовать снова
+        </button>
+      </div>
+    )
+  }
+
+  if (!books.length) {
+    return (
+      <div className={styles.emptyContainer}>
+        <h2 className={styles.emptyTitle}>📚 Книг пока нет</h2>
+        <p className={styles.emptyMessage}>
+          Здесь будут отображаться доступные книги.
+        </p>
       </div>
     )
   }
