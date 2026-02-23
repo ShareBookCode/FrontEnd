@@ -8,6 +8,7 @@ export type {
   CatalogFilters,
   Book,
   BookSchema,
+  BookPreview,
 } from './model/types'
 export {
   bookReducer,
@@ -25,4 +26,3 @@ export {
   selectBookDetailsError,
 } from './model/selectors'
 export { BookPreviewCard } from './ui/ui'
-export type { BookPreview } from './model/types'

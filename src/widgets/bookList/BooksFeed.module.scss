@@ -4,6 +4,8 @@
   margin: 35px;
 
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+   // Все карточки в сетке будут одинаковой высоты
+  grid-auto-rows: 1fr;
 }
 .card {
   border: 1px solid #ccc;
@@ -27,6 +29,10 @@
 
   display: flex;
   flex-direction: column;
+  height: 100%;
+   > *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .imageWrapper {
@@ -34,6 +40,7 @@
   width: 100%;
   height: 300px;
   margin-top: 10px;
+  flex-shrink: 0;
 }
 .cardSkeleton {
   display: flex;
@@ -43,6 +50,7 @@
   border-radius: 8px;
   background: #f0f0f0;
   animation: shimmer 1.5s infinite linear;
+  height: 100%;
 }
 
 .imageSkeleton {
