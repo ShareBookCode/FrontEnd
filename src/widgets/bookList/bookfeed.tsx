@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import styles from './BooksFeed.module.scss'
 
@@ -22,7 +21,8 @@ export const BooksFeed = () => {
   useEffect(() => {
     dispatch(fetchBooksCatalog())
   }, [dispatch])
-  if (isLoading)
+
+  if (isLoading) {
     return (
       <div className={styles.grid}>
         {books.map(book => (
@@ -30,36 +30,13 @@ export const BooksFeed = () => {
         ))}
       </div>
     )
+  }
 
   return (
     <div className={styles.grid}>
       {books.map(book => (
         <Link href={`/books/${book.id}`} key={book.id}>
-          <div className={styles.card}>
-            <div>ID: {book.id}</div>
-            <b>{book.title}</b>
-            <div>👤 {book.author}</div>
-
-            <div style={{ flexGrow: 1 }}>
-              📍 {book.location.city}, {book.location.district}
-            </div>
-
-            {book.thumbnail && (
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={book.thumbnail}
-                  alt={book.title}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  loading='lazy'
-                  placeholder='blur'
-                  blurDataURL={book.thumbnail}
-                />
-              </div>
-            )}
-
-            {book.isFavorite && <div>❤️</div>}
-          </div>
+          <BookPreviewCard bookPreview={book} />
         </Link>
       ))}
     </div>
