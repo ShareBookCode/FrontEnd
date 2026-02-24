@@ -6,7 +6,7 @@ import { useLocale } from 'next-intl'
 import { changeLanguageAction } from '../api/change-language'
 import { Locale, locales } from '@shared/config'
 
-export const LangSwitcher = () => {
+export function LangSwitcher() {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const currentLocale = useLocale()
