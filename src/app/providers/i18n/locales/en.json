@@ -2,6 +2,11 @@
   "HomePage": {
     "title": "Hello world!"
   },
+  "Header-main": {
+    "navAriaLabel": "Main navigation",
+    "inputAriaLabel": "Search books",
+    "profileAriaLabel": "Profile"
+  },
   "Book": {
     "linkAriaLabel": "Go to the book",
     "buttonFavoriteAriaLabel": "Add to favorites",
