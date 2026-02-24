@@ -15,12 +15,13 @@
 
   display: flex;
   justify-content: space-between;
+}
 
-  div {
-    display: flex;
-    align-items: center;
-    gap: 35px;
-  }
+.leftSection,
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 35px;
 }
 
 .logo {

@@ -84,13 +84,16 @@ src/
 Псевдонимы путей нужны для удобства импорта и избежания длинных относительных путей.
 
 - `@/*` -> `src/*`
+- `@mocks/*` -> `src/mocks/*`
 - `@app/*` -> `src/app/*`
 - `@shared/*` -> `src/shared/*`
 - `@widgets/*` -> `src/widgets/*`
 - `@features/*` -> `src/features/*`
+- `@entities/*` -> `src/entities/*`
 - `@providers/*` -> `src/app/providers/*`
 - `@styles/*` -> `src/shared/styles/*`
-- `@icons/*` -> `src/shared/icons/*`
+- `@icons/*` -> `src/shared/assets/icons/*`
+- `@fonts/*` -> `src/shared/assets/fonts/*`
 
 ## Именование файлов
 Если в папке ui только один .tsx файл и один файл .module.scss, то именуем их ui
