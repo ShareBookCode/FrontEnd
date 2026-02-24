@@ -4,9 +4,8 @@ import clsx from 'clsx'
 import { useTranslations } from 'next-intl'
 import FavoriteIcon from '@/shared/assets/icons/heart.svg'
 
-interface FavoriteButtonProps {
+interface FavoriteButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
-  props?: ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 export function FavoriteButton({ className, ...props }: FavoriteButtonProps) {
