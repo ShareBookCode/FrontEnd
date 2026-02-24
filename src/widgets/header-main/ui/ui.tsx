@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from './ui.module.scss'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import ProfileIcon from '@/shared/assets/icons/profile.svg'
 import Logo from '@/shared/assets/icons/logo.svg'
 import SearchIcon from '@/shared/assets/icons/search.svg'
 import { Container } from '@/shared/ui/container'
-import { useTranslations } from 'next-intl'
 
 const links = [
   { name: 'Главная', href: '/' },
