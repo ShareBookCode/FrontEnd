@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-{
-  "HomePage": {
-    "title": "Hello world!"
-  },
-  "Book": {
-    "linkAriaLabel": "Go to the book",
-    "buttonFavoriteAriaLabel": "Add to favorites",
-    "imageAlt": "Book cover"
-  }
-}
-=======
 {
   "HomePage": {
     "title": "Hello world!"
@@ -25,4 +13,3 @@
     "imageAlt": "Book cover"
   }
 }
->>>>>>> f25ae38bc2c2c5fd97f96b21a81e343048e497c6

@@ -7,11 +7,7 @@ import { BookPreview } from '../model/types'
 import { literata } from '@/shared/assets/fonts'
 import { FavoriteButton } from '@/shared/ui/favorite-button'
 
-export function BookPreviewCard({
-  bookPreview,
-}: {
-  bookPreview: BookPreview
-}) {
+export function BookPreviewCard({ bookPreview }: { bookPreview: BookPreview }) {
   const t = useTranslations('Book')
 
   return (

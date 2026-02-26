@@ -13,7 +13,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
 
-export const BooksFeed = () => {
+export function BooksFeed() {
   const dispatch = useAppDispatch()
   const books = useAppSelector(selectBookCatalogItems)
   const isLoading = useAppSelector(selectBookCatalogIsLoading)

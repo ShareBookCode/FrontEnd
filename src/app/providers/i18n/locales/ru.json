@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-{
-  "HomePage": {
-    "title": "Привет мир"
-  },
-  "Book": {
-    "linkAriaLabel": "Перейти к книге",
-    "buttonFavoriteAriaLabel": "Добавить в избранное",
-    "imageAlt": "Обложка книги"
-  }
-}
-=======
 {
   "HomePage": {
     "title": "Привет мир"
@@ -25,4 +13,3 @@
     "imageAlt": "Обложка книги"
   }
 }
->>>>>>> f25ae38bc2c2c5fd97f96b21a81e343048e497c6

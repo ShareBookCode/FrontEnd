@@ -1,21 +1,6 @@
 import styles from './page.module.scss'
 import HeartIcon from '@icons/heart.svg'
-import clsx from 'clsx'
-import type { ReactNode } from 'react'
-import { Container } from '@/shared/ui/container'
 import { BookPreview } from '@/entities/book'
-
-function Layout({ children }: { children: ReactNode }) {
-  return (
-    <Container>
-      <div className={clsx(styles.page)}>
-        <h1 className={styles.title}>Избранное</h1>
-        {children}
-      </div>
-    </Container>
-  )
-}
-
 
 export default function Page() {
   const favorites: BookPreview[] = []
