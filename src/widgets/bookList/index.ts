@@ -1,1 +1,1 @@
-export { BooksFeed } from './ui/bookfeed'
+export { BooksFeed } from './ui/book-feed'
