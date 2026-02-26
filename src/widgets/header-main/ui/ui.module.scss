@@ -1,0 +1,236 @@
+<<<<<<< HEAD:src/widgets/header-main/ui/header.module.scss
+@use '@styles/variables' as *;
+@use '@styles/adaptive-px' as *;
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: $header-height;
+  padding: $apx-14;
+  background: $background-light-gray;
+}
+
+.nav {
+  font-size: $apx-16;
+  width: $apx-1330;
+  height: $apx-38;
+  
+  display: flex;
+  align-items: center;
+  gap: $apx-35;
+}
+
+.logo {
+  width: $apx-116;
+  height: $apx-24;
+
+  svg{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.menu {
+  display: flex;
+  gap: $apx-30;
+
+  list-style-type: none;
+  margin-right: auto;
+}
+
+.link {
+  text-decoration: none;
+  color: $text-secondary;
+  transition: 0.2s;
+
+  &:hover {
+    color: $text-heading;
+  }
+}
+
+.linkActive {
+  color: $text-heading;
+}
+
+.searchContainer {
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: $apx-14;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: $apx-18;
+    height: $apx-18;
+  }
+
+  &:focus-within svg path {
+    stroke: $color-primary;
+  }
+}
+
+.search {
+	font-weight: 400;
+	font-size: $apx-16;
+
+  width: $apx-400;
+  height: $apx-38;
+  padding: 0 $apx-41 0 $apx-15;
+  border-radius: $apx-300;
+
+	border: $apx-2 solid rgb(42, 127, 255, 0);
+  outline: none;
+
+	background: $background-dirty-gray;
+	color: $text-secondary;
+
+  &:focus {
+    border: 2px solid rgb(42, 127, 255, 0.8);
+  }
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+}
+
+.profile {
+  width: $apx-38; 
+  height: $apx-38;
+  border-radius: $apx-36;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-primary;
+
+  svg{
+    width: $apx-18; 
+    height: $apx-18;
+  }
+}
+=======
+@use '@styles/variables' as *;
+@use '@styles/adaptive-px' as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 0;
+  background: rgb(250, 250, 250, 0.8);
+}
+
+.nav {
+  font-size: 16px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftSection,
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.logo {
+  width: 116px;
+  height: 24px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+
+  list-style-type: none;
+  margin-right: auto;
+}
+
+.link {
+  text-decoration: none;
+  color: $text-secondary;
+  transition: 0.2s;
+
+  &:hover {
+    color: $text-heading;
+  }
+}
+
+.linkActive {
+  color: $text-heading;
+}
+
+.searchContainer {
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 18px;
+    height: 18px;
+  }
+
+  &:focus-within svg path {
+    stroke: $color-primary;
+  }
+}
+
+.search {
+  font-weight: 400;
+  font-size: 16px;
+
+  width: 400px;
+  height: 38px;
+  padding: 0 41px 0 15px;
+  border-radius: 300px;
+
+  border: 2px solid rgb(42, 127, 255, 0);
+  outline: none;
+
+  background: $background-light-gray;
+  color: $text-secondary;
+
+  &:focus {
+    border: 2px solid rgb(42, 127, 255, 0.8);
+  }
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+}
+
+.profile {
+  width: 38px;
+  height: 38px;
+  border-radius: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-primary;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+>>>>>>> f25ae38bc2c2c5fd97f96b21a81e343048e497c6:src/widgets/header-main/ui/ui.module.scss
