@@ -2,21 +2,21 @@
 
 .container {
   width: 100%;
-  max-width: $apx-1400;
+  max-width: 1330px;
   margin: 0 auto;
-  padding: 0 $apx-35;
+  padding: 0 35px;
 }
 
 @media (max-width: 1024px) {
   .container {
-    max-width: $apx-l-988;
-    padding: 0 $apx-l-20;
+    max-width: 988px;
+    padding: 0 20px;
   }
 }
 
 @media (max-width: 450px) {
   .container {
-    max-width: $apx-m-400;
-    padding: 0 $apx-m-16;
+    max-width: 400px;
+    padding: 0 16px;
   }
 }
