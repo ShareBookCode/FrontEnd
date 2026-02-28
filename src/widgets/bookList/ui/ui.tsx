@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import styles from './BooksFeed.module.scss'
+import styles from './ui.module.scss'
 
 import {
   fetchBooksCatalog,
