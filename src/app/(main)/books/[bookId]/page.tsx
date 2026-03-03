@@ -1,8 +1,12 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useParams } from 'next/navigation'
 import Image from 'next/image'
+import { useParams } from 'next/navigation'
+import {
+  BookOwnerCard,
+  type BookOwnerCardData,
+} from '@/widgets/book-owner-card'
 import {
   fetchBookById,
   clearDetails,
@@ -18,6 +22,8 @@ export default function BookPage() {
   const book = useAppSelector(selectBookDetailsData)
   const isLoading = useAppSelector(selectBookDetailsIsLoading)
 
+
+
   useEffect(() => {
     if (id) {
       dispatch(fetchBookById(id as string))
@@ -30,6 +36,32 @@ export default function BookPage() {
 
   if (isLoading) return <div>Загрузка полной информации...</div>
   if (!book) return <div>Книга не найдена</div>
+
+  // TODO: Удалить после подключения auth-слайса.
+  const currentUserId = 'user-1'
+  // Книга считается "своей", если владелец совпадает с текущим пользователем.
+  const isMyBook = book.owner.id === currentUserId
+
+  const ownerCardData: BookOwnerCardData = {
+    ownerId: book.owner.id,
+    name: book.owner.name || 'Пользователь',
+    avatarUrl: book.owner.avatar,
+    // TODO: заменить на реальное значение, когда появится в API
+    memberSinceMonths: undefined,
+    givenCount: book.owner.stats?.given ?? 0,
+    exchangedCount: book.owner.stats?.exchanged ?? 0,
+    exchangeType: book.exchangeType,
+    status: book.status,
+    city: book.owner.location?.city ?? '',
+    district: book.owner.location?.district ?? '',
+    isMyBook,
+    actions: {
+      // TODO: заменить на реальные ссылки/хендлеры, когда появятся маршруты и API
+      editHref: '#',
+      chatHref: '/chats',
+      onCloseAd: undefined,
+    },
+  }
 
   return (
     <main style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
@@ -120,8 +152,13 @@ export default function BookPage() {
             </div>
           )}
 
-          {/* Блок владельца */}
-          {/* Здесь будет информация о пользователе, но для него нужно создавать отдельные моковые данные + прописывать интерфейс, так что оставляем пустым */}
+        </section>
+
+        {/* Блок владельца */}
+        <section>
+          <div>
+            <BookOwnerCard data={ownerCardData} />
+          </div>
         </section>
       </div>
     </main>
