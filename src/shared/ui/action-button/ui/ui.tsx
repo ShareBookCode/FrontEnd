@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import type { ButtonHTMLAttributes } from 'react'  
+import type { ButtonHTMLAttributes } from 'react'
 import styles from './ui.module.scss'
 
 type ActionButtonVariant = 'primary' | 'dangerText'

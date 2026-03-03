@@ -22,8 +22,6 @@ export default function BookPage() {
   const book = useAppSelector(selectBookDetailsData)
   const isLoading = useAppSelector(selectBookDetailsIsLoading)
 
-
-
   useEffect(() => {
     if (id) {
       dispatch(fetchBookById(id as string))
@@ -151,7 +149,6 @@ export default function BookPage() {
               ❤️
             </div>
           )}
-
         </section>
 
         {/* Блок владельца */}
