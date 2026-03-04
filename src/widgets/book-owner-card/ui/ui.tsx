@@ -1,5 +1,3 @@
-'use client'
-
 import styles from './ui.module.scss'
 import HitIcon from '@icons/hit.svg'
 import ExchangeIcon from '@icons/exchange.svg'
@@ -53,10 +51,10 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
     status: BookStatus,
   ) {
     if (status === 'closed') {
-      return `${name} уже закрыла это объявление`
+      return `${name} уже закрыл(а) это объявление`
     }
     if (status === 'reserved') {
-      return `${name} временно зарезервировала эту книгу`
+      return `${name} временно зарезервировал(а) эту книгу`
     }
     if (exchangeType === 'free') {
       return `${name} готов(а) отдать книгу бесплатно`
