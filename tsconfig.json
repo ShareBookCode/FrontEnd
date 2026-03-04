@@ -29,8 +29,8 @@
       "@mocks/*": ["src/mocks/*"],
       "@providers/*": ["src/app/providers/*"],
       "@styles/*": ["src/shared/styles/*"],
-      "@icons/*": ["src/shared/icons/*"],
-      "@assets/*": ["src/shared/assets/*"]
+      "@icons/*": ["src/shared/assets/icons/*"],
+      "@fonts/*": ["src/shared/assets/fonts/*"],
     },
   },
   "include": [

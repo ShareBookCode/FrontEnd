@@ -1,4 +1,4 @@
-import { BookPreview } from '@/entities/book'
+import { BookPreviewCard } from '@/entities/book'
 
 const bookPreview = {
   id: '2',
@@ -15,7 +15,7 @@ const bookPreview = {
 export default function Page() {
   return (
     <div style={{ padding: '20px' }}>
-      <BookPreview bookPreview={bookPreview} />
+      <BookPreviewCard bookPreview={bookPreview} />
     </div>
   )
 }

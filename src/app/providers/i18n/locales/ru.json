@@ -2,6 +2,11 @@
   "HomePage": {
     "title": "Привет мир"
   },
+  "Header-main": {
+    "navAriaLabel": "Основная навигация",
+    "inputAriaLabel": "Поиск книг",
+    "profileAriaLabel": "Профиль"
+  },
   "Book": {
     "linkAriaLabel": "Перейти к книге",
     "buttonFavoriteAriaLabel": "Добавить в избранное",
