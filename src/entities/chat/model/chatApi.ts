@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Message, SendMessageRequest } from './types'
 
-const url = process.env.NEXT_PUBLIC_WS_URL
+const url =
+  process.env.NEXT_PUBLIC_WS_URL || (typeof window !== 'undefined' ? `ws://${window.location.host}/chat` : '')
 
 export const chatApi = createApi({
   reducerPath: 'chatApi',
@@ -19,7 +20,6 @@ export const chatApi = createApi({
           if (!url) throw new Error('WebSocket URL is not defined')
 
           socket = new WebSocket(`${url}/${chatId}`)
-
           await cacheDataLoaded
 
           const listener = (event: MessageEvent) => {

@@ -1,31 +1,36 @@
 import { http, HttpResponse, ws } from 'msw'
 import type { Message, SendMessageRequest } from '@entities/chat'
 
-const chat = ws.link(`${process.env.NEXT_PUBLIC_WS_URL}/:chatId`)
+const wsUrl = process.env.NEXT_PUBLIC_WS_URL
+const chat = wsUrl ? ws.link(`${wsUrl}/:chatId`) : null
 
 export const chatHandlers = [
-  chat.addEventListener('connection', ({ client, params }) => {
-    const { chatId } = params
+  ...(chat
+    ? [
+        chat.addEventListener('connection', ({ client, params }) => {
+          const { chatId } = params
 
-    const interval = setInterval(() => {
-      client.send(
-        JSON.stringify({
-          id: crypto.randomUUID(),
-          chatId: chatId,
-          text: 'Проверка сообщения по WebSocket',
-          senderId: {
-            id: 'user_2',
-            whenOnline: Date.now(),
-            isOnline: true,
-          },
-          timestamp: Date.now(),
-          isRead: false,
-        } as SendMessageRequest),
-      )
-    }, 30000)
+          const interval = setInterval(() => {
+            client.send(
+              JSON.stringify({
+                id: crypto.randomUUID(),
+                chatId: chatId,
+                text: 'Проверка сообщения по WebSocket',
+                senderId: {
+                  id: 'user_2',
+                  whenOnline: Date.now(),
+                  isOnline: true,
+                },
+                timestamp: Date.now(),
+                isRead: false,
+              } as SendMessageRequest),
+            )
+          }, 30000)
 
-    client.addEventListener('close', () => clearInterval(interval))
-  }),
+          client.addEventListener('close', () => clearInterval(interval))
+        }),
+      ]
+    : []),
 
   http.get('chat/messages/:chatId', ({ params }) => {
     return HttpResponse.json([
@@ -53,20 +58,24 @@ export const chatHandlers = [
       isRead: false,
     }
 
-    setTimeout(() => {
-      chat.broadcast(
-        JSON.stringify({
-          id: Math.random().toString(36).substring(2),
-          chatId: payload.chatId,
-          text: `Получил: "${payload.text}".`,
-          senderId: {
-            id: 'user_2',
-          },
-          timestamp: Date.now(),
-          isRead: false,
-        } as SendMessageRequest),
-      )
-    }, 1500)
+    if (chat) {
+      setTimeout(() => {
+        chat.broadcast(
+          JSON.stringify({
+            id: Math.random().toString(36).substring(2),
+            chatId: payload.chatId,
+            text: `Получил: "${payload.text}".`,
+            senderId: {
+              id: 'user_2',
+              whenOnline: Date.now(),
+              isOnline: true,
+            },
+            timestamp: Date.now(),
+            isRead: false,
+          }),
+        )
+      }, 1500)
+    }
 
     return HttpResponse.json(myMessage)
   }),
