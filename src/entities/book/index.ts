@@ -5,10 +5,10 @@ export type {
   Category,
   FilterType,
   User,
-  BookPreview,
   CatalogFilters,
   Book,
   BookSchema,
+  BookPreview,
 } from './model/types'
 export {
   bookReducer,

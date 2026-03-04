@@ -176,3 +176,4 @@ GitHub Actions workflow `.github/workflows/main.yml` запускается на
 
 - `pnpm install --frozen-lockfile`
 - `pnpm run lint --max-warnings 0`
+
