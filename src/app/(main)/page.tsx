@@ -1,10 +1,10 @@
 import style from './page.module.scss'
-import { BooksFeed } from '@/widgets/bookList/index'
+import { BookFeed } from '@/widgets/bookfeed/index'
 
 export default function Page() {
   return (
     <div className={style.main}>
-      <BooksFeed />
+      <BookFeed />
     </div>
   )
 }
