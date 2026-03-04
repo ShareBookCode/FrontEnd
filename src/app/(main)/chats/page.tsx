@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 // import Image from 'next/image'
-import { useGetMessagesQuery, useSendMessageMutation } from '@/entities/chat'
+import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
 import { useGetUsersQuery, User } from '@entities/user'
 
 export default function Page() {
