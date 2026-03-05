@@ -45,11 +45,11 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
     actions,
   } = data
 
-  function buildExchangeDescription(
+  const buildExchangeDescription = (
     name: string,
     exchangeType: ExchangeType,
     status: BookStatus,
-  ) {
+  ) => {
     if (status === 'closed') {
       return `${name} уже закрыл(а) это объявление`
     }
@@ -59,14 +59,8 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
     if (exchangeType === 'free') {
       return `${name} готов(а) отдать книгу бесплатно`
     }
-
     return `${name} готов(а) обменять книгу на любую интересную`
   }
-
-  const safeGivenCount = givenCount ?? 0
-  const safeExchangedCount = exchangedCount ?? 0
-  const safeCity = city ?? ''
-  const safeDistrict = district ?? ''
 
   return (
     <aside className={styles.card}>
@@ -98,7 +92,7 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
         <span className={styles.cardIcon}>
           <HitIcon width={18} height={18} />
         </span>
-        Отдано {safeGivenCount} книг • Обменяно {safeExchangedCount}
+        Отдано {givenCount} книг • Обменяно {exchangedCount}
       </p>
       <p className={styles.note}>
         <span className={styles.cardIcon}>
@@ -110,12 +104,11 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
         <span className={styles.cardIcon}>
           <LocationIcon width={18} height={18} />
         </span>
-        {safeCity}
-        {safeDistrict && `, ${safeDistrict}`}
+        {city}
+        {district && `, ${district}`}
       </p>
       <span className={styles.separator} />
 
-      {/* Переключаем действие по владельцу книги */}
       {isMyBook ? (
         <div className={styles.actions}>
           <ActionButton as='link' href={actions.editHref ?? '#'}>
