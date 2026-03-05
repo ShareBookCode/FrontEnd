@@ -1,7 +1,28 @@
-import { http, HttpResponse } from 'msw'
-import { Message } from '@/entities/chat'
+import { http, HttpResponse, ws } from 'msw'
+import { Message } from '@entities/chat'
+
+const chat = ws.link(`${process.env.NEXT_PUBLIC_WS_URL}/:chatId`)
 
 export const chatHandlers = [
+  chat.addEventListener('connection', ({ client, params }) => {
+    const { chatId } = params
+
+    const interval = setInterval(() => {
+      client.send(
+        JSON.stringify({
+          id: Math.random().toString(36),
+          chatId: chatId,
+          text: 'Проверка сообщения по WebSocket',
+          senderId: 'user_2',
+          timestamp: Date.now(),
+          isRead: false,
+        }),
+      )
+    }, 30000)
+
+    client.addEventListener('close', () => clearInterval(interval))
+  }),
+
   http.get('chat/messages/:chatId', ({ params }) => {
     return HttpResponse.json([
       {
@@ -16,11 +37,27 @@ export const chatHandlers = [
   }),
   http.post('chat/messages', async ({ request }) => {
     const payload = (await request.json()) as Message
-    return HttpResponse.json({
+
+    const myMessage = {
       ...payload,
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substring(2, 11),
       timestamp: Date.now(),
       isRead: false,
-    })
+    }
+
+    setTimeout(() => {
+      chat.broadcast(
+        JSON.stringify({
+          id: Math.random().toString(36).substring(2),
+          chatId: payload.chatId,
+          text: `Получил: "${payload.text}".`,
+          senderId: 'user_2',
+          timestamp: Date.now(),
+          isRead: false,
+        }),
+      )
+    }, 1500)
+
+    return HttpResponse.json(myMessage)
   }),
 ]
