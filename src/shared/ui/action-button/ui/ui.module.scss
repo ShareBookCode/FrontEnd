@@ -1,0 +1,37 @@
+@use '@styles/variables' as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.primary {
+  background: $color-primary;
+  color: $background-primary;
+
+  &:hover {
+    background: $color-primary-dark;
+  }
+}
+
+.dangerText {
+  background: $background-primary;
+  color: $color-danger;
+
+  &:hover {
+    background: $background-light-gray;
+  }
+}
