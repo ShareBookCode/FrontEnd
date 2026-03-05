@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Message, SendMessageRequest } from './types'
 
-const url =
-  process.env.NEXT_PUBLIC_WS_URL || `ws://${window.location.host}/chat` // ENV переменная для точности что будет localhost в разработке
+const url = process.env.NEXT_PUBLIC_WS_URL
 
 export const chatApi = createApi({
   reducerPath: 'chatApi',
