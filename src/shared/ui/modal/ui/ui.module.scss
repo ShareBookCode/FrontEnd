@@ -1,0 +1,58 @@
+@use '@styles/variables' as *;
+
+$modal-duration: 0.15s;
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scaleOut {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(4px);
+
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity $modal-duration ease-in;
+}
+
+.overlayHide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay[data-hidden='true'] {
+  display: none;
+  visibility: hidden;
+}
+
+.content {
+  width: min(363px, calc(100vw - 32px));
+  height: auto;
+
+  padding: 25px;
+
+  background: $background-primary;
+  border: 1px solid $background-light-gray;
+  border-radius: 15px;
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.17);
+
+  animation: scaleIn $modal-duration ease-out;
+}
+
+.contentHide {
+  animation: scaleOut $modal-duration ease-in;
+}
