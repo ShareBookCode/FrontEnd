@@ -1,8 +1,8 @@
 import { useRef, useEffect } from 'react'
 import clsx from 'clsx'
 import styles from './ui.module.scss'
-import { useScrollLock } from '@shared/hooks'
-import { useEscapeKey } from '@shared/hooks'
+import { useEscapeKey } from '../lib/useEscapeKey'
+import { useScrollLock } from '../lib/useScrollLock'
 
 const MODAL_ANIMATION_DURATION = 150
 
