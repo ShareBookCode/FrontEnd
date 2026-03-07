@@ -4,8 +4,8 @@ export const useEscapeKey = (handler: () => void, enabled: boolean) => {
   useEffect(() => {
     if (!enabled) return
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') handler()
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') handler()
     }
 
     document.addEventListener('keydown', handleKeyDown)
