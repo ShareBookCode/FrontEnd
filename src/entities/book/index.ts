@@ -7,7 +7,6 @@ export type {
   User,
   BookPreview,
   CatalogFilters,
-  BookPreview,
   Book,
   BookSchema,
 } from './model/types'
