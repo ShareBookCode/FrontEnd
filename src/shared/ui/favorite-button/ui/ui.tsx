@@ -2,7 +2,7 @@ import styles from './ui.module.scss'
 import { ButtonHTMLAttributes } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'next-intl'
-import FavoriteIcon from '@/shared/assets/icons/favorite.svg'
+import FavoriteIcon from '@/shared/assets/icons/heart.svg'
 
 interface FavoriteButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
