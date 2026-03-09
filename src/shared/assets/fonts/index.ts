@@ -3,7 +3,7 @@ import { Literata } from 'next/font/google'
 
 export const onest = Onest({
   subsets: ['cyrillic', 'latin'],
-  weight: ['400', '500'],
+  weight: ['400', '500', '600'],
 })
 
 export const literata = Literata({

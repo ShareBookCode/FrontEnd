@@ -1,0 +1,47 @@
+@use '@styles/variables' as *;
+
+.tooltip {
+  position: absolute;
+  right: 280px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 222px;
+  padding: 8px 10px;
+  border-radius: 9px;
+
+  opacity: 0;
+  transition: opacity 0.1s;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.17);
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  bottom: 12px;
+
+  width: 8px;
+  height: 20px;
+
+  background: $background-primary;
+  clip-path: path(
+    'M-4.37114e-07 10C-5.68248e-07 7 8 4.0001 8 -3.49691e-07L8 20C8 16.0251 -3.0598e-07 13 -4.37114e-07 10Z'
+  );
+}
+
+.tooltipActive {
+  opacity: 1;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 12px;
+}
