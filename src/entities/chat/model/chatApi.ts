@@ -13,9 +13,13 @@ export const chatApi = createApi({
         chatId,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
       ) {
-        const socket = new WebSocket(`${url}/${chatId}`)
+        let socket: WebSocket | null = null
 
         try {
+          if (!url) throw new Error('WebSocket URL is not defined')
+
+          socket = new WebSocket(`${url}/${chatId}`)
+
           await cacheDataLoaded
 
           const listener = (event: MessageEvent) => {
@@ -26,6 +30,7 @@ export const chatApi = createApi({
               updateCachedData(draft => {
                 if (!draft.find(m => m.id === data.id)) {
                   draft.push(data)
+                  draft.sort((a, b) => a.timestamp - b.timestamp)
                 }
               })
             } catch (err) {
@@ -40,7 +45,7 @@ export const chatApi = createApi({
         } catch (err) {
           console.error('Socket error:', err)
         } finally {
-          socket.close()
+          socket?.close()
         }
       },
     }),
