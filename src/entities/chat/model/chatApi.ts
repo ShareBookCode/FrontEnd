@@ -20,6 +20,7 @@ export const chatApi = createApi({
           if (!url) throw new Error('WebSocket URL is not defined')
 
           socket = new WebSocket(`${url}/${chatId}`)
+
           await cacheDataLoaded
 
           const listener = (event: MessageEvent) => {
