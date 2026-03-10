@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { LikeButton } from '@/features/toggle-book-like'
-import { onest } from '@shared/fonts'
+import { onest } from '@shared/assets/fonts'
 import clsx from 'clsx'
 
 import styles from './book-card.module.scss'
@@ -44,7 +44,7 @@ export const BookCard = ({ book }: Props) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
 
   const [currentMiniVisible, setCurrentMiniVisible] = useState(MINI_VISIBLE)
-  
+
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const [isTransitioning, setIsTransitioning] = useState(false)
@@ -56,13 +56,12 @@ export const BookCard = ({ book }: Props) => {
     const getMiniVisible = () => {
       if (window.innerWidth <= 480) return 3
       if (window.innerWidth <= 768) return 4
-      return MINI_VISIBLE 
+      return MINI_VISIBLE
     }
 
     const handleResize = () => {
       setCurrentMiniVisible(getMiniVisible())
     }
-
 
     setCurrentMiniVisible(getMiniVisible())
 
@@ -93,7 +92,7 @@ export const BookCard = ({ book }: Props) => {
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return
-    
+
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
@@ -124,7 +123,7 @@ export const BookCard = ({ book }: Props) => {
 
   const onMouseUp = (e: React.MouseEvent) => {
     if (!isDragging || !mouseStart) return
-    
+
     const distance = mouseStart - e.clientX
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
@@ -154,13 +153,13 @@ export const BookCard = ({ book }: Props) => {
 
   const onMainImageTouchEnd = () => {
     if (!touchStart || !touchEnd) return
-    
+
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
 
     const maxImages = Math.min(MAX_PREVIEW, book.images.length)
-    
+
     if (isLeftSwipe) {
       setIsTransitioning(true)
       setTimeout(() => {
@@ -183,13 +182,13 @@ export const BookCard = ({ book }: Props) => {
 
   const onMainImageMouseUp = (e: React.MouseEvent) => {
     if (!isDragging || !mouseStart) return
-    
+
     const distance = mouseStart - e.clientX
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
 
     const maxImages = Math.min(MAX_PREVIEW, book.images.length)
-    
+
     if (isLeftSwipe) {
       setIsTransitioning(true)
       setTimeout(() => {
@@ -207,7 +206,7 @@ export const BookCard = ({ book }: Props) => {
     setIsDragging(false)
     setMouseStart(null)
   }
-    
+
   const onPopupImageTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)
     setTouchStart(e.targetTouches[0].clientX)
@@ -219,7 +218,7 @@ export const BookCard = ({ book }: Props) => {
 
   const onPopupImageTouchEnd = () => {
     if (!touchStart || !touchEnd) return
-    
+
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
@@ -238,7 +237,7 @@ export const BookCard = ({ book }: Props) => {
 
   const onPopupImageMouseUp = (e: React.MouseEvent) => {
     if (!isDragging || !mouseStart) return
-    
+
     const distance = mouseStart - e.clientX
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
@@ -281,7 +280,9 @@ export const BookCard = ({ book }: Props) => {
     setPopupImageTransition(true)
     setTimeout(() => {
       setGalleryPopupIndex(prev =>
-        prev === null ? 0 : (prev - 1 + book.images.length) % book.images.length,
+        prev === null
+          ? 0
+          : (prev - 1 + book.images.length) % book.images.length,
       )
       setPopupImageTransition(false)
     }, 150)
@@ -334,9 +335,9 @@ export const BookCard = ({ book }: Props) => {
             setIsDragging(false)
             setMouseStart(null)
           }}
-          style={{ 
+          style={{
             cursor: isDragging ? 'grabbing' : 'grab',
-            userSelect: 'none'
+            userSelect: 'none',
           }}
         >
           <img
@@ -345,7 +346,7 @@ export const BookCard = ({ book }: Props) => {
             className={styles.bookImagesMainImage}
             style={{
               opacity: isTransitioning ? 0.7 : 1,
-              transform: isTransitioning ? 'scale(0.98)' : 'scale(1)'
+              transform: isTransitioning ? 'scale(0.98)' : 'scale(1)',
             }}
           />
           <div className={styles.likedBtnContainer}>
@@ -419,7 +420,7 @@ export const BookCard = ({ book }: Props) => {
                   className={styles.popupInterface}
                   onClick={e => e.stopPropagation()}
                 >
-                  <div 
+                  <div
                     className={styles.popupImageMain}
                     onTouchStart={onPopupImageTouchStart}
                     onTouchMove={onPopupImageTouchMove}
@@ -431,17 +432,19 @@ export const BookCard = ({ book }: Props) => {
                       setIsDragging(false)
                       setMouseStart(null)
                     }}
-                    style={{ 
+                    style={{
                       cursor: isDragging ? 'grabbing' : 'grab',
-                      userSelect: 'none'
+                      userSelect: 'none',
                     }}
                   >
-                    <img 
-                      src={book.images[galleryPopupIndex].src} 
-                      alt='' 
+                    <img
+                      src={book.images[galleryPopupIndex].src}
+                      alt=''
                       style={{
                         opacity: popupImageTransition ? 0.7 : 1,
-                        transform: popupImageTransition ? 'scale(0.95)' : 'scale(1)'
+                        transform: popupImageTransition
+                          ? 'scale(0.95)'
+                          : 'scale(1)',
                       }}
                     />
                     <button
@@ -485,7 +488,7 @@ export const BookCard = ({ book }: Props) => {
                       </svg>
                     </button>
                   </div>
-                  <div 
+                  <div
                     className={styles.popupImageMini}
                     onTouchStart={onTouchStart}
                     onTouchMove={onTouchMove}
@@ -497,14 +500,19 @@ export const BookCard = ({ book }: Props) => {
                       setIsDragging(false)
                       setMouseStart(null)
                     }}
-                    style={{ 
+                    style={{
                       cursor: isDragging ? 'grabbing' : 'grab',
-                      userSelect: 'none'
+                      userSelect: 'none',
                     }}
                   >
                     <div className={styles.miniContainer}>
                       {Array.from(
-                        { length: Math.min(currentMiniVisible, book.images.length) },
+                        {
+                          length: Math.min(
+                            currentMiniVisible,
+                            book.images.length,
+                          ),
+                        },
                         (_, index) => {
                           const realIndex =
                             (miniStartIndex + index) % book.images.length
@@ -525,9 +533,12 @@ export const BookCard = ({ book }: Props) => {
                                   width: '100%',
                                   height: '100%',
                                   objectFit: 'cover',
-                                  transform: isSwipingMini ? 'scale(0.95)' : 'scale(1)',
+                                  transform: isSwipingMini
+                                    ? 'scale(0.95)'
+                                    : 'scale(1)',
                                   opacity: isSwipingMini ? 0.7 : 1,
-                                  transition: 'transform 0.2s ease, opacity 0.2s ease'
+                                  transition:
+                                    'transform 0.2s ease, opacity 0.2s ease',
                                 }}
                                 onClick={() => setGalleryPopupIndex(realIndex)}
                               />
