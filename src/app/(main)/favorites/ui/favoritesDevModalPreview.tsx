@@ -11,6 +11,8 @@ export function FavoritesDevModalPreview() {
   const searchParams = useSearchParams()
 
   const isDev = process.env.NODE_ENV !== 'production'
+  if (!isDev) return null
+
   const isOpen = isDev && searchParams.get('modal') === PREVIEW_QUERY_VALUE
 
   const handleClose = () => {
