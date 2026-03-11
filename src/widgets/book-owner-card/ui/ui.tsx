@@ -90,7 +90,7 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
 
       <p className={styles.stats}>
         <span className={styles.cardIcon}>
-          <HitIcon width={18} height={18} />
+          <HitIcon width={24} height={24} />
         </span>
         Отдано {givenCount} книг • Обменяно {exchangedCount}
       </p>
