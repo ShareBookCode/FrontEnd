@@ -1,7 +1,2 @@
 export { userApi, useGetUsersQuery, useGetUserByIdQuery } from './model/slice'
-export type {
-  User,
-  UserProfile,
-  UserAboutMyself,
-  UserAccount,
-} from './model/types'
+export type { DefaultUser as User } from '@shared/lib/types'

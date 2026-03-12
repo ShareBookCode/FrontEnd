@@ -1,24 +1,48 @@
 import { http, HttpResponse } from 'msw'
-import type { User } from '@entities/user'
+import type { DefaultUser as User } from '@shared/lib/types'
 
 const mockUsers: User[] = [
   {
     id: 'user_1',
     name: 'Иван Иванов (Вы)',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ivan',
-    createdAt: Date.now(),
+    isOnline: true,
+    stats: {
+      given: 7,
+      exchanged: 1,
+    },
+    location: {
+      city: 'Санкт-Петербург',
+      district: 'Выборгский р-н',
+    },
   },
   {
     id: 'user_2',
     name: 'Алексей Книголюб',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex',
-    createdAt: Date.now(),
+    isOnline: true,
+    stats: {
+      given: 1,
+      exchanged: 6,
+    },
+    location: {
+      city: 'Санкт-Петербург',
+      district: 'Приморский р-н',
+    },
   },
   {
     id: 'user_3',
     name: 'Мария Ред',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria',
-    createdAt: Date.now(),
+    isOnline: false,
+    stats: {
+      given: 5,
+      exchanged: 2,
+    },
+    location: {
+      city: 'Москва',
+      district: 'ЦАО',
+    },
   },
 ]
 

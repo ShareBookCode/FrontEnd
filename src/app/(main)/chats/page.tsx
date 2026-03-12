@@ -87,10 +87,7 @@ export default function Page() {
         <ul>
           {users.map(u => (
             <li key={u.id}>
-              {u.name} {' Online: '}
-              {messages.some(m => m.senderId.id === u.id && m.senderId.isOnline)
-                ? 'Да'
-                : 'Нет'}
+              {u.name} (Online: {u.isOnline ? 'Да' : 'Нет'})
             </li>
           ))}
         </ul>
