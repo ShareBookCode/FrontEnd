@@ -7,7 +7,7 @@ export interface BookImages {
 export interface BookData {
   id: string
   title: string
-  author: string
+  author: string[] | string
   images: BookImages[]
   description: string
   publisher: string

@@ -1,1 +1,1 @@
-export { BookCard } from './ui/book-card'
+export { BookCard } from './ui/book-card/book-card'

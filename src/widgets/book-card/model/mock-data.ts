@@ -2,7 +2,7 @@ export const mockImages = [
   {
     src: 'https://picsum.photos/seed/book1/400/600',
     alt: 'Обложка книги «Мастер и Маргарита» Михаила Булгакова',
-    liked: true,
+    liked: false,
   },
   {
     src: 'https://picsum.photos/seed/book2/400/600',
