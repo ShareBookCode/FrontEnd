@@ -77,6 +77,7 @@ const generateMockBooks = (count: number): Book[] => {
         id: `user-${i}`,
         name: i % 2 === 0 ? 'Евгения' : 'Александр',
         avatar: `https://i.pravatar.cc/150?u=${i}`,
+        isOnline: i % 2 === 0 ? true : false,
         stats: { given: 10, exchanged: 5 },
         location: locations[i % locations.length],
       },
