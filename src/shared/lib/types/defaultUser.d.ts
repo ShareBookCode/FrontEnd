@@ -2,13 +2,15 @@ export interface DefaultUser {
   id: string
   name: string
   avatar: string | null
-  isOnline: boolean
+  online: {
+    when: number
+    isOnline: boolean
+  }
+  description: string
   stats: {
     given: number
     exchanged: number
   }
-  location: {
-    city: string
-    district: string
-  }
+  createdAt: number
+  updatedAt: number
 }
