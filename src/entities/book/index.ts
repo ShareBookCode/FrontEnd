@@ -4,7 +4,6 @@ export type {
   BindingType,
   Category,
   FilterType,
-  User,
   BookPreview,
   CatalogFilters,
   Book,

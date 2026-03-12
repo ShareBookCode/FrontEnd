@@ -1,3 +1,5 @@
+import type { DefaultUser as User } from '@shared/lib/types'
+
 export type ExchangeType = 'free' | 'exchange'
 export type BookCondition = 'New' | 'Good' | 'Fair' | 'Poor'
 export type BindingType = 'Hardcover' | 'Softcover'
@@ -10,21 +12,6 @@ export type Category =
   | 'Art'
   | 'Textbooks'
 export type FilterType = ExchangeType | 'all'
-
-// Пока не используется, думаю он уйдет в сущность пользователя, но так как пользователя еще не существует, останется тут
-export interface User {
-  id: string
-  name: string
-  avatar: string | null
-  stats: {
-    given: number
-    exchanged: number
-  }
-  location: {
-    city: string
-    district: string
-  }
-}
 
 // Сделал ограниченную сортировку, потому она в будущем будет проходить через БД, а не на клиенте
 export interface CatalogFilters {
