@@ -4,15 +4,18 @@ import Link from 'next/link'
 import styles from '../RegistrationFlow.module.scss'
 import { useSearchParams } from 'next/navigation'
 import clsx from 'clsx'
+import { useState } from 'react'
+import { StepProps } from '../../lib/types'
 import { Input } from '@/shared/ui/inputs'
 import { Button } from '@/shared/ui/button'
 import { useUpdateSearchParam } from '@/shared/lib/hooks'
-import { useState } from 'react'
 
-export function EmailStep({ success }: { success: boolean }) {
+export function EmailStep({ status }: StepProps) {
   const searchParams = useSearchParams()
   const updateParam = useUpdateSearchParam()
   const [email, setEmail] = useState(searchParams.get('email') || '')
+
+  const isEmailError = !status.success && status.field == 'email'
 
   return (
     <>
@@ -23,14 +26,12 @@ export function EmailStep({ success }: { success: boolean }) {
       <label>
         <Input
           id='email'
-          status={success ? 'default' : 'error'}
+          status={isEmailError ? 'error' : 'default'}
           name='email'
           type='email'
           value={email}
-          onChange={e => {
-            updateParam('email', e.target.value, 'replace')
-            setEmail(e.target.value)
-          }}
+          onChange={e => setEmail(e.target.value)}
+          onBlur={() => updateParam('email', email)}
           placeholder='Почта'
         />
       </label>

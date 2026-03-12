@@ -4,19 +4,17 @@ import styles from '../RegistrationFlow.module.scss'
 import EyeClosed from '@icons/eye-closed.svg'
 import EyeOpened from '@icons/eye-opened.svg'
 import { useState } from 'react'
+import { StepProps } from '../../lib/types'
 import { InputWithIcon } from '@/shared/ui/inputs'
 import { Button } from '@/shared/ui/button'
 import { useEnterFocus } from '@/shared/lib/hooks'
 
-export function PasswordStep({
-  success,
-  field,
-}: {
-  success: boolean
-  field: string | undefined
-}) {
+export function PasswordStep({ status }: StepProps) {
   const { register, handleKeyDown } = useEnterFocus()
   const [showPassword, setShowPassword] = useState(false)
+
+  const isPasswordError = !status.success && status.field == 'name'
+  const isRepeatPasswordError = !status.success && status.field == 'city'
 
   const toggleShowPassword = (e: MouseEvent) => {
     e.preventDefault()
@@ -29,7 +27,7 @@ export function PasswordStep({
       <div className={styles.fields}>
         <label>
           <InputWithIcon
-            status={!success && field == 'password' ? 'error' : 'default'}
+            status={isPasswordError ? 'error' : 'default'}
             type={showPassword ? 'text' : 'password'}
             ref={register(0)}
             onKeyDown={handleKeyDown(0)}
@@ -44,9 +42,7 @@ export function PasswordStep({
         </label>
         <label>
           <InputWithIcon
-            status={
-              !success && field == 'repeat-password' ? 'error' : 'default'
-            }
+            status={isRepeatPasswordError ? 'error' : 'default'}
             type={showPassword ? 'text' : 'password'}
             ref={register(1)}
             onKeyDown={handleKeyDown(1)}

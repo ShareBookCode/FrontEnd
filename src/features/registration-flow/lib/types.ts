@@ -3,7 +3,7 @@ export const REGISTRATION_STEPS = ['email', 'name', 'password'] as const
 export type RegistrationStep = (typeof REGISTRATION_STEPS)[number]
 
 export interface RegistrationParams {
-  step: string
+  step: RegistrationStep
   email: string
   name: string
   city: string
@@ -23,12 +23,24 @@ export type EmailErrorCode =
 
 export type NameErrorCode = 'short_name' | 'long_name' | 'invalid_name'
 
-export type RegistrationErrorCode = EmailErrorCode | NameErrorCode
+export type PasswordErrorCode =
+  | 'short_password'
+  | 'weak_password'
+  | 'password_mismatch'
 
-export type RegistrationResult<E = RegistrationErrorCode> =
+export type RegistrationErrorCode =
+  | EmailErrorCode
+  | NameErrorCode
+  | PasswordErrorCode
+
+export type ValidateRegistrationResult<E = RegistrationErrorCode> =
   | { success: true }
   | {
       success: false
       field: RegistrationField
       error: E
     }
+
+export interface StepProps {
+  status: ValidateRegistrationResult
+}

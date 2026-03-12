@@ -1,5 +1,5 @@
 import z from 'zod'
-import { NameErrors, RegistrationState } from '../lib/types'
+import { NameErrorCode, ValidateRegistrationResult } from '../lib/types'
 
 const nameSchema = z
   .string()
@@ -10,14 +10,14 @@ const nameSchema = z
 
 export const validateName = (
   name: FormDataEntryValue,
-): RegistrationState<NameErrors> => {
+): ValidateRegistrationResult<NameErrorCode> => {
   const result = nameSchema.safeParse(name)
 
   if (!result.success) {
     return {
       success: false,
       field: 'name',
-      error: result.error.issues[0].message as NameErrors,
+      error: result.error.issues[0].message as NameErrorCode,
     }
   }
 

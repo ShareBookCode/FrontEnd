@@ -3,22 +3,20 @@
 import styles from '../RegistrationFlow.module.scss'
 import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
+import { StepProps } from '../../lib/types'
 import { Input } from '@/shared/ui/inputs'
 import { Button } from '@/shared/ui/button'
 import { useEnterFocus, useUpdateSearchParam } from '@/shared/lib/hooks'
 
-export function NameStep({
-  success,
-  field,
-}: {
-  success: boolean
-  field: string | undefined
-}) {
+export function NameStep({ status }: StepProps) {
   const searchParams = useSearchParams()
   const updateParam = useUpdateSearchParam()
   const { register, handleKeyDown } = useEnterFocus()
   const [name, setName] = useState(searchParams.get('name') || '')
   const [city, setCity] = useState(searchParams.get('city') || '')
+
+  const isNameError = !status.success && status.field == 'name'
+  const isCityError = !status.success && status.field == 'city'
 
   return (
     <>
@@ -27,13 +25,11 @@ export function NameStep({
         <label>
           <Input
             id='name'
-            status={!success && field == 'name' ? 'error' : 'default'}
+            status={isNameError ? 'error' : 'default'}
             ref={register(0)}
             value={name}
-            onChange={e => {
-              updateParam('name', e.target.value)
-              setName(e.target.value)
-            }}
+            onChange={e => setName(e.target.value)}
+            onBlur={() => updateParam('name', name)}
             onKeyDown={handleKeyDown(0)}
             placeholder='Имя'
           />
@@ -41,13 +37,11 @@ export function NameStep({
         <label>
           <Input
             id='city'
-            status={!success && field == 'city' ? 'error' : 'default'}
+            status={isCityError ? 'error' : 'default'}
             ref={register(1)}
             value={city}
-            onChange={e => {
-              updateParam('city', e.target.value)
-              setCity(e.target.value)
-            }}
+            onChange={e => setCity(e.target.value)}
+            onBlur={() => updateParam('city', city)}
             onKeyDown={handleKeyDown(1)}
             placeholder='Город (необязательно)'
           />

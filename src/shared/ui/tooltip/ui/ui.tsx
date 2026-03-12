@@ -1,11 +1,16 @@
 import { useEffect } from 'react'
 import styles from './ui.module.scss'
 
-export function Tooltip({ inputId }: { inputId: string }) {
+interface TooltipProps {
+  targetId: string
+  error: string
+}
+
+export function Tooltip({ targetId, error }: TooltipProps) {
   useEffect(() => {
     const tooltip = document.getElementById('tooltip')
     const inputCoordinats = document
-      .getElementById(inputId)
+      .getElementById(targetId)
       ?.getBoundingClientRect()
 
     if (tooltip && inputCoordinats) {
@@ -14,7 +19,7 @@ export function Tooltip({ inputId }: { inputId: string }) {
     }
 
     tooltip?.classList.add(styles.tooltipActive)
-  }, [inputId])
+  }, [targetId])
 
   return (
     <div id='tooltip' className={styles.tooltip}>

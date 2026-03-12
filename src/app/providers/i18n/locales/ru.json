@@ -11,5 +11,60 @@
     "linkAriaLabel": "Перейти к книге",
     "buttonFavoriteAriaLabel": "Добавить в избранное",
     "imageAlt": "Обложка книги"
+  },
+  "Authentication": {
+    "TitleAboutShareBook": {
+      "onePart": "Станьте частью",
+      "twoPart": "ShareBook.",
+      "threePart": "Отдавайте. Меняйтесь.",
+      "fourthPart": "Читайте."
+    },
+    "TitleRegistrationWithEmail": "Регистрация через почту",
+
+    "EmailPlaceholder": "Почта",
+    "NamePlaceholder": "Имя",
+    "CityPlaceholder": "Город (необязательно)",
+    "PasswordPlaceholder": "Пароль",
+    "RepeatPasswordPlaceholder": "Повторите пароль",
+
+    "ButtonNextStep": "Далее",
+    "ButtonRegistration": "Зарегестрироваться",
+
+    "ErrorsField": {
+      "invalid_email": {
+        "title": "Некорректный email",
+        "description": "Проверьте формат адреса электронной почты и попробуйте снова."
+      },
+      "busy_email": {
+        "title": "Email уже используется",
+        "description": "Этот адрес электронной почты уже зарегистрирован."
+      },
+
+      "short_name": {
+        "title": "Слишком короткое имя",
+        "description": "Имя должно содержать больше символов."
+      },
+      "long_name": {
+        "title": "Слишком длинное имя",
+        "description": "Имя превышает допустимую длину."
+      },
+      "invalid_name": {
+        "title": "Некорректное имя",
+        "description": "Допускаются только буквы, цифры и спец символы использовать нельзя"
+      },
+
+      "short_password": {
+        "title": "Слишком короткий пароль",
+        "description": "Пароль должен содержать больше символов."
+      },
+      "weak_password": {
+        "title": "Слишком простой пароль",
+        "description": "Используйте более сложный пароль с буквами, цифрами или специальными символами."
+      },
+      "password_mismatch": {
+        "title": "Пароли не совпадают",
+        "description": "Повторный пароль не совпадает с введённым ранее."
+      }
+    }
   }
 }

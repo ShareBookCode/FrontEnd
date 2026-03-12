@@ -1,6 +1,6 @@
 import styles from './page.module.scss'
 import Link from 'next/link'
-import { RegistrationFlow } from '@/features/registration-switcher'
+import { RegistrationFlow } from '@/features/registration-flow'
 
 export default function Page() {
   return (

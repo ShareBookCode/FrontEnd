@@ -11,5 +11,23 @@
     "linkAriaLabel": "Go to the book",
     "buttonFavoriteAriaLabel": "Add to favorites",
     "imageAlt": "Book cover"
+  },
+  "Authentication": {
+    "TitleAboutShareBook": {
+      "onePart": "Become part of",
+      "twoPart": "ShareBook.",
+      "threePart": "Give away. Exchange.",
+      "fourthPart": "Read."
+    },
+    "TitleRegistrationWithEmail": "Sign up with email",
+
+    "EmailPlaceholder": "Email",
+    "NamePlaceholder": "Name",
+    "CityPlaceholder": "City (optional)",
+    "PasswordPlaceholder": "Password",
+    "RepeatPasswordPlaceholder": "Repeat password",
+
+    "ButtonNextStep": "Next",
+    "ButtonRegistration": "Sign up"
   }
 }
