@@ -1,5 +1,5 @@
 import { http, HttpResponse, ws } from 'msw'
-import { Message } from '@entities/chat'
+import type { Message, SendMessageRequest } from '@entities/chat'
 
 const chat = ws.link(`${process.env.NEXT_PUBLIC_WS_URL}/:chatId`)
 
@@ -13,10 +13,12 @@ export const chatHandlers = [
           id: Math.random().toString(36),
           chatId: chatId,
           text: 'Проверка сообщения по WebSocket',
-          senderId: 'user_2',
+          senderId: {
+            id: 'user_2',
+          },
           timestamp: Date.now(),
           isRead: false,
-        }),
+        } as SendMessageRequest),
       )
     }, 30000)
 
@@ -29,10 +31,14 @@ export const chatHandlers = [
         id: 'msg_0',
         chatId: params.chatId,
         text: 'Старое сообщение из БД',
-        senderId: 'user_2',
+        senderId: {
+          id: 'user_2',
+          whenOnline: Date.now(),
+          isOnline: true,
+        },
         timestamp: Date.now() - 10000,
         isRead: true,
-      },
+      } as Message,
     ])
   }),
   http.post('chat/messages', async ({ request }) => {
@@ -51,10 +57,12 @@ export const chatHandlers = [
           id: Math.random().toString(36).substring(2),
           chatId: payload.chatId,
           text: `Получил: "${payload.text}".`,
-          senderId: 'user_2',
+          senderId: {
+            id: 'user_2',
+          },
           timestamp: Date.now(),
           isRead: false,
-        }),
+        } as SendMessageRequest),
       )
     }, 1500)
 

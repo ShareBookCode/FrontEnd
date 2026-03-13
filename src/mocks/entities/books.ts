@@ -1,6 +1,6 @@
 import { http, HttpResponse, delay } from 'msw'
-import {
-  Book,
+import type {
+  GetBook,
   BookPreview,
   Category,
   BindingType,
@@ -46,7 +46,7 @@ const MOCK_COLORS = [
   '#9B59B6', // Purple
 ]
 
-const generateMockBooks = (count: number): Book[] => {
+const generateMockBooks = (count: number): GetBook[] => {
   return Array.from({ length: count }, (_, i) => {
     const bookId = i + 1
 
@@ -84,7 +84,6 @@ const generateMockBooks = (count: number): Book[] => {
       exchangeType: i % 2 === 0 ? 'free' : 'exchange',
       status: 'available',
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
     }
   })
 }

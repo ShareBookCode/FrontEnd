@@ -1,7 +1,14 @@
-export interface Chat {
+interface User {
   id: string
-  users: string[]
-  lastMessage?: Message
+}
+
+interface UserOnline extends User {
+  whenOnline: number
+  isOnline: boolean
+}
+
+export interface Chat {
+  users: User[]
   updatedAt: number
 }
 
@@ -9,13 +16,13 @@ export interface Message {
   id: string
   chatId: string
   text: string
-  senderId: string
+  senderId: UserOnline
   timestamp: number
   isRead: boolean
 }
 
 export interface SendMessageRequest {
   chatId: string
-  senderId: string
+  senderId: User
   text: string
 }

@@ -1,5 +1,3 @@
-import type { DefaultUser as User } from '@shared/lib/types'
-
 export type ExchangeType = 'free' | 'exchange'
 export type BookCondition = 'New' | 'Good' | 'Fair' | 'Poor'
 export type BindingType = 'Hardcover' | 'Softcover'
@@ -12,6 +10,21 @@ export type Category =
   | 'Art'
   | 'Textbooks'
 export type FilterType = ExchangeType | 'all'
+
+// User для обработки книг
+interface User {
+  id: string
+  name: string
+  avatar: string | null
+  stats: {
+    given: number
+    exchanged: number
+  }
+  location: {
+    city: string
+    district: string
+  }
+}
 
 // Сделал ограниченную сортировку, потому она в будущем будет проходить через БД, а не на клиенте
 export interface CatalogFilters {
@@ -31,7 +44,7 @@ export interface BookPreview {
   isFavorite?: boolean
 }
 
-export interface Book {
+interface Book {
   id: string
   title: string
   author: string
@@ -47,11 +60,17 @@ export interface Book {
   language: string
   condition: BookCondition
 
-  owner: User
   exchangeType: ExchangeType
   status: 'available' | 'reserved' | 'closed'
 
   createdAt: string
+}
+
+export interface GetBook extends Book {
+  owner: User
+}
+
+export interface PostBook extends Book {
   updatedAt: string
 }
 
