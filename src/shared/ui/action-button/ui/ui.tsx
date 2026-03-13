@@ -14,7 +14,7 @@ type BaseProps = {
 type ButtonProps = BaseProps &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     as?: 'button'
-}
+  }
 
 type LinkProps = BaseProps & {
   as: 'link'

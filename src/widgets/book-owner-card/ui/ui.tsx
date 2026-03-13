@@ -51,7 +51,6 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
   const exchangeDescription = getExchangeDescription(name, exchangeType, status)
   const locationText = city ? `${city}, ${district}` : city
 
-
   return (
     <aside className={styles.card}>
       <div className={styles.header}>
