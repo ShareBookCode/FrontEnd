@@ -4,7 +4,6 @@ import { useState } from 'react'
 // import Image from 'next/image'
 import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
-import type { DefaultUser as User } from '@shared/lib/types'
 
 export default function Page() {
   const chatId = 'test-chat-id'
@@ -25,7 +24,9 @@ export default function Page() {
     try {
       await sendMessage({
         chatId,
-        senderId: currentUserId,
+        senderId: {
+          id: currentUserId,
+        },
         text: inputText,
       }).unwrap()
       setInputText('')
@@ -44,7 +45,7 @@ export default function Page() {
       <section>
         {messages.length === 0 && <p>Сообщений пока нет</p>}
         {messages.map(msg => {
-          const sender = users.find((u: User) => u.id === msg.senderId)
+          const sender = users.find(u => u.id === msg.senderId.id)
           return (
             <div key={msg.id}>
               {/* <Image
@@ -84,9 +85,12 @@ export default function Page() {
         <p>Current User ID: {currentUserId}</p>
         <p>Всего сообщений в кеше: {messages.length}</p>
         <ul>
-          {users.map((u: User) => (
+          {users.map(u => (
             <li key={u.id}>
-              {u.name} (Online: {u.isOnline ? 'Да' : 'Нет'})
+              {u.name} {' Online: '}
+              {messages.some(m => m.senderId.id === u.id && m.senderId.isOnline)
+                ? 'Да'
+                : 'Нет'}
             </li>
           ))}
         </ul>

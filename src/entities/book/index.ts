@@ -6,7 +6,8 @@ export type {
   FilterType,
   BookPreview,
   CatalogFilters,
-  Book,
+  GetBook,
+  PostBook,
   BookSchema,
 } from './model/types'
 export {
