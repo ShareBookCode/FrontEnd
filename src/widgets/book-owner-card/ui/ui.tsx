@@ -4,7 +4,7 @@ import ExchangeIcon from '@icons/exchange.svg'
 import LocationIcon from '@icons/location.svg'
 import { getExchangeDescription } from '../lib/getExchangeDescription'
 import type { Book, ExchangeType } from '@/entities/book'
-import { PrimaryButton } from '@/shared/ui/action-button'
+import { PrimaryButton } from '@/shared/ui/primary-button'
 import { DangerButton } from '@/shared/ui/danger-button'
 
 type BookStatus = Book['status']
