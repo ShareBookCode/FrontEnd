@@ -1,1 +1,1 @@
-export { ActionButton } from './ui/ui'
+export { PrimaryButton } from './ui/ui'

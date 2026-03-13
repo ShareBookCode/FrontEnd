@@ -1,67 +1,61 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import type { ButtonHTMLAttributes } from 'react'
+import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import styles from './ui.module.scss'
 
-type ActionButtonVariant = 'primary' | 'dangerText'
-type ActionButtonSize = 's' | 'm' | 'l'
+type PrimaryButtonSize = 'small' | 'medium' | 'large'
 
-type ActionButtonProps = {
-  children: string
-  variant?: ActionButtonVariant
-  size?: ActionButtonSize
+type BaseProps = {
+  children: ReactNode
+  size?: PrimaryButtonSize
   className?: string
-  as?: 'button' | 'link'
-  href?: string
-} & ButtonHTMLAttributes<HTMLButtonElement>
+}
 
-export function ActionButton({
-  children,
-  variant = 'primary',
-  size = 'l',
-  className,
-  as = 'button',
-  href,
-  ...props
-}: ActionButtonProps) {
-  const { disabled, ...buttonProps } = props
-  const sizeClassName = {
-    s: styles.sizeS,
-    m: styles.sizeM,
-    l: styles.sizeL,
-  }[size]
+type ButtonProps = BaseProps &
+  ButtonHTMLAttributes<HTMLButtonElement> & {
+    as?: 'button'
+}
 
-  const actionButtonClassName = clsx(
+type LinkProps = BaseProps & {
+  as: 'link'
+  href: string
+  disabled?: boolean
+}
+
+type PrimaryButtonProps = ButtonProps | LinkProps
+
+export function PrimaryButton(props: PrimaryButtonProps) {
+  const { children, size = 'large', className } = props
+
+  const buttonClassName = clsx(
     styles.button,
-    sizeClassName,
-    styles[variant],
-    disabled && styles.isDisabled,
+    { small: styles.sizeS, medium: styles.sizeM, large: styles.sizeL }[size],
+    styles.primary,
+    props.disabled && styles.isDisabled,
     className,
   )
 
-  if (as === 'link' && disabled) {
+  if (props.as === 'link' && props.disabled) {
     return (
-      <span className={actionButtonClassName} aria-disabled='true'>
+      <span className={buttonClassName} aria-disabled='true'>
         {children}
       </span>
     )
   }
 
-  if (as === 'link') {
+  if (props.as === 'link') {
     return (
-      <Link href={href ?? '#'} className={actionButtonClassName}>
+      <Link href={props.href} className={buttonClassName}>
         {children}
       </Link>
     )
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { as: _as, size: _size, ...buttonProps } = props as ButtonProps
+
   return (
-    <button
-      type='button'
-      className={actionButtonClassName}
-      disabled={disabled}
-      {...buttonProps}
-    >
+    <button type='button' className={buttonClassName} {...buttonProps}>
       {children}
     </button>
   )

@@ -2,8 +2,10 @@ import styles from './ui.module.scss'
 import HitIcon from '@icons/hit.svg'
 import ExchangeIcon from '@icons/exchange.svg'
 import LocationIcon from '@icons/location.svg'
+import { getExchangeDescription } from '../lib/getExchangeDescription'
 import type { Book, ExchangeType } from '@/entities/book'
-import { ActionButton } from '@/shared/ui/action-button'
+import { PrimaryButton } from '@/shared/ui/action-button'
+import { DangerButton } from '@/shared/ui/danger-button'
 
 type BookStatus = Book['status']
 
@@ -45,22 +47,10 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
     actions,
   } = data
 
-  const buildExchangeDescription = (
-    name: string,
-    exchangeType: ExchangeType,
-    status: BookStatus,
-  ) => {
-    if (status === 'closed') {
-      return `${name} уже закрыл(а) это объявление`
-    }
-    if (status === 'reserved') {
-      return `${name} временно зарезервировал(а) эту книгу`
-    }
-    if (exchangeType === 'free') {
-      return `${name} готов(а) отдать книгу бесплатно`
-    }
-    return `${name} готов(а) обменять книгу на любую интересную`
-  }
+  const statsText = `Отдано ${givenCount ?? 0} книг • Обменяно ${exchangedCount ?? 0}`
+  const exchangeDescription = getExchangeDescription(name, exchangeType, status)
+  const locationText = city ? `${city}, ${district}` : city
+
 
   return (
     <aside className={styles.card}>
@@ -92,40 +82,40 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
         <span className={styles.cardIcon}>
           <HitIcon width={24} height={24} />
         </span>
-        Отдано {givenCount} книг • Обменяно {exchangedCount}
+        {statsText}
       </p>
       <p className={styles.note}>
         <span className={styles.cardIcon}>
           <ExchangeIcon width={18} height={18} />
         </span>
-        {buildExchangeDescription(name, exchangeType, status)}
+        {exchangeDescription}
       </p>
-      <p className={styles.location}>
-        <span className={styles.cardIcon}>
-          <LocationIcon width={18} height={18} />
-        </span>
-        {city}
-        {district && `, ${district}`}
-      </p>
+      {(city || district) && (
+        <p className={styles.location}>
+          <span className={styles.cardIcon}>
+            <LocationIcon width={18} height={18} />
+          </span>
+          {locationText}
+        </p>
+      )}
       <span className={styles.separator} />
 
       {isMyBook ? (
         <div className={styles.actions}>
-          <ActionButton as='link' href={actions.editHref ?? '#'}>
+          {/* TODO: заменить на реальные ссылки/хендлеры, когда появятся маршруты и API */}
+          <PrimaryButton as='link' href={actions.editHref ?? '#'}>
             Редактировать
-          </ActionButton>
-          <ActionButton
-            as='button'
-            variant='dangerText'
-            onClick={actions.onCloseAd}
-          >
+          </PrimaryButton>
+          {/* TODO: заменить на реальные ссылки/хендлеры, когда появятся маршруты и API */}
+          <DangerButton onClick={actions.onCloseAd}>
             Закрыть объявление
-          </ActionButton>
+          </DangerButton>
         </div>
       ) : (
-        <ActionButton as='link' href={actions.chatHref ?? '/chats'}>
+        /* TODO: заменить на реальные ссылки/хендлеры, когда появятся маршруты и API */
+        <PrimaryButton as='link' href={actions.chatHref ?? '/chats'}>
           Написать
-        </ActionButton>
+        </PrimaryButton>
       )}
     </aside>
   )

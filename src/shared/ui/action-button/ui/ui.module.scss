@@ -57,18 +57,3 @@
     background: $color-primary-disabled;
   }
 }
-
-.dangerText {
-  background: $background-primary;
-  color: $color-danger;
-
-  &:hover {
-    background: $background-light-gray;
-  }
-
-  &:disabled,
-  &.isDisabled {
-    color: $color-danger-light;
-    background: $background-primary;
-  }
-}
