@@ -1,0 +1,71 @@
+.popupGallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  z-index: 1000;
+}
+.btn {
+  position: absolute;
+  background-color: #f1f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1001;
+}
+
+.popupGalleryCloseButton {
+  top: 35px;
+  right: 35px;
+  width: 40px;
+  height: 40px;
+
+  & > svg {
+    width: 10.49px;
+    height: 10.49px;
+  }
+}
+
+.popupGalleryMainImageWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.popupGalleryMainImage {
+  display: block;
+  width: 437px;
+  height: 658px;
+  border: 1px solid #9e9e9e;
+}
+
+.popupGalleryArrowButton {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+
+  & > svg {
+    width: 8px;
+    height: 16px;
+  }
+}
+.arrowsPrev {
+  left: 35px;
+  bottom: 50%;
+}
+.arrowsNext {
+  right: 35px;
+  bottom: 50%;
+}

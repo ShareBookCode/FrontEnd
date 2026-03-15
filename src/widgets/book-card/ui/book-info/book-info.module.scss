@@ -1,0 +1,63 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 620px;
+  padding-top: 20px;
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .descriptionTitle {
+      font-size: 24px;
+      font-weight: 600;
+      text-align: start;
+      margin: 0;
+      min-height: 31px;
+    }
+
+    .descriptionText {
+      font-size: 16px;
+      font-weight: 400;
+      text-align: start;
+      line-height: 135%;
+    }
+
+    .descriptionButton {
+      background: none;
+      border: none;
+      color: #007bff;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0;
+      margin-left: 4px;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 16px;
+    font-weight: 400;
+
+    &Item {
+      display: flex;
+      gap: 40px;
+    }
+
+    &ItemLabel {
+      text-align: start;
+      min-width: 107px;
+      min-height: 20px;
+      color: #909090;
+    }
+
+    &ItemValue {
+      text-align: start;
+      min-height: 20px;
+    }
+  }
+}

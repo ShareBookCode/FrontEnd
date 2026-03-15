@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.mainImage {
+  display: flex;
+  position: relative;
+  min-height: 475px;
+  max-width: 315px;
+
+  .mainImageImg {
+    display: block;
+    min-height: 475px;
+    max-width: 315px;
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .mainImageLikeBtn {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+  }
+
+  .liked {
+    background-color: #2a7fff;
+  }
+}
