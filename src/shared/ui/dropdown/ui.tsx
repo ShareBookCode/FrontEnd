@@ -64,21 +64,21 @@ export function Dropdown({
     [isControlled, onOpenChange],
   )
 
-  const open = () => {
+  const open = useCallback(() => {
     if (!disabled) {
       setOpenState(true)
     }
-  }
+  }, [disabled, setOpenState])
 
-  const close = () => {
+  const close = useCallback(() => {
     setOpenState(false)
-  }
+  }, [setOpenState])
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     if (!disabled) {
       setOpenState(!isOpen)
     }
-  }
+  }, [disabled, isOpen, setOpenState])
 
   const handleDropdownInnerClick = () => {
     if (closeOnContentClick) {
@@ -91,13 +91,13 @@ export function Dropdown({
       if (!rootRef.current) return
 
       if (!rootRef.current.contains(e.target as Node)) {
-        setOpenState(false)
+        close()
       }
     }
 
     function onEscape(e: KeyboardEvent) {
       if (e.key === 'Escape') {
-        setOpenState(false)
+        close()
       }
     }
 
@@ -108,7 +108,7 @@ export function Dropdown({
       document.removeEventListener('pointerdown', onDocClick)
       document.removeEventListener('keydown', onEscape)
     }
-  }, [setOpenState])
+  }, [close])
 
   const style: CSSProperties = {
     width: toCssWidth(width),
@@ -119,7 +119,6 @@ export function Dropdown({
       ref={rootRef}
       className={clsx(styles.root, className)}
       style={style}
-      data-disabled={disabled ? 'true' : 'false'}
       aria-disabled={disabled ? 'true' : 'false'}
     >
       {renderTrigger({
