@@ -1,6 +1,7 @@
 // Colors
 $color-primary: #2A7FFF; 
 $color-primary-dark:#355FFF;
+$color-primary-disabled:#5A9CFF;
 $color-primary-light:#2a7fffcc;  
 $color-danger:#FF2A2A;
 $color-danger-light:#ff2a2acc;
@@ -20,6 +21,10 @@ $background-gradient: linear-gradient(
   #DFECFF 70%,
   #FFFFFF 100%
 );
+
+// Borders & shadows
+$border-light: #9E9E9E33;
+$shadow-soft: 0px 0px 12px 5px #4242420D;
 
 // Sizes
 $header-height: 66px;
