@@ -1,0 +1,23 @@
+.root {
+  position: relative;
+}
+
+.root[data-disabled='true'] {
+  opacity: 0.6;
+}
+
+.dropdown {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  width: 100%;
+  background: #fff;
+  border-radius: 9px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  z-index: 50;
+  overflow: hidden;
+}
+
+.dropdownInner {
+  padding: 7px;
+}
