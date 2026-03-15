@@ -2,7 +2,14 @@
 
 import styles from './ui.module.scss'
 import clsx from 'clsx'
-import { ReactNode, useEffect, useRef, useState, CSSProperties } from 'react'
+import {
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  CSSProperties,
+} from 'react'
 
 type RenderTriggerProps = {
   isOpen: boolean
@@ -46,13 +53,16 @@ export function Dropdown({
   const isControlled = controlledIsOpen !== undefined
   const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen
 
-  const setOpenState = (next: boolean) => {
-    if (!isControlled) {
-      setUncontrolledIsOpen(next)
-    }
+  const setOpenState = useCallback(
+    (next: boolean) => {
+      if (!isControlled) {
+        setUncontrolledIsOpen(next)
+      }
 
-    onOpenChange?.(next)
-  }
+      onOpenChange?.(next)
+    },
+    [isControlled, onOpenChange],
+  )
 
   const open = () => {
     if (!disabled) {
@@ -98,7 +108,7 @@ export function Dropdown({
       document.removeEventListener('pointerdown', onDocClick)
       document.removeEventListener('keydown', onEscape)
     }
-  }, [isControlled, onOpenChange])
+  }, [setOpenState])
 
   const style: CSSProperties = {
     width: toCssWidth(width),
