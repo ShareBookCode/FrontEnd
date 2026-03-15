@@ -2,13 +2,7 @@
 
 import styles from './ui.module.scss'
 import clsx from 'clsx'
-import {
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-  CSSProperties,
-} from 'react'
+import { ReactNode, useEffect, useRef, useState, CSSProperties } from 'react'
 
 type RenderTriggerProps = {
   isOpen: boolean
@@ -87,13 +81,13 @@ export function Dropdown({
       if (!rootRef.current) return
 
       if (!rootRef.current.contains(e.target as Node)) {
-        close()
+        setOpenState(false)
       }
     }
 
     function onEscape(e: KeyboardEvent) {
       if (e.key === 'Escape') {
-        close()
+        setOpenState(false)
       }
     }
 
@@ -104,7 +98,7 @@ export function Dropdown({
       document.removeEventListener('pointerdown', onDocClick)
       document.removeEventListener('keydown', onEscape)
     }
-  }, [isOpen])
+  }, [isControlled, onOpenChange])
 
   const style: CSSProperties = {
     width: toCssWidth(width),
