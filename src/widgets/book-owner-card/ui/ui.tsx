@@ -2,7 +2,7 @@ import styles from './ui.module.scss'
 import HitIcon from '@icons/hit.svg'
 import ExchangeIcon from '@icons/exchange.svg'
 import LocationIcon from '@icons/location.svg'
-import { getExchangeDescription } from '../lib/getExchangeDescription'
+import { getExchangeDescription } from '../lib/get-exchange-description'
 import type { Book, ExchangeType } from '@/entities/book'
 import { PrimaryButton } from '@/shared/ui/primary-button'
 import { DangerButton } from '@/shared/ui/danger-button'
@@ -49,7 +49,7 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
 
   const statsText = `Отдано ${givenCount ?? 0} книг • Обменяно ${exchangedCount ?? 0}`
   const exchangeDescription = getExchangeDescription(name, exchangeType, status)
-  const locationText = city ? `${city}, ${district}` : city
+  const locationText = city ? (district ? `${city}, ${district}` : city) : null
 
   return (
     <aside className={styles.card}>
@@ -89,7 +89,7 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
         </span>
         {exchangeDescription}
       </p>
-      {(city || district) && (
+      {locationText && (
         <p className={styles.location}>
           <span className={styles.cardIcon}>
             <LocationIcon width={18} height={18} />

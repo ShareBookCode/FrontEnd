@@ -51,7 +51,6 @@ export function PrimaryButton(props: PrimaryButtonProps) {
     )
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { as: _as, size: _size, ...buttonProps } = props as ButtonProps
 
   return (
