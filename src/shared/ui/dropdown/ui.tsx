@@ -31,7 +31,7 @@ type Props = {
   children: ReactNode
 }
 
-function toCssWidth(width?: Props['width']) {
+const toCssWidth = (width?: Props['width']) => {
   if (width === undefined) return undefined
   return typeof width === 'number' ? `${width}px` : width
 }
@@ -87,7 +87,7 @@ export function Dropdown({
   }
 
   useEffect(() => {
-    function onDocClick(e: PointerEvent) {
+    const onDocClick = (e: PointerEvent) => {
       if (!rootRef.current) return
 
       if (!rootRef.current.contains(e.target as Node)) {
@@ -95,7 +95,7 @@ export function Dropdown({
       }
     }
 
-    function onEscape(e: KeyboardEvent) {
+    const onEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         close()
       }
