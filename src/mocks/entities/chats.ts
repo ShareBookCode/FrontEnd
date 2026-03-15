@@ -10,11 +10,13 @@ export const chatHandlers = [
     const interval = setInterval(() => {
       client.send(
         JSON.stringify({
-          id: Math.random().toString(36),
+          id: crypto.randomUUID(),
           chatId: chatId,
           text: 'Проверка сообщения по WebSocket',
           senderId: {
             id: 'user_2',
+            whenOnline: Date.now(),
+            isOnline: true,
           },
           timestamp: Date.now(),
           isRead: false,
@@ -28,7 +30,7 @@ export const chatHandlers = [
   http.get('chat/messages/:chatId', ({ params }) => {
     return HttpResponse.json([
       {
-        id: 'msg_0',
+        id: crypto.randomUUID(),
         chatId: params.chatId,
         text: 'Старое сообщение из БД',
         senderId: {
