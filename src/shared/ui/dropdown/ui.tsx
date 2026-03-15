@@ -7,7 +7,6 @@ import {
   useEffect,
   useRef,
   useState,
-  KeyboardEvent,
   CSSProperties,
 } from 'react'
 
@@ -25,6 +24,8 @@ type Props = {
   dropdownClassName?: string
   disabled?: boolean
   closeOnContentClick?: boolean
+  isOpen?: boolean
+  onOpenChange?: (next: boolean) => void
   renderTrigger: (props: RenderTriggerProps) => ReactNode
   children: ReactNode
 }
@@ -39,59 +40,71 @@ export function Dropdown({
   className,
   dropdownClassName,
   disabled,
-  closeOnContentClick = false,
+  closeOnContentClick = true,
+  isOpen: controlledIsOpen,
+  onOpenChange,
   renderTrigger,
   children,
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (!rootRef.current) return
-      if (!rootRef.current.contains(e.target as Node)) {
-        setIsOpen(false)
-      }
+  const isControlled = controlledIsOpen !== undefined
+  const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen
+
+  const setOpenState = (next: boolean) => {
+    if (!isControlled) {
+      setUncontrolledIsOpen(next)
     }
 
-    function onEscape(e: globalThis.KeyboardEvent) {
-      if (e.key === 'Escape') {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', onDocClick)
-    document.addEventListener('keydown', onEscape)
-
-    return () => {
-      document.removeEventListener('mousedown', onDocClick)
-      document.removeEventListener('keydown', onEscape)
-    }
-  }, [])
+    onOpenChange?.(next)
+  }
 
   const open = () => {
-    if (!disabled) setIsOpen(true)
+    if (!disabled) {
+      setOpenState(true)
+    }
   }
 
   const close = () => {
-    setIsOpen(false)
+    setOpenState(false)
   }
 
   const toggle = () => {
-    if (!disabled) setIsOpen(prev => !prev)
+    if (!disabled) {
+      setOpenState(!isOpen)
+    }
   }
 
-  const handleDropdownClick = () => {
+  const handleDropdownInnerClick = () => {
     if (closeOnContentClick) {
-      setIsOpen(false)
+      close()
     }
   }
 
-  const handleDropdownKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Escape') {
-      setIsOpen(false)
+  useEffect(() => {
+    function onDocClick(e: PointerEvent) {
+      if (!rootRef.current) return
+
+      if (!rootRef.current.contains(e.target as Node)) {
+        close()
+      }
     }
-  }
+
+    function onEscape(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        close()
+      }
+    }
+
+    document.addEventListener('pointerdown', onDocClick)
+    document.addEventListener('keydown', onEscape)
+
+    return () => {
+      document.removeEventListener('pointerdown', onDocClick)
+      document.removeEventListener('keydown', onEscape)
+    }
+  }, [isOpen])
 
   const style: CSSProperties = {
     width: toCssWidth(width),
@@ -103,6 +116,7 @@ export function Dropdown({
       className={clsx(styles.root, className)}
       style={style}
       data-disabled={disabled ? 'true' : 'false'}
+      aria-disabled={disabled ? 'true' : 'false'}
     >
       {renderTrigger({
         isOpen,
@@ -113,12 +127,13 @@ export function Dropdown({
       })}
 
       {isOpen && (
-        <div
-          className={clsx(styles.dropdown, dropdownClassName)}
-          onClick={handleDropdownClick}
-          onKeyDown={handleDropdownKeyDown}
-        >
-          <div className={styles.dropdownInner}>{children}</div>
+        <div className={clsx(styles.dropdown, dropdownClassName)}>
+          <div
+            className={styles.dropdownInner}
+            onClick={handleDropdownInnerClick}
+          >
+            {children}
+          </div>
         </div>
       )}
     </div>
