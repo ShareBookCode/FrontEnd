@@ -4,66 +4,60 @@
   gap: 40px;
   max-width: 620px;
   padding-top: 20px;
-}
 
-.description-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.description-title {
-  font-size: 24px;
-  font-weight: 600;
-  text-align: start;
-  margin: 0;
-  min-height: 31px;
-}
-
-.description-text {
-  font-size: 16px;
-  font-weight: 400;
-  text-align: start;
-  line-height: 135%;
-}
-
-.description-button {
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 0;
-  margin-left: 4px;
-
-  &:hover {
-    color: #0056b3;
-  }
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-
-  &__item {
+  .description {
     display: flex;
-    gap: 40px;
+    flex-direction: column;
+    gap: 15px;
+
+    .descriptionTitle {
+      font-size: 24px;
+      font-weight: 600;
+      text-align: start;
+      margin: 0;
+      min-height: 31px;
+    }
+
+    .descriptionText {
+      font-size: 16px;
+      font-weight: 400;
+      text-align: start;
+      line-height: 135%;
+    }
+
+    .descriptionButton {
+      background: none;
+      border: none;
+      color: #007bff;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0;
+      margin-left: 4px;
+    }
   }
 
-  &__item-label {
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     font-size: 16px;
     font-weight: 400;
-    text-align: start;
-    min-width: 107px;
-    min-height: 20px;
-    color: #909090;
-  }
 
-  &__item-value {
-    font-size: 16px;
-    font-weight: 400;
-    text-align: start;
-    min-height: 20px;
+    &Item {
+      display: flex;
+      gap: 40px;
+    }
+
+    &ItemLabel {
+      text-align: start;
+      min-width: 107px;
+      min-height: 20px;
+      color: #909090;
+    }
+
+    &ItemValue {
+      text-align: start;
+      min-height: 20px;
+    }
   }
 }

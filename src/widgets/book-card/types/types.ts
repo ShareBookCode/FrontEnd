@@ -1,14 +1,13 @@
-export interface BookImages {
+export interface BookImage {
   src: string
   alt?: string
-  liked: boolean
 }
 
 export interface BookData {
   id: string
   title: string
   author: string[] | string
-  images: BookImages[]
+  images: BookImage[]
   description: string
   publisher: string
   yearPublisher: string
@@ -17,4 +16,5 @@ export interface BookData {
   genre: string[] | string
   bookLanguage: string
   bookState: string
+  liked: boolean
 }

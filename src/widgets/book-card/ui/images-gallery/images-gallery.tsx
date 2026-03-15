@@ -1,119 +1,67 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 import styles from './images-gallery.module.scss'
-import { BookImages } from '../../types/types'
+import { BookImage } from '../../types/types'
 import { FavoriteButton } from '@/shared/ui/favorite-button'
-import ChooseIcon from '@/shared/assets/icons/choose.svg'
 import { PopupGallery } from '../popup-gallery/popup-gallery'
+import { Thumballs } from '../thumballs/thumballs'
 
 interface Props {
-  images: BookImages[]
+  images: BookImage[]
 }
 
 export const BookGallery = ({ images }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [galleryImages, setGalleryImages] = useState(images)
   const [isPopupOpen, setIsPopupOpen] = useState(false)
-
-  const correctAlt = (alt?: string) => {
-    return alt || 'No alt text'
-  }
-
-  const toggleFavorite = () => {
-    setGalleryImages(prev =>
-      prev.map((img, index) =>
-        index === activeIndex ? { ...img, liked: !img.liked } : img,
-      ),
-    )
-  }
 
   const chooseMiniImage = (index: number) => {
     setActiveIndex(index)
   }
   const closePopup = () => {
     setIsPopupOpen(false)
-    setActiveIndex(0)
   }
 
   const onPrev = () => {
-    setActiveIndex(
-      activeIndex - 1 < 0 ? galleryImages.length - 1 : activeIndex - 1,
-    )
+    setActiveIndex(prev => (prev - 1 < 0 ? images.length - 1 : prev - 1))
   }
   const onNext = () => {
-    setActiveIndex(
-      activeIndex + 1 >= galleryImages.length ? 0 : activeIndex + 1,
-    )
+    setActiveIndex(prev => (prev + 1 >= images.length ? 0 : prev + 1))
   }
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles['main-image']}>
-        <img
-          src={galleryImages[activeIndex].src}
-          alt={correctAlt(galleryImages[activeIndex].alt)}
-          className={styles['main-image__img']}
+      <div className={styles.mainImage} onClick={() => setIsPopupOpen(true)}>
+        <Image
+          src={images[activeIndex].src}
+          alt={images[activeIndex].alt ?? 'No alt text'}
+          className={styles.mainImageImg}
           tabIndex={0}
-          onClick={() => setIsPopupOpen(true)}
+          width={315}
+          height={475}
+          loading='eager'
         />
-        <FavoriteButton
-          className={`${styles['main-image__like-btn']} ${
-            galleryImages[activeIndex].liked ? styles.liked : ''
-          }`}
-          onClick={toggleFavorite}
-        />
+        <FavoriteButton className={styles.mainImageLikeBtn} />
       </div>
-      <div className={styles['mini-image']}>
-        {galleryImages.slice(0, 4).map((img, index) => {
-          const isActive = activeIndex === index
-          const isLast = index === 3
-          const hiddenImages = Math.max(galleryImages.length - 4, 0)
-          const showMoreOverlay = isLast && hiddenImages > 0
-
-          return (
-            <div
-              key={img.src}
-              className={styles['mini-image__item']}
-              onClick={() => chooseMiniImage(index)}
-            >
-              <img
-                src={img.src}
-                alt={correctAlt(img.alt)}
-                className={styles['mini-image__img']}
-                tabIndex={0}
-              />
-
-              {showMoreOverlay && (
-                <div
-                  className={styles['mini-image__more-overlay']}
-                  onClick={e => {
-                    e.stopPropagation()
-                    setIsPopupOpen(true)
-                  }}
-                >
-                  +{hiddenImages}
-                </div>
-              )}
-              {isActive && (
-                <div className={styles['mini-image__active-overlay']}>
-                  <ChooseIcon />
-                </div>
-              )}
-            </div>
-          )
-        })}
-      </div>
+      <Thumballs
+        mode='main'
+        images={images}
+        activeIndex={activeIndex}
+        onClick={chooseMiniImage}
+        setIsPopupOpen={setIsPopupOpen}
+        onPrev={onPrev}
+        onNext={onNext}
+      />
       <PopupGallery
-        images={galleryImages}
+        images={images}
         isOpen={isPopupOpen}
         currentImageIndex={activeIndex}
         onClose={closePopup}
         onPrev={onPrev}
         onNext={onNext}
         chooseMiniImage={chooseMiniImage}
-        correctAlt={correctAlt}
       />
     </div>
   )

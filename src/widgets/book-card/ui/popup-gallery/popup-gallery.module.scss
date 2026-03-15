@@ -1,4 +1,4 @@
-.popup-gallery {
+.popupGallery {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,127 +12,60 @@
   padding-top: 70px;
   padding-bottom: 70px;
   z-index: 1000;
+}
+.btn {
+  position: absolute;
+  background-color: #f1f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1001;
+}
 
-  .btn {
-    position: absolute;
-    background-color: #f1f4f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 1001;
+.popupGalleryCloseButton {
+  top: 35px;
+  right: 35px;
+  width: 40px;
+  height: 40px;
+
+  & > svg {
+    width: 10.49px;
+    height: 10.49px;
   }
+}
 
-  &__close-button {
-    top: 35px;
-    right: 35px;
-    width: 40px;
-    height: 40px;
+.popupGalleryMainImageWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-    & > svg {
-      width: 10.49px;
-      height: 10.49px;
-    }
+.popupGalleryMainImage {
+  display: block;
+  width: 437px;
+  height: 658px;
+  border: 1px solid #9e9e9e;
+}
+
+.popupGalleryArrowButton {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+
+  & > svg {
+    width: 8px;
+    height: 16px;
   }
-
-  &__main-image-wrapper {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  &__main-image {
-    display: block;
-    width: 437px;
-    height: 658px;
-    border: 1px solid #9e9e9e;
-  }
-
-  &__arrow-button {
-    position: absolute;
-    width: 44px;
-    height: 44px;
-
-    & > svg {
-      width: 8px;
-      height: 16px;
-    }
-  }
-  .arrows__prev {
-    left: 35px;
-    bottom: 50%;
-  }
-  .arrows__next {
-    right: 35px;
-    bottom: 50%;
-  }
-
-  &__mini-images-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 9px;
-    width: 100%;
-    min-height: 72px;
-  }
-
-  &__mini-image-item {
-    width: 72px;
-    height: 72px;
-    border-radius: 7px;
-    flex-shrink: 0;
-    cursor: pointer;
-    position: relative;
-  }
-
-  &__mini-image-img {
-    display: block;
-    max-width: 72px;
-    min-width: 72px;
-    max-height: 72px;
-    border-radius: 7px;
-    flex-shrink: 0;
-  }
-
-  &__mini-image-active-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 7px;
-
-    & > svg {
-      width: 14px;
-      height: 10px;
-    }
-  }
-
-  &__mini-arrow-button {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    background-color: transparent;
-
-    & > svg {
-      width: 6px;
-      height: 12px;
-    }
-  }
-
-  &__mini-images-list {
-    display: flex;
-    gap: 9px;
-    overflow: hidden;
-  }
+}
+.arrowsPrev {
+  left: 35px;
+  bottom: 50%;
+}
+.arrowsNext {
+  right: 35px;
+  bottom: 50%;
 }

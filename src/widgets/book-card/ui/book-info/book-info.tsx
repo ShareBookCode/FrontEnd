@@ -13,19 +13,35 @@ interface Props {
 export const BookInfo = ({ book }: Props) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
 
+  const descriptionText = isDescriptionExpanded
+    ? book.description
+    : book.description.length > 220
+      ? `${book.description.slice(0, 220)}...`
+      : book.description
+
+  const shouldShowButton = book.description.length > 220
+
+  const infoItems = [
+    { label: 'Автор', value: book.author },
+    { label: 'Издательство', value: book.publisher },
+    { label: 'Год издания', value: book.yearPublisher },
+    { label: 'Переплет', value: book.binding },
+    { label: 'Страниц', value: book.pages },
+    { label: 'Жанр', value: book.genre },
+    { label: 'Язык', value: book.bookLanguage },
+    { label: 'Состояние', value: book.bookState },
+  ]
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles['description-wrapper']}>
-        <h2 className={styles['description-title']}>Описание</h2>
-        <p className={clsx(styles['description-text'], literata.className)}>
-          {isDescriptionExpanded
-            ? book.description
-            : book.description.length > 220
-              ? `${book.description.slice(0, 220)}...`
-              : book.description}
-          {book.description.length > 220 && (
+      <div className={styles.description}>
+        <h2 className={styles.descriptionTitle}>Описание</h2>
+        <p className={clsx(styles.descriptionText, literata.className)}>
+          {descriptionText}
+
+          {shouldShowButton && (
             <button
-              className={styles['description-button']}
+              className={styles.descriptionButton}
               onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
             >
               {isDescriptionExpanded ? 'Свернуть' : 'Читать полностью'}
@@ -34,51 +50,15 @@ export const BookInfo = ({ book }: Props) => {
         </p>
       </div>
 
-      <div className={styles['info']}>
-        <div className={styles['info__item']}>
-          <span className={styles['info__item-label']}>Автор</span>
-          <span className={styles['info__item-value']}>
-            {Array.isArray(book.author)
-              ? book.author.map((author: string) => author).join(', ')
-              : book.author}
-          </span>
-        </div>
-        <div className={styles['info__item']}>
-          <span className={styles['info__item-label']}>Издательство</span>
-          <span className={styles['info__item-value']}>{book.publisher}</span>
-        </div>
-        <div className={styles['info__item']}>
-          <span className={styles['info__item-label']}>Год издания</span>
-          <span className={styles['info__item-value']}>
-            {book.yearPublisher}
-          </span>
-        </div>
-        <div className={styles['info__item']}>
-          <span className={styles['info__item-label']}>Переплет</span>
-          <span className={styles['info__item-value']}>{book.binding}</span>
-        </div>
-        <div className={styles['info__item']}>
-          <span className={styles['info__item-label']}>Страниц</span>
-          <span className={styles['info__item-value']}>{book.pages}</span>
-        </div>
-        <div className={styles['info__item']}>
-          <span className={styles['info__item-label']}>Жанр</span>
-          <span className={styles['info__item-value']}>
-            {Array.isArray(book.genre)
-              ? book.genre.map((genre: string) => genre).join(', ')
-              : book.genre}
-          </span>
-        </div>
-        <div className={styles['info__item']}>
-          <span className={styles['info__item-label']}>Язык</span>
-          <span className={styles['info__item-value']}>
-            {book.bookLanguage}
-          </span>
-        </div>
-        <div className={styles['info__item']}>
-          <span className={styles['info__item-label']}>Состояние</span>
-          <span className={styles['info__item-value']}>{book.bookState}</span>
-        </div>
+      <div className={styles.info}>
+        {infoItems.map((item, index) => (
+          <div key={index} className={styles.infoItem}>
+            <span className={styles.infoItemLabel}>{item.label}</span>
+            <span className={styles.infoItemValue}>
+              {Array.isArray(item.value) ? item.value.join(', ') : item.value}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   )

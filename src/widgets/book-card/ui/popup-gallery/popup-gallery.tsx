@@ -1,21 +1,21 @@
 'use client'
 
 import styles from './popup-gallery.module.scss'
-import { BookImages } from '../../types/types'
+import Image from 'next/image'
+import { BookImage } from '../../types/types'
 import CloseIcon from '@/shared/assets/icons/close.svg'
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-prev.svg'
 import ArrowRightIcon from '@/shared/assets/icons/arrow-next.svg'
-import ChooseIcon from '@/shared/assets/icons/choose.svg'
+import { Thumballs } from '../thumballs/thumballs'
 
 interface Props {
-  images: BookImages[]
+  images: BookImage[]
   isOpen: boolean
   currentImageIndex: number
   onClose: () => void
   onPrev: () => void
   onNext: () => void
   chooseMiniImage: (index: number) => void
-  correctAlt: (alt?: string) => string
 }
 
 export const PopupGallery = ({
@@ -26,89 +26,48 @@ export const PopupGallery = ({
   onPrev,
   onNext,
   chooseMiniImage,
-  correctAlt,
 }: Props) => {
   if (!isOpen) return null
 
-  const windowSize = 7
-  const startIndex =
-    images.length <= windowSize
-      ? 0
-      : Math.max(0, Math.min(currentImageIndex - 3, images.length - windowSize))
-  const visibleImages = images.slice(startIndex, startIndex + windowSize)
-
   return (
-    <div className={styles['popup-gallery']}>
+    <div className={styles.popupGallery}>
       <button
-        className={`${styles['popup-gallery__close-button']} ${styles['btn']}`}
+        className={`${styles.popupGalleryCloseButton} ${styles.btn}`}
         onClick={onClose}
       >
         <CloseIcon />
       </button>
-      <div className={styles['popup-gallery__main-image-wrapper']}>
+      <div className={styles.popupGalleryMainImageWrapper}>
         <button
-          className={`${styles['popup-gallery__arrow-button']} ${styles['arrows__prev']} ${styles['btn']}`}
+          className={`${styles.popupGalleryArrowButton} ${styles.arrowsPrev} ${styles.btn}`}
           onClick={onPrev}
         >
           <ArrowLeftIcon />
         </button>
-        <img
+        <Image
           src={images[currentImageIndex].src}
-          alt={images[currentImageIndex].alt}
-          className={styles['popup-gallery__main-image']}
+          alt={images[currentImageIndex].alt || 'No alt text'}
+          className={styles.popupGalleryMainImage}
+          tabIndex={0}
+          width={315}
+          height={475}
+          loading='eager'
         />
         <button
-          className={`${styles['popup-gallery__arrow-button']} ${styles['arrows__next']} ${styles['btn']}`}
+          className={`${styles.popupGalleryArrowButton} ${styles.arrowsNext} ${styles.btn}`}
           onClick={onNext}
         >
           <ArrowRightIcon />
         </button>
       </div>
-      <div className={styles['popup-gallery__mini-images-wrapper']}>
-        <button
-          className={`${styles['popup-gallery__mini-arrow-button']} ${styles['arrows__prev-mini']}`}
-          onClick={onPrev}
-        >
-          <ArrowLeftIcon />
-        </button>
-        <div className={styles['popup-gallery__mini-images-list']}>
-          {visibleImages.map((img, index) => {
-            const actualIndex = startIndex + index
-            const isActive = currentImageIndex === actualIndex
-
-            return (
-              <div
-                key={`${img.src}-${actualIndex}`}
-                className={styles['popup-gallery__mini-image-item']}
-                onClick={() => chooseMiniImage(actualIndex)}
-              >
-                <img
-                  src={img.src}
-                  alt={correctAlt(img.alt)}
-                  className={styles['popup-gallery__mini-image-img']}
-                  tabIndex={0}
-                />
-
-                {isActive && (
-                  <div
-                    className={
-                      styles['popup-gallery__mini-image-active-overlay']
-                    }
-                  >
-                    <ChooseIcon />
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
-        <button
-          className={`${styles['popup-gallery__mini-arrow-button']} ${styles['arrows__next-mini']}`}
-          onClick={onNext}
-        >
-          <ArrowRightIcon />
-        </button>
-      </div>
+      <Thumballs
+        mode='popup'
+        images={images}
+        activeIndex={currentImageIndex}
+        onClick={chooseMiniImage}
+        onPrev={onPrev}
+        onNext={onNext}
+      />
     </div>
   )
 }

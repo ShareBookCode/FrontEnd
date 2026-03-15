@@ -1,48 +1,49 @@
+import img1 from './images/1.jpg'
+import img2 from './images/2.jpg'
+import img3 from './images/3.jpg'
+import img4 from './images/4.jpg'
+import img5 from './images/5.jpg'
+import img6 from './images/6.jpg'
+import img7 from './images/7.jpg'
+import img8 from './images/8.jpg'
+import img9 from './images/9.jpg'
+
 export const mockImages = [
   {
-    src: 'https://picsum.photos/seed/book1/400/600',
+    src: img1.src,
     alt: 'Обложка книги «Мастер и Маргарита» Михаила Булгакова',
-    liked: false,
   },
   {
-    src: 'https://picsum.photos/seed/book2/400/600',
+    src: img2.src,
     alt: 'Обложка книги «Преступление и наказание» Фёдора Достоевского',
-    liked: false,
   },
   {
-    src: 'https://picsum.photos/seed/book3/400/600',
+    src: img3.src,
     alt: 'Обложка книги «Война и мир» Льва Толстого',
-    liked: false,
   },
   {
-    src: 'https://picsum.photos/seed/book4/400/600',
+    src: img4.src,
     alt: 'Обложка книги «Евгений Онегин» Александра Пушкина',
-    liked: false,
   },
   {
-    src: 'https://picsum.photos/seed/book5/400/600',
+    src: img5.src,
     alt: 'Обложка книги «Собачье сердце» Михаила Булгакова',
-    liked: false,
   },
   {
-    src: 'https://picsum.photos/seed/book6/400/600',
+    src: img6.src,
     alt: 'Обложка книги «Идиот» Фёдора Достоевского',
-    liked: false,
   },
   {
-    src: 'https://picsum.photos/seed/book7/400/600',
+    src: img7.src,
     alt: 'Обложка книги «Идиот» Фёдора Достоевского',
-    liked: false,
   },
   {
-    src: 'https://picsum.photos/seed/book8/400/600',
+    src: img8.src,
     alt: 'Обложка книги «Идиот» Фёдора Достоевского',
-    liked: false,
   },
   {
-    src: 'https://picsum.photos/seed/book9/400/600',
+    src: img9.src,
     alt: 'Обложка книги «Идиот» Фёдора Достоевского',
-    liked: false,
   },
 ]
 
@@ -60,4 +61,5 @@ export const mockData = {
   genre: ['Фантастика'],
   bookLanguage: 'Русский',
   bookState: 'Хорошое',
+  liked: false,
 }

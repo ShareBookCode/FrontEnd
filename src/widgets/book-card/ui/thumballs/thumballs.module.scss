@@ -1,0 +1,118 @@
+.thumballsMainWrapper {
+  display: flex;
+  gap: 9px;
+  max-width: 315px;
+  min-height: 72px;
+  overflow: hidden;
+
+  .thumballMainItem {
+    flex-shrink: 0;
+    height: 72px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .thumballMainImg {
+    display: block;
+    max-width: 72px;
+    min-width: 72px;
+    max-height: 72px;
+    border-radius: 7px;
+    flex-shrink: 0;
+  }
+
+  .thumballMainMoreOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(214, 214, 214, 0.55);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 7px;
+  }
+
+  .thumballMainActiveOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > svg {
+      width: 14px;
+      height: 10px;
+    }
+  }
+}
+
+.thumballPopupWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 72px;
+
+  .thumballPopupItem {
+    width: 72px;
+    height: 72px;
+    border-radius: 7px;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .thumballPopupImg {
+    display: block;
+    max-width: 72px;
+    min-width: 72px;
+    max-height: 72px;
+    border-radius: 7px;
+    flex-shrink: 0;
+  }
+
+  .thumballPopupActiveOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+  }
+
+  & > svg {
+    width: 14px;
+    height: 10px;
+  }
+
+  .thumballPopupArrowButton {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: transparent;
+
+    & > svg {
+      width: 6px;
+      height: 12px;
+    }
+  }
+
+  .thumballImagesList {
+    display: flex;
+    gap: 9px;
+    overflow: hidden;
+  }
+}

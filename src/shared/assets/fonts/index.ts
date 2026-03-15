@@ -8,5 +8,5 @@ export const onest = Onest({
 
 export const literata = Literata({
   subsets: ['cyrillic', 'latin'],
-  weight: ['500'],
+  weight: ['500', '400'],
 })
