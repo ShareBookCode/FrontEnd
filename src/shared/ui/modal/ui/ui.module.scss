@@ -39,8 +39,11 @@ $modal-duration: 0.15s;
 }
 
 .content {
-  width: min(363px, calc(100vw - 32px));
-  height: auto;
+  width: fit-content;
+  max-width: calc(100vw - 32px);
+  height: fit-content;
+  max-height: calc(100vh - 32px);
+  overflow: auto;
 
   padding: 25px;
 
