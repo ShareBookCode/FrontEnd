@@ -11,8 +11,8 @@ export type Category =
   | 'Textbooks'
 export type FilterType = ExchangeType | 'all'
 
-// Пока не используется, думаю он уйдет в сущность пользователя, но так как пользователя еще не существует, останется тут
-export interface User {
+// User для обработки книг
+interface User {
   id: string
   name: string
   avatar: string | null
@@ -44,7 +44,7 @@ export interface BookPreview {
   isFavorite?: boolean
 }
 
-export interface Book {
+interface Book {
   id: string
   title: string
   author: string
@@ -60,11 +60,17 @@ export interface Book {
   language: string
   condition: BookCondition
 
-  owner: User
   exchangeType: ExchangeType
   status: 'available' | 'reserved' | 'closed'
 
   createdAt: string
+}
+
+export interface GetBook extends Book {
+  owner: User
+}
+
+export interface PostBook extends Book {
   updatedAt: string
 }
 

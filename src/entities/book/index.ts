@@ -4,9 +4,9 @@ export type {
   BindingType,
   Category,
   FilterType,
-  User,
   CatalogFilters,
-  Book,
+  GetBook,
+  PostBook,
   BookSchema,
   BookPreview,
 } from './model/types'
