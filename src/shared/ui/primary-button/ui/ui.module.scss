@@ -44,7 +44,7 @@
   font-size: 16px;
 }
 
-.primary {
+.primary-first {
   background: $color-primary;
   color: $background-primary;
 
@@ -55,5 +55,61 @@
   &:disabled,
   &.isDisabled {
     background: $color-primary-disabled;
+  }
+}
+
+.primary-second {
+  background: $background-light-gray;
+  color: $text-secondary;
+
+  &:hover {
+    background: $background-light-gray;
+  }
+
+  &:disabled,
+  &.isDisabled {
+    opacity: 0.5;
+  }
+}
+
+.primary-third {
+  background: $background-primary;
+  color: $text-secondary;
+
+  &:hover {
+    background: $background-light-gray;
+  }
+
+  &:disabled,
+  &.isDisabled {
+    opacity: 0.5;
+  }
+}
+
+.danger-first {
+  background: $background-primary;
+  color: $color-danger;
+
+  &:hover {
+    background: $background-light-gray;
+  }
+
+  &:disabled,
+  &.isDisabled {
+    color: $color-danger-light;
+  }
+}
+
+.danger-second {
+  background: $color-danger;
+  color: $background-primary;
+
+  &:hover {
+    background: $color-danger-dark;
+  }
+
+  &:disabled,
+  &.isDisabled {
+    color: $color-danger-light;
   }
 }

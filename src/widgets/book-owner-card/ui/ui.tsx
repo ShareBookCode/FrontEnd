@@ -3,11 +3,11 @@ import HitIcon from '@icons/hit.svg'
 import ExchangeIcon from '@icons/exchange.svg'
 import LocationIcon from '@icons/location.svg'
 import { getExchangeDescription } from '../lib/get-exchange-description'
-import type { Book, ExchangeType } from '@/entities/book'
+import type { GetBook, ExchangeType } from '@/entities/book'
+import { PrimaryLinkButton } from '@/shared/ui/primary-button'
 import { PrimaryButton } from '@/shared/ui/primary-button'
-import { DangerButton } from '@/shared/ui/danger-button'
 
-type BookStatus = Book['status']
+type BookStatus = GetBook['status']
 
 export type BookOwnerCardData = {
   ownerId: string
@@ -102,19 +102,19 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
       {isMyBook ? (
         <div className={styles.actions}>
           {/* TODO: заменить на реальные ссылки/хендлеры, когда появятся маршруты и API */}
-          <PrimaryButton as='link' href={actions.editHref ?? '#'}>
+          <PrimaryLinkButton href={actions.editHref ?? '#'}>
             Редактировать
-          </PrimaryButton>
+          </PrimaryLinkButton>
           {/* TODO: заменить на реальные ссылки/хендлеры, когда появятся маршруты и API */}
-          <DangerButton onClick={actions.onCloseAd}>
+          <PrimaryButton variant='dangerFirst' onClick={actions.onCloseAd}>
             Закрыть объявление
-          </DangerButton>
+          </PrimaryButton>
         </div>
       ) : (
         /* TODO: заменить на реальные ссылки/хендлеры, когда появятся маршруты и API */
-        <PrimaryButton as='link' href={actions.chatHref ?? '/chats'}>
+        <PrimaryLinkButton href={actions.chatHref ?? '/chats'}>
           Написать
-        </PrimaryButton>
+        </PrimaryLinkButton>
       )}
     </aside>
   )
