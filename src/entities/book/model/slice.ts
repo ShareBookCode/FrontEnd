@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import type { Category, BookPreview, Book, BookSchema } from './types'
+import type { Category, BookPreview, GetBook, BookSchema } from './types'
 
 export const fetchBooksCatalog = createAsyncThunk(
   'book/fetchCatalog',
@@ -15,7 +15,7 @@ export const fetchBookById = createAsyncThunk(
   async (id: string) => {
     const response = await fetch(`/api/books/${id}`)
     if (!response.ok) throw new Error('Failed to fetch book details')
-    return (await response.json()) as Book
+    return (await response.json()) as GetBook
   },
 )
 

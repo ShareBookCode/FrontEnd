@@ -1,11 +1,11 @@
 import { http, HttpResponse, delay } from 'msw'
-import {
-  Book,
+import type {
+  GetBook,
   BookPreview,
   Category,
   BindingType,
   BookCondition,
-} from '@/entities/book'
+} from '@entities/book'
 
 const categories: Category[] = [
   'Science',
@@ -46,7 +46,7 @@ const MOCK_COLORS = [
   '#9B59B6', // Purple
 ]
 
-const generateMockBooks = (count: number): Book[] => {
+const generateMockBooks = (count: number): GetBook[] => {
   return Array.from({ length: count }, (_, i) => {
     const bookId = i + 1
 
@@ -77,13 +77,13 @@ const generateMockBooks = (count: number): Book[] => {
         id: `user-${i}`,
         name: i % 2 === 0 ? 'Евгения' : 'Александр',
         avatar: `https://i.pravatar.cc/150?u=${i}`,
+        isOnline: i % 2 === 0 ? true : false,
         stats: { given: 10, exchanged: 5 },
         location: locations[i % locations.length],
       },
       exchangeType: i % 2 === 0 ? 'free' : 'exchange',
       status: 'available',
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
     }
   })
 }
