@@ -1,7 +1,6 @@
 import styles from './thumballs.module.scss'
 import Image from 'next/image'
 import { BookImage } from '../../types/types'
-import clsx from 'clsx'
 import ChooseIcon from '@/shared/assets/icons/choose.svg'
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-prev.svg'
 import ArrowRightIcon from '@/shared/assets/icons/arrow-next.svg'
@@ -16,7 +15,7 @@ interface Props {
   onNext?: () => void
 }
 
-export const Thumballs = ({
+export function Thumballs({
   mode,
   images,
   activeIndex,
@@ -24,7 +23,7 @@ export const Thumballs = ({
   setIsPopupOpen,
   onPrev,
   onNext,
-}: Props) => {
+}: Props) {
   switch (mode) {
     case 'main':
       const numberDisplayedImages = 4

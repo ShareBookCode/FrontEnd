@@ -5,15 +5,15 @@ import Image from 'next/image'
 
 import styles from './images-gallery.module.scss'
 import { BookImage } from '../../types/types'
-import { FavoriteButton } from '@/shared/ui/favorite-button'
 import { PopupGallery } from '../popup-gallery/popup-gallery'
 import { Thumballs } from '../thumballs/thumballs'
+import { FavoriteButton } from '@/shared/ui/favorite-button'
 
 interface Props {
   images: BookImage[]
 }
 
-export const BookGallery = ({ images }: Props) => {
+export function BookGallery({ images }: Props) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPopupOpen, setIsPopupOpen] = useState(false)
 

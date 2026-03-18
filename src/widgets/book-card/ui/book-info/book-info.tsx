@@ -2,15 +2,15 @@
 import styles from './book-info.module.scss'
 
 import { BookData } from '../../types/types'
-import { literata } from '@shared/assets/fonts'
 import clsx from 'clsx'
 import { useState } from 'react'
+import { literata } from '@shared/assets/fonts'
 
 interface Props {
   book: BookData
 }
 
-export const BookInfo = ({ book }: Props) => {
+export function BookInfo({ book }: Props) {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
 
   const descriptionText = isDescriptionExpanded

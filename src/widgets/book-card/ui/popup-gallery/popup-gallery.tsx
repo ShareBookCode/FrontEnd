@@ -1,12 +1,13 @@
 'use client'
 
+import { useEffect } from 'react'
 import styles from './popup-gallery.module.scss'
 import Image from 'next/image'
 import { BookImage } from '../../types/types'
+import { Thumballs } from '../thumballs/thumballs'
 import CloseIcon from '@/shared/assets/icons/close.svg'
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-prev.svg'
 import ArrowRightIcon from '@/shared/assets/icons/arrow-next.svg'
-import { Thumballs } from '../thumballs/thumballs'
 
 interface Props {
   images: BookImage[]
@@ -18,7 +19,7 @@ interface Props {
   chooseMiniImage: (index: number) => void
 }
 
-export const PopupGallery = ({
+export function PopupGallery({
   images,
   isOpen,
   currentImageIndex,
@@ -26,7 +27,29 @@ export const PopupGallery = ({
   onPrev,
   onNext,
   chooseMiniImage,
-}: Props) => {
+}: Props) {
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        onPrev()
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        onNext()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, onClose, onPrev, onNext])
+
   if (!isOpen) return null
 
   return (
