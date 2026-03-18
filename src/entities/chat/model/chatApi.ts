@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Message, SendMessageRequest } from './types'
 
 const url =
-  process.env.NEXT_PUBLIC_WS_URL || (typeof window !== 'undefined' ? `ws://${window.location.host}/chat` : '')
+  process.env.NEXT_PUBLIC_WS_URL ||
+  (typeof window !== 'undefined' ? `ws://${window.location.host}/chat` : '')
 
 export const chatApi = createApi({
   reducerPath: 'chatApi',
