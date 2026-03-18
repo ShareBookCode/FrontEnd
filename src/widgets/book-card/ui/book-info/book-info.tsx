@@ -1,7 +1,7 @@
 'use client'
 import styles from './book-info.module.scss'
 
-import { BookData } from '../../types/types'
+import type { BookData } from '../../types/types'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { literata } from '@shared/assets/fonts'

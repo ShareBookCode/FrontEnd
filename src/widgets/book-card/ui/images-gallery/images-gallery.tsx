@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import styles from './images-gallery.module.scss'
-import { BookImage } from '../../types/types'
+import type { BookImage } from '../../types/types'
 import { PopupGallery } from '../popup-gallery/popup-gallery'
 import { Thumballs } from '../thumballs/thumballs'
 import { FavoriteButton } from '@/shared/ui/favorite-button'

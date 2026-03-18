@@ -1,5 +1,5 @@
 import styles from './book-card.module.scss'
-import { BookData } from '../../types/types'
+import type { BookData } from '../../types/types'
 
 import clsx from 'clsx'
 import { BookGallery } from '../images-gallery/images-gallery'

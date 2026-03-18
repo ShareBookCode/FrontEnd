@@ -1,6 +1,6 @@
 import styles from './thumballs.module.scss'
 import Image from 'next/image'
-import { BookImage } from '../../types/types'
+import type { BookImage } from '../../types/types'
 import ChooseIcon from '@/shared/assets/icons/choose.svg'
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-prev.svg'
 import ArrowRightIcon from '@/shared/assets/icons/arrow-next.svg'
