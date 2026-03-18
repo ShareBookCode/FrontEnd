@@ -1,32 +1,17 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonSizes, ButtonVariants } from '../lib/types'
+
 import clsx from 'clsx'
 import styles from './ui.module.scss'
-
-const sizeClass = {
-  small: styles.sizeS,
-  medium: styles.sizeM,
-  large: styles.sizeL,
-} as const
-
-type PrimaryButtonSize = keyof typeof sizeClass
+import { sizeClass, variantClass } from '../lib/types'
 
 type PrimaryButtonType = 'button' | 'submit'
 
-const variantClass = {
-  primaryFirst: styles['primary-first'],
-  primarySecond: styles['primary-second'],
-  primaryThird: styles['primary-third'],
-  dangerFirst: styles['danger-first'],
-  dangerSecond: styles['danger-second'],
-} as const
-
-type PrimaryButtonVariant = keyof typeof variantClass
-
 type PrimaryButtonProps = {
   children: ReactNode
-  size?: PrimaryButtonSize
+  size?: ButtonSizes
   type?: PrimaryButtonType
-  variant?: PrimaryButtonVariant
+  variant?: ButtonVariants
   disabled?: boolean
   className?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>

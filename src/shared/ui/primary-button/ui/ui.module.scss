@@ -113,3 +113,17 @@
     color: $color-danger-light;
   }
 }
+.danger-third {
+  background: $background-light-gray;
+  color: $color-danger;
+
+  &:hover {
+    color:$background-primary;
+    background: $color-danger;
+  }
+
+  &:disabled,
+  &.isDisabled {
+    opacity: 0.5;
+  }
+}
