@@ -1,23 +1,23 @@
 import { http, HttpResponse } from 'msw'
 import type { User } from '@entities/user'
 
-const mockUsers: User[] = [
+export const mockUsers: User[] = [
   {
     id: 'user_1',
     name: 'Иван Иванов (Вы)',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ivan',
+    avatar: null,
     createdAt: Date.now(),
   },
   {
     id: 'user_2',
     name: 'Алексей Книголюб',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex',
+    avatar: null,
     createdAt: Date.now(),
   },
   {
     id: 'user_3',
     name: 'Мария Ред',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria',
+    avatar: null,
     createdAt: Date.now(),
   },
 ]
