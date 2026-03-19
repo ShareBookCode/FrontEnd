@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './ui.module.scss'
 import { useState, KeyboardEvent } from 'react'
 import clsx from 'clsx'
@@ -64,7 +66,31 @@ export function UserCard({
           <span className={styles.name}>{name}</span>
           {isVerified && <VerifiedIcon className={styles.verifiedIcon} />}
         </div>
-        <p className={styles.lastMessage}>{lastMessage}</p>
+        {(() => {
+          const parts = lastMessage.split(/(«[^»]+»)/)
+          if (parts.length > 1) {
+            return (
+              <p className={styles.lastMessage}>
+                {parts.map((part, i) =>
+                  part.startsWith('«') && part.endsWith('»') ? (
+                    <span key={i} className={styles.bookTitle}>
+                      {part}
+                    </span>
+                  ) : (
+                    <span key={i} className={styles.messageText}>
+                      {part}
+                    </span>
+                  )
+                )}
+              </p>
+            )
+          }
+          return (
+            <p className={styles.lastMessage}>
+              <span className={styles.messageText}>{lastMessage}</span>
+            </p>
+          )
+        })()}
       </div>
 
       <div className={styles.meta}>
