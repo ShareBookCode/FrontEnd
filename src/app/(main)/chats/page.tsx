@@ -2,8 +2,38 @@
 
 import { useState } from 'react'
 // import Image from 'next/image'
-import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
+import {
+  useGetMessagesQuery,
+  useSendMessageMutation,
+  UserCard,
+} from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
+
+// тестовые данные для предпросмотра компонента UserCard
+const MOCK_USERS = [
+  {
+    id: '1',
+    avatar: 'https://i.pravatar.cc/150?img=47',
+    name: 'Евгения',
+    isVerified: true,
+    lastMessage:
+      'Стивен Хокинг «Краткие ответы на большие вопросы»',
+    timestamp: '13:15',
+    unreadCount: 2,
+    isActive: false,
+  },
+  {
+    id: '2',
+    avatar: 'https://i.pravatar.cc/150?img=47',
+    name: 'Евгения',
+    isVerified: true,
+    lastMessage:
+      'Стивен Хокинг «Краткие ответы на большие вопросы»',
+    timestamp: '13:15',
+    unreadCount: 2,
+    isActive: true,
+  },
+]
 
 export default function Page() {
   const chatId = 'test-chat-id'
@@ -40,6 +70,27 @@ export default function Page() {
   return (
     <div>
       <h1>Чат (Тестовый режим)</h1>
+
+      {/* ====== Предпросмотр компонента UserCard ====== */}
+      <section style={{ maxWidth: 320, marginBottom: 24 }}>
+        <h2 style={{ fontSize: 14, marginBottom: 8, color: '#909090' }}>
+          UserCard — предпросмотр
+        </h2>
+        {MOCK_USERS.map(user => (
+          <UserCard
+            key={user.id}
+            avatar={user.avatar}
+            name={user.name}
+            isVerified={user.isVerified}
+            lastMessage={user.lastMessage}
+            timestamp={user.timestamp}
+            unreadCount={user.unreadCount}
+            isActive={user.isActive}
+          />
+        ))}
+      </section>
+
+      <hr />
 
       {/* Список сообщений */}
       <section>
