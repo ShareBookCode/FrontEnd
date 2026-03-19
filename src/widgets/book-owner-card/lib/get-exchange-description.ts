@@ -1,7 +1,6 @@
-import type { ExchangeType } from '@/entities/book'
-import type { Book } from '@/entities/book'
+import type { ExchangeType, GetBook } from '@/entities/book'
 
-type BookStatus = Book['status']
+type BookStatus = GetBook['status']
 
 export const getExchangeDescription = (
   name: string,
