@@ -99,6 +99,7 @@ export const bookHandlers = [
       title: book.title,
       author: book.author,
       thumbnail: book.thumbnails[0],
+      genre: book.genre,
       location: book.owner.location,
       isFavorite: book.isFavorite,
     }))

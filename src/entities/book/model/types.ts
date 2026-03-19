@@ -37,6 +37,7 @@ export interface BookPreview {
   title: string
   author: string
   thumbnail: string
+  genre: Category
   location: {
     city: string
     district: string
