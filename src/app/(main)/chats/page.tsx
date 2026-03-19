@@ -1,43 +1,20 @@
 'use client'
 
 import { useState } from 'react'
-// import Image from 'next/image'
+import Image from 'next/image'
 import {
   useGetMessagesQuery,
   useSendMessageMutation,
   UserCard,
 } from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
-
-// тестовые данные для предпросмотра компонента UserCard
-const MOCK_USERS = [
-  {
-    id: '1',
-    avatar: 'https://i.pravatar.cc/150?img=47',
-    name: 'Евгения',
-    isVerified: true,
-    lastMessage:
-      'Стивен Хокинг «Краткие ответы на большие вопросы»',
-    timestamp: '13:15',
-    unreadCount: 2,
-    isActive: false,
-  },
-  {
-    id: '2',
-    avatar: 'https://i.pravatar.cc/150?img=47',
-    name: 'Евгения',
-    isVerified: true,
-    lastMessage:
-      'Стивен Хокинг «Краткие ответы на большие вопросы»',
-    timestamp: '13:15',
-    unreadCount: 2,
-    isActive: true,
-  },
-]
+import { useAppSelector } from '@shared/hooks/useAppRedux'
+import DefaultAvatar from '@/shared/assets/icons/default-avatar.svg'
 
 export default function Page() {
   const chatId = 'test-chat-id'
-  const currentUserId = 'user_1'
+  const currentUser = useAppSelector(state => state.user.currentUser)
+  const currentUserId = currentUser?.id
 
   const [inputText, setInputText] = useState('')
 
@@ -71,40 +48,69 @@ export default function Page() {
     <div>
       <h1>Чат (Тестовый режим)</h1>
 
-      {/* ====== Предпросмотр компонента UserCard ====== */}
       <section style={{ maxWidth: 320, marginBottom: 24 }}>
         <h2 style={{ fontSize: 14, marginBottom: 8, color: '#909090' }}>
-          UserCard — предпросмотр
+          UserCard
         </h2>
-        {MOCK_USERS.map(user => (
-          <UserCard
-            key={user.id}
-            avatar={user.avatar}
-            name={user.name}
-            isVerified={user.isVerified}
-            lastMessage={user.lastMessage}
-            timestamp={user.timestamp}
-            unreadCount={user.unreadCount}
-            isActive={user.isActive}
-          />
-        ))}
+        {users
+          .filter(user => user.id !== currentUserId)
+          .map(user => {
+            const userMessages = messages.filter(m => m.senderId.id === user.id)
+            const lastMsg = userMessages[userMessages.length - 1]
+            const unreadCount = userMessages.filter(m => !m.isRead).length
+
+            return (
+              <UserCard
+                key={user.id}
+                avatar={user.avatar}
+                name={user.name}
+                isVerified={false}
+                lastMessage={lastMsg?.text || 'Нет сообщений'}
+                timestamp={
+                  lastMsg
+                    ? new Date(lastMsg.timestamp).toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })
+                    : ''
+                }
+                unreadCount={unreadCount}
+                isActive={user.id === 'user_2'} // TODO: implement active chat state
+              />
+            )
+          })}
       </section>
 
       <hr />
 
-      {/* Список сообщений */}
       <section>
         {messages.length === 0 && <p>Сообщений пока нет</p>}
         {messages.map(msg => {
           const sender = users.find(u => u.id === msg.senderId.id)
           return (
-            <div key={msg.id}>
-              {/* <Image
-                src={sender?.avatarUrl || 'https://via.placeholder.com/30'}
-                alt='avatar'
-                width={30}
-                height={30}
-              /> */}
+            <div
+              key={msg.id}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginBottom: '8px',
+              }}
+            >
+              {sender?.avatar ? (
+                <Image
+                  src={sender.avatar}
+                  alt='avatar'
+                  width={30}
+                  height={30}
+                />
+              ) : (
+                <DefaultAvatar
+                  width={30}
+                  height={30}
+                  style={{ borderRadius: '50%' }}
+                />
+              )}
               <strong>{sender?.name || 'Система'}: </strong>
               <span>{msg.text}</span>
               <small> [{new Date(msg.timestamp).toLocaleTimeString()}]</small>
@@ -115,7 +121,6 @@ export default function Page() {
 
       <hr />
 
-      {/* Поле ввода */}
       <footer>
         <input
           type='text'
@@ -129,7 +134,6 @@ export default function Page() {
 
       <hr />
 
-      {/* Инфо-панель для теста */}
       <details>
         <summary>Отладочная информация</summary>
         <p>Chat ID: {chatId}</p>

@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { bookReducer } from '@entities/book'
 import { chatApi } from '@entities/chat'
-import { userApi } from '@entities/user'
+import { userApi, userReducer } from '@entities/user'
 
 export const store = configureStore({
   reducer: {
     book: bookReducer,
+    user: userReducer,
     [chatApi.reducerPath]: chatApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
