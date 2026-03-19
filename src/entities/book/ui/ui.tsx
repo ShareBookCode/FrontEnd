@@ -24,6 +24,7 @@ export function BookPreviewCard({ bookPreview }: { bookPreview: BookPreview }) {
           alt={`${t('imageAlt')} ${bookPreview.title}`}
           sizes='202px'
           fill
+          priority
         />
 
         <FavoriteButton className={styles.favorite} />
