@@ -10,7 +10,13 @@ import {
 } from '@/entities/book'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
 
-export function BooksFeed() {
+export function BooksFeed({
+  searchQuery = '',
+  category = 'All',
+}: {
+  searchQuery?: string
+  category?: string
+}) {
   const dispatch = useAppDispatch()
   const books = useAppSelector(selectBookCatalogItems)
   const isLoading = useAppSelector(selectBookCatalogIsLoading)
@@ -19,7 +25,26 @@ export function BooksFeed() {
     dispatch(fetchBooksCatalog())
   }, [dispatch])
 
-  if (isLoading) return <div>Загрузка книг...</div>
+  const filteredBooks = books.filter(book => {
+    const matchesSearch =
+      book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesCategory = category === 'All' || book.genre === category
+    return matchesSearch && matchesCategory
+  })
+
+  if (isLoading)
+    return (
+      <div style={{ textAlign: 'center', padding: '40px', color: '#909090' }}>
+        Загрузка книг...
+      </div>
+    )
+  if (filteredBooks.length === 0)
+    return (
+      <div style={{ textAlign: 'center', padding: '40px', color: '#909090' }}>
+        Книги не найдены.
+      </div>
+    )
 
   return (
     <div
@@ -30,7 +55,7 @@ export function BooksFeed() {
         gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
       }}
     >
-      {books.map(book => (
+      {filteredBooks.map(book => (
         <Link
           href={`/books/${book.id}`}
           key={book.id}
