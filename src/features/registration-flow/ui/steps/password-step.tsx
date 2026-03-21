@@ -25,8 +25,10 @@ export function PasswordStep({ status }: StepProps) {
     <>
       <h1 className={styles.title}>Регистрация через почту</h1>
       <div className={styles.fields}>
-        <label>
+        <label htmlFor='password'>
           <InputWithIcon
+            id='password'
+            name='password'
             status={isPasswordError ? 'error' : 'default'}
             type={showPassword ? 'text' : 'password'}
             ref={register(0)}
@@ -40,8 +42,10 @@ export function PasswordStep({ status }: StepProps) {
             )}
           </InputWithIcon>
         </label>
-        <label>
+        <label htmlFor='repeat-password'>
           <InputWithIcon
+            id='repeat-password'
+            name='repeat-password'
             status={isRepeatPasswordError ? 'error' : 'default'}
             type={showPassword ? 'text' : 'password'}
             ref={register(1)}

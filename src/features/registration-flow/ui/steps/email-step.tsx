@@ -2,19 +2,17 @@
 
 import Link from 'next/link'
 import styles from '../RegistrationFlow.module.scss'
-import { useSearchParams } from 'next/navigation'
 import clsx from 'clsx'
-import { useState } from 'react'
 import { StepProps } from '../../lib/types'
+import { selectRegistrationDraftData } from '@/entities/registration'
 import { Input } from '@/shared/ui/inputs'
 import { Button } from '@/shared/ui/button'
-import { useUpdateSearchParam } from '@/shared/lib/hooks'
+import { useAppSelector } from '@/shared/lib/hooks'
+import { useState } from 'react'
 
 export function EmailStep({ status }: StepProps) {
-  const searchParams = useSearchParams()
-  const updateParam = useUpdateSearchParam()
-  const [email, setEmail] = useState(searchParams.get('email') || '')
-
+  const draft = useAppSelector(selectRegistrationDraftData)
+  const [email, setEmail] = useState(draft.email)
   const isEmailError = !status.success && status.field == 'email'
 
   return (
@@ -23,7 +21,7 @@ export function EmailStep({ status }: StepProps) {
         Станьте частью <span>ShareBook.</span> Отдавайте. Меняйтесь.
         <span>Читайте.</span>
       </h1>
-      <label>
+      <label htmlFor='email'>
         <Input
           id='email'
           status={isEmailError ? 'error' : 'default'}
@@ -31,7 +29,6 @@ export function EmailStep({ status }: StepProps) {
           type='email'
           value={email}
           onChange={e => setEmail(e.target.value)}
-          onBlur={() => updateParam('email', email)}
           placeholder='Почта'
         />
       </label>

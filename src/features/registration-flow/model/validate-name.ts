@@ -1,5 +1,8 @@
 import z from 'zod'
-import { NameErrorCode, ValidateRegistrationResult } from '../lib/types'
+import {
+  NameErrorCode,
+  ValidateRegistrationResult,
+} from '@/entities/registration'
 
 const nameSchema = z
   .string()

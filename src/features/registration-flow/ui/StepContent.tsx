@@ -1,7 +1,8 @@
 import { EmailStep } from './steps/email-step'
 import { NameStep } from './steps/name-step'
 import { PasswordStep } from './steps/password-step'
-import { RegistrationStep, ValidateRegistrationResult } from '../lib/types'
+import { RegistrationStep } from '../lib/types'
+import { ValidateRegistrationResult } from '@/entities/registration'
 
 interface StepContentProps {
   step: RegistrationStep

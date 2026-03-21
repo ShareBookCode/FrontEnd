@@ -28,6 +28,43 @@
     "RepeatPasswordPlaceholder": "Repeat password",
 
     "ButtonNextStep": "Next",
-    "ButtonRegistration": "Sign up"
+    "ButtonRegistration": "Sign up",
+
+    "ErrorsField": {
+      "invalid_email": {
+        "title": "Invalid email",
+        "description": "Check the email address format and try again."
+      },
+      "busy_email": {
+        "title": "Email is already in use",
+        "description": "This email address is already registered."
+      },
+
+      "short_name": {
+        "title": "Name is too short",
+        "description": "The name must contain more characters."
+      },
+      "long_name": {
+        "title": "Name is too long",
+        "description": "The name exceeds the allowed length."
+      },
+      "invalid_name": {
+        "title": "Invalid name",
+        "description": "Only letters are allowed. Do not use numbers or special characters."
+      },
+      
+      "short_password": {
+        "title": "Password is too short",
+        "description": "The password must contain at least 8 characters."
+      },
+      "weak_password": {
+        "title": "Password is too weak",
+        "description": "The password is not strong enough. Try a combination of letters, numbers, and symbols."
+      },
+      "password_mismatch": {
+        "title": "Passwords do not match",
+        "description": "The passwords do not match. Please try again."
+      }
+    }
   }
 }

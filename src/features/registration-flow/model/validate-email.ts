@@ -1,13 +1,16 @@
 import z from 'zod'
 import axios from 'axios'
-import { EmailErrorCode, RegistrationResult } from '../lib/types'
+import {
+  EmailErrorCode,
+  ValidateRegistrationResult,
+} from '@/entities/registration'
 
 const TOKEN = '4CVB1p4zuf_z7z-RwLUgyOTQ9vJ1uaQzO3Zs0PAQJWi48UrZPxe4e0uxHS8yPkwD'
 const emailSchema = z.string().email()
 
 export const validateEmail = async (
-  email: FormDataEntryValue,
-): Promise<RegistrationResult<EmailErrorCode>> => {
+  email: string,
+): Promise<ValidateRegistrationResult<EmailErrorCode>> => {
   const parsedEmail = emailSchema.safeParse(email)
 
   if (!parsedEmail.success) {

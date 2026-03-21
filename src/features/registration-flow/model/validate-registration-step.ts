@@ -1,21 +1,28 @@
-import { RegistrationParams, ValidateRegistrationResult } from '../lib/types'
+import { RegistrationStep } from '../lib/types'
 import { validateEmail } from './validate-email'
 import { validateName } from './validate-name'
+import { validatePassword } from './validate-password'
+import { ValidateRegistrationResult } from '@/entities/registration'
 
 export const validateRegistrationStep = async (
-  params: RegistrationParams,
+  formData: FormData,
+  step: RegistrationStep,
 ): Promise<ValidateRegistrationResult> => {
-  switch (params.step) {
+  switch (step) {
     case 'email': {
-      return validateEmail(params.email)
+      const email = formData.get('email')?.toString() || ''
+      return validateEmail(email)
     }
 
     case 'name': {
-      return validateName(params.name)
+      const name = formData.get('name')?.toString() || ''
+      return validateName(name)
     }
 
     case 'password': {
-      return { success: true }
+      const password = formData.get('password')?.toString() || ''
+      const repeatPassword = formData.get('repeat-password')?.toString() || ''
+      return validatePassword(password, repeatPassword)
     }
 
     default: {
