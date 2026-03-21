@@ -1,13 +1,19 @@
 import clsx from 'clsx'
 import styles from './ui.module.scss'
 
+type DropdownListValue = {
+  primary: string
+  secondary?: string
+}
+
 interface DropdownListProps {
-  values: string[]
+  values: DropdownListValue[]
   idList?: string
   idOption?: string
   label?: string
   classNameList?: string
   classNameOption?: string
+  onSelect?: (value: DropdownListValue) => void
 }
 
 export function DropdownList({
@@ -17,6 +23,7 @@ export function DropdownList({
   label,
   classNameList,
   classNameOption,
+  onSelect,
 }: DropdownListProps) {
   return (
     <ul
@@ -27,13 +34,14 @@ export function DropdownList({
     >
       {values.map((value, index) => (
         <li
-          key={value + index}
+          key={value.primary + index}
           id={`${idOption}-${index + 1}`}
+          onClick={() => onSelect?.(value)}
           className={clsx(styles.option, classNameOption)}
           aria-selected='false'
           role='option'
         >
-          {value}
+          {value.primary}, {value.secondary && <span>{value.secondary}</span>}
         </li>
       ))}
     </ul>

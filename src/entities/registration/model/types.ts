@@ -2,12 +2,14 @@ export const EMPTY_REGISTRATION_DRAFT: RegistrationDraft = {
   email: '',
   name: '',
   city: '',
+  place: '',
 }
 
 export interface RegistrationDraft {
   email: string
   name: string
   city: string
+  place: string
 }
 
 export type RegistrationDraftPatch = Partial<RegistrationDraft>

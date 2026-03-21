@@ -36,6 +36,7 @@ export const initialState: RegistrationSchema = {
       email: '',
       name: '',
       city: '',
+      place: '',
     },
     isLoading: false,
     error: null,
