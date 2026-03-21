@@ -13,7 +13,7 @@ interface Props {
   onNext: () => void
 }
 
-export function ThumballsPopup({
+export function Thumballs({
   images,
   activeIndex,
   onClick,

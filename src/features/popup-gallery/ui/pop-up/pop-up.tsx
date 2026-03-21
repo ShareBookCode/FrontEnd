@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect } from 'react'
-import styles from './popup-gallery.module.scss'
+import styles from './pop-up.module.scss'
 import Image from 'next/image'
-import { ThumballsPopup } from './thumballs-popup'
+import { Thumballs } from '../thumballs/thumballs-popup'
 import type { BookImage } from '@shared/lib/types'
 import CloseIcon from '@/shared/assets/icons/close.svg'
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-prev.svg'
@@ -19,7 +19,7 @@ interface Props {
   chooseMiniImage: (index: number) => void
 }
 
-export function PopupGallery({
+export function Popup({
   images,
   isOpen,
   currentImageIndex,
@@ -53,37 +53,40 @@ export function PopupGallery({
   if (!isOpen) return null
 
   return (
-    <div className={styles.popupGallery}>
+    <div className={styles.popup}>
       <button
-        className={`${styles.popupGalleryCloseButton} ${styles.btn}`}
+        className={`${styles.popupCloseButton} ${styles.btn}`}
         onClick={onClose}
       >
         <CloseIcon />
       </button>
-      <div className={styles.popupGalleryMainImageWrapper}>
-        <button
-          className={`${styles.popupGalleryArrowButton} ${styles.arrowsPrev} ${styles.btn}`}
-          onClick={onPrev}
-        >
-          <ArrowLeftIcon />
-        </button>
-        <Image
-          src={images[currentImageIndex].src}
-          alt={images[currentImageIndex].alt || 'No alt text'}
-          className={styles.popupGalleryMainImage}
-          tabIndex={0}
-          width={315}
-          height={475}
-          loading='eager'
-        />
-        <button
-          className={`${styles.popupGalleryArrowButton} ${styles.arrowsNext} ${styles.btn}`}
-          onClick={onNext}
-        >
-          <ArrowRightIcon />
-        </button>
+      <div className={styles.mainImgWrapper}>
+        <div className={styles.popupMainImageWrapper}>
+          <button
+            className={`${styles.popupArrowButton} ${styles.arrowsPrev} ${styles.btn}`}
+            onClick={onPrev}
+          >
+            <ArrowLeftIcon />
+          </button>
+          <Image
+            src={images[currentImageIndex].src}
+            alt={images[currentImageIndex].alt || 'No alt text'}
+            className={styles.popupMainImage}
+            tabIndex={0}
+            width={437}
+            height={658}
+            loading='eager'
+          />
+          <button
+            className={`${styles.popupArrowButton} ${styles.arrowsNext} ${styles.btn}`}
+            onClick={onNext}
+          >
+            <ArrowRightIcon />
+          </button>
+        </div>
       </div>
-      <ThumballsPopup
+
+      <Thumballs
         images={images}
         activeIndex={currentImageIndex}
         onClick={chooseMiniImage}

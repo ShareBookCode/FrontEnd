@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import styles from './images-gallery.module.scss'
 import { ThumballsGallery } from '../thumballs-gallery/thumballs-gallery'
-import { PopupGallery } from '@/features/popup-gallery/popup-gallery'
+import { Popup } from '@features/popup-gallery/index'
 import type { BookImage } from '@shared/lib/types'
 import { FavoriteButton } from '@/shared/ui/favorite-button'
 
@@ -51,7 +51,7 @@ export function BookGallery({ images }: Props) {
         onClick={chooseMiniImage}
         setIsPopupOpen={setIsPopupOpen}
       />
-      <PopupGallery
+      <Popup
         images={images}
         isOpen={isPopupOpen}
         currentImageIndex={activeIndex}
