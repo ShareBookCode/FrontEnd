@@ -3,8 +3,8 @@
 import { useEffect } from 'react'
 import styles from './popup-gallery.module.scss'
 import Image from 'next/image'
-import { BookImage } from '../../types/types'
-import { Thumballs } from '../thumballs/thumballs'
+import { ThumballsPopup } from './thumballs-popup'
+import type { BookImage } from '@shared/lib/types'
 import CloseIcon from '@/shared/assets/icons/close.svg'
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-prev.svg'
 import ArrowRightIcon from '@/shared/assets/icons/arrow-next.svg'
@@ -83,8 +83,7 @@ export function PopupGallery({
           <ArrowRightIcon />
         </button>
       </div>
-      <Thumballs
-        mode='popup'
+      <ThumballsPopup
         images={images}
         activeIndex={currentImageIndex}
         onClick={chooseMiniImage}

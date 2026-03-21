@@ -2,7 +2,6 @@ export interface BookImage {
   src: string
   alt?: string
 }
-
 export interface BookData {
   id: string
   title: string

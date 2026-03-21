@@ -4,9 +4,9 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import styles from './images-gallery.module.scss'
-import type { BookImage } from '../../types/types'
-import { PopupGallery } from '../popup-gallery/popup-gallery'
-import { Thumballs } from '../thumballs/thumballs'
+import { ThumballsGallery } from '../thumballs-gallery/thumballs-gallery'
+import { PopupGallery } from '@/features/popup-gallery/popup-gallery'
+import type { BookImage } from '@shared/lib/types'
 import { FavoriteButton } from '@/shared/ui/favorite-button'
 
 interface Props {
@@ -45,14 +45,11 @@ export function BookGallery({ images }: Props) {
         />
         <FavoriteButton className={styles.mainImageLikeBtn} />
       </div>
-      <Thumballs
-        mode='main'
+      <ThumballsGallery
         images={images}
         activeIndex={activeIndex}
         onClick={chooseMiniImage}
         setIsPopupOpen={setIsPopupOpen}
-        onPrev={onPrev}
-        onNext={onNext}
       />
       <PopupGallery
         images={images}
