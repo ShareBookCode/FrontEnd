@@ -1,4 +1,5 @@
 import { RegistrationStep } from '../lib/types'
+import { validateCity } from './validate-city'
 import { validateEmail } from './validate-email'
 import { validateName } from './validate-name'
 import { validatePassword } from './validate-password'
@@ -16,7 +17,16 @@ export const validateRegistrationStep = async (
 
     case 'name': {
       const name = formData.get('name')?.toString() || ''
-      return validateName(name)
+      const validatedName = validateName(name)
+
+      if (!validatedName.success) {
+        return validatedName
+      }
+
+      const city = formData.get('city')?.toString() || ''
+      const place = formData.get('place')?.toString() || ''
+
+      return validateCity(city, place)
     }
 
     case 'password': {

@@ -15,6 +15,7 @@ export const getDraftPatchByStep = (
       return {
         name: formData.get('name')?.toString() || '',
         city: formData.get('city')?.toString() || '',
+        place: formData.get('place')?.toString() || '',
       }
 
     default:

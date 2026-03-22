@@ -9,6 +9,8 @@ import { getNextStep, getRegistrationStep } from '../lib/steps'
 import { getDraftPatchByStep } from '../lib/get-draft-patch-by-step'
 import {
   fetchRegistrationDraft,
+  RegisterUserPayload,
+  selectRegistrationDraftData,
   selectRegistrationDraftIsLoading,
   updateRegistrationDraft,
   ValidateRegistrationResult,
@@ -19,6 +21,7 @@ import {
   useUpdateSearchParam,
 } from '@/shared/lib/hooks'
 import { Tooltip } from '@/shared/ui/tooltip'
+import { registerUser } from '../model/register-user'
 
 const INITIAL_STATUS: ValidateRegistrationResult = { success: true }
 
@@ -31,6 +34,8 @@ export function RegistrationFlow() {
   const searchParams = useSearchParams()
   const updateParam = useUpdateSearchParam()
   const dispatch = useAppDispatch()
+
+  const draft = useAppSelector(selectRegistrationDraftData)
   const isLoading = useAppSelector(selectRegistrationDraftIsLoading)
 
   const step = getRegistrationStep(searchParams.get('step'))
@@ -58,8 +63,18 @@ export function RegistrationFlow() {
 
     if (nextStep && result.success) {
       const draft = getDraftPatchByStep(formData, step)
+
       dispatch(updateRegistrationDraft(draft))
       updateParam('step', nextStep, 'push')
+    } else if (!nextStep && result.success) {
+      const password = formData.get('password')?.toString() || ''
+      const registerUserPayload: RegisterUserPayload = {
+        ...draft,
+        password,
+      }
+
+      const response = await registerUser(registerUserPayload)
+      console.log(response)
     }
 
     setStepStatus({

@@ -10,6 +10,9 @@ import { Button } from '@/shared/ui/button'
 import { useEnterFocus } from '@/shared/lib/hooks'
 
 export function PasswordStep({ status }: StepProps) {
+  const [password, setPassword] = useState('')
+  const [repeatPassword, setRepeatPassword] = useState('')
+
   const { register, handleKeyDown } = useEnterFocus()
   const [showPassword, setShowPassword] = useState(false)
 
@@ -29,6 +32,8 @@ export function PasswordStep({ status }: StepProps) {
           <InputWithIcon
             id='password'
             name='password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             status={isPasswordError ? 'error' : 'default'}
             type={showPassword ? 'text' : 'password'}
             ref={register(0)}
@@ -46,6 +51,8 @@ export function PasswordStep({ status }: StepProps) {
           <InputWithIcon
             id='repeat-password'
             name='repeat-password'
+            value={repeatPassword}
+            onChange={e => setRepeatPassword(e.target.value)}
             status={isRepeatPasswordError ? 'error' : 'default'}
             type={showPassword ? 'text' : 'password'}
             ref={register(1)}

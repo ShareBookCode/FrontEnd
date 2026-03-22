@@ -20,7 +20,7 @@ export const validatePassword = (
   if (!result.success) {
     return {
       success: false,
-      field: 'name',
+      field: 'password',
       error: result.error.issues[0].message as PasswordErrorCode,
     }
   }
@@ -28,7 +28,7 @@ export const validatePassword = (
   if (password !== repeatPassword) {
     return {
       success: false,
-      field: 'name',
+      field: 'password',
       error: 'password_mismatch',
     }
   }

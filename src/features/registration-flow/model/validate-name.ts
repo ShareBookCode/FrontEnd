@@ -12,7 +12,7 @@ const nameSchema = z
   .regex(/^[\p{L}\s'-]+$/u, 'invalid_name')
 
 export const validateName = (
-  name: FormDataEntryValue,
+  name: string,
 ): ValidateRegistrationResult<NameErrorCode> => {
   const result = nameSchema.safeParse(name)
 

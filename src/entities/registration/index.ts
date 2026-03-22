@@ -10,12 +10,14 @@ export {
   clearRegistrationDraft,
 } from './model/slice'
 export type {
+  RegisterUserPayload,
   RegistrationDraft,
   RegistrationDraftPatch,
   RegistrationSchema,
   RegistrationField,
   EmailErrorCode,
   NameErrorCode,
+  CityErrorCode,
   PasswordErrorCode,
   RegistrationErrorCode,
   ValidateRegistrationResult,

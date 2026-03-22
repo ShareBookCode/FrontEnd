@@ -52,7 +52,12 @@
         "title": "Invalid name",
         "description": "Only letters are allowed. Do not use numbers or special characters."
       },
-      
+
+      "invalid_city": {
+        "title": "Invalid address",
+        "description": "Select a city from the list"
+      },
+
       "short_password": {
         "title": "Password is too short",
         "description": "The password must contain at least 8 characters."
