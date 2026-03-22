@@ -1,31 +1,25 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import {
+  closeModal,
+  MODAL_TYPES,
+  selectModalIsOpen,
+  selectModalType,
+} from '@/entities/modal'
+import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 import { Modal } from '@/shared/ui/modal'
 
-const PREVIEW_QUERY_VALUE = 'true'
-
 export function FavoritesDevModalPreview() {
-  const pathname = usePathname()
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  const dispatch = useAppDispatch()
+  const isModalOpen = useAppSelector(selectModalIsOpen)
+  const modalType = useAppSelector(selectModalType)
 
-  const isDev = process.env.NODE_ENV !== 'production'
-  if (!isDev) return null
-
-  const isOpen = isDev && searchParams.get('modal') === PREVIEW_QUERY_VALUE
-
-  const handleClose = () => {
-    const nextParams = new URLSearchParams(searchParams.toString())
-    nextParams.delete('modal')
-    const query = nextParams.toString()
-    router.replace(query ? `${pathname}?${query}` : pathname)
-  }
+  const isOpen = isModalOpen && modalType === MODAL_TYPES.FAVORITES_PREVIEW
 
   return (
     <Modal
       isOpen={isOpen}
-      onClose={handleClose}
+      onClose={() => dispatch(closeModal())}
       ariaLabel='Favorites modal preview'
     >
       <div style={{ display: 'grid', gap: 12 }}>
@@ -71,7 +65,7 @@ export function FavoritesDevModalPreview() {
         >
           <button
             type='button'
-            onClick={handleClose}
+            onClick={() => dispatch(closeModal())}
             style={{
               border: '1px solid #e4e7ec',
               background: '#f2f4f7',

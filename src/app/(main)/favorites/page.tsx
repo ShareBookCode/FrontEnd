@@ -1,4 +1,5 @@
 import HeartIcon from '@icons/heart.svg'
+import { FavoritesDevModalTrigger } from './ui/favoritesDevModalTrigger'
 import { FavoritesDevModalPreview } from './ui/favoritesDevModalPreview'
 import styles from './page.module.scss'
 import { BookPreview } from '@/entities/book'
@@ -19,6 +20,7 @@ export default function Page() {
   if (favorites.length === 0) {
     return (
       <>
+        <FavoritesDevModalTrigger />
         <div className={styles.empty}>
           <div className={styles.emptyInner}>
             <div className={styles.iconWrap} aria-hidden='true'>
@@ -40,6 +42,7 @@ export default function Page() {
 
   return (
     <>
+      <FavoritesDevModalTrigger />
       <div className={styles.list}>
         {favorites.map(book => (
           <div key={book.id}>{book.title}</div>

@@ -4,4 +4,5 @@ export {
   selectModalType,
   selectModalPayload,
 } from './model/selectors'
+export { MODAL_TYPES } from './model/types'
 export type { ModalState, ModalType } from './model/types'
