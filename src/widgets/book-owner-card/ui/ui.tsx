@@ -55,6 +55,7 @@ export function BookOwnerCard({ data }: BookOwnerCardProps) {
     <aside className={styles.card}>
       <div className={styles.header}>
         {avatarUrl ? (
+          // TODO: заменить на <Image>, когда появятся аватары в API
           <span
             className={styles.avatar}
             aria-hidden='true'
