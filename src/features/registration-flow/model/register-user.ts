@@ -1,10 +1,10 @@
+'use server'
+
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 import { RegisterUserPayload } from '@/entities/registration'
-import {
-  authUser,
-  AuthUserPayload,
-  createUser,
-  CreateUserPayload,
-} from '@/shared/api/user'
+import { createUser, CreateUserPayload } from '@/shared/api/user'
+import { authUser, AuthUserPayload } from '@/shared/api/auth'
 
 export const registerUser = async (payload: RegisterUserPayload) => {
   const { email, name, city, place, password } = payload
@@ -23,5 +23,8 @@ export const registerUser = async (payload: RegisterUserPayload) => {
   }
 
   await createUser(createUserPayload)
-  return await authUser(authUserPayload)
+  await authUser(authUserPayload)
+
+  revalidatePath('/')
+  redirect('/')
 }

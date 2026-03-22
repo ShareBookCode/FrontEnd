@@ -16,8 +16,9 @@ export function PasswordStep({ status }: StepProps) {
   const { register, handleKeyDown } = useEnterFocus()
   const [showPassword, setShowPassword] = useState(false)
 
-  const isPasswordError = !status.success && status.field == 'name'
-  const isRepeatPasswordError = !status.success && status.field == 'city'
+  const isPasswordError = !status.success && status.field == 'password'
+  const isRepeatPasswordError =
+    !status.success && status.field == 'repeat-password'
 
   const toggleShowPassword = (e: MouseEvent) => {
     e.preventDefault()

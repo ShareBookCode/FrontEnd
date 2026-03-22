@@ -17,10 +17,10 @@ export const validateRegistrationStep = async (
 
     case 'name': {
       const name = formData.get('name')?.toString() || ''
-      const validatedName = validateName(name)
+      const resultValidationName = validateName(name)
 
-      if (!validatedName.success) {
-        return validatedName
+      if (!resultValidationName.success) {
+        return resultValidationName
       }
 
       const city = formData.get('city')?.toString() || ''

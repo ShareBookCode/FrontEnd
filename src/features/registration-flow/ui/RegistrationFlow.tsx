@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react'
 import { StepContent } from './StepContent'
 import { getNextStep, getRegistrationStep } from '../lib/steps'
 import { getDraftPatchByStep } from '../lib/get-draft-patch-by-step'
+import { registerUser } from '../model/register-user'
 import {
+  clearRegistrationDraft,
   fetchRegistrationDraft,
   RegisterUserPayload,
   selectRegistrationDraftData,
@@ -21,7 +23,6 @@ import {
   useUpdateSearchParam,
 } from '@/shared/lib/hooks'
 import { Tooltip } from '@/shared/ui/tooltip'
-import { registerUser } from '../model/register-user'
 
 const INITIAL_STATUS: ValidateRegistrationResult = { success: true }
 
@@ -73,8 +74,8 @@ export function RegistrationFlow() {
         password,
       }
 
-      const response = await registerUser(registerUserPayload)
-      console.log(response)
+      dispatch(clearRegistrationDraft())
+      await registerUser(registerUserPayload)
     }
 
     setStepStatus({

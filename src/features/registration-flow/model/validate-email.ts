@@ -5,7 +5,7 @@ import {
   ValidateRegistrationResult,
 } from '@/entities/registration'
 
-const emailSchema = z.string().email()
+const emailSchema = z.string().email('invalid_email')
 
 export const validateEmail = async (
   email: string,
@@ -16,7 +16,7 @@ export const validateEmail = async (
     return {
       success: false,
       field: 'email',
-      error: 'invalid_email',
+      error: parsedEmail.error.issues[0].message as EmailErrorCode,
     }
   }
 

@@ -1,18 +1,11 @@
 import axios from 'axios'
 import { NextRequest, NextResponse } from 'next/server'
-import https from 'https'
-
-const httpsAgent = new https.Agent({
-  rejectUnauthorized: false,
-})
 
 export const POST = async (request: NextRequest) => {
   const email = request.nextUrl.searchParams.get('email')?.trim() ?? ''
 
-  console.log('Email', email)
   try {
     await axios.post(`${process.env.BACKEND_URL}/user/check`, '', {
-      httpsAgent,
       params: {
         email,
       },

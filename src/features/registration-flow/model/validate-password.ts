@@ -15,20 +15,20 @@ export const validatePassword = (
   password: FormDataEntryValue,
   repeatPassword: FormDataEntryValue,
 ): ValidateRegistrationResult<PasswordErrorCode> => {
-  const result = passwordSchema.safeParse(password)
+  const parsedPassword = passwordSchema.safeParse(password)
 
-  if (!result.success) {
+  if (!parsedPassword.success) {
     return {
       success: false,
       field: 'password',
-      error: result.error.issues[0].message as PasswordErrorCode,
+      error: parsedPassword.error.issues[0].message as PasswordErrorCode,
     }
   }
 
   if (password !== repeatPassword) {
     return {
       success: false,
-      field: 'password',
+      field: 'repeat-password',
       error: 'password_mismatch',
     }
   }
