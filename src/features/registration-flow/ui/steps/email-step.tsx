@@ -4,11 +4,11 @@ import Link from 'next/link'
 import styles from '../RegistrationFlow.module.scss'
 import clsx from 'clsx'
 import { StepProps } from '../../lib/types'
+import { useState } from 'react'
 import { selectRegistrationDraftData } from '@/entities/registration'
 import { Input } from '@/shared/ui/inputs'
 import { Button } from '@/shared/ui/button'
 import { useAppSelector } from '@/shared/lib/hooks'
-import { useState } from 'react'
 
 export function EmailStep({ status }: StepProps) {
   const draft = useAppSelector(selectRegistrationDraftData)
