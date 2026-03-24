@@ -1,0 +1,60 @@
+.thumballPopupWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 72px;
+
+  .thumballPopupItem {
+    width: 72px;
+    height: 72px;
+    border-radius: 7px;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .thumballPopupImg {
+    display: block;
+    max-width: 72px;
+    min-width: 72px;
+    max-height: 72px;
+    border-radius: 7px;
+    flex-shrink: 0;
+  }
+
+  .thumballPopupActiveOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+  }
+
+  & > svg {
+    width: 14px;
+    height: 10px;
+  }
+
+  .thumballPopupArrowButton {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-color: transparent;
+
+    & > svg {
+      width: 6px;
+      height: 12px;
+    }
+  }
+
+  .thumballImagesList {
+    display: flex;
+    gap: 9px;
+    overflow: hidden;
+  }
+}
