@@ -13,9 +13,7 @@ import {
 
 type RenderTriggerProps = {
   isOpen: boolean
-  open: () => void
-  close: () => void
-  toggle: () => void
+  setOpen: (next: boolean) => void
   disabled?: boolean
 }
 
@@ -24,7 +22,6 @@ type Props = {
   className?: string
   dropdownClassName?: string
   disabled?: boolean
-  closeOnContentClick?: boolean
   isOpen?: boolean
   onOpenChange?: (next: boolean) => void
   renderTrigger: (props: RenderTriggerProps) => ReactNode
@@ -41,74 +38,54 @@ export function Dropdown({
   className,
   dropdownClassName,
   disabled,
-  closeOnContentClick = true,
   isOpen: controlledIsOpen,
   onOpenChange,
   renderTrigger,
   children,
 }: Props) {
-  const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false)
+  const [innerIsOpen, setInnerIsOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement | null>(null)
 
   const isControlled = controlledIsOpen !== undefined
-  const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen
+  const isOpen = isControlled ? controlledIsOpen : innerIsOpen
 
-  const setOpenState = useCallback(
+  const setOpen = useCallback(
     (next: boolean) => {
+      if (next === isOpen) return
+      if (disabled && next) return
+
       if (!isControlled) {
-        setUncontrolledIsOpen(next)
+        setInnerIsOpen(next)
       }
 
       onOpenChange?.(next)
     },
-    [isControlled, onOpenChange],
+    [disabled, isControlled, isOpen, onOpenChange],
   )
 
-  const open = useCallback(() => {
-    if (!disabled) {
-      setOpenState(true)
-    }
-  }, [disabled, setOpenState])
-
-  const close = useCallback(() => {
-    setOpenState(false)
-  }, [setOpenState])
-
-  const toggle = useCallback(() => {
-    if (!disabled) {
-      setOpenState(!isOpen)
-    }
-  }, [disabled, isOpen, setOpenState])
-
-  const handleDropdownInnerClick = () => {
-    if (closeOnContentClick) {
-      close()
-    }
-  }
-
   useEffect(() => {
-    const onDocClick = (e: PointerEvent) => {
-      if (!rootRef.current) return
+    if (!isOpen) return
 
-      if (!rootRef.current.contains(e.target as Node)) {
-        close()
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false)
       }
     }
 
-    const onEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        close()
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
       }
     }
 
-    document.addEventListener('pointerdown', onDocClick)
-    document.addEventListener('keydown', onEscape)
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.removeEventListener('pointerdown', onDocClick)
-      document.removeEventListener('keydown', onEscape)
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [close])
+  }, [isOpen, setOpen])
 
   const style: CSSProperties = {
     width: toCssWidth(width),
@@ -119,24 +96,17 @@ export function Dropdown({
       ref={rootRef}
       className={clsx(styles.root, className)}
       style={style}
-      aria-disabled={disabled ? 'true' : 'false'}
+      aria-disabled={disabled || undefined}
     >
       {renderTrigger({
         isOpen,
-        open,
-        close,
-        toggle,
+        setOpen,
         disabled,
       })}
 
       {isOpen && (
         <div className={clsx(styles.dropdown, dropdownClassName)}>
-          <div
-            className={styles.dropdownInner}
-            onClick={handleDropdownInnerClick} // зачем это
-          >
-            {children}
-          </div>
+          {children}
         </div>
       )}
     </div>
