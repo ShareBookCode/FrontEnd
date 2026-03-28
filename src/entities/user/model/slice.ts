@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { User } from './types'
-
-// TODO: Прописать все ключи по типам
+import type { User } from './types'
 
 export const userApi = createApi({
   reducerPath: 'userApi',

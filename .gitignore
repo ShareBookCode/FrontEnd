@@ -1,3 +1,4 @@
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -22,6 +23,7 @@
 
 # misc
 .DS_Store
+FETCH_HEAD
 *.pem
 .vscode/
 
@@ -41,3 +43,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
