@@ -1,3 +1,5 @@
 export type { Chat, Message, SendMessageRequest } from './model/types'
 export { chatApi } from './model/chatApi'
 export { useGetMessagesQuery, useSendMessageMutation } from './model/chatApi'
+export { mockData } from './model/mock-data'
+export { ChatWindow } from './ui/chat-window/ui/chat-window'

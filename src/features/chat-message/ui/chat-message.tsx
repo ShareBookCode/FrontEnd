@@ -14,6 +14,7 @@ interface Props {
 
 export function ChatMessage({ message, currentUserId }: Props) {
   const isOwnMessage = message.senderId === currentUserId
+  const isError = message.status === 'error'
   return (
     <>
       <div
@@ -22,22 +23,28 @@ export function ChatMessage({ message, currentUserId }: Props) {
           onest.className,
           styles.wrapper,
           isOwnMessage ? styles.send : styles.received,
-          message.status === 'error' && styles.error,
+          isError && styles.error,
         )}
       >
-        <p className={styles.message}>{message.message}</p>
-        <p className={styles.time}>{message.timestamp}</p>
-        {message.status === 'error' && (
-          <>
-            {' '}
-            <span className={styles.errorIcon}>
-              <NotificationsIcon />
-            </span>
-            <button className={styles.retryButton}>
-              <RetryIcon />
-              <span className={styles.retryButtonText}>Повторить попытку</span>
-            </button>
-          </>
+        <div className={styles.container}>
+          {isError && (
+            <>
+              <span className={styles.errorIcon}>
+                <NotificationsIcon />
+              </span>
+            </>
+          )}
+          <div className={styles.messageContainer}>
+            <p className={styles.message}>{message.message}</p>
+            <p className={styles.time}>{message.timestamp}</p>
+          </div>
+        </div>
+
+        {isError && (
+          <button className={styles.retryButton}>
+            <RetryIcon />
+            <span className={styles.retryButtonText}>Повторить попытку</span>
+          </button>
         )}
       </div>
     </>

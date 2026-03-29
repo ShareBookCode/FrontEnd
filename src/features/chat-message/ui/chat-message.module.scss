@@ -1,46 +1,62 @@
 @use '@styles/variables' as *;
 
 .wrapper {
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 10px;
+  max-width: 53%;
+}
+
+.messageContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 14px;
-  padding-top: 9px;
-  padding-bottom: 9px;
-  min-height: 0;
-  gap: 5px;
-  font-size: 16px;
-  border-radius: 10px;
-  max-width: 53%;
-  font-size: 16px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .time {
   align-self: flex-end;
-  min-width: 34px;
   font-size: 12px;
+  font-weight: 400;
+  padding-bottom: 5px;
+  padding-right: 7px;
 }
 
 .message {
   width: fit-content;
   max-width: 92%;
   word-break: break-word;
+  padding-left: 14px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-right: 5px;
+  font-weight: 400;
 }
 
 .received {
-  background-color: $background-light-gray;
   align-self: flex-start;
   color: $text-heading;
 
-  & > .time {
-    color: $text-secondary;
+  & > .container {
+    & > .messageContainer {
+      background-color: $background-light-gray;
+    }
   }
 }
 
 .send {
-  background-color: $color-primary;
   align-self: flex-end;
   color: $background-primary;
+
+  & > .container {
+    & > .messageContainer {
+      background-color: $color-primary;
+
+      & > .message {
+        padding-right: 7px;
+      }
+    }
+  }
 
   & > .time {
     color: $background-primary;
@@ -48,44 +64,56 @@
 }
 
 .error {
-  box-sizing: border-box;
-  position: relative;
-  min-width: 55px;
-  background-color: $background-light-gray;
-  color: $text-secondary;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   align-self: end;
-  margin-top: 16px;
+  color: $text-secondary;
 
-  & > .message {
-    overflow-wrap: break-word;
-  }
+  & > .container {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    align-self: end;
 
-  & > .time {
-    visibility: hidden;
-    min-width: 17px;
-  }
+    & > .errorIcon {
+      background-color: white;
+      width: 18px;
+      height: 18px;
+    }
 
-  & > .errorIcon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -23px;
-    width: 18px;
-    height: 18px;
+    & > .messageContainer {
+      background-color: $background-light-gray;
+      border-radius: 10px 10px 0 10px;
+
+      & > .message {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 7px;
+        overflow-wrap: break-word;
+      }
+
+      & > .time {
+        font-size: 5px;
+        visibility: hidden;
+      }
+    }
   }
 
   & > .retryButton {
-    background-color: transparent;
-    position: absolute;
+    appearance: none;
     display: flex;
-    align-items: center;
+    align-self: end;
     gap: 4px;
-    font-size: 12px;
-    color: red;
-    line-height: 1.2;
-    text-wrap: nowrap;
-    bottom: -22px;
-    right: 0;
+    background-color: transparent;
     cursor: pointer;
+
+    & > .retryButtonText {
+      margin: 0;
+      color: red;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.2;
+    }
   }
 }
