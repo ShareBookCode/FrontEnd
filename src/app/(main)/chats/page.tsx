@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { ChatWindow } from '@widgets/chat-window'
+import { mockData } from '@widgets/chat-window/model'
 // import Image from 'next/image'
 import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
-import { mockData } from '@widgets/chat-window/model'
 
 export default function Page() {
   const chatId = 'test-chat-id'

@@ -1,6 +1,6 @@
 import styles from './chat-window.module.scss'
-import type { MessageData } from '@shared/lib/types/chat'
 import { ChatMessage } from '@features/chat-message/index'
+import type { MessageData } from '@shared/lib/types/chat'
 
 interface Props {
   data: MessageData[]
@@ -14,7 +14,6 @@ export function ChatWindow({ data, currentUserId }: Props) {
           message={chat}
           key={chat.message + chat.id + chat.status}
           currentUserId={currentUserId}
-
         />
       ))}
     </div>
