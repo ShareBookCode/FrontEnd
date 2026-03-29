@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { ChatWindow } from '@entities/chat'
-import { mockData } from '@entities/chat'
+import { ChatWindow } from '@widgets/chat-window'
+import { mockData } from '@widgets/chat-window'
 // import Image from 'next/image'
 import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
