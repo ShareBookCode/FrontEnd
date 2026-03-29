@@ -1,3 +1,5 @@
+export { userCheck } from './api/user-check'
+export { createUser } from './api/create-user'
 export { registrationReducer } from './model/slice'
 export {
   selectRegistrationDraftData,
@@ -10,6 +12,7 @@ export {
   clearRegistrationDraft,
 } from './model/slice'
 export type {
+  CreateUserPayload,
   RegisterUserPayload,
   RegistrationDraft,
   RegistrationDraftPatch,

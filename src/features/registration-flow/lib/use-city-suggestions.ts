@@ -11,9 +11,9 @@ export const useCitySuggestions = () => {
     if (value.length < MIN_CITY_LENGTH) return
 
     timeoutRef.current = setTimeout(async () => {
-      const response = await getListCities(value)
-      const results: Cities[] = Array.isArray(response.data.results)
-        ? response.data.results
+      const response = await getListCities({ search: value, lang: 'ru' })
+      const results: Cities[] = Array.isArray(response.results)
+        ? response.results
         : []
 
       setCities(results)

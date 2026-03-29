@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { NextResponse } from 'next/server'
 
 export interface AuthUserPayload {
   login: string
@@ -16,6 +15,5 @@ export const authUser = async (payload: AuthUserPayload) => {
     },
   })
 
-  console.log(response.data)
-  return NextResponse.json(response.data)
+  return response.data
 }

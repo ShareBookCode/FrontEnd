@@ -1,7 +1,7 @@
 import z from 'zod'
-import axios from 'axios'
 import {
   EmailErrorCode,
+  userCheck,
   ValidateRegistrationResult,
 } from '@/entities/registration'
 
@@ -20,33 +20,15 @@ export const validateEmail = async (
     }
   }
 
-  try {
-    await axios.post(`/api/user/check`, null, {
-      params: {
-        email: parsedEmail.data,
-      },
-    })
+  const result = await userCheck({ email: parsedEmail.data })
 
-    return { success: true }
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const status = error.response?.status
-
-      if (status === 400 || status === 409) {
-        return {
-          success: false,
-          field: 'email',
-          error: 'busy_email',
-        }
-      }
-    }
-
-    console.error('Emaol validation request failed:', error)
-
+  if (!result.success) {
     return {
       success: false,
       field: 'email',
-      error: 'email_check_failed',
+      error: result.error,
     }
   }
+
+  return { success: true }
 }
