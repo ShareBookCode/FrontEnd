@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { ChatWindow } from '@widgets/chat-window'
 // import Image from 'next/image'
 import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
+import { mockData } from '@widgets/chat-window/model'
 
 export default function Page() {
   const chatId = 'test-chat-id'
@@ -38,63 +40,78 @@ export default function Page() {
   if (isMessagesLoading || isUsersLoading) return <div>Загрузка...</div>
 
   return (
-    <div>
-      <h1>Чат (Тестовый режим)</h1>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '50px',
+        height: '100vh',
+        padding: '50px',
+      }}
+    >
+      {' '}
+      <div>
+        <h1>Чат (Тестовый режим)</h1>
 
-      {/* Список сообщений */}
-      <section>
-        {messages.length === 0 && <p>Сообщений пока нет</p>}
-        {messages.map(msg => {
-          const sender = users.find(u => u.id === msg.senderId.id)
-          return (
-            <div key={msg.id}>
-              {/* <Image
-                src={sender?.avatarUrl || 'https://via.placeholder.com/30'}
-                alt='avatar'
-                width={30}
-                height={30}
-              /> */}
-              <strong>{sender?.name || 'Система'}: </strong>
-              <span>{msg.text}</span>
-              <small> [{new Date(msg.timestamp).toLocaleTimeString()}]</small>
-            </div>
-          )
-        })}
-      </section>
+        {/* Список сообщений */}
+        <section>
+          {messages.length === 0 && <p>Сообщений пока нет</p>}
+          {messages.map(msg => {
+            const sender = users.find(u => u.id === msg.senderId.id)
+            return (
+              <div key={msg.id}>
+                {/* <Image
+          src={sender?.avatarUrl || 'https://via.placeholder.com/30'}
+          alt='avatar'
+          width={30}
+          height={30}
+        /> */}
+                <strong>{sender?.name || 'Система'}: </strong>
+                <span>{msg.text}</span>
+                <small> [{new Date(msg.timestamp).toLocaleTimeString()}]</small>
+              </div>
+            )
+          })}
+        </section>
 
-      <hr />
+        <hr />
 
-      {/* Поле ввода */}
-      <footer>
-        <input
-          type='text'
-          value={inputText}
-          onChange={e => setInputText(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleSend()}
-          placeholder='Введите сообщение...'
-        />
-        <button onClick={handleSend}>Отправить</button>
-      </footer>
+        {/* Поле ввода */}
 
-      <hr />
+        <footer>
+          <input
+            type='text'
+            value={inputText}
+            onChange={e => setInputText(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleSend()}
+            placeholder='Введите сообщение...'
+          />
+          <button onClick={handleSend}>Отправить</button>
+        </footer>
 
-      {/* Инфо-панель для теста */}
-      <details>
-        <summary>Отладочная информация</summary>
-        <p>Chat ID: {chatId}</p>
-        <p>Current User ID: {currentUserId}</p>
-        <p>Всего сообщений в кеше: {messages.length}</p>
-        <ul>
-          {users.map(u => (
-            <li key={u.id}>
-              {u.name} {' Online: '}
-              {messages.some(m => m.senderId.id === u.id && m.senderId.isOnline)
-                ? 'Да'
-                : 'Нет'}
-            </li>
-          ))}
-        </ul>
-      </details>
+        <hr />
+
+        {/* Инфо-панель для теста */}
+        <details>
+          <summary>Отладочная информация</summary>
+          <p>Chat ID: {chatId}</p>
+          <p>Current User ID: {currentUserId}</p>
+          <p>Всего сообщений в кеше: {messages.length}</p>
+          <ul>
+            {users.map(u => (
+              <li key={u.id}>
+                {u.name} {' Online: '}
+                {messages.some(
+                  m => m.senderId.id === u.id && m.senderId.isOnline,
+                )
+                  ? 'Да'
+                  : 'Нет'}
+              </li>
+            ))}
+          </ul>
+        </details>
+      </div>
+      <ChatWindow data={mockData} currentUserId={currentUserId} />
     </div>
   )
 }

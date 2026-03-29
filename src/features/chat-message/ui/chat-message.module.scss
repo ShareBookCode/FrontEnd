@@ -1,0 +1,91 @@
+@use '@styles/variables' as *;
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 14px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  min-height: 0;
+  gap: 5px;
+  font-size: 16px;
+  border-radius: 10px;
+  max-width: 53%;
+  font-size: 16px;
+}
+
+.time {
+  align-self: flex-end;
+  min-width: 34px;
+  font-size: 12px;
+}
+
+.message {
+  width: fit-content;
+  max-width: 92%;
+  word-break: break-word;
+}
+
+.received {
+  background-color: $background-light-gray;
+  align-self: flex-start;
+  color: $text-heading;
+
+  & > .time {
+    color: $text-secondary;
+  }
+}
+
+.send {
+  background-color: $color-primary;
+  align-self: flex-end;
+  color: $background-primary;
+
+  & > .time {
+    color: $background-primary;
+  }
+}
+
+.error {
+  box-sizing: border-box;
+  position: relative;
+  min-width: 55px;
+  background-color: $background-light-gray;
+  color: $text-secondary;
+  align-self: end;
+  margin-top: 16px;
+
+  & > .message {
+    overflow-wrap: break-word;
+  }
+
+  & > .time {
+    visibility: hidden;
+    min-width: 17px;
+  }
+
+  & > .errorIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -23px;
+    width: 18px;
+    height: 18px;
+  }
+
+  & > .retryButton {
+    background-color: transparent;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: red;
+    line-height: 1.2;
+    text-wrap: nowrap;
+    bottom: -22px;
+    right: 0;
+    cursor: pointer;
+  }
+}
