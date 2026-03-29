@@ -84,7 +84,7 @@ export interface BookSchema {
   }
   // Ветка детальной информации о конкретной книге
   details: {
-    data: Book | null
+    data: GetBook | null
     isLoading: boolean
     error: string | null
   }

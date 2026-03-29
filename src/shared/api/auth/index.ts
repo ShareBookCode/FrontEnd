@@ -15,5 +15,18 @@ export const authUser = async (payload: AuthUserPayload) => {
     },
   })
 
+  console.log(response.data.token)
+
+  const user = await axios.get(`${process.env.BACKEND_URL}/user`, {
+    headers: {
+      'X-Project-Token': process.env.BACKEND_TOKEN,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${response.data.token}`,
+      accept: 'application/json',
+    },
+  })
+
+  console.log(user.data)
+
   return response.data
 }
