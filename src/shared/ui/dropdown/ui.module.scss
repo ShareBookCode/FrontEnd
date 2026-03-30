@@ -1,3 +1,5 @@
+@use '@styles/variables' as *;
+
 .root {
   position: relative;
 }
@@ -11,9 +13,9 @@
   left: 0;
   top: calc(100% + 10px);
   width: 100%;
-  background: #fff;
+  background: $background-primary;
   border-radius: 9px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: $shadow-dropdown;
   z-index: 50;
   overflow: hidden;
 }
