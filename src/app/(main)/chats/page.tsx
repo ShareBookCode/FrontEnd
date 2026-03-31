@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { ChatWindow } from '@widgets/chat-window'
-import { mockData } from '@widgets/chat-window'
 // import Image from 'next/image'
 import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
@@ -15,6 +14,8 @@ export default function Page() {
 
   const { data: messages = [], isLoading: isMessagesLoading } =
     useGetMessagesQuery(chatId)
+
+  console.log('messages', messages)
 
   const { data: users = [], isLoading: isUsersLoading } = useGetUsersQuery()
 
@@ -111,7 +112,7 @@ export default function Page() {
           </ul>
         </details>
       </div>
-      <ChatWindow data={mockData} currentUserId={currentUserId} />
+      <ChatWindow data={messages} currentUserId={currentUserId} />
     </div>
   )
 }

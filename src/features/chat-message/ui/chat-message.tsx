@@ -1,19 +1,19 @@
 import styles from './chat-message.module.scss'
 
 import clsx from 'clsx'
+import type { Message } from '@entities/chat'
 
 import { onest } from '@shared/assets/fonts'
-import type { MessageData } from '@shared/lib/types/chat'
 import NotificationsIcon from '@shared/assets/icons/notification.svg'
 import RetryIcon from '@shared/assets/icons/retry.svg'
 
 interface Props {
-  message: MessageData
+  message: Message
   currentUserId: string
 }
 
 export function ChatMessage({ message, currentUserId }: Props) {
-  const isOwnMessage = message.senderId === currentUserId
+  const isOwnMessage = message.senderId.id === currentUserId
   const isError = message.status === 'error'
   return (
     <>
@@ -35,7 +35,7 @@ export function ChatMessage({ message, currentUserId }: Props) {
             </>
           )}
           <div className={styles.messageContainer}>
-            <p className={styles.message}>{message.message}</p>
+            <p className={styles.message}>{message.text}</p>
             <p className={styles.time}>{message.timestamp}</p>
           </div>
         </div>
