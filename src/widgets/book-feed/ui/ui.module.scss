@@ -1,7 +1,22 @@
+@use '@styles/variables' as *;
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 242px);
   gap: 30px;
   justify-content: center;
   padding: 30px 0;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 60px 0;
+}
+
+.statusText {
+  font-size: 16px;
+  color: $text-secondary;
 }

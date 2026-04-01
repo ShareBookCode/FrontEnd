@@ -26,3 +26,4 @@ export {
   selectBookDetailsError,
 } from './model/selectors'
 export { BookPreviewCard } from './ui/ui'
+export { BookPreviewSkeleton } from './ui/skeleton'
