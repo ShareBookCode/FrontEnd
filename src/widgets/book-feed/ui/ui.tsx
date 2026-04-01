@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '@/shared/hooks'
+import styles from './ui.module.scss'
 import {
   fetchBooksCatalog,
   selectBookCatalogItems,
   BookPreviewCard,
 } from '@/entities/book'
-import styles from './ui.module.scss'
+import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 
 export function BookFeed() {
   const dispatch = useAppDispatch()
