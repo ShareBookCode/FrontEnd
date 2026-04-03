@@ -14,7 +14,10 @@ const passwordSchema = z
 export const validatePassword = (
   password: FormDataEntryValue,
   repeatPassword: FormDataEntryValue,
-): ValidateRegistrationResult<PasswordErrorCode> => {
+): ValidateRegistrationResult<
+  PasswordErrorCode,
+  'password' | 'repeat-password'
+> => {
   const parsedPassword = passwordSchema.safeParse(password)
 
   if (!parsedPassword.success) {

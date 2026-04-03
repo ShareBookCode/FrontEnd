@@ -1,7 +1,7 @@
 'use server'
 
 import { BookPreviewCard } from '@/entities/book'
-import { getUser } from '@/shared/api/user'
+// import { getUser } from '@/shared/api/user'
 
 const bookPreview = {
   id: '2',
@@ -16,10 +16,9 @@ const bookPreview = {
 }
 
 export default async function Page() {
-  const user = await getUser()
+  // const user = await getUser()
   return (
     <div style={{ padding: '20px' }}>
-      {user.name}
       <BookPreviewCard bookPreview={bookPreview} />
     </div>
   )

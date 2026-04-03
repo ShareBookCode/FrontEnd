@@ -13,7 +13,7 @@ const nameSchema = z
 
 export const validateName = (
   name: string,
-): ValidateRegistrationResult<NameErrorCode> => {
+): ValidateRegistrationResult<NameErrorCode, 'name'> => {
   const parsedName = nameSchema.safeParse(name)
 
   if (!parsedName.success) {

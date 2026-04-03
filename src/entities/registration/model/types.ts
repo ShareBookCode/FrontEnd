@@ -65,10 +65,13 @@ export type RegistrationErrorCode =
   | PasswordErrorCode
   | CityErrorCode
 
-export type ValidateRegistrationResult<E = RegistrationErrorCode> =
+export type ValidateRegistrationResult<
+  E = RegistrationErrorCode,
+  F = RegistrationField,
+> =
   | { success: true }
   | {
       success: false
-      field: RegistrationField
+      field: F
       error: E
     }

@@ -25,8 +25,8 @@ export const updateRegistrationDraft = createAsyncThunk(
 export const clearRegistrationDraft = createAsyncThunk(
   'registrationDraft/clearDraft',
   async () => {
-    const response = await axios.delete('/api/registration-draft')
-    return response.data as RegistrationDraft
+    await axios.delete('/api/registration-draft')
+    return initialState.draft.data
   },
 )
 

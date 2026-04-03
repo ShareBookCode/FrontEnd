@@ -9,7 +9,7 @@ const emailSchema = z.string().email('invalid_email')
 
 export const validateEmail = async (
   email: string,
-): Promise<ValidateRegistrationResult<EmailErrorCode>> => {
+): Promise<ValidateRegistrationResult<EmailErrorCode, 'email'>> => {
   const parsedEmail = emailSchema.safeParse(email)
 
   if (!parsedEmail.success) {

@@ -6,8 +6,8 @@ import {
 export const validateCity = (
   city: string,
   place: string,
-): ValidateRegistrationResult<CityErrorCode> => {
-  if (place.length === 0) {
+): ValidateRegistrationResult<CityErrorCode, 'city'> => {
+  if (place.length === 0 && city.length !== 0) {
     return {
       success: false,
       field: 'city',
