@@ -1,7 +1,9 @@
 import axios from 'axios'
-import { CreateUserPayload } from '../model/types'
+import { RegisterUserPayload } from '../model/types'
 
-export const createUser = async (payload: CreateUserPayload): Promise<void> => {
+export const createUser = async (
+  payload: RegisterUserPayload,
+): Promise<void> => {
   try {
     await axios.post(`${process.env.BACKEND_URL}/user`, payload, {
       headers: {

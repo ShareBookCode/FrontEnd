@@ -1,28 +1,20 @@
 export const EMPTY_REGISTRATION_DRAFT: RegistrationDraft = {
-  email: '',
+  login: '',
   name: '',
   city: '',
   place: '',
 }
 
-export interface CreateUserPayload {
-  login: string
-  psw: string
-  name: string
-  city: string
-  place: string
-}
-
 export interface RegisterUserPayload {
-  email: string
+  login: string
   name: string
   city: string
   place: string
-  password: string
+  psw: string
 }
 
 export interface RegistrationDraft {
-  email: string
+  login: string
   name: string
   city: string
   place: string

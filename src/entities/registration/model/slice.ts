@@ -33,7 +33,7 @@ export const clearRegistrationDraft = createAsyncThunk(
 export const initialState: RegistrationSchema = {
   draft: {
     data: {
-      email: '',
+      login: '',
       name: '',
       city: '',
       place: '',

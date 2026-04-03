@@ -12,7 +12,7 @@ import { useAppSelector } from '@/shared/lib/hooks'
 
 export function EmailStep({ status }: StepProps) {
   const draft = useAppSelector(selectRegistrationDraftData)
-  const [email, setEmail] = useState(draft.email)
+  const [email, setEmail] = useState(draft.login)
   const isEmailError = !status.success && status.field == 'email'
 
   return (

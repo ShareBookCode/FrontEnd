@@ -12,7 +12,6 @@ export {
   clearRegistrationDraft,
 } from './model/slice'
 export type {
-  CreateUserPayload,
   RegisterUserPayload,
   RegistrationDraft,
   RegistrationDraftPatch,

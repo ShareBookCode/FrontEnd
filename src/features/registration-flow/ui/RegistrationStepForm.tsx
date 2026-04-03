@@ -42,10 +42,10 @@ export function RegistrationStepForm({ step }: { step: RegistrationStep }) {
       dispatch(updateRegistrationDraft(draftPatchByStep))
       updateParam('step', nextStep, 'push')
     } else if (!nextStep && result.success) {
-      const password = formData.get('password')?.toString() || ''
+      const psw = formData.get('password')?.toString() || ''
       const registerUserPayload: RegisterUserPayload = {
         ...draft,
-        password,
+        psw,
       }
 
       dispatch(clearRegistrationDraft())

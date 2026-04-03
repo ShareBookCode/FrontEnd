@@ -8,7 +8,7 @@ export const getDraftPatchByStep = (
   switch (step) {
     case 'email':
       return {
-        email: formData.get('email')?.toString() || '',
+        login: formData.get('email')?.toString() || '',
       }
 
     case 'name':
