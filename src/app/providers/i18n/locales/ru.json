@@ -11,5 +11,65 @@
     "linkAriaLabel": "Перейти к книге",
     "buttonFavoriteAriaLabel": "Добавить в избранное",
     "imageAlt": "Обложка книги"
+  },
+  "Authentication": {
+    "TitleAboutShareBook": {
+      "onePart": "Станьте частью",
+      "twoPart": "ShareBook.",
+      "threePart": "Отдавайте. Меняйтесь.",
+      "fourthPart": "Читайте."
+    },
+    "TitleRegistrationWithEmail": "Регистрация через почту",
+
+    "EmailPlaceholder": "Почта",
+    "NamePlaceholder": "Имя",
+    "CityPlaceholder": "Город (необязательно)",
+    "PasswordPlaceholder": "Пароль",
+    "RepeatPasswordPlaceholder": "Повторите пароль",
+
+    "ButtonNextStep": "Далее",
+    "ButtonRegistration": "Зарегестрироваться",
+
+    "ErrorsField": {
+      "invalid_email": {
+        "title": "Некорректный email",
+        "description": "Проверьте формат адреса электронной почты и попробуйте снова."
+      },
+      "busy_email": {
+        "title": "Email уже используется",
+        "description": "Этот адрес электронной почты уже зарегистрирован."
+      },
+
+      "short_name": {
+        "title": "Слишком короткое имя",
+        "description": "Имя должно содержать больше символов."
+      },
+      "long_name": {
+        "title": "Слишком длинное имя",
+        "description": "Имя превышает допустимую длину."
+      },
+      "invalid_name": {
+        "title": "Некорректное имя",
+        "description": "Допускаются только буквы. Цифры и спец символы использовать нельзя"
+      },
+
+      "invalid_city": {
+        "title": "Некорректный адрес",
+        "description": "Выберите город из списка"
+      },
+
+      "short_password": {
+        "title": "Слишком короткий пароль",
+        "description": "Пароль должен содержать минимум 8 символов."
+      },
+      "weak_password": {
+        "title": "Слишком простой пароль",
+        "description": "Пароль недостаточно надежен. Попробуйте сочетание букв, цифр и символов."
+      },
+      "password_mismatch": {
+        "title": "Пароли не совпадают",
+        "description": "Пароли не совпадают. Повторите попытку."
+      }
+    }
   }
 }

@@ -1,0 +1,16 @@
+@use '@styles/variables' as *;
+
+.footer {
+  width: 527px;
+  margin-bottom: 50px;
+
+  font-size: 16px;
+  font-weight: 400;
+  color: $text-secondary;
+  text-align: center;
+
+  a {
+    text-decoration: underline;
+    color: $text-secondary;
+  }
+}
