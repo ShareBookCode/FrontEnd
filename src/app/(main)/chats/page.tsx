@@ -55,26 +55,8 @@ export default function Page() {
         <h1>Чат (Тестовый режим)</h1>
 
         {/* Список сообщений */}
-        <section>
-          {messages.length === 0 && <p>Сообщений пока нет</p>}
-          {messages.map(msg => {
-            const sender = users.find(u => u.id === msg.senderId.id)
-            return (
-              <div key={msg.id}>
-                {/* <Image
-          src={sender?.avatarUrl || 'https://via.placeholder.com/30'}
-          alt='avatar'
-          width={30}
-          height={30}
-        /> */}
-                <strong>{sender?.name || 'Система'}: </strong>
-                <span>{msg.text}</span>
-                <small> [{new Date(msg.timestamp).toLocaleTimeString()}]</small>
-              </div>
-            )
-          })}
-        </section>
 
+        <ChatWindow data={messages} currentUserId={currentUserId} />
         <hr />
 
         {/* Поле ввода */}
@@ -112,7 +94,6 @@ export default function Page() {
           </ul>
         </details>
       </div>
-      <ChatWindow data={messages} currentUserId={currentUserId} />
     </div>
   )
 }

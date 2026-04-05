@@ -36,7 +36,13 @@ export function ChatMessage({ message, currentUserId }: Props) {
           )}
           <div className={styles.messageContainer}>
             <p className={styles.message}>{message.text}</p>
-            <p className={styles.time}>{message.timestamp}</p>
+            <p className={styles.time}>
+              {new Date(message.timestamp).toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+              })}
+            </p>
           </div>
         </div>
 
