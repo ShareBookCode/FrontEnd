@@ -10,8 +10,10 @@ import {
   BookPreviewCard,
   BookPreviewSkeleton,
 } from '@/entities/book'
-import { useAppDispatch, useAppSelector } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { PrimaryButton } from '@/shared/ui/primary-button'
+
+const SKELETON_PLACEHOLDER_COUNT = 10
 
 export function BookFeed() {
   const dispatch = useAppDispatch()
@@ -26,7 +28,7 @@ export function BookFeed() {
   if (isLoading) {
     return (
       <div className={styles.grid}>
-        {Array.from({ length: 10 }).map((_, i) => (
+        {Array.from({ length: SKELETON_PLACEHOLDER_COUNT }).map((_, i) => (
           <BookPreviewSkeleton key={i} />
         ))}
       </div>
