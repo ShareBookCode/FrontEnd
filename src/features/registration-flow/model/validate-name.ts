@@ -1,0 +1,30 @@
+import z from 'zod'
+import {
+  NameErrorCode,
+  ValidateRegistrationResult,
+} from '@/entities/registration'
+
+const nameSchema = z
+  .string()
+  .trim()
+  .min(2, 'short_name')
+  .max(50, 'long_name')
+  .regex(/^[\p{L}\s'-]+$/u, 'invalid_name')
+
+export const validateName = (
+  name: string,
+): ValidateRegistrationResult<NameErrorCode, 'name'> => {
+  const parsedName = nameSchema.safeParse(name)
+
+  if (!parsedName.success) {
+    return {
+      success: false,
+      field: 'name',
+      error: parsedName.error.issues[0].message as NameErrorCode,
+    }
+  }
+
+  return {
+    success: true,
+  }
+}
