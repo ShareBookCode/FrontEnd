@@ -1,8 +1,11 @@
+'use client'
+
 import clsx from 'clsx'
 
 import StarVerifiedIcon from '@icons/star-verified.svg'
-import { CountBadge } from '@shared/ui/count-badge'
+
 import styles from './ui.module.scss'
+import { CountBadge } from '@shared/ui/count-badge'
 
 export interface UserChatCardProps {
   name: string

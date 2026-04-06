@@ -1,3 +1,5 @@
+'use client'
+
 import type { CSSProperties } from 'react'
 
 import styles from './ui.module.scss'
@@ -12,9 +14,7 @@ export function CountBadge({ count, color }: CountBadgeProps) {
     <span
       className={styles.badge}
       aria-label={`${count} непрочитанных сообщений`}
-      style={
-        color ? ({ '--badge-color': color } as CSSProperties) : undefined
-      }
+      style={color ? ({ '--badge-color': color } as CSSProperties) : undefined}
     >
       {count}
     </span>
