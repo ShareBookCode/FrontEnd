@@ -4,6 +4,7 @@ import { useState } from 'react'
 // import Image from 'next/image'
 import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
+import { UserChatCard } from '@widgets/user-chat-card'
 
 export default function Page() {
   const chatId = 'test-chat-id'
@@ -94,6 +95,64 @@ export default function Page() {
             </li>
           ))}
         </ul>
+      </details>
+
+      <hr />
+
+      {/* DEV: Превью UserChatCard */}
+      <details open>
+        <summary>
+          <strong>DEV — UserChatCard states</strong>
+        </summary>
+        <div
+          style={{
+            maxWidth: 414,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+            marginTop: 12,
+          }}
+        >
+          {/* Unactive — без непрочитанных */}
+          <UserChatCard
+            name='Евгения'
+            isVerified
+            lastMessage='Стивен Хокинг'
+            bookTitle='«Краткие ответы на большие вопросы»'
+            timestamp='13:15'
+          />
+
+          {/* Unactive — с непрочитанными */}
+          <UserChatCard
+            name='Евгения'
+            isVerified
+            lastMessage='Стивен Хокинг'
+            bookTitle='«Краткие ответы на большие вопросы»'
+            timestamp='13:15'
+            unreadCount={2}
+          />
+
+          {/* Active — с непрочитанными */}
+          <UserChatCard
+            name='Евгения'
+            isVerified
+            lastMessage='Стивен Хокинг'
+            bookTitle='«Краткие ответы на большие вопросы»'
+            timestamp='13:15'
+            unreadCount={2}
+            isActive
+          />
+
+          {/* Active — без непрочитанных */}
+          <UserChatCard
+            name='Евгения'
+            isVerified
+            lastMessage='Стивен Хокинг'
+            bookTitle='«Краткие ответы на большие вопросы»'
+            timestamp='13:15'
+            isActive
+          />
+        </div>
       </details>
     </div>
   )

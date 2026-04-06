@@ -1,7 +1,3 @@
-// ============================================================
-// Design tokens — ShareBook
-// ============================================================
-
 // --- Brand ---
 $color-primary: #2a7fff;
 $color-primary-dark: #355fff;
@@ -10,22 +6,26 @@ $color-primary-80: rgba(42, 127, 255, 0.8);
 $color-primary-15: rgba(42, 127, 255, 0.15);
 
 $color-danger: #ff2a2a;
-$color-danger-dark: #d32b2b;
+$color-danger-dark: #d32b2b; // dev token, not in Figma — used for danger hover
 $color-danger-80: rgba(255, 42, 42, 0.8);
 
 // --- Base ---
 $color-white: #ffffff;
 $color-black: #000000;
+$color-dark-grey: #303030;
+$color-grey: #909090;
+$color-light-grey: #f1f4f6;
 
 // --- Text ---
 $text-heading: $color-black;
-$text-primary: #303030;
-$text-secondary: #909090;
+$text-primary: $color-dark-grey;
+$text-secondary: $color-grey;
+$text-muted: #9b9b9b;
 $text-accent: $color-primary;
 
 // --- Backgrounds ---
 $background-primary: $color-white;
-$background-light-gray: #f1f4f6;
+$background-light-gray: $color-light-grey;
 $background-header: rgba(250, 250, 250, 0.8);
 $background-gradient: linear-gradient(
   180deg,

@@ -1,0 +1,69 @@
+export const EMPTY_REGISTRATION_DRAFT: RegistrationDraft = {
+  login: '',
+  name: '',
+  city: '',
+  place: '',
+}
+
+export interface RegisterUserPayload {
+  login: string
+  name: string
+  city: string
+  place: string
+  psw: string
+}
+
+export interface RegistrationDraft {
+  login: string
+  name: string
+  city: string
+  place: string
+}
+
+export type RegistrationDraftPatch = Partial<RegistrationDraft>
+
+export interface RegistrationSchema {
+  draft: {
+    data: RegistrationDraft
+    isLoading: boolean
+    error: string | null
+  }
+}
+
+export type RegistrationField =
+  | 'email'
+  | 'name'
+  | 'password'
+  | 'city'
+  | 'repeat-password'
+
+export type EmailErrorCode =
+  | 'invalid_email'
+  | 'busy_email'
+  | 'email_check_failed'
+
+export type NameErrorCode = 'short_name' | 'long_name' | 'invalid_name'
+
+export type CityErrorCode = 'invalid_city'
+
+export type PasswordErrorCode =
+  | 'short_password'
+  | 'weak_password'
+  | 'password_mismatch'
+
+export type RegistrationErrorCode =
+  | EmailErrorCode
+  | NameErrorCode
+  | PasswordErrorCode
+  | CityErrorCode
+
+export type ValidateRegistrationResult<
+  E = RegistrationErrorCode,
+  F = RegistrationField,
+> =
+  | { success: true }
+  | {
+      success: false
+      field: F
+      error: E
+    }

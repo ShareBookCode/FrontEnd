@@ -1,4 +1,7 @@
 import clsx from 'clsx'
+
+import StarVerifiedIcon from '@icons/star-verified.svg'
+import { CountBadge } from '@shared/ui/count-badge'
 import styles from './ui.module.scss'
 
 export interface UserChatCardProps {
@@ -46,10 +49,10 @@ export function UserChatCard({
         <div className={styles.nameRow}>
           <span className={styles.name}>{name}</span>
           {isVerified && (
-            <span
-              className={styles.verifiedBadge}
-              role='img'
+            <StarVerifiedIcon
               aria-label='Верифицированный пользователь'
+              width={18}
+              height={18}
             />
           )}
         </div>
@@ -69,11 +72,8 @@ export function UserChatCard({
       )}
 
       {hasUnread && (
-        <span
-          className={styles.badge}
-          aria-label={`${unreadCount} непрочитанных сообщений`}
-        >
-          {unreadCount}
+        <span className={styles.badgeWrapper}>
+          <CountBadge count={unreadCount!} />
         </span>
       )}
     </button>

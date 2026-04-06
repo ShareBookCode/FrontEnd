@@ -8,7 +8,7 @@
   width: 100%;
   min-height: 90px;
   padding: 12px;
-  padding-right: 52px; // резервируем место для time (absolute)
+  padding-right: 52px;
 
   border: none;
   border-radius: 12px;
@@ -70,25 +70,6 @@
   white-space: nowrap;
 }
 
-// TODO: заменить на SVG-иконку когда появится в assets
-.verifiedBadge {
-  display: inline-block;
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: $color-primary;
-
-  &::after {
-    content: '✓';
-    display: block;
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 18px;
-  }
-}
 
 .message {
   margin: 0;
@@ -120,23 +101,8 @@
   white-space: nowrap;
 }
 
-.badge {
+.badgeWrapper {
   position: absolute;
-  bottom: 25px;
-  right: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 4px;
-
-  border-radius: 12px;
-  background-color: $color-primary;
-
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 100%;
-  color: #fff;
-  white-space: nowrap;
+  bottom: 23px;
+  right: 16px;
 }

@@ -1,0 +1,16 @@
+@use '@styles/variables' as *;
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--badge-color, #{$color-primary});
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 100%;
+  color: $color-white;
+  white-space: nowrap;
+}
