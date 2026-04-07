@@ -9,6 +9,8 @@ export type CreateBookFormValues = {
   year: string
   exchangeType: ExchangeType
   condition: BookCondition
+  description: string
+  location: string
 }
 
 export const GENRE_OPTIONS: { value: Category; label: string }[] = [

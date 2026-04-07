@@ -1,10 +1,6 @@
-import { mockData } from '@/widgets/book-card/model'
-import { BookCard } from '@/widgets/book-card'
+'use client'
+import { CreateBookForm } from '@/features/create-book'
 
 export default function Page() {
-  return (
-    <div>
-      <BookCard book={mockData} />
-    </div>
-  )
+  return <CreateBookForm />
 }

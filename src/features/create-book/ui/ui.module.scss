@@ -17,9 +17,9 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
   width: 100%;
-  max-width: 530px;
+  max-width: 500px;
 }
 
 .field {
@@ -84,7 +84,7 @@
 // Cover upload
 .coverUpload {
   display: flex;
-  gap: 16px;
+  gap: 32px;
   align-items: flex-start;
 }
 
@@ -119,11 +119,121 @@
   color: $text-secondary;
 }
 
-.coverInput {
+.hiddenInput {
   display: none;
+}
+
+// Additional photos
+.photoGrid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.photoThumb {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 9px;
+  overflow: hidden;
+  background: $background-light-gray;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.photoRemove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.photoAdd {
+  width: 80px;
+  height: 80px;
+  border-radius: 9px;
+  background: $background-light-gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.photoAddIcon {
+  color: $text-secondary;
+  width: 28px;
+  height: 28px;
+}
+
+// Textarea
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 9px;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: inherit;
+  background: $background-light-gray;
+  border: 2px solid transparent;
+  color: $text-heading;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.15s ease;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+
+  &:focus {
+    border-color: rgb(42, 127, 255, 0.8);
+    outline: none;
+  }
+}
+
+// Map
+.map {
+  width: 100%;
+  height: 200px;
+  border-radius: 9px;
+  border: none;
+  margin-top: 4px;
 }
 
 .submitButton {
   margin-top: 8px;
   width: 100%;
+}
+
+.disclaimer {
+  text-align: center;
+  font-size: 13px;
+  color: $text-secondary;
+  line-height: 1.5;
+}
+
+.disclaimerLink {
+  color: $text-secondary;
+  text-decoration: underline;
+
+  &:hover {
+    color: $text-primary;
+  }
 }
