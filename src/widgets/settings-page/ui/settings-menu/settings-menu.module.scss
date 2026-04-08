@@ -1,0 +1,33 @@
+@use '@styles/variables' as *;
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 1330px;
+  margin: 0 auto;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 260px;
+  min-height: 100vh;
+  padding: 35px;
+  padding-left: 0;
+  border-right: 1px solid $background-light-gray;
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    min-height: 31px;
+    width: fit-content;
+  }
+}

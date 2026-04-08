@@ -1,3 +1,5 @@
+import { SettingsMenu } from '@widgets/settings-page'
+
 export default function Page() {
-  return <div>Welcome profile</div>
+  return <SettingsMenu />
 }

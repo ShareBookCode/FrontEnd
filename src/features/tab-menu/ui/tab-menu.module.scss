@@ -1,0 +1,40 @@
+@use '@styles/variables' as *;
+
+.menu {
+  display: flex;
+  flex-direction: column;
+
+  .item {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 10px;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+
+    &.itemActive {
+      color: $color-primary;
+      background: $background-light-gray;
+    }
+  }
+
+  .label {
+    color: $text-secondary;
+
+    &.labelActive {
+      color: $color-primary;
+    }
+  }
+
+  .icon {
+    &.iconActive {
+      path {
+        stroke: $color-primary;
+      }
+    }
+  }
+}
