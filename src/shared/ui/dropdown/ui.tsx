@@ -133,7 +133,7 @@ export function Dropdown({
         <div className={clsx(styles.dropdown, dropdownClassName)}>
           <div
             className={styles.dropdownInner}
-            onClick={handleDropdownInnerClick}
+            onClick={handleDropdownInnerClick} // зачем это
           >
             {children}
           </div>

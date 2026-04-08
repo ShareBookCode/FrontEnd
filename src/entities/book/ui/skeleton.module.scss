@@ -1,0 +1,51 @@
+@use '@styles/variables' as *;
+
+.card {
+  width: 202px;
+  padding: 20px 20px 8px 20px;
+}
+
+.cover {
+  width: 202px;
+  height: 304px;
+  border-radius: 4px;
+  background: $background-light-gray;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.line {
+  height: 14px;
+  border-radius: 4px;
+  background: $background-light-gray;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.title {
+  width: 80%;
+  margin-top: 8px;
+}
+
+.titleSecond {
+  width: 60%;
+  margin-top: 6px;
+}
+
+.author {
+  width: 50%;
+  margin-top: 8px;
+}
+
+.location {
+  width: 70%;
+  margin-top: 12px;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
