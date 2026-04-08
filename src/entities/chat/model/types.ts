@@ -17,7 +17,7 @@ export interface Message {
   chatId: string
   text: string
   senderId: UserOnline
-  status: 'received' | 'send' | 'error'
+  status: 'received' | 'send' | 'sending' | 'error'
   timestamp: number
   isRead: boolean
 }
