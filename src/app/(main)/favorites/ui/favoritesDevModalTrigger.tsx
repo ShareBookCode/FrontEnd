@@ -1,7 +1,7 @@
 'use client'
 
 import { MODAL_TYPES, openModal } from '@/entities/modal'
-import { useAppDispatch } from '@/shared/hooks'
+import { useAppDispatch } from '@/shared/lib/hooks'
 
 export function FavoritesDevModalTrigger() {
   const dispatch = useAppDispatch()

@@ -6,7 +6,7 @@ import {
   selectModalIsOpen,
   selectModalType,
 } from '@/entities/modal'
-import { useAppDispatch, useAppSelector } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { Modal } from '@/shared/ui/modal'
 
 export function FavoritesDevModalPreview() {

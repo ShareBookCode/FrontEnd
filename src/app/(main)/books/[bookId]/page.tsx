@@ -13,7 +13,7 @@ import {
   selectBookDetailsData,
   selectBookDetailsIsLoading,
 } from '@/entities/book'
-import { useAppDispatch, useAppSelector } from '@shared/hooks'
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 
 export default function BookPage() {
   const params = useParams()
