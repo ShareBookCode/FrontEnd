@@ -1,12 +1,26 @@
 import { http, HttpResponse } from 'msw'
-import type { User } from '@entities/user'
+import type { User, UserProfile } from '@entities/user'
+import profileAvatar from '@mocks/images/profile-avatar.jpg'
+
+const mockCurrentUser: UserProfile = {
+  id: 'user_1',
+  name: 'Анна Франс',
+  avatar: profileAvatar.src,
+  createdAt: Date.now(),
+  stats: {
+    given: 17,
+    exchanged: 21,
+  },
+  description:
+    'Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
+}
 
 const mockUsers: User[] = [
   {
-    id: 'user_1',
-    name: 'Иван Иванов (Вы)',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ivan',
-    createdAt: Date.now(),
+    id: mockCurrentUser.id,
+    name: mockCurrentUser.name,
+    avatar: mockCurrentUser.avatar,
+    createdAt: mockCurrentUser.createdAt,
   },
   {
     id: 'user_2',
@@ -23,6 +37,9 @@ const mockUsers: User[] = [
 ]
 
 export const userHandlers = [
+  http.get('/user', () => {
+    return HttpResponse.json(mockCurrentUser)
+  }),
   http.get('/users', () => {
     return HttpResponse.json(mockUsers)
   }),
