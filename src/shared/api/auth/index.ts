@@ -1,5 +1,6 @@
-import axios from 'axios'
 import { cookies } from 'next/headers'
+import { apiClient } from '../http'
+import { AUTH } from '../endpoints'
 
 export interface AuthUserPayload {
   login: string
@@ -7,16 +8,9 @@ export interface AuthUserPayload {
 }
 
 export const authUser = async (payload: AuthUserPayload) => {
-  const response = await axios.post(`${process.env.BACKEND_URL}/auth`, '', {
+  const { token } = await apiClient.post<{ token: string }>(AUTH, '', {
     params: payload,
-    headers: {
-      'X-Project-Token': process.env.BACKEND_TOKEN,
-      'Content-Type': 'application/json',
-      accept: '*/*',
-    },
   })
-
-  const token = response.data.token
   const cookieStore = await cookies()
 
   cookieStore.set('auth_token', token, {

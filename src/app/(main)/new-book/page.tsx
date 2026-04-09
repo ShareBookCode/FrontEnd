@@ -1,10 +1,9 @@
-import { mockData } from '@/widgets/book-card/model'
-import { BookCard } from '@/widgets/book-card'
+'use client'
 
 export default function Page() {
   return (
     <div>
-      <BookCard book={mockData} />
+      <h1>New Book Page</h1>
     </div>
   )
 }
