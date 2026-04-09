@@ -7,10 +7,30 @@ export type CreateBookFormValues = {
   language: string
   publisher: string
   year: string
+  pages: string
   exchangeType: ExchangeType
   condition: BookCondition
   description: string
   location: string
+}
+
+export type CreateBookPayload = {
+  title: string
+  /** UUIDs returned after uploading files as binary. TODO: implement file upload */
+  thumbnails?: string[]
+  description: string
+  publisher: string
+  year: number
+  pages: number
+  genres: string[]
+  authors: string[]
+  language: string
+  condition: string
+  exchangeType: string
+  location: {
+    city: string
+    district: string // TODO: extract district from location suggestions
+  }
 }
 
 export const GENRE_OPTIONS: { value: Category; label: string }[] = [

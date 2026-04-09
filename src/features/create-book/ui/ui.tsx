@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
 import ChevronIcon from '@icons/chevron.svg'
-import AddBookIcon from '@icons/add-book-icon.svg'
 import { createBookAction } from '../api'
+import { ImageUpload } from './image-upload'
 import {
   CONDITION_OPTIONS,
   EXCHANGE_TYPE_OPTIONS,
@@ -19,6 +19,7 @@ import { Dropdown } from '@shared/ui/dropdown'
 import { DropdownList } from '@shared/ui/dropdown-list'
 import { PrimaryButton } from '@shared/ui/primary-button'
 import { getListCities } from '@shared/api/city'
+import { ROUTES } from '@shared/config/routes'
 
 const INITIAL_VALUES: CreateBookFormValues = {
   title: '',
@@ -27,6 +28,7 @@ const INITIAL_VALUES: CreateBookFormValues = {
   language: '',
   publisher: '',
   year: '',
+  pages: '',
   exchangeType: 'free',
   condition: 'Good',
   description: '',
@@ -35,9 +37,21 @@ const INITIAL_VALUES: CreateBookFormValues = {
 
 const MIN_LOCATION_LENGTH = 3
 const DEBOUNCE_MS = 400
-const MAX_EXTRA_PHOTOS = 4
+const MAX_EXTRA_PHOTOS = 3
+
+// TODO: upload files as binary to file service, return UUIDs
+// Structure: thumbnails[0] = cover, thumbnails[1..3] = additional (max 4 total)
+async function uploadThumbnails(
+  cover: File | null,
+  photos: File[],
+): Promise<string[]> {
+  void cover
+  void photos
+  return []
+}
 
 export function CreateBookForm() {
+  const router = useRouter()
   const [values, setValues] = useState<CreateBookFormValues>(INITIAL_VALUES)
   const [coverFile, setCoverFile] = useState<File | null>(null)
   const [coverPreview, setCoverPreview] = useState<string | null>(null)
@@ -47,8 +61,6 @@ export function CreateBookForm() {
     { city: string; place: string }[]
   >([])
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const coverInputRef = useRef<HTMLInputElement>(null)
-  const photoInputRef = useRef<HTMLInputElement>(null)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const set = <K extends keyof CreateBookFormValues>(
@@ -56,27 +68,24 @@ export function CreateBookForm() {
     value: CreateBookFormValues[K],
   ) => setValues(prev => ({ ...prev, [key]: value }))
 
-  const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null
+  const handleAddCover = (file: File) => {
+    if (coverPreview) URL.revokeObjectURL(coverPreview)
     setCoverFile(file)
-    if (file) {
-      setCoverPreview(URL.createObjectURL(file))
-    } else {
-      setCoverPreview(null)
-    }
+    setCoverPreview(URL.createObjectURL(file))
   }
 
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null
-    if (!file) return
-    if (photoFiles.length >= MAX_EXTRA_PHOTOS) return
-    const preview = URL.createObjectURL(file)
+  const handleRemoveCover = () => {
+    if (coverPreview) URL.revokeObjectURL(coverPreview)
+    setCoverFile(null)
+    setCoverPreview(null)
+  }
+
+  const handleAddPhoto = (file: File) => {
     setPhotoFiles(prev => [...prev, file])
-    setPhotoPreviews(prev => [...prev, preview])
-    e.target.value = ''
+    setPhotoPreviews(prev => [...prev, URL.createObjectURL(file)])
   }
 
-  const removePhoto = (index: number) => {
+  const handleRemovePhoto = (index: number) => {
     URL.revokeObjectURL(photoPreviews[index])
     setPhotoFiles(prev => prev.filter((_, i) => i !== index))
     setPhotoPreviews(prev => prev.filter((_, i) => i !== index))
@@ -106,26 +115,39 @@ export function CreateBookForm() {
     }
   }, [])
 
+  const resetForm = () => {
+    setValues(INITIAL_VALUES)
+    if (coverPreview) URL.revokeObjectURL(coverPreview)
+    setCoverFile(null)
+    setCoverPreview(null)
+    photoPreviews.forEach(url => URL.revokeObjectURL(url))
+    setPhotoFiles([])
+    setPhotoPreviews([])
+    setLocationSuggestions([])
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
     try {
-      const formData = new FormData()
-      formData.append('title', values.title)
-      formData.append('author', values.author)
-      formData.append('genre', values.genre)
-      formData.append('language', values.language)
-      formData.append('publisher', values.publisher)
-      formData.append('year', values.year)
-      formData.append('exchangeType', values.exchangeType)
-      formData.append('condition', values.condition)
-      formData.append('description', values.description)
-      formData.append('location', values.location)
-      if (coverFile) {
-        formData.append('cover', coverFile)
-      }
-      photoFiles.forEach(file => formData.append('photos', file))
-      await createBookAction(formData)
+      const thumbnails = await uploadThumbnails(coverFile, photoFiles)
+      await createBookAction({
+        title: values.title,
+        description: values.description,
+        publisher: values.publisher,
+        year: Number(values.year),
+        pages: Number(values.pages),
+        genres: [values.genre],
+        authors: [values.author],
+        language: values.language,
+        condition: values.condition,
+        exchangeType: values.exchangeType,
+        thumbnails,
+        // TODO: extract district from location suggestions API response
+        location: { city: values.location, district: '' },
+      })
+      resetForm()
+      router.push(ROUTES.home)
     } finally {
       setIsSubmitting(false)
     }
@@ -258,6 +280,22 @@ export function CreateBookForm() {
           />
         </div>
 
+        {/* Количество страниц */}
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor='pages'>
+            Количество страниц
+          </label>
+          <Input
+            id='pages'
+            name='pages'
+            placeholder='256'
+            value={values.pages}
+            onChange={e => set('pages', e.target.value)}
+            type='number'
+            min='1'
+          />
+        </div>
+
         {/* Вид передачи */}
         <div className={styles.field}>
           <span className={styles.label}>Вид передачи</span>
@@ -305,80 +343,28 @@ export function CreateBookForm() {
         {/* Обложка */}
         <div className={styles.field}>
           <span className={styles.label}>Обложка</span>
-          <div className={styles.coverUpload}>
-            <button
-              type='button'
-              className={styles.coverPreview}
-              onClick={() => coverInputRef.current?.click()}
-              aria-label='Загрузить обложку'
-            >
-              {coverPreview ? (
-                <Image
-                  src={coverPreview}
-                  alt='Обложка книги'
-                  width={150}
-                  height={227}
-                  style={{ objectFit: 'cover' }}
-                />
-              ) : (
-                <ImageIcon className={styles.coverIcon} />
-              )}
-            </button>
-            <p className={styles.coverHint}>
-              Загрузите обложку из интернета, так мы сможем поддерживать
-              удобство поиска книги на платформе. Если в интернете не нашлось
-              вашей книги, постарайтесь сделать аккуратное фото обложки.
-            </p>
-            <input
-              ref={coverInputRef}
-              className={styles.hiddenInput}
-              type='file'
-              accept='image/*'
-              onChange={handleCoverChange}
-            />
-          </div>
+          <ImageUpload
+            images={coverPreview ? [coverPreview] : []}
+            max={1}
+            width={150}
+            height={227}
+            onAdd={handleAddCover}
+            onRemove={handleRemoveCover}
+            layout='stack'
+            hint='Загрузите обложку из интернета, так мы сможем поддерживать удобство поиска книги на платформе. Если в интернете не нашлось вашей книги, постарайтесь сделать аккуратное фото обложки.'
+          />
         </div>
 
         {/* Дополнительные фотографии */}
         <div className={styles.field}>
           <span className={styles.label}>Дополнительные фотографии</span>
-          <div className={styles.photoGrid}>
-            {photoPreviews.map((src, i) => (
-              <div key={i} className={styles.photoThumb}>
-                <Image
-                  src={src}
-                  alt={`Фото ${i + 1}`}
-                  width={80}
-                  height={80}
-                  style={{ objectFit: 'cover' }}
-                />
-                <button
-                  type='button'
-                  className={styles.photoRemove}
-                  onClick={() => removePhoto(i)}
-                  aria-label='Удалить фото'
-                >
-                  ×
-                </button>
-              </div>
-            ))}
-            {photoFiles.length < MAX_EXTRA_PHOTOS && (
-              <button
-                type='button'
-                className={styles.photoAdd}
-                onClick={() => photoInputRef.current?.click()}
-                aria-label='Добавить фото'
-              >
-                <AddBookIcon className={styles.photoAddIcon} />
-              </button>
-            )}
-          </div>
-          <input
-            ref={photoInputRef}
-            className={styles.hiddenInput}
-            type='file'
-            accept='image/*'
-            onChange={handlePhotoChange}
+          <ImageUpload
+            images={photoPreviews}
+            max={MAX_EXTRA_PHOTOS}
+            width={156}
+            height={156}
+            onAdd={handleAddPhoto}
+            onRemove={handleRemovePhoto}
           />
         </div>
 
@@ -466,46 +452,11 @@ export function CreateBookForm() {
 
         <p className={styles.disclaimer}>
           Выкладывая объявление вы соглашаетесь с правилами{' '}
-          <a href='/rules' className={styles.disclaimerLink}>
+          <a href={ROUTES.rules} className={styles.disclaimerLink}>
             ShareBook
           </a>
         </p>
       </form>
     </div>
-  )
-}
-
-function ImageIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox='0 0 24 24'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <rect
-        x='3'
-        y='3'
-        width='18'
-        height='18'
-        rx='3'
-        stroke='currentColor'
-        strokeWidth='1.5'
-      />
-      <circle
-        cx='8.5'
-        cy='8.5'
-        r='1.5'
-        stroke='currentColor'
-        strokeWidth='1.5'
-      />
-      <path
-        d='M3 15L8 10L11 13L14 10L21 17'
-        stroke='currentColor'
-        strokeWidth='1.5'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-    </svg>
   )
 }

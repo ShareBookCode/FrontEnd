@@ -1,0 +1,76 @@
+@use '@styles/variables' as *;
+
+.stackLayout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.stackSlots {
+  flex-shrink: 0;
+}
+
+.slots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.thumb {
+  position: relative;
+  border-radius: 9px;
+  overflow: hidden;
+  background: $background-light-gray;
+  flex-shrink: 0;
+}
+
+.remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: $color-danger;
+  font-size: 18px;
+  background: $background-light-gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.removeIcon {
+  width: 12px;
+  height: 12px;
+  color: #ff4d4d;
+}
+
+.addSlot {
+  border-radius: 9px;
+  background: $background-light-gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+}
+
+.addIcon {
+  color: $text-secondary;
+  width: 28px;
+  height: 28px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.hint {
+  font-size: 13px;
+  line-height: 1.5;
+  color: $text-secondary;
+}
