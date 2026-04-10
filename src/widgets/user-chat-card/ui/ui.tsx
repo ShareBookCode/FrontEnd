@@ -1,8 +1,8 @@
 'use client'
 
-import clsx from 'clsx'
-
 import StarVerifiedIcon from '@icons/star-verified.svg'
+import { useTranslations } from 'next-intl'
+import clsx from 'clsx'
 
 import styles from './ui.module.scss'
 import { CountBadge } from '@shared/ui/count-badge'
@@ -30,6 +30,7 @@ export function UserChatCard({
   isActive,
   onClick,
 }: UserChatCardProps) {
+  const t = useTranslations('UserChatCard')
   const hasUnread = unreadCount != null && unreadCount > 0
 
   return (
@@ -53,7 +54,7 @@ export function UserChatCard({
           <span className={styles.name}>{name}</span>
           {isVerified && (
             <StarVerifiedIcon
-              aria-label='Верифицированный пользователь'
+              aria-label={t('verifiedAriaLabel')}
               width={18}
               height={18}
             />
@@ -69,7 +70,10 @@ export function UserChatCard({
       </div>
 
       {timestamp && (
-        <span className={styles.time} aria-label={`Время: ${timestamp}`}>
+        <span
+          className={styles.time}
+          aria-label={t('timeAriaLabel', { time: timestamp })}
+        >
           {timestamp}
         </span>
       )}
