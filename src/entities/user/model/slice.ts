@@ -11,14 +11,11 @@ export const userApi = createApi({
     getUsers: builder.query<User[], void>({
       query: () => 'users',
     }),
-    getUserById: builder.query<User, string>({
+    getUserById: builder.query<UserProfile, string>({
       query: id => `users/${id}`,
     }),
   }),
 })
 
-export const {
-  useGetCurrentUserQuery,
-  useGetUsersQuery,
-  useGetUserByIdQuery,
-} = userApi
+export const { useGetCurrentUserQuery, useGetUsersQuery, useGetUserByIdQuery } =
+  userApi

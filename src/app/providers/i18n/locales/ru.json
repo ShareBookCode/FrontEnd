@@ -7,6 +7,13 @@
     "inputAriaLabel": "Поиск книг",
     "profileAriaLabel": "Профиль"
   },
+  "ProfileHeader": {
+    "given": "Отдано {count, plural, one {# книга} few {# книги} many {# книг} other {# книги}}",
+    "exchanged": "Обменяно {count}",
+    "settingsAriaLabel": "Настройки",
+    "newAd": "Новое объявление",
+    "writeMessage": "Написать"
+  },
   "Book": {
     "linkAriaLabel": "Перейти к книге",
     "buttonFavoriteAriaLabel": "Добавить в избранное",

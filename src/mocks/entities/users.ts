@@ -1,38 +1,44 @@
 import { http, HttpResponse } from 'msw'
-import type { User, UserProfile } from '@entities/user'
-import profileAvatar from '@mocks/images/profile-avatar.jpg'
+import type { UserProfile } from '@entities/user'
 
 const mockCurrentUser: UserProfile = {
   id: 'user_1',
   name: 'Анна Франс',
-  avatar: profileAvatar.src,
+  avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Anna',
   createdAt: Date.now(),
   stats: {
-    given: 17,
-    exchanged: 21,
+    given: 5,
+    exchanged: 2,
   },
   description:
     'Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
 }
 
-const mockUsers: User[] = [
-  {
-    id: mockCurrentUser.id,
-    name: mockCurrentUser.name,
-    avatar: mockCurrentUser.avatar,
-    createdAt: mockCurrentUser.createdAt,
-  },
+const mockUsers: UserProfile[] = [
+  mockCurrentUser,
   {
     id: 'user_2',
-    name: 'Алексей Книголюб',
+    name: 'Алексей Книголюб-Читатель-Книголюб-Читатель',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex',
     createdAt: Date.now(),
+    stats: {
+      given: 8,
+      exchanged: 12,
+    },
+    description:
+      'Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
   },
   {
     id: 'user_3',
     name: 'Мария Ред',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria',
+    avatar: '',
     createdAt: Date.now(),
+    stats: {
+      given: 34,
+      exchanged: 41,
+    },
+    description:
+      'Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
   },
 ]
 

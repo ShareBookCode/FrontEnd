@@ -7,6 +7,13 @@
     "inputAriaLabel": "Search books",
     "profileAriaLabel": "Profile"
   },
+  "ProfileHeader": {
+    "given": "Given {count, plural, one {# book} other {# books}}",
+    "exchanged": "Exchanged {count}",
+    "settingsAriaLabel": "Settings",
+    "newAd": "New listing",
+    "writeMessage": "Write"
+  },
   "Book": {
     "linkAriaLabel": "Go to the book",
     "buttonFavoriteAriaLabel": "Add to favorites",
