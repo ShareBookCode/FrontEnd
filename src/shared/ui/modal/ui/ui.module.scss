@@ -20,7 +20,7 @@ $modal-duration: 0.15s;
   align-items: center;
   justify-content: center;
 
-  background: rgba(255, 255, 255, 0.65);
+  background: $overlay-white;
   backdrop-filter: blur(4px);
 
   z-index: 1000;
@@ -51,7 +51,7 @@ $modal-duration: 0.15s;
   border: 1px solid $background-light-gray;
   border-radius: 15px;
 
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.17);
+  box-shadow: $shadow-modal;
 
   animation: scaleIn $modal-duration ease-out;
 }

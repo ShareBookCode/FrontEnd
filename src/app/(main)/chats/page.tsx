@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+
+import styles from './page.module.scss'
 import { ChatWindow } from '@widgets/chat-window'
-// import Image from 'next/image'
+import { UserChatCard } from '@widgets/user-chat-card'
 import { useGetMessagesQuery, useSendMessageMutation } from '@entities/chat'
 import { useGetUsersQuery } from '@entities/user'
 
@@ -94,6 +96,71 @@ export default function Page() {
           </ul>
         </details>
       </div>
+      {/* Инфо-панель для теста */}
+      <details>
+        <summary>Отладочная информация</summary>
+        <p>Chat ID: {chatId}</p>
+        <p>Current User ID: {currentUserId}</p>
+        <p>Всего сообщений в кеше: {messages.length}</p>
+        <ul>
+          {users.map(u => (
+            <li key={u.id}>
+              {u.name} {' Online: '}
+              {messages.some(m => m.senderId.id === u.id && m.senderId.isOnline)
+                ? 'Да'
+                : 'Нет'}
+            </li>
+          ))}
+        </ul>
+      </details>
+      <hr />
+      {/* DEV: Превью UserChatCard */}
+      <details open>
+        <summary>
+          <strong>DEV — UserChatCard states</strong>
+        </summary>
+        <div className={styles.devPreview}>
+          {/* Unactive — без непрочитанных */}
+          <UserChatCard
+            name='Евгения'
+            isVerified
+            author='Стивен Хокинг'
+            bookTitle='«Краткие ответы на большие вопросы»'
+            timestamp='13:15'
+          />
+
+          {/* Unactive — с непрочитанными */}
+          <UserChatCard
+            name='Евгения'
+            isVerified
+            author='Стивен Хокинг'
+            bookTitle='«Краткие ответы на большие вопросы»'
+            timestamp='13:15'
+            unreadCount={2}
+          />
+
+          {/* Active — с непрочитанными */}
+          <UserChatCard
+            name='Евгения'
+            isVerified
+            author='Стивен Хокинг'
+            bookTitle='«Краткие ответы на большие вопросы»'
+            timestamp='13:15'
+            unreadCount={101}
+            isActive
+          />
+
+          {/* Active — без непрочитанных */}
+          <UserChatCard
+            name='Евгения'
+            isVerified
+            author='Стивен Хокинг'
+            bookTitle='«Краткие ответы на большие вопросы»'
+            timestamp='13:15'
+            isActive
+          />
+        </div>
+      </details>
     </div>
   )
 }

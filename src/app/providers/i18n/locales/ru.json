@@ -12,6 +12,10 @@
     "buttonFavoriteAriaLabel": "Добавить в избранное",
     "imageAlt": "Обложка книги"
   },
+  "UserChatCard": {
+    "verifiedAriaLabel": "Верифицированный пользователь",
+    "timeAriaLabel": "Время: {time}"
+  },
   "Authentication": {
     "TitleAboutShareBook": {
       "onePart": "Станьте частью",
