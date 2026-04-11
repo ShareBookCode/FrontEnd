@@ -10,13 +10,14 @@ type CountBadgeProps = {
 }
 
 export function CountBadge({ count, color }: CountBadgeProps) {
+  const display = count > 99 ? '99+' : count
   return (
     <span
       className={styles.badge}
       aria-label={`${count} непрочитанных сообщений`}
       style={color ? ({ '--badge-color': color } as CSSProperties) : undefined}
     >
-      {count}
+      {display}
     </span>
   )
 }

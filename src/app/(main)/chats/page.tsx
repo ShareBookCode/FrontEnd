@@ -124,7 +124,7 @@ export default function Page() {
           <UserChatCard
             name='Евгения'
             isVerified
-            lastMessage='Стивен Хокинг'
+            author='Стивен Хокинг'
             bookTitle='«Краткие ответы на большие вопросы»'
             timestamp='13:15'
           />
@@ -133,7 +133,7 @@ export default function Page() {
           <UserChatCard
             name='Евгения'
             isVerified
-            lastMessage='Стивен Хокинг'
+            author='Стивен Хокинг'
             bookTitle='«Краткие ответы на большие вопросы»'
             timestamp='13:15'
             unreadCount={2}
@@ -143,10 +143,10 @@ export default function Page() {
           <UserChatCard
             name='Евгения'
             isVerified
-            lastMessage='Стивен Хокинг'
+            author='Стивен Хокинг'
             bookTitle='«Краткие ответы на большие вопросы»'
             timestamp='13:15'
-            unreadCount={2}
+            unreadCount={101}
             isActive
           />
 
@@ -154,7 +154,7 @@ export default function Page() {
           <UserChatCard
             name='Евгения'
             isVerified
-            lastMessage='Стивен Хокинг'
+            author='Стивен Хокинг'
             bookTitle='«Краткие ответы на большие вопросы»'
             timestamp='13:15'
             isActive

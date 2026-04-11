@@ -10,7 +10,7 @@ import { CountBadge } from '@shared/ui/count-badge'
 export interface UserChatCardProps {
   name: string
   avatarUrl?: string | null
-  lastMessage?: string
+  author?: string
   bookTitle?: string
   timestamp?: string
   unreadCount?: number
@@ -22,7 +22,7 @@ export interface UserChatCardProps {
 export function UserChatCard({
   name,
   avatarUrl,
-  lastMessage,
+  author,
   bookTitle,
   timestamp,
   unreadCount,
@@ -61,28 +61,25 @@ export function UserChatCard({
           )}
         </div>
 
-        {(lastMessage || bookTitle) && (
-          <p className={styles.message}>
-            {lastMessage && <span>{lastMessage} </span>}
+        {(author || bookTitle) && (
+          <div className={styles.meta}>
+            {author && <span className={styles.author}>{author}</span>}
             {bookTitle && <span className={styles.bookTitle}>{bookTitle}</span>}
-          </p>
+          </div>
         )}
       </div>
 
-      {timestamp && (
-        <span
-          className={styles.time}
-          aria-label={t('timeAriaLabel', { time: timestamp })}
-        >
-          {timestamp}
-        </span>
-      )}
-
-      {hasUnread && (
-        <span className={styles.badgeWrapper}>
-          <CountBadge count={unreadCount!} />
-        </span>
-      )}
+      <div className={styles.side}>
+        {timestamp && (
+          <span
+            className={styles.time}
+            aria-label={t('timeAriaLabel', { time: timestamp })}
+          >
+            {timestamp}
+          </span>
+        )}
+        {hasUnread && <CountBadge count={unreadCount!} />}
+      </div>
     </button>
   )
 }
