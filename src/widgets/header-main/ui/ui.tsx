@@ -21,6 +21,8 @@ export function HeaderMain() {
   const t = useTranslations('Header-main')
   const pathname = usePathname()
 
+  console.log('Hello')
+
   return (
     <header className={styles.header}>
       <Container>
