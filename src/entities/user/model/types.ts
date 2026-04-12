@@ -2,7 +2,7 @@ export interface User {
   id: string
   name: string
   avatar: string | null
-  createdAt: number
+  createdAt: string
 }
 
 export interface UserProfile extends User {
@@ -10,11 +10,11 @@ export interface UserProfile extends User {
     given: number
     exchanged: number
   }
-  description: string
+  description: string | null
 }
 
 export interface UserAboutMyself extends User {
-  description: string
+  description: string | null
 }
 
 export interface UserAccount {

@@ -1,13 +1,11 @@
-'use client'
-
+import { redirect } from 'next/navigation'
 import { ProfileHeader } from '@widgets/profile-header'
-import { useGetCurrentUserQuery } from '@entities/user'
+import { getUser } from '@shared/api/user'
 
-export default function Page() {
-  const { data: currentUser, isLoading, isError } = useGetCurrentUserQuery()
+export default async function Page() {
+  const user = await getUser()
 
-  if (isLoading) return <div>Загрузка...</div>
-  if (isError || !currentUser) return <div>Не удалось загрузить профиль</div>
+  if (!user) redirect('/sign-in')
 
-  return <ProfileHeader user={currentUser} isOwner={true} />
+  return <ProfileHeader user={user} isOwner={true} />
 }

@@ -1,23 +1,23 @@
-'use client'
-
-import { use } from 'react'
+import { redirect, notFound } from 'next/navigation'
 import { ProfileHeader } from '@widgets/profile-header'
-import { useGetCurrentUserQuery, useGetUserByIdQuery } from '@entities/user'
+import { getUser, getUserById } from '@shared/api/user'
 
 interface PageProps {
   params: Promise<{ userId: string }>
 }
 
-export default function Page({ params }: PageProps) {
-  const { userId } = use(params)
+export default async function Page({ params }: PageProps) {
+  const { userId } = await params
 
-  const { data: currentUser } = useGetCurrentUserQuery()
-  const { data: viewedUser, isLoading, isError } = useGetUserByIdQuery(userId)
+  const [currentUser, viewedUser] = await Promise.all([
+    getUser(),
+    getUserById(userId),
+  ])
 
-  if (isLoading) return <div>Загрузка...</div>
-  if (isError || !viewedUser) return <div>Пользователь не найден</div>
+  if (!currentUser) redirect('/sign-in')
+  if (!viewedUser) notFound()
 
-  const isOwner = currentUser?.id === viewedUser.id
+  const isOwner = currentUser.id === viewedUser.id
 
   return <ProfileHeader user={viewedUser} isOwner={isOwner} />
 }

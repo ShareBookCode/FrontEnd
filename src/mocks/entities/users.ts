@@ -5,7 +5,7 @@ const mockCurrentUser: UserProfile = {
   id: 'user_1',
   name: 'Анна Франс',
   avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Anna',
-  createdAt: Date.now(),
+  createdAt: new Date().toISOString(),
   stats: {
     given: 5,
     exchanged: 2,
@@ -20,7 +20,7 @@ const mockUsers: UserProfile[] = [
     id: 'user_2',
     name: 'Алексей Книголюб-Читатель-Книголюб-Читатель',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex',
-    createdAt: Date.now(),
+    createdAt: new Date().toISOString(),
     stats: {
       given: 8,
       exchanged: 12,
@@ -32,7 +32,7 @@ const mockUsers: UserProfile[] = [
     id: 'user_3',
     name: 'Мария Ред',
     avatar: '',
-    createdAt: Date.now(),
+    createdAt: new Date().toISOString(),
     stats: {
       given: 34,
       exchanged: 41,

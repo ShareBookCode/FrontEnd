@@ -1,9 +1,4 @@
-export {
-  userApi,
-  useGetCurrentUserQuery,
-  useGetUsersQuery,
-  useGetUserByIdQuery,
-} from './model/slice'
+export { userApi, useGetUsersQuery } from './model/slice'
 export type {
   User,
   UserProfile,
