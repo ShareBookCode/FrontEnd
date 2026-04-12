@@ -19,6 +19,10 @@
     "buttonFavoriteAriaLabel": "Add to favorites",
     "imageAlt": "Book cover"
   },
+  "UserChatCard": {
+    "verifiedAriaLabel": "Verified user",
+    "timeAriaLabel": "Time: {time}"
+  },
   "Authentication": {
     "TitleAboutShareBook": {
       "onePart": "Become part of",
