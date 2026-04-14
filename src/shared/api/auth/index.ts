@@ -1,8 +1,10 @@
 import { cookies } from 'next/headers'
-import { apiClient } from '../http'
+import { apiClient, ParamsType } from '../http'
 import { AUTH } from '../endpoints'
 
-export interface AuthUserPayload {
+export { getAuthToken } from './get-auth-token'
+
+export interface AuthUserPayload extends ParamsType {
   login: string
   psw: string
 }
@@ -20,9 +22,4 @@ export const authUser = async (payload: AuthUserPayload) => {
     path: '/',
     maxAge: 60 * 60 * 24 * 7,
   })
-}
-
-export const getAuthToken = async () => {
-  const cookieStore = await cookies()
-  return cookieStore.get('auth_token')?.value
 }

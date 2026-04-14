@@ -1,4 +1,4 @@
-import { getAuthToken } from '../auth'
+import { getAuthToken } from '../auth/get-auth-token'
 
 export class ApiError extends Error {
   constructor(
@@ -10,15 +10,32 @@ export class ApiError extends Error {
   }
 }
 
+export enum HttpMethod {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
+}
+
+export type ParamsType = object
+
 interface RequestConfig {
-  params?: object
+  params?: ParamsType
   headers?: Record<string, string>
 }
 
-const buildUrl = (path: string, params?: object): string => {
-  const url = new URL(path, process.env.BACKEND_URL)
+const REQUEST_TIMEOUT_MS = 10_000
+const TOTAL_TIMEOUT_MS = 30_000
+const MAX_RETRIES = 3
+
+const buildUrl = (path: string, params?: ParamsType): string => {
+  const base = (
+    process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost'
+  ).replace(/\/$/, '')
+  const url = new URL(`${base}${path}`)
   if (params) {
-    Object.entries(params).forEach(([key, value]: [string, unknown]) => {
+    Object.entries(params).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
         url.searchParams.set(key, String(value))
       }
@@ -32,7 +49,7 @@ const buildHeaders = async (
 ): Promise<Headers> => {
   const headers = new Headers({
     'Content-Type': 'application/json',
-    'X-Project-Token': process.env.BACKEND_TOKEN ?? '',
+    'X-Project-Token': process.env.NEXT_PUBLIC_BACKEND_TOKEN ?? '',
     ...extra,
   })
   const token = await getAuthToken()
@@ -43,49 +60,83 @@ const buildHeaders = async (
 }
 
 const handleResponse = async <T>(response: Response): Promise<T> => {
+  const text = await response.text()
   if (!response.ok) {
-    let message = 'Request failed'
-    try {
-      const body = await response.json()
-      message = body?.message ?? message
-    } catch {
-      // ignore parse error, keep default message
-    }
+    const message =
+      (text ? JSON.parse(text)?.message : null) ?? 'Request failed'
     throw new ApiError(response.status, message)
   }
-  const text = await response.text()
   return (text ? JSON.parse(text) : undefined) as T
 }
 
+const isRetryable = (error: unknown): boolean => {
+  if (error instanceof ApiError) return error.status >= 500
+  if (error instanceof DOMException && error.name === 'AbortError') return true
+  return error instanceof TypeError
+}
+
 const request = async <T>(
-  method: string,
+  method: HttpMethod,
   url: string,
   data?: unknown,
   config?: RequestConfig,
 ): Promise<T> => {
-  const headers = await buildHeaders(config?.headers)
-  const hasBody = data !== null && data !== undefined && data !== ''
-  const response = await fetch(buildUrl(url, config?.params), {
-    method,
-    headers,
-    body: hasBody ? JSON.stringify(data) : undefined,
-  })
-  return handleResponse<T>(response)
+  const deadline = Date.now() + TOTAL_TIMEOUT_MS
+  let attempt = 0
+
+  while (true) {
+    const remaining = deadline - Date.now()
+    if (remaining <= 0) throw new ApiError(408, 'Request timeout')
+
+    const controller = new AbortController()
+    const timeoutId = setTimeout(
+      () => controller.abort(),
+      Math.min(REQUEST_TIMEOUT_MS, remaining),
+    )
+
+    try {
+      const headers = await buildHeaders(config?.headers)
+      const hasBody = data !== null && data !== undefined
+      const fetchUrl = buildUrl(url, config?.params)
+      const response = await fetch(fetchUrl, {
+        method,
+        headers,
+        body: hasBody ? JSON.stringify(data) : undefined,
+        signal: controller.signal,
+      })
+      clearTimeout(timeoutId)
+      return handleResponse<T>(response)
+    } catch (error) {
+      clearTimeout(timeoutId)
+      if (
+        attempt < MAX_RETRIES &&
+        isRetryable(error) &&
+        Date.now() < deadline
+      ) {
+        attempt += 1
+        continue
+      }
+      throw error
+    }
+  }
 }
 
 export const apiClient = {
   get: <T>(url: string, config?: RequestConfig): Promise<T> =>
-    request<T>('GET', url, undefined, config),
+    request<T>(HttpMethod.GET, url, undefined, config),
 
   post: <T>(url: string, data?: unknown, config?: RequestConfig): Promise<T> =>
-    request<T>('POST', url, data, config),
+    request<T>(HttpMethod.POST, url, data, config),
 
   patch: <T>(url: string, data?: unknown, config?: RequestConfig): Promise<T> =>
-    request<T>('PATCH', url, data, config),
+    request<T>(HttpMethod.PATCH, url, data, config),
 
   put: <T>(url: string, data?: unknown, config?: RequestConfig): Promise<T> =>
-    request<T>('PUT', url, data, config),
+    request<T>(HttpMethod.PUT, url, data, config),
 
-  delete: <T>(url: string, config?: RequestConfig): Promise<T> =>
-    request<T>('DELETE', url, undefined, config),
+  delete: <T>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig,
+  ): Promise<T> => request<T>(HttpMethod.DELETE, url, data, config),
 }
