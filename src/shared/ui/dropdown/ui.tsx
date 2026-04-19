@@ -13,8 +13,14 @@ import {
 
 type RenderTriggerProps = {
   isOpen: boolean
-  setOpen: (next: boolean) => void
+  open: () => void
+  close: () => void
+  toggle: () => void
   disabled?: boolean
+}
+
+type RenderContentProps = {
+  close: () => void
 }
 
 type Props = {
@@ -25,7 +31,7 @@ type Props = {
   isOpen?: boolean
   onOpenChange?: (next: boolean) => void
   renderTrigger: (props: RenderTriggerProps) => ReactNode
-  children: ReactNode
+  children: ReactNode | ((props: RenderContentProps) => ReactNode)
 }
 
 const toCssWidth = (width?: Props['width']) => {
@@ -45,14 +51,16 @@ export function Dropdown({
 }: Props) {
   const [innerIsOpen, setInnerIsOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement | null>(null)
+  const hasRequestedCloseRef = useRef(false)
 
   const isControlled = controlledIsOpen !== undefined
-  const isOpen = isControlled ? controlledIsOpen : innerIsOpen
+  const rawIsOpen = isControlled ? Boolean(controlledIsOpen) : innerIsOpen
+  const isOpen = disabled ? false : rawIsOpen
 
   const setOpen = useCallback(
     (next: boolean) => {
-      if (next === isOpen) return
       if (disabled && next) return
+      if (next === rawIsOpen) return
 
       if (!isControlled) {
         setInnerIsOpen(next)
@@ -60,8 +68,33 @@ export function Dropdown({
 
       onOpenChange?.(next)
     },
-    [disabled, isControlled, isOpen, onOpenChange],
+    [disabled, isControlled, rawIsOpen, onOpenChange],
   )
+
+  const open = () => setOpen(true)
+  const close = () => setOpen(false)
+  const toggle = () => setOpen(!isOpen)
+
+  useEffect(() => {
+    const shouldForceClose = Boolean(disabled && rawIsOpen)
+
+    if (!shouldForceClose) {
+      hasRequestedCloseRef.current = false
+      return
+    }
+
+    if (hasRequestedCloseRef.current) return
+
+    hasRequestedCloseRef.current = true
+
+    const timeoutId = window.setTimeout(() => {
+      setOpen(false)
+    }, 0)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [disabled, rawIsOpen, setOpen])
 
   useEffect(() => {
     if (!isOpen) return
@@ -91,6 +124,9 @@ export function Dropdown({
     width: toCssWidth(width),
   }
 
+  const content =
+    typeof children === 'function' ? children({ close }) : children
+
   return (
     <div
       ref={rootRef}
@@ -100,13 +136,15 @@ export function Dropdown({
     >
       {renderTrigger({
         isOpen,
-        setOpen,
+        open,
+        close,
+        toggle,
         disabled,
       })}
 
       {isOpen && (
         <div className={clsx(styles.dropdown, dropdownClassName)}>
-          {children}
+          {content}
         </div>
       )}
     </div>
