@@ -1,1 +1,0 @@
-export { tabData } from './data'

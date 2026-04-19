@@ -1,0 +1,49 @@
+@use '@styles/variables' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  padding-top: 35px;
+  padding-left: 35px;
+
+  .title {
+    width: fit-content;
+    min-height: 31px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .avatarBlock {
+      margin-bottom: 15px;
+    }
+
+    .fieldsBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .actionBlock {
+      display: flex;
+      .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        background-color: $color-primary;
+        color: $background-primary;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        max-width: 107px;
+        min-height: 32px;
+        cursor: pointer;
+      }
+    }
+  }
+}

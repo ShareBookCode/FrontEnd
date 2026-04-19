@@ -41,9 +41,14 @@
 
   .input,
   .textarea {
-    padding: 9px 15px 9px 14px;
+    padding: 8px 15px 8px 14px;
     max-width: 300px;
     border-radius: 9px;
+    caret-color: $color-primary;
+
+    &:focus {
+      outline-color: rgba(42, 127, 255, 0.8);
+    }
   }
 }
 
@@ -54,8 +59,13 @@
   .input,
   .textarea {
     padding: 12px 10px;
-    border-radius: 10px;
+    border-radius: 7px;
     min-height: 100px;
+    caret-color: $color-primary;
+
+    &:focus {
+      outline-color: rgba(42, 127, 255, 0.8);
+    }
   }
 }
 

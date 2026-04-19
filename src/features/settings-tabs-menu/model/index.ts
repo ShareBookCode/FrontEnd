@@ -1,0 +1,1 @@
+export { settingsTabsVariants } from './data'

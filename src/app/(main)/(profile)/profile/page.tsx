@@ -1,5 +1,5 @@
-import { SettingsMenu } from '@widgets/settings-page'
+import Link from 'next/link'
 
 export default function Page() {
-  return <SettingsMenu />
+  return <Link href='/settings'>Настройки</Link>
 }
