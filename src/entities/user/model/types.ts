@@ -10,11 +10,11 @@ export interface UserProfile extends User {
     given: number
     exchanged: number
   }
-  description: string | null
+  description: string
 }
 
 export interface UserAboutMyself extends User {
-  description: string | null
+  description: string
 }
 
 export interface UserAccount {
