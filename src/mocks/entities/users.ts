@@ -22,8 +22,6 @@ const mockUsers: User[] = [
   },
 ]
 
-const BUSY_EMAILS = ['busy@test.com']
-
 export const userHandlers = [
   http.get('/users', () => {
     return HttpResponse.json(mockUsers)
@@ -37,12 +35,7 @@ export const userHandlers = [
   http.post('/user', () => {
     return new HttpResponse(null, { status: 201 })
   }),
-  http.post('/user/check', ({ request }) => {
-    const url = new URL(request.url)
-    const email = url.searchParams.get('email') ?? ''
-    if (BUSY_EMAILS.includes(email)) {
-      return new HttpResponse(null, { status: 409 })
-    }
+  http.post('/user/check', () => {
     return new HttpResponse(null, { status: 200 })
   }),
 ]
