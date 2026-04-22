@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { getAuthToken } from '../auth'
-import { formatAvatar } from './format-avatar'
-import type { UserProfile } from '@entities/user'
+import { formatAvatar, type UserProfile } from '@entities/user'
 
 export const getUser = async (): Promise<UserProfile | null> => {
   const token = await getAuthToken()
@@ -22,8 +21,6 @@ export const getUser = async (): Promise<UserProfile | null> => {
     return {
       ...user,
       avatar: formatAvatar(user.avatar),
-      description: user.description ?? '',
-      stats: user.stats ?? { given: 0, exchanged: 0 },
     }
   } catch {
     return null
@@ -49,8 +46,6 @@ export const getUserById = async (id: string): Promise<UserProfile | null> => {
     return {
       ...user,
       avatar: formatAvatar(user.avatar),
-      description: user.description ?? '',
-      stats: user.stats ?? { given: 0, exchanged: 0 },
     }
   } catch {
     return null

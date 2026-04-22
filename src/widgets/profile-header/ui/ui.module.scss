@@ -11,7 +11,6 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 24px;
-  min-height: 159px;
 }
 
 .userInfo {
@@ -19,10 +18,12 @@
   align-items: flex-start;
   gap: 24px;
   min-width: 0;
+  min-height: 159px;
 }
 
 .avatar {
   flex-shrink: 0;
+  align-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +51,7 @@
 }
 
 .name {
-  margin: 0 0 14px;
+  margin-bottom: 14px;
   color: $text-heading;
   font-size: 32px;
   font-weight: 600;
@@ -66,7 +67,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-bottom: 14px;
+  margin-bottom: 14px;
 }
 
 .statsText {
@@ -92,20 +93,12 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 1.35;
-}
-
-.toggle {
-  margin-left: 4px;
-  padding: 0;
-  background: none;
-  border: none;
-  color: $color-primary;
-  font: inherit;
-  cursor: pointer;
-
-  &:hover {
-    color: $color-primary-dark;
-  }
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 }
 
 .controls {

@@ -1,5 +1,8 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 export default function Error() {
-  return <div>Пользователь не найден</div>
+  const t = useTranslations('Profile')
+  return <div>{t('notFound')}</div>
 }

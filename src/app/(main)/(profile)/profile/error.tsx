@@ -1,5 +1,8 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 export default function Error() {
-  return <div>Не удалось загрузить профиль</div>
+  const t = useTranslations('Profile')
+  return <div>{t('loadError')}</div>
 }

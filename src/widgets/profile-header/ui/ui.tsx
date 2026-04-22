@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import clsx from 'clsx'
 import HitIcon from '@icons/hit.svg'
@@ -12,8 +11,6 @@ import { Container } from '@shared/ui/container'
 import { PrimaryButton } from '@shared/ui/primary-button'
 import { literata } from '@shared/assets/fonts'
 
-const DESCRIPTION_LIMIT = 220
-
 interface ProfileHeaderProps {
   user: UserProfile
   isOwner: boolean
@@ -22,14 +19,6 @@ interface ProfileHeaderProps {
 export function ProfileHeader({ user, isOwner }: ProfileHeaderProps) {
   const { name, avatar, stats, description } = user
   const t = useTranslations('ProfileHeader')
-
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
-
-  const shouldShowToggle = description.length > DESCRIPTION_LIMIT
-  const descriptionText =
-    shouldShowToggle && !isDescriptionExpanded
-      ? `${description.slice(0, DESCRIPTION_LIMIT)}...`
-      : description
 
   return (
     <section className={styles.profileHeader}>
@@ -66,16 +55,7 @@ export function ProfileHeader({ user, isOwner }: ProfileHeaderProps) {
 
               {description && (
                 <p className={clsx(styles.bio, literata.className)}>
-                  {descriptionText}
-                  {shouldShowToggle && (
-                    <button
-                      type='button'
-                      className={styles.toggle}
-                      onClick={() => setIsDescriptionExpanded(prev => !prev)}
-                    >
-                      {isDescriptionExpanded ? 'Свернуть' : 'Читать полностью'}
-                    </button>
-                  )}
+                  {description}
                 </p>
               )}
             </div>
