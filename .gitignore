@@ -20,6 +20,9 @@
 # production
 /build
 
+# local claude config
+.claude/
+
 # misc
 .DS_Store
 .claude/

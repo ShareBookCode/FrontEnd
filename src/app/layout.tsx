@@ -1,4 +1,4 @@
-import 'normalize.css/normalize.css'
+import '@styles/normalize.scss'
 import '@styles/global.scss'
 import ReduxProvider from '@providers/redux/redux.provider'
 import { I18nProvider } from '@providers/i18n/i18n.provider'

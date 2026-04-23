@@ -1,23 +1,18 @@
-@use '@styles/adaptive-px' as *;
+@use '@styles/adaptive' as *;
 
 .container {
   width: 100%;
-  max-width: 1400px; // 1330px контента + 70px padding
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 35px;
-  box-sizing: border-box; // fix: без этого padding добавлялся к width: 100%, вызывая горизонтальный скролл
-}
 
-@media (max-width: 1024px) {
-  .container {
-    max-width: 1028px; // 988px контента + 40px padding
+  @include desktop {
+    max-width: 1028px;
     padding: 0 20px;
   }
-}
 
-@media (max-width: 450px) {
-  .container {
-    max-width: 432px; // 400px контента + 32px padding
+  @include mobile {
+    max-width: 432px;
     padding: 0 16px;
   }
 }
