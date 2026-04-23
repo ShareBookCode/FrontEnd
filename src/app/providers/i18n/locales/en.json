@@ -73,6 +73,16 @@
       "password_mismatch": {
         "title": "Passwords do not match",
         "description": "The passwords do not match. Please try again."
+      },
+
+      "email_check_failed": {
+        "title": "Email check failed",
+        "description": "Could not verify the email address. Please try again."
+      },
+
+      "request_timeout": {
+        "title": "Request timed out",
+        "description": "The server took too long to respond. Please try again."
       }
     }
   }

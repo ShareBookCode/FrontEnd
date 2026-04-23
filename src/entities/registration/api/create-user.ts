@@ -1,26 +1,23 @@
-import axios from 'axios'
+'use server'
+
 import { RegisterUserPayload } from '../model/types'
+import { apiClient, ApiError } from '@shared/api/http'
+import { USER } from '@shared/api/endpoints'
+
+const ERROR_MESSAGES = {
+  requestFailed: 'Request failed',
+  internalServer: 'Internal server error',
+} as const
 
 export const createUser = async (
   payload: RegisterUserPayload,
 ): Promise<void> => {
   try {
-    await axios.post(`${process.env.BACKEND_URL}/user`, payload, {
-      headers: {
-        'X-Project-Token': process.env.BACKEND_TOKEN,
-        'Content-Type': 'application/json',
-        accept: '*/*',
-      },
-    })
+    await apiClient.post(USER, payload)
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error('Backend status:', error.response?.status)
-      console.error('Backend data:', error.response?.data)
-
-      throw new Error(error.response?.data?.message || 'Request failed')
+    if (error instanceof ApiError) {
+      throw new Error(error.message || ERROR_MESSAGES.requestFailed)
     }
-
-    console.error(error)
-    throw new Error('Internal server error')
+    throw new Error(ERROR_MESSAGES.internalServer)
   }
 }

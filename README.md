@@ -18,7 +18,6 @@ ShareBook даёт книгам вторую жизнь, предотвраща�
 ![Next-intl](https://img.shields.io/badge/Next%20intl-%2314213b?style=for-the-badge&logoColor=white)
 ![Sass](https://img.shields.io/badge/Saas-%23c04180?style=for-the-badge&logo=sass&logoColor=white)
 ![Svgr](https://img.shields.io/badge/Svgr-%2318171a?style=for-the-badge&logoColor=white)
-![Axios](https://img.shields.io/badge/Axios-%23363847?style=for-the-badge&logo=axios)
 ![Clsx](https://img.shields.io/badge/Clsx-yellow?style=for-the-badge)
 
 ## Основные библиотеки

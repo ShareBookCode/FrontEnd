@@ -1,31 +1,39 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 import {
   RegistrationDraft,
   RegistrationDraftPatch,
   RegistrationSchema,
 } from './types'
 
+const DRAFT_URL = '/api/registration-draft'
+
 export const fetchRegistrationDraft = createAsyncThunk(
   'registrationDraft/getDraft',
   async () => {
-    const response = await axios.get('/api/registration-draft')
-    return response.data as RegistrationDraft
+    const response = await fetch(DRAFT_URL)
+    if (!response.ok) throw new Error('Failed to fetch draft')
+    return response.json() as Promise<RegistrationDraft>
   },
 )
 
 export const updateRegistrationDraft = createAsyncThunk(
   'registrationDraft/updateDraft',
   async (body: RegistrationDraftPatch) => {
-    const response = await axios.patch('/api/registration-draft', body)
-    return response.data as RegistrationDraft
+    const response = await fetch(DRAFT_URL, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+    if (!response.ok) throw new Error('Failed to update draft')
+    return response.json() as Promise<RegistrationDraft>
   },
 )
 
 export const clearRegistrationDraft = createAsyncThunk(
   'registrationDraft/clearDraft',
   async () => {
-    await axios.delete('/api/registration-draft')
+    const response = await fetch(DRAFT_URL, { method: 'DELETE' })
+    if (!response.ok) throw new Error('Failed to clear draft')
     return initialState.draft.data
   },
 )
