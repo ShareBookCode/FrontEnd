@@ -1,8 +1,9 @@
 'use server'
 
-import axios from 'axios'
 import type { CreateBookPayload } from '../model/types'
+import { apiClient } from '@shared/api/http'
+import { BOOKS } from '@shared/api/endpoints'
 
 export const createBookAction = async (payload: CreateBookPayload) => {
-  return axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/books`, payload)
+  return apiClient.post(BOOKS, payload)
 }

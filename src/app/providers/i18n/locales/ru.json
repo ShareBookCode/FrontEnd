@@ -16,6 +16,13 @@
     "verifiedAriaLabel": "Верифицированный пользователь",
     "timeAriaLabel": "Время: {time}"
   },
+  "CreateBook": {
+    "title": "Новое объявление",
+    "submitButton": "Выложить объявление",
+    "submittingButton": "Публикация...",
+    "submitError": "Не удалось опубликовать объявление. Попробуйте снова.",
+    "disclaimer": "Выкладывая объявление вы соглашаетесь с правилами <link>ShareBook</link>"
+  },
   "Authentication": {
     "TitleAboutShareBook": {
       "onePart": "Станьте частью",

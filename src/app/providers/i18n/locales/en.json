@@ -16,6 +16,13 @@
     "verifiedAriaLabel": "Verified user",
     "timeAriaLabel": "Time: {time}"
   },
+  "CreateBook": {
+    "title": "New listing",
+    "submitButton": "Post listing",
+    "submittingButton": "Publishing...",
+    "submitError": "Failed to post the listing. Please try again.",
+    "disclaimer": "By posting a listing you agree to the <link>ShareBook</link> rules"
+  },
   "Authentication": {
     "TitleAboutShareBook": {
       "onePart": "Become part of",

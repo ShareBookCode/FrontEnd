@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import clsx from 'clsx'
 import ChevronIcon from '@icons/chevron.svg'
 import { createBookAction } from '../api'
@@ -52,6 +53,7 @@ async function uploadThumbnails(
 
 export function CreateBookForm() {
   const router = useRouter()
+  const t = useTranslations('CreateBook')
   const [values, setValues] = useState<CreateBookFormValues>(INITIAL_VALUES)
   const [coverFile, setCoverFile] = useState<File | null>(null)
   const [coverPreview, setCoverPreview] = useState<string | null>(null)
@@ -61,6 +63,7 @@ export function CreateBookForm() {
     { city: string; place: string }[]
   >([])
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const set = <K extends keyof CreateBookFormValues>(
@@ -129,6 +132,7 @@ export function CreateBookForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError(null)
     try {
       const thumbnails = await uploadThumbnails(coverFile, photoFiles)
       await createBookAction({
@@ -148,6 +152,8 @@ export function CreateBookForm() {
       })
       resetForm()
       router.push(ROUTES.home)
+    } catch {
+      setSubmitError(t('submitError'))
     } finally {
       setIsSubmitting(false)
     }
@@ -162,7 +168,7 @@ export function CreateBookForm() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Новое объявление</h1>
+      <h1 className={styles.title}>{t('title')}</h1>
 
       <form className={styles.form} onSubmit={handleSubmit}>
         {/* Название книги */}
@@ -442,19 +448,24 @@ export function CreateBookForm() {
           )}
         </div>
 
+        {submitError && <p className={styles.submitError}>{submitError}</p>}
+
         <PrimaryButton
           type='submit'
           className={styles.submitButton}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Публикация...' : 'Выложить объявление'}
+          {isSubmitting ? t('submittingButton') : t('submitButton')}
         </PrimaryButton>
 
         <p className={styles.disclaimer}>
-          Выкладывая объявление вы соглашаетесь с правилами{' '}
-          <a href={ROUTES.rules} className={styles.disclaimerLink}>
-            ShareBook
-          </a>
+          {t.rich('disclaimer', {
+            link: chunks => (
+              <a href={ROUTES.rules} className={styles.disclaimerLink}>
+                {chunks}
+              </a>
+            ),
+          })}
         </p>
       </form>
     </div>
