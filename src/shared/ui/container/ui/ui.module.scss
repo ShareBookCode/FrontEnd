@@ -1,22 +1,18 @@
-@use '@styles/adaptive-px' as *;
+@use '@styles/adaptive' as *;
 
 .container {
   width: 100%;
-  max-width: 1330px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 35px;
-}
 
-@media (max-width: 1024px) {
-  .container {
-    max-width: 988px;
+  @include desktop {
+    max-width: 1028px;
     padding: 0 20px;
   }
-}
 
-@media (max-width: 450px) {
-  .container {
-    max-width: 400px;
+  @include mobile {
+    max-width: 432px;
     padding: 0 16px;
   }
 }

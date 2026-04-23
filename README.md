@@ -1,3 +1,13 @@
+# ShareBook
+
+## Описание проекта
+
+ShareBook — платформа для обмена книгами и другой печатной продукцией, на которой люди самостоятельно выставляют свои книги с целью обменять их на другие или безвозмездно отдать. Пользователь может найти нужную ему книгу, прочитать о ней, добавить в избранное и связаться с её владельцем через чат.
+
+Прямых конкурентов у проекта нет, однако в мире уже давно развивается и набирает обороты такое явление как буккроссинг. Работает это так: в некоторых крупных городах есть точки, куда люди могут принести книги или взять себе имеющиеся там. Подход ShareBook имеет явные преимущества по сравнению с описанной концепцией: можно не выходя из дома посмотреть, какие книги доступны для обмена в твоём городе, выставить свои книги. Более того, благодаря возможности связи «отдающего» и «забирающего», есть возможность обмениваться книгами не навсегда, а на определённый срок — например, на неделю или на месяц.
+
+ShareBook даёт книгам вторую жизнь, предотвращая их выбрасывание и тем самым снижая выбросы CO₂ путём сокращения объёмов производства: один и тот же экземпляр вместо того, чтобы пылиться на полке после прочтения, может быть прочитан ещё огромным количеством людей.
+
 # Стек технологий
 
 ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
@@ -8,7 +18,6 @@
 ![Next-intl](https://img.shields.io/badge/Next%20intl-%2314213b?style=for-the-badge&logoColor=white)
 ![Sass](https://img.shields.io/badge/Saas-%23c04180?style=for-the-badge&logo=sass&logoColor=white)
 ![Svgr](https://img.shields.io/badge/Svgr-%2318171a?style=for-the-badge&logoColor=white)
-![Axios](https://img.shields.io/badge/Axios-%23363847?style=for-the-badge&logo=axios)
 ![Clsx](https://img.shields.io/badge/Clsx-yellow?style=for-the-badge)
 
 ## Основные библиотеки
@@ -57,122 +66,6 @@ pnpm build
 pnpm start
 ```
 
-# Архитектура и структура проекта
+# Участие в разработке
 
-Базовый подход — `Feature-Sliced Design`:
-
-```text
-src/
-  app/        # маршруты, layout'ы, провайдеры
-  widgets/    # большие самодостаточные компоненты куски функциональности или интерфейса
-  features/   # пользовательские фичи
-  entities/   # бизнес-сущности, с которыми работает проект, например book
-  shared/     # переиспользуемый код, конфиги, стили, иконки
-```
-
-## Что где находится сейчас
-
-- `src/mocks` - моки для проекта
-- `src/app/(auth)` — страницы авторизации
-- `src/app/(main)` — основные страницы приложения
-- `src/app/providers` — `ReduxProvider`, `I18nProvider`, `MSWProvider`
-- `src/shared/assets` - шрифты, иконки и изображения
-- `src/shared/styles` - базовые стили и часто используемые css переменные
-
-## Path aliases
-
-Псевдонимы путей нужны для удобства импорта и избежания длинных относительных путей.
-
-- `@/*` -> `src/*`
-- `@mocks/*` -> `src/mocks/*`
-- `@app/*` -> `src/app/*`
-- `@shared/*` -> `src/shared/*`
-- `@widgets/*` -> `src/widgets/*`
-- `@features/*` -> `src/features/*`
-- `@entities/*` -> `src/entities/*`
-- `@providers/*` -> `src/app/providers/*`
-- `@styles/*` -> `src/shared/styles/*`
-- `@icons/*` -> `src/shared/assets/icons/*`
-- `@fonts/*` -> `src/shared/assets/fonts/*`
-
-## Именование файлов
-Если в папке ui только один .tsx файл и один файл .module.scss, то именуем их ui
-
-Пример:
-
-```text
-ui/
-  ui.tsx
-  ui.module.scss
-```
-
-# Стандарты разработки
-
-Раздел фиксирует обязательные правила команды перед созданием Pull Request.
-
-## Линтинг и форматирование
-
-- ESLint: `eslint.config.mjs`
-- Prettier: `.prettierrc`
-  - Без точек с запятой (`semi: false`)
-  - Одинарные кавычки (`singleQuote: true`)
-  - Одинарные кавычки в JSX (`jsxSingleQuote: true`)
-  - Пробелы в объектах (`bracketSpacing: true`)
-  - Запятые везде (`trailingComma: "all"`)
-  - Длина строки: 80 символов (`printWidth: 80`)
-  - Отступы: 2 пробела (`tabWidth: 2`)
-  - Стрелочные функции без скобок для одного параметра (`arrowParens: "avoid"`)
-  - Unix-стиль переносов строк (`endOfLine: "lf"`)
-- FSD-правила: `eslint-plugin-fsd-lint`
-
-## FSD-правила, включенные в проекте
-
-- `fsd-lint/no-public-api-sidestep` — нельзя обходить публичный API слайса и импортировать его внутренние файлы напрямую.
-- `fsd-lint/forbidden-imports` — проверяет и запрещает импорты, которые нарушают правила слоев и связей в FSD.
-- `fsd-lint/no-relative-imports` — нельзя использовать относительные импорты там, где по правилам проекта нужно использовать алиасы.
-- `fsd-lint/no-cross-slice-dependency` — запрещает прямые зависимости между слайсами, если они не предусмотрены архитектурой.
-- `fsd-lint/no-global-store-imports` — запрещает прямой импорт глобального store в местах, где это ломает изоляцию слоев.
-- `fsd-lint/no-ui-in-business-logic` — запрещает смешивать UI-логику с бизнес-логикой.
-
-## Именование веток
-
-Используйте формат:
-
-```text
-FRONTEND-<номер_issue>
-```
-
-Пример: `FRONTEND-10`.
-
-## Именование коммитов
-
-Каждый коммит должен иметь осмысленное название в формате:
-
-```text
-<type>: <короткое описание>
-```
-
-Типы коммитов:
-
-• feat — новая функциональность
-
-• fix — исправление бага
-
-• refactor — переработка кода без изменения поведения
-
-Примеры:
-
-```
-feat: add user profile page
-fix: correct login validation
-refactor: split API logic into services
-```
-
-# CI
-
-Раздел описывает автоматические проверки в репозитории.
-
-GitHub Actions workflow `.github/workflows/main.yml` запускается на `push` и `pull_request` в `main` и выполняет:
-
-- `pnpm install --frozen-lockfile`
-- `pnpm run lint --max-warnings 0`
+Подробная информация об архитектуре проекта, стандартах разработки и CI описана в [docs/contributing.md](docs/contributing.md).

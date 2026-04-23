@@ -1,21 +1,25 @@
 'use server'
 
-import axios from 'axios'
+import { apiClient } from '../http'
+import { CITY } from '../endpoints'
+import { Locale } from '@shared/config/i18n/i18n'
 
 export interface GetListCitesPayload {
   search: string
-  lang: 'ru' | 'en'
+  lang: Locale
 }
 
-export const getListCities = async (payload: GetListCitesPayload) => {
-  const response = await axios.get(`${process.env.BACKEND_URL}/city`, {
-    params: payload,
-    headers: {
-      'X-Project-Token': process.env.BACKEND_TOKEN,
-      'Content-Type': 'application/json',
-      accept: '*/*',
-    },
-  })
+export interface CityResponse {
+  results: City[]
+}
 
-  return response.data
+export interface City {
+  city: string
+  place: string
+}
+
+export const getListCities = async (
+  payload: GetListCitesPayload,
+): Promise<CityResponse> => {
+  return apiClient.get<CityResponse>(CITY, { params: payload })
 }

@@ -20,8 +20,12 @@
 # production
 /build
 
+# local claude config
+.claude/
+
 # misc
 .DS_Store
+.claude/
 FETCH_HEAD
 *.pem
 .vscode/
@@ -33,6 +37,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
+.env
 .env.local
 .env.production
 .env
@@ -43,3 +48,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude
+.claude/

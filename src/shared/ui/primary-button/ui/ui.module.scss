@@ -11,7 +11,9 @@
   font-weight: 500;
   line-height: 100%;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 
   &:active {
     transform: scale(0.98);
@@ -96,7 +98,7 @@
 
   &:disabled,
   &.isDisabled {
-    color: $color-danger-light;
+    color: $color-danger-80;
   }
 }
 
@@ -110,7 +112,7 @@
 
   &:disabled,
   &.isDisabled {
-    color: $color-danger-light;
+    color: $color-danger-80;
   }
 }
 .danger-third {
@@ -118,7 +120,7 @@
   color: $color-danger;
 
   &:hover {
-    color:$background-primary;
+    color: $background-primary;
     background: $color-danger;
   }
 

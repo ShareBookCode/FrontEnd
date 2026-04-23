@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Cities, DEBOUNCE_MS, MIN_CITY_LENGTH } from './types'
-import { getListCities } from '@/shared/api/city'
+import { DEBOUNCE_MS, MIN_CITY_LENGTH } from './types'
+import { City, getListCities } from '@shared/api/city'
 
 export const useCitySuggestions = () => {
-  const [cities, setCities] = useState<Cities[]>([])
+  const [cities, setCities] = useState<City[]>([])
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const searchCity = (value: string, onSuccess?: () => void) => {
@@ -12,9 +12,7 @@ export const useCitySuggestions = () => {
 
     timeoutRef.current = setTimeout(async () => {
       const response = await getListCities({ search: value, lang: 'ru' })
-      const results: Cities[] = Array.isArray(response.results)
-        ? response.results
-        : []
+      const results = response.results ?? []
 
       setCities(results)
 
