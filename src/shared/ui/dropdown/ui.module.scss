@@ -13,13 +13,7 @@
   left: 0;
   top: calc(100% + 10px);
   width: 100%;
-  background: $background-primary;
-  border-radius: 9px;
-  box-shadow: $shadow-dropdown;
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.25);
   z-index: 50;
   overflow: hidden;
-}
-
-.dropdownInner {
-  padding: 7px; // зачем это
 }

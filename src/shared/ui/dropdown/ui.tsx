@@ -19,16 +19,19 @@ type RenderTriggerProps = {
   disabled?: boolean
 }
 
+type RenderContentProps = {
+  close: () => void
+}
+
 type Props = {
   width?: number | string
   className?: string
   dropdownClassName?: string
   disabled?: boolean
-  closeOnContentClick?: boolean
   isOpen?: boolean
   onOpenChange?: (next: boolean) => void
   renderTrigger: (props: RenderTriggerProps) => ReactNode
-  children: ReactNode
+  children: ReactNode | ((props: RenderContentProps) => ReactNode)
 }
 
 const toCssWidth = (width?: Props['width']) => {
@@ -41,85 +44,95 @@ export function Dropdown({
   className,
   dropdownClassName,
   disabled,
-  closeOnContentClick = true,
   isOpen: controlledIsOpen,
   onOpenChange,
   renderTrigger,
   children,
 }: Props) {
-  const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false)
+  const [innerIsOpen, setInnerIsOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement | null>(null)
+  const hasRequestedCloseRef = useRef(false)
 
   const isControlled = controlledIsOpen !== undefined
-  const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen
+  const rawIsOpen = isControlled ? Boolean(controlledIsOpen) : innerIsOpen
+  const isOpen = disabled ? false : rawIsOpen
 
-  const setOpenState = useCallback(
+  const setOpen = useCallback(
     (next: boolean) => {
+      if (disabled && next) return
+      if (next === rawIsOpen) return
+
       if (!isControlled) {
-        setUncontrolledIsOpen(next)
+        setInnerIsOpen(next)
       }
 
       onOpenChange?.(next)
     },
-    [isControlled, onOpenChange],
+    [disabled, isControlled, rawIsOpen, onOpenChange],
   )
 
-  const open = useCallback(() => {
-    if (!disabled) {
-      setOpenState(true)
-    }
-  }, [disabled, setOpenState])
-
-  const close = useCallback(() => {
-    setOpenState(false)
-  }, [setOpenState])
-
-  const toggle = useCallback(() => {
-    if (!disabled) {
-      setOpenState(!isOpen)
-    }
-  }, [disabled, isOpen, setOpenState])
-
-  const handleDropdownInnerClick = () => {
-    if (closeOnContentClick) {
-      close()
-    }
-  }
+  const open = () => setOpen(true)
+  const close = () => setOpen(false)
+  const toggle = () => setOpen(!isOpen)
 
   useEffect(() => {
-    const onDocClick = (e: PointerEvent) => {
-      if (!rootRef.current) return
+    const shouldForceClose = Boolean(disabled && rawIsOpen)
 
-      if (!rootRef.current.contains(e.target as Node)) {
-        close()
-      }
+    if (!shouldForceClose) {
+      hasRequestedCloseRef.current = false
+      return
     }
 
-    const onEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        close()
-      }
-    }
+    if (hasRequestedCloseRef.current) return
 
-    document.addEventListener('pointerdown', onDocClick)
-    document.addEventListener('keydown', onEscape)
+    hasRequestedCloseRef.current = true
+
+    const timeoutId = window.setTimeout(() => {
+      setOpen(false)
+    }, 0)
 
     return () => {
-      document.removeEventListener('pointerdown', onDocClick)
-      document.removeEventListener('keydown', onEscape)
+      window.clearTimeout(timeoutId)
     }
-  }, [close])
+  }, [disabled, rawIsOpen, setOpen])
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false)
+      }
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen, setOpen])
 
   const style: CSSProperties = {
     width: toCssWidth(width),
   }
+
+  const content =
+    typeof children === 'function' ? children({ close }) : children
 
   return (
     <div
       ref={rootRef}
       className={clsx(styles.root, className)}
       style={style}
-      aria-disabled={disabled ? 'true' : 'false'}
+      aria-disabled={disabled || undefined}
     >
       {renderTrigger({
         isOpen,
@@ -131,12 +144,7 @@ export function Dropdown({
 
       {isOpen && (
         <div className={clsx(styles.dropdown, dropdownClassName)}>
-          <div
-            className={styles.dropdownInner}
-            onClick={handleDropdownInnerClick} // зачем это
-          >
-            {children}
-          </div>
+          {content}
         </div>
       )}
     </div>
