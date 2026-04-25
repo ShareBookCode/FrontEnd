@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Page() {
-  return <div>Welcome profile</div>
+  return <Link href='/settings'>Настройки</Link>
 }

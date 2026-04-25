@@ -1,0 +1,48 @@
+@use '@styles/variables' as *;
+
+.menu {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 226px;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 35px;
+  padding-right: 35px;
+  border-right: 1px solid $color-light-grey;
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .link {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    max-width: 190px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 10px;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+    color: $text-secondary;
+
+    &.linkActive {
+      color: $color-primary;
+      background: $background-light-gray;
+    }
+  }
+
+  .icon {
+    &.iconActive {
+      path {
+        stroke: $color-primary;
+      }
+    }
+  }
+}

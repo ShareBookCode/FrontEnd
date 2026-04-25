@@ -1,0 +1,35 @@
+import axios from 'axios'
+import { log } from 'console'
+import { cookies } from 'next/headers'
+
+export interface AuthUserPayload {
+  login: string
+  psw: string
+}
+
+export const getTokenTest = async (payload: AuthUserPayload) => {
+  const response = await axios.post(`${process.env.BACKEND_URL}/auth`, '', {
+    params: payload,
+    headers: {
+      'X-Project-Token': process.env.BACKEND_TOKEN,
+      'Content-Type': 'application/json',
+      accept: '*/*',
+    },
+  })
+
+  const token = response.data.token
+
+  try {
+    const cookieStore = await cookies()
+
+    cookieStore.set('auth_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    })
+  } finally {
+    return token
+  }
+}
