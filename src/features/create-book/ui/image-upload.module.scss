@@ -18,7 +18,7 @@
 
 .thumb {
   position: relative;
-  border-radius: 9px;
+  border-radius: 6px;
   overflow: hidden;
   background: $background-light-gray;
   flex-shrink: 0;
@@ -49,7 +49,7 @@
 }
 
 .addSlot {
-  border-radius: 9px;
+  border-radius: 6px;
   background: $background-light-gray;
   display: flex;
   align-items: center;
@@ -70,7 +70,7 @@
 }
 
 .hint {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: $text-secondary;
 }

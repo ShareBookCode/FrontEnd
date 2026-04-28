@@ -11,7 +11,7 @@
   font-size: 24px;
   font-weight: 600;
   color: $text-heading;
-  margin-bottom: 40px;
+  margin: 0 0 40px 0;
 }
 
 .form {
@@ -26,19 +26,22 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  input {
+    height: 40px;
+  }
 }
 
 .label {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: $text-primary;
 }
 
-// Dropdown trigger styled as input
 .dropdownTrigger {
   box-sizing: border-box;
   width: 100%;
-  height: 38px;
+  height: 40px;
   border-radius: 9px;
   padding: 0 14px;
   font-size: 16px;
@@ -74,14 +77,12 @@
   }
 }
 
-// Toggle groups
 .toggleGroup {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-// Cover upload
 .coverUpload {
   display: flex;
   gap: 32px;
@@ -123,7 +124,6 @@
   display: none;
 }
 
-// Additional photos
 .photoGrid {
   display: flex;
   gap: 8px;
@@ -182,7 +182,6 @@
   height: 28px;
 }
 
-// Textarea
 .textarea {
   box-sizing: border-box;
   width: 100%;
@@ -208,13 +207,17 @@
   }
 }
 
-// Map
 .map {
   width: 100%;
-  height: 200px;
+  height: 300px;
   border-radius: 9px;
   border: none;
-  margin-top: 4px;
+  margin-top: 80px;
+}
+
+.fieldError {
+  font-size: 13px;
+  color: $color-danger;
 }
 
 .submitError {
@@ -223,14 +226,18 @@
   text-align: center;
 }
 
+.submitSection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 .submitButton {
-  margin-top: 8px;
-  width: 100%;
+  width: 50%;
 }
 
 .disclaimer {
-  text-align: center;
-  font-size: 13px;
+  text-align: start;
+  font-size: 16px;
   color: $text-secondary;
   line-height: 1.5;
 }

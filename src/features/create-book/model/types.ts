@@ -16,8 +16,7 @@ export type CreateBookFormValues = {
 
 export type CreateBookPayload = {
   title: string
-  /** UUIDs returned after uploading files as binary. TODO: implement file upload */
-  thumbnails?: string[]
+  thumbnails: string[]
   description: string
   publisher: string
   year: number
@@ -29,7 +28,7 @@ export type CreateBookPayload = {
   exchangeType: string
   location: {
     city: string
-    district: string // TODO: extract district from location suggestions
+    district: string
   }
 }
 

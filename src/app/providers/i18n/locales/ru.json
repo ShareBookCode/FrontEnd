@@ -21,7 +21,32 @@
     "submitButton": "Выложить объявление",
     "submittingButton": "Публикация...",
     "submitError": "Не удалось опубликовать объявление. Попробуйте снова.",
-    "disclaimer": "Выкладывая объявление вы соглашаетесь с правилами <link>ShareBook</link>"
+    "disclaimer": "Выкладывая объявление вы соглашаетесь с правилами <link>ShareBook</link>",
+    "fields": {
+      "title": { "label": "Название книги", "placeholder": "Евгений Онегин" },
+      "author": { "label": "Автор", "placeholder": "Александр Пушкин" },
+      "genre": { "label": "Жанр", "placeholder": "Роман" },
+      "language": { "label": "Язык книги", "placeholder": "Русский" },
+      "publisher": { "label": "Издательство", "placeholder": "АСТ" },
+      "year": { "label": "Год издания", "placeholder": "1994" },
+      "pages": { "label": "Количество страниц", "placeholder": "256" },
+      "exchangeType": { "label": "Вид передачи" },
+      "condition": { "label": "Состояние" },
+      "cover": {
+        "label": "Обложка",
+        "hint": "Загрузите обложку из интернета, так мы сможем поддерживать удобство поиска книги на платформе. Если в интернете не нашлось вашей книги, постарайтесь сделать аккуратное фото обложки."
+      },
+      "photos": { "label": "Дополнительные фотографии" },
+      "description": { "label": "Описание", "placeholder": "Книга 1997 года издания..." },
+      "location": { "label": "Место встречи", "placeholder": "Санкт-Петербург, Исаакиевский сквер" }
+    },
+    "locationSuggestionsLabel": "Подсказки мест встречи",
+    "mapTitle": "Место встречи на карте",
+    "errors": {
+      "required": "Обязательное поле",
+      "yearRange": "Год должен быть от 1000 до 2100",
+      "pagesMin": "Минимум 1 страница"
+    }
   },
   "Authentication": {
     "TitleAboutShareBook": {

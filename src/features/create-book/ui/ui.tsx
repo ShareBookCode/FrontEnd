@@ -5,16 +5,12 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import clsx from 'clsx'
 import ChevronIcon from '@icons/chevron.svg'
-import { createBookAction } from '../api'
+import { createBookAction, uploadThumbnails } from '../api'
 import { ImageUpload } from './image-upload'
-import {
-  CONDITION_OPTIONS,
-  EXCHANGE_TYPE_OPTIONS,
-  GENRE_OPTIONS,
-  type CreateBookFormValues,
-} from '../model/types'
+import { GENRE_OPTIONS, type CreateBookFormValues } from '../model/types'
+import { FIELD_CONFIG } from '../model/config'
 import styles from './ui.module.scss'
-import type { BookCondition, Category, ExchangeType } from '@entities/book'
+import type { Category } from '@entities/book'
 import { Input } from '@shared/ui/inputs'
 import { Dropdown } from '@shared/ui/dropdown'
 import { DropdownList } from '@shared/ui/dropdown-list'
@@ -40,17 +36,6 @@ const MIN_LOCATION_LENGTH = 3
 const DEBOUNCE_MS = 400
 const MAX_EXTRA_PHOTOS = 3
 
-// TODO: upload files as binary to file service, return UUIDs
-// Structure: thumbnails[0] = cover, thumbnails[1..3] = additional (max 4 total)
-async function uploadThumbnails(
-  cover: File | null,
-  photos: File[],
-): Promise<string[]> {
-  void cover
-  void photos
-  return []
-}
-
 export function CreateBookForm() {
   const router = useRouter()
   const t = useTranslations('CreateBook')
@@ -62,6 +47,9 @@ export function CreateBookForm() {
   const [locationSuggestions, setLocationSuggestions] = useState<
     { city: string; place: string }[]
   >([])
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof CreateBookFormValues, string>>
+  >({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -70,6 +58,26 @@ export function CreateBookForm() {
     key: K,
     value: CreateBookFormValues[K],
   ) => setValues(prev => ({ ...prev, [key]: value }))
+
+  const clearError = (key: keyof CreateBookFormValues) =>
+    setErrors(prev => ({ ...prev, [key]: undefined }))
+
+  const validate = (): boolean => {
+    const next: Partial<Record<keyof CreateBookFormValues, string>> = {}
+    if (!values.title.trim()) next.title = t('errors.required')
+    if (!values.author.trim()) next.author = t('errors.required')
+    if (!values.language.trim()) next.language = t('errors.required')
+    if (values.year) {
+      const y = Number(values.year)
+      if (y < 1000 || y > 2100) next.year = t('errors.yearRange')
+    }
+    if (values.pages) {
+      const p = Number(values.pages)
+      if (p < 1) next.pages = t('errors.pagesMin')
+    }
+    setErrors(next)
+    return Object.keys(next).length === 0
+  }
 
   const handleAddCover = (file: File) => {
     if (coverPreview) URL.revokeObjectURL(coverPreview)
@@ -131,6 +139,7 @@ export function CreateBookForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!validate()) return
     setIsSubmitting(true)
     setSubmitError(null)
     try {
@@ -147,7 +156,6 @@ export function CreateBookForm() {
         condition: values.condition,
         exchangeType: values.exchangeType,
         thumbnails,
-        // TODO: extract district from location suggestions API response
         location: { city: values.location, district: '' },
       })
       resetForm()
@@ -168,187 +176,115 @@ export function CreateBookForm() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>{t('title')}</h1>
+      <h4 className={styles.title}>{t('title')}</h4>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        {/* Название книги */}
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor='title'>
-            Название книги
-          </label>
-          <Input
-            id='title'
-            name='title'
-            placeholder='Евгений Онегин'
-            value={values.title}
-            onChange={e => set('title', e.target.value)}
-            required
-          />
-        </div>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        {FIELD_CONFIG.map(field => {
+          if (field.type === 'input') {
+            return (
+              <div key={field.key} className={styles.field}>
+                <label className={styles.label} htmlFor={field.key}>
+                  {t(`fields.${field.key}.label`)}
+                </label>
+                <Input
+                  id={field.key}
+                  name={field.key}
+                  placeholder={t(`fields.${field.key}.placeholder`)}
+                  value={values[field.key] as string}
+                  onChange={e => {
+                    setValues(prev => ({
+                      ...prev,
+                      [field.key]: e.target.value,
+                    }))
+                    clearError(field.key)
+                  }}
+                  type={field.inputType}
+                  min={field.min}
+                  max={field.max}
+                />
+                {errors[field.key] && (
+                  <span className={styles.fieldError}>{errors[field.key]}</span>
+                )}
+              </div>
+            )
+          }
 
-        {/* Автор */}
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor='author'>
-            Автор
-          </label>
-          <Input
-            id='author'
-            name='author'
-            placeholder='Александр Пушкин'
-            value={values.author}
-            onChange={e => set('author', e.target.value)}
-            required
-          />
-        </div>
-
-        {/* Жанр */}
-        <div className={styles.field}>
-          <span className={styles.label}>Жанр</span>
-          <Dropdown
-            renderTrigger={({ isOpen, toggle }) => (
-              <button
-                type='button'
-                className={styles.dropdownTrigger}
-                onClick={toggle}
-                aria-expanded={isOpen}
-              >
-                <span
-                  className={clsx(
-                    !selectedGenreLabel && styles.dropdownPlaceholder,
+          if (field.type === 'genre') {
+            return (
+              <div key='genre' className={styles.field}>
+                <span className={styles.label}>{t('fields.genre.label')}</span>
+                <Dropdown
+                  renderTrigger={({ isOpen, toggle }) => (
+                    <button
+                      type='button'
+                      className={styles.dropdownTrigger}
+                      onClick={toggle}
+                      aria-expanded={isOpen}
+                    >
+                      <span
+                        className={clsx(
+                          !selectedGenreLabel && styles.dropdownPlaceholder,
+                        )}
+                      >
+                        {selectedGenreLabel ?? t('fields.genre.placeholder')}
+                      </span>
+                      <ChevronIcon
+                        width={18}
+                        height={18}
+                        className={clsx(
+                          styles.dropdownChevron,
+                          isOpen && styles.open,
+                        )}
+                      />
+                    </button>
                   )}
                 >
-                  {selectedGenreLabel ?? 'Роман'}
-                </span>
-                <ChevronIcon
-                  width={18}
-                  height={18}
-                  className={clsx(
-                    styles.dropdownChevron,
-                    isOpen && styles.open,
-                  )}
-                />
-              </button>
-            )}
-          >
-            <DropdownList
-              values={GENRE_OPTIONS.map(o => ({ primary: o.label }))}
-              onSelect={item => {
-                const option = GENRE_OPTIONS.find(o => o.label === item.primary)
-                if (option) set('genre', option.value as Category)
-              }}
-            />
-          </Dropdown>
-        </div>
+                  <DropdownList
+                    values={GENRE_OPTIONS.map(o => ({ primary: o.label }))}
+                    onSelect={item => {
+                      const option = GENRE_OPTIONS.find(
+                        o => o.label === item.primary,
+                      )
+                      if (option) set('genre', option.value as Category)
+                    }}
+                  />
+                </Dropdown>
+              </div>
+            )
+          }
 
-        {/* Язык книги */}
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor='language'>
-            Язык книги
-          </label>
-          <Input
-            id='language'
-            name='language'
-            placeholder='Русский'
-            value={values.language}
-            onChange={e => set('language', e.target.value)}
-            required
-          />
-        </div>
+          return (
+            <div key={field.key} className={styles.field}>
+              <span className={styles.label}>
+                {t(`fields.${field.key}.label`)}
+              </span>
+              <div className={styles.toggleGroup}>
+                {field.options.map(option => (
+                  <PrimaryButton
+                    key={option.value}
+                    type='button'
+                    variant={
+                      values[field.key] === option.value
+                        ? 'primaryFirst'
+                        : 'primarySecond'
+                    }
+                    onClick={() =>
+                      setValues(prev => ({
+                        ...prev,
+                        [field.key]: option.value,
+                      }))
+                    }
+                  >
+                    {option.label}
+                  </PrimaryButton>
+                ))}
+              </div>
+            </div>
+          )
+        })}
 
-        {/* Издательство */}
         <div className={styles.field}>
-          <label className={styles.label} htmlFor='publisher'>
-            Издательство
-          </label>
-          <Input
-            id='publisher'
-            name='publisher'
-            placeholder='АСТ'
-            value={values.publisher}
-            onChange={e => set('publisher', e.target.value)}
-          />
-        </div>
-
-        {/* Год издания */}
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor='year'>
-            Год издания
-          </label>
-          <Input
-            id='year'
-            name='year'
-            placeholder='1994'
-            value={values.year}
-            onChange={e => set('year', e.target.value)}
-            type='number'
-            min='1000'
-            max='2100'
-          />
-        </div>
-
-        {/* Количество страниц */}
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor='pages'>
-            Количество страниц
-          </label>
-          <Input
-            id='pages'
-            name='pages'
-            placeholder='256'
-            value={values.pages}
-            onChange={e => set('pages', e.target.value)}
-            type='number'
-            min='1'
-          />
-        </div>
-
-        {/* Вид передачи */}
-        <div className={styles.field}>
-          <span className={styles.label}>Вид передачи</span>
-          <div className={styles.toggleGroup}>
-            {EXCHANGE_TYPE_OPTIONS.map(option => (
-              <PrimaryButton
-                key={option.value}
-                type='button'
-                variant={
-                  values.exchangeType === option.value
-                    ? 'primaryFirst'
-                    : 'primarySecond'
-                }
-                onClick={() =>
-                  set('exchangeType', option.value as ExchangeType)
-                }
-              >
-                {option.label}
-              </PrimaryButton>
-            ))}
-          </div>
-        </div>
-
-        {/* Состояние */}
-        <div className={styles.field}>
-          <span className={styles.label}>Состояние</span>
-          <div className={styles.toggleGroup}>
-            {CONDITION_OPTIONS.map(option => (
-              <PrimaryButton
-                key={option.value}
-                type='button'
-                variant={
-                  values.condition === option.value
-                    ? 'primaryFirst'
-                    : 'primarySecond'
-                }
-                onClick={() => set('condition', option.value as BookCondition)}
-              >
-                {option.label}
-              </PrimaryButton>
-            ))}
-          </div>
-        </div>
-
-        {/* Обложка */}
-        <div className={styles.field}>
-          <span className={styles.label}>Обложка</span>
+          <span className={styles.label}>{t('fields.cover.label')}</span>
           <ImageUpload
             images={coverPreview ? [coverPreview] : []}
             max={1}
@@ -357,13 +293,12 @@ export function CreateBookForm() {
             onAdd={handleAddCover}
             onRemove={handleRemoveCover}
             layout='stack'
-            hint='Загрузите обложку из интернета, так мы сможем поддерживать удобство поиска книги на платформе. Если в интернете не нашлось вашей книги, постарайтесь сделать аккуратное фото обложки.'
+            hint={t('fields.cover.hint')}
           />
         </div>
 
-        {/* Дополнительные фотографии */}
         <div className={styles.field}>
-          <span className={styles.label}>Дополнительные фотографии</span>
+          <span className={styles.label}>{t('fields.photos.label')}</span>
           <ImageUpload
             images={photoPreviews}
             max={MAX_EXTRA_PHOTOS}
@@ -374,33 +309,31 @@ export function CreateBookForm() {
           />
         </div>
 
-        {/* Описание */}
         <div className={styles.field}>
           <label className={styles.label} htmlFor='description'>
-            Описание
+            {t('fields.description.label')}
           </label>
           <textarea
             id='description'
             name='description'
             className={styles.textarea}
-            placeholder='Книга 1997 года издания...'
+            placeholder={t('fields.description.placeholder')}
             value={values.description}
             onChange={e => set('description', e.target.value)}
             rows={4}
           />
         </div>
 
-        {/* Место встречи */}
         <div className={styles.field}>
           <label className={styles.label} htmlFor='location'>
-            Место встречи
+            {t('fields.location.label')}
           </label>
           <Dropdown
             renderTrigger={({ isOpen, open }) => (
               <Input
                 id='location'
                 name='location'
-                placeholder='Санкт-Петербург, Исаакиевский сквер'
+                placeholder={t('fields.location.placeholder')}
                 value={values.location}
                 onChange={e => {
                   set('location', e.target.value)
@@ -434,7 +367,7 @@ export function CreateBookForm() {
               }}
               idList='location-listbox'
               idOption='location-option'
-              label='Подсказки мест встречи'
+              label={t('locationSuggestionsLabel')}
             />
           </Dropdown>
 
@@ -442,7 +375,7 @@ export function CreateBookForm() {
             <iframe
               className={styles.map}
               src={mapSrc}
-              title='Место встречи на карте'
+              title={t('mapTitle')}
               allowFullScreen
             />
           )}
@@ -450,23 +383,25 @@ export function CreateBookForm() {
 
         {submitError && <p className={styles.submitError}>{submitError}</p>}
 
-        <PrimaryButton
-          type='submit'
-          className={styles.submitButton}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? t('submittingButton') : t('submitButton')}
-        </PrimaryButton>
+        <div className={styles.submitSection}>
+          <PrimaryButton
+            type='submit'
+            className={styles.submitButton}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? t('submittingButton') : t('submitButton')}
+          </PrimaryButton>
 
-        <p className={styles.disclaimer}>
-          {t.rich('disclaimer', {
-            link: chunks => (
-              <a href={ROUTES.rules} className={styles.disclaimerLink}>
-                {chunks}
-              </a>
-            ),
-          })}
-        </p>
+          <p className={styles.disclaimer}>
+            {t.rich('disclaimer', {
+              link: chunks => (
+                <a href={ROUTES.rules} className={styles.disclaimerLink}>
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+        </div>
       </form>
     </div>
   )
