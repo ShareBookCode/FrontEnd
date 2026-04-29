@@ -41,7 +41,7 @@ export function DropdownList({
           aria-selected='false'
           role='option'
         >
-          {value.primary}, {value.secondary && <span>{value.secondary}</span>}
+          {value.primary} {value.secondary && <span>, {value.secondary}</span>}
         </li>
       ))}
     </ul>

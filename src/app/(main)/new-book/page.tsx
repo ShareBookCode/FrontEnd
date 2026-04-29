@@ -1,9 +1,6 @@
 'use client'
+import { CreateBookForm } from '@/features/create-book'
 
 export default function Page() {
-  return (
-    <div>
-      <h1>New Book Page</h1>
-    </div>
-  )
+  return <CreateBookForm />
 }

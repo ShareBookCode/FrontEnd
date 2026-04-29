@@ -16,6 +16,38 @@
     "verifiedAriaLabel": "Verified user",
     "timeAriaLabel": "Time: {time}"
   },
+  "CreateBook": {
+    "title": "New listing",
+    "submitButton": "Post listing",
+    "submittingButton": "Publishing...",
+    "submitError": "Failed to post the listing. Please try again.",
+    "disclaimer": "By posting a listing you agree to the <link>ShareBook</link> rules",
+    "fields": {
+      "title": { "label": "Book title", "placeholder": "Eugene Onegin" },
+      "author": { "label": "Author", "placeholder": "Alexander Pushkin" },
+      "genre": { "label": "Genre", "placeholder": "Novel" },
+      "language": { "label": "Book language", "placeholder": "Russian" },
+      "publisher": { "label": "Publisher", "placeholder": "AST" },
+      "year": { "label": "Year of publication", "placeholder": "1994" },
+      "pages": { "label": "Number of pages", "placeholder": "256" },
+      "exchangeType": { "label": "Transfer type" },
+      "condition": { "label": "Condition" },
+      "cover": {
+        "label": "Cover",
+        "hint": "Upload a cover from the internet so we can support convenient book search on the platform. If you couldn't find your book online, try to take a clear photo of the cover."
+      },
+      "photos": { "label": "Additional photos" },
+      "description": { "label": "Description", "placeholder": "Book published in 1997..." },
+      "location": { "label": "Meeting place", "placeholder": "Start typing an address, then select from the list" }
+    },
+    "locationSuggestionsLabel": "Meeting place suggestions",
+    "mapTitle": "Meeting place on the map",
+    "errors": {
+      "required": "Required field",
+      "yearRange": "Year must be between 1000 and 2100",
+      "pagesMin": "Minimum 1 page"
+    }
+  },
   "Authentication": {
     "TitleAboutShareBook": {
       "onePart": "Become part of",
