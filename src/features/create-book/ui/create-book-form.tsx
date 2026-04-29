@@ -5,17 +5,19 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import clsx from 'clsx'
 import ChevronIcon from '@icons/chevron.svg'
-import { createBookAction, uploadThumbnails } from '../api'
+import { createBookAction, uploadThumbnails } from '../api/create-book-action'
 import { ImageUpload } from './image-upload'
 import { GENRE_OPTIONS, type CreateBookFormValues } from '../model/types'
 import { FIELD_CONFIG } from '../model/config'
-import styles from './ui.module.scss'
+import styles from './create-book-form.module.scss'
 import type { Category } from '@entities/book'
+import type { UserAccount } from '@entities/user'
 import { Input } from '@shared/ui/inputs'
 import { Dropdown } from '@shared/ui/dropdown'
 import { DropdownList } from '@shared/ui/dropdown-list'
 import { PrimaryButton } from '@shared/ui/primary-button'
 import { getListCities } from '@shared/api/city'
+import { getUser } from '@shared/api/user'
 import { ROUTES } from '@shared/config/routes'
 
 const INITIAL_VALUES: CreateBookFormValues = {
@@ -35,6 +37,8 @@ const INITIAL_VALUES: CreateBookFormValues = {
 const MIN_LOCATION_LENGTH = 3
 const DEBOUNCE_MS = 400
 const MAX_EXTRA_PHOTOS = 3
+const YANDEX_MAPS_BASE =
+  process.env.NEXT_PUBLIC_YANDEX_MAPS_URL ?? 'https://yandex.ru/maps/?text='
 
 export function CreateBookForm() {
   const router = useRouter()
@@ -52,7 +56,21 @@ export function CreateBookForm() {
   >({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [userCity, setUserCity] = useState<string | null>(null)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    getUser()
+      .then(data => {
+        const user = data as UserAccount
+        if (user?.city) setUserCity(user.city)
+      })
+      .catch(() => {})
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current)
+    }
+  }, [])
 
   const set = <K extends keyof CreateBookFormValues>(
     key: K,
@@ -120,12 +138,6 @@ export function CreateBookForm() {
     }, DEBOUNCE_MS)
   }
 
-  useEffect(() => {
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current)
-    }
-  }, [])
-
   const resetForm = () => {
     setValues(INITIAL_VALUES)
     if (coverPreview) URL.revokeObjectURL(coverPreview)
@@ -170,8 +182,9 @@ export function CreateBookForm() {
   const selectedGenreLabel =
     GENRE_OPTIONS.find(o => o.value === values.genre)?.label ?? null
 
-  const mapSrc = values.location
-    ? `https://yandex.ru/maps/?text=${encodeURIComponent(values.location)}&z=15`
+  const mapQuery = values.location || userCity
+  const mapSrc = mapQuery
+    ? `${YANDEX_MAPS_BASE}${encodeURIComponent(mapQuery)}&z=15`
     : null
 
   return (

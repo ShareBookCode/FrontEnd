@@ -38,7 +38,7 @@
       },
       "photos": { "label": "Additional photos" },
       "description": { "label": "Description", "placeholder": "Book published in 1997..." },
-      "location": { "label": "Meeting place", "placeholder": "Saint Petersburg, St. Isaac's Square" }
+      "location": { "label": "Meeting place", "placeholder": "Start typing an address, then select from the list" }
     },
     "locationSuggestionsLabel": "Meeting place suggestions",
     "mapTitle": "Meeting place on the map",
