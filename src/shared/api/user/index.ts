@@ -1,7 +1,13 @@
 import { getAuthToken } from '../auth/get-auth-token'
 import { apiClient } from '../http'
 import { USER } from '../endpoints'
-import { formatAvatar, type UserProfile } from '@entities/user'
+import type { UserProfile } from '@entities/user'
+
+const formatAvatar = (avatar: string | null | undefined): string | null => {
+  if (!avatar) return null
+  if (avatar.startsWith('http')) return avatar
+  return `data:image/png;base64,${avatar}`
+}
 
 export const getUser = async (): Promise<UserProfile | null> => {
   const token = await getAuthToken()

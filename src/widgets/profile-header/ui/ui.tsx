@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import clsx from 'clsx'
 import HitIcon from '@icons/hit.svg'
 import SettingsIcon from '@icons/settings.svg'
@@ -8,7 +9,7 @@ import styles from './ui.module.scss'
 import { getInitials } from '../lib/get-initials'
 import type { UserProfile } from '@entities/user'
 import { Container } from '@shared/ui/container'
-import { PrimaryButton } from '@shared/ui/primary-button'
+import { PrimaryButton, PrimaryLinkButton } from '@shared/ui/primary-button'
 import { literata } from '@shared/assets/fonts'
 
 interface ProfileHeaderProps {
@@ -64,18 +65,20 @@ export function ProfileHeader({ user, isOwner }: ProfileHeaderProps) {
           <div className={styles.controls}>
             {isOwner ? (
               <>
-                {/* TODO: подключить переход на страницу настроек */}
-                <button
-                  type='button'
+                <Link
+                  href='/settings/about-myself'
                   className={styles.settingsBtn}
                   aria-label={t('settingsAriaLabel')}
                 >
                   <SettingsIcon width={24} height={24} />
-                </button>
-                {/* TODO: подключить открытие формы нового объявления */}
-                <PrimaryButton size='large' className={styles.actionBtn}>
+                </Link>
+                <PrimaryLinkButton
+                  href='/new-book'
+                  size='large'
+                  className={styles.actionBtn}
+                >
                   {t('newAd')}
-                </PrimaryButton>
+                </PrimaryLinkButton>
               </>
             ) : (
               // TODO: подключить переход в чат с пользователем
