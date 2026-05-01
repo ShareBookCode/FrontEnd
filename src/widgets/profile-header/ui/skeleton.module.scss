@@ -1,0 +1,73 @@
+@use '@styles/variables' as *;
+
+.profileHeader {
+  width: 100%;
+  padding: 50px 0 76px;
+  background: $background-gradient;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: $background-light-gray;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.bone {
+  border-radius: 4px;
+  background: $background-light-gray;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.name {
+  width: 200px;
+  height: 32px;
+  margin-bottom: 14px;
+}
+
+.stats {
+  width: 160px;
+  height: 16px;
+  margin-bottom: 14px;
+}
+
+.bio {
+  width: 300px;
+  height: 16px;
+}
+
+.button {
+  width: 160px;
+  height: 42px;
+  border-radius: 12px;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

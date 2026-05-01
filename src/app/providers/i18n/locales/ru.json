@@ -7,6 +7,17 @@
     "inputAriaLabel": "Поиск книг",
     "profileAriaLabel": "Профиль"
   },
+  "ProfileHeader": {
+    "given": "Отдано {count, plural, one {# книга} few {# книги} many {# книг} other {# книги}}",
+    "exchanged": "Обменяно {count}",
+    "settingsAriaLabel": "Настройки",
+    "newAd": "Новое объявление",
+    "writeMessage": "Написать"
+  },
+  "Profile": {
+    "loadError": "Не удалось загрузить профиль",
+    "notFound": "Пользователь не найден"
+  },
   "Book": {
     "linkAriaLabel": "Перейти к книге",
     "buttonFavoriteAriaLabel": "Добавить в избранное",
@@ -42,6 +53,10 @@
       "busy_email": {
         "title": "Email уже используется",
         "description": "Этот адрес электронной почты уже зарегистрирован."
+      },
+      "email_check_failed": {
+        "title": "Не удалось проверить email",
+        "description": "Проверьте соединение с интернетом и попробуйте ещё раз."
       },
 
       "short_name": {

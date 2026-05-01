@@ -7,6 +7,17 @@
     "inputAriaLabel": "Search books",
     "profileAriaLabel": "Profile"
   },
+  "ProfileHeader": {
+    "given": "Given {count, plural, one {# book} other {# books}}",
+    "exchanged": "Exchanged {count}",
+    "settingsAriaLabel": "Settings",
+    "newAd": "New listing",
+    "writeMessage": "Write"
+  },
+  "Profile": {
+    "loadError": "Failed to load profile",
+    "notFound": "User not found"
+  },
   "Book": {
     "linkAriaLabel": "Go to the book",
     "buttonFavoriteAriaLabel": "Add to favorites",
@@ -42,6 +53,10 @@
       "busy_email": {
         "title": "Email is already in use",
         "description": "This email address is already registered."
+      },
+      "email_check_failed": {
+        "title": "Failed to check email",
+        "description": "Check your connection and try again."
       },
 
       "short_name": {
