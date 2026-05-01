@@ -55,4 +55,10 @@ export const userHandlers = [
       ? HttpResponse.json(user)
       : new HttpResponse(null, { status: 404 })
   }),
+  http.post('/user', () => {
+    return new HttpResponse(null, { status: 201 })
+  }),
+  http.post('/user/check', () => {
+    return new HttpResponse(null, { status: 200 })
+  }),
 ]

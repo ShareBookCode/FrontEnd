@@ -1,22 +1,18 @@
-import axios from 'axios'
 import { cookies } from 'next/headers'
+import { apiClient, ParamsType } from '../http'
+import { AUTH } from '../endpoints'
 
-export interface AuthUserPayload {
+export { getAuthToken } from './get-auth-token'
+
+export interface AuthUserPayload extends ParamsType {
   login: string
   psw: string
 }
 
 export const authUser = async (payload: AuthUserPayload) => {
-  const response = await axios.post(`${process.env.BACKEND_URL}/auth`, '', {
+  const { token } = await apiClient.post<{ token: string }>(AUTH, '', {
     params: payload,
-    headers: {
-      'X-Project-Token': process.env.BACKEND_TOKEN,
-      'Content-Type': 'application/json',
-      accept: '*/*',
-    },
   })
-
-  const token = response.data.token
   const cookieStore = await cookies()
 
   cookieStore.set('auth_token', token, {
@@ -26,9 +22,4 @@ export const authUser = async (payload: AuthUserPayload) => {
     path: '/',
     maxAge: 60 * 60 * 24 * 7,
   })
-}
-
-export const getAuthToken = async () => {
-  const cookieStore = await cookies()
-  return cookieStore.get('auth_token')?.value
 }
